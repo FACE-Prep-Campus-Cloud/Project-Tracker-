@@ -729,7 +729,13 @@ async function loadSheetData(){
           error(){throw new Error('Parse failed');}
         });
       })
-      .catch(err=>{console.error(err);errEl.classList.add('show');reject(err);});
+      .catch(err=>{
+  console.error(err);
+  document.getElementById('loadingText').style.display='none';
+  document.querySelector('.spinner').style.display='none';
+  errEl.classList.add('show');
+  reject(err);
+});
   });
 }
 
