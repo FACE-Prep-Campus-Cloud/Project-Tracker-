@@ -211,6 +211,13 @@ tbody tr:last-child td{border-bottom:none;}
 tbody tr:hover td{background:var(--surface2);}
 tbody tr{transition:background 0.12s;}
 
+/* MENTOR MODAL */
+.mentor-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:9999;display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(2px);}
+.mentor-modal-overlay.open{display:flex;animation:fadeUp 0.25s cubic-bezier(.22,1,.36,1);}
+.mentor-modal-box{background:#fff;border-radius:14px;border:1px solid rgba(120,80,10,0.15);width:100%;max-width:680px;max-height:88vh;overflow-y:auto;padding:28px;box-shadow:0 12px 40px rgba(90,50,0,0.35);}
+.mm-close-btn{border:1px solid var(--border2);border-radius:8px;width:32px;height:32px;background:var(--surface);cursor:pointer;font-size:18px;color:var(--ink3);transition:background 0.15s;display:flex;align-items:center;justify-content:center;}
+.mm-close-btn:hover{background:var(--bg2);}
+
 ::-webkit-scrollbar{width:5px;height:5px;}
 ::-webkit-scrollbar-track{background:var(--bg2);}
 ::-webkit-scrollbar-thumb{background:var(--gold-mid);border-radius:99px;}
@@ -241,6 +248,23 @@ tbody tr{transition:background 0.12s;}
     1. Open your Google Sheet<br>
     2. Click "Share" → "Anyone with the link" → "Viewer"<br>
     3. Refresh this page
+  </div>
+</div>
+
+<!-- ═══ MENTOR MODAL — FIX: moved inside <body> properly ═══ -->
+<div class="mentor-modal-overlay" id="mentorModalOverlay" onclick="if(event.target===this)closeMentorModal()">
+  <div class="mentor-modal-box" onclick="event.stopPropagation()">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;">
+      <div>
+        <div style="font-family:var(--font-display);font-size:22px;color:var(--ink);" id="mmName">—</div>
+        <div style="font-size:12px;color:var(--ink3);margin-top:4px;" id="mmSub">—</div>
+      </div>
+      <button class="mm-close-btn" onclick="closeMentorModal()">×</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;" id="mmStats"></div>
+    <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:12px;">Question-by-question breakdown</div>
+    <div id="mmQRows"></div>
+    <div style="font-size:11px;color:var(--ink4);border-top:1px solid var(--border);padding-top:10px;margin-top:16px;">* Yes/No counts are aggregated across all subjects this mentor teaches.</div>
   </div>
 </div>
 
@@ -372,7 +396,6 @@ tbody tr{transition:background 0.12s;}
 
   <!-- ═══ MENTOR PERFORMANCE PANEL ═══ -->
   <div class="panel" id="panel-mentors">
-    <!-- TABLE CARD (moved to top) -->
     <div class="card" style="padding:0;overflow:hidden">
       <div id="mentorTableSummaryBar" style="display:flex;align-items:center;gap:24px;padding:14px 22px;background:linear-gradient(135deg,#4a2800,#7a4f00);flex-wrap:wrap;">
         <div style="color:#fde9a0;font-size:12px;"><span style="opacity:0.6;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:2px;">Global Mean</span><span id="mtSumGlobalMean" style="font-family:'DM Serif Display',Georgia,serif;font-size:18px;">—</span></div>
@@ -389,7 +412,6 @@ tbody tr{transition:background 0.12s;}
       <div style="padding:12px 22px;font-size:11px;color:var(--ink4);border-top:1px solid var(--border);">* Bayesian = (Global Mean × Σ Responses + Avg Rating × Mentor Responses) / (Σ Responses + Mentor Responses)</div>
     </div>
 
-    <!-- NEW CHART BELOW TABLE: Scatter (Responses vs Rating) + Horizontal Top/Bottom Bars -->
     <div class="card">
       <div class="card-header">
         <div class="card-title">Mentor Insights — Responses vs. Rating</div>
@@ -408,8 +430,11 @@ tbody tr{transition:background 0.12s;}
         <canvas id="insightScatterChart"></canvas>
       </div>
 
-      <!-- Top vs Bottom Horizontal Bar -->
-     
+      <!-- FIX 1: insightHorizWrap was missing — added here -->
+      <div id="insightHorizWrap" style="position:relative;width:100%;height:380px;display:none;">
+        <canvas id="insightHorizChart"></canvas>
+      </div>
+
       <!-- Response Volume Bar -->
       <div id="insightResponseWrap" style="position:relative;width:100%;height:380px;display:none;">
         <canvas id="insightResponseChart"></canvas>
@@ -644,17 +669,17 @@ function processSheetData(rows){
     if(!isNaN(npsVal)&&npsVal>=1&&npsVal<=10)npsScores.push(npsVal);
     for(let i=1;i<=7;i++){
       const sn=row[`subject${i}_Name`],mn=row[`subject${i}_Mentor`],rt=parseFloat(row[`subject${i}_Rating`]);
-     if(sn&&mn&&!isNaN(rt)&&rt>0){
-  subjectSet.add(sn);
-  TABLE_DATA.push({dept,mentor:mn,subject:sn,rating:rt});
-  if(!mentorStats[mn])mentorStats[mn]={name:mn,depts:new Set([dept]),ratings:[],subjects:new Set(),qs:[{y:0,n:0},{y:0,n:0},{y:0,n:0},{y:0,n:0},{y:0,n:0}]};
-  mentorStats[mn].depts.add(dept);mentorStats[mn].ratings.push(rt);mentorStats[mn].subjects.add(sn);
-  for(let q=1;q<=5;q++){
-    const ans=row[`subject${i}_Q${q}`]||'';
-    if(ans==='Yes')mentorStats[mn].qs[q-1].y++;
-    else if(ans==='No')mentorStats[mn].qs[q-1].n++;
-  } 
-}
+      if(sn&&mn&&!isNaN(rt)&&rt>0){
+        subjectSet.add(sn);
+        TABLE_DATA.push({dept,mentor:mn,subject:sn,rating:rt});
+        if(!mentorStats[mn])mentorStats[mn]={name:mn,depts:new Set([dept]),ratings:[],subjects:new Set(),qs:[{y:0,n:0},{y:0,n:0},{y:0,n:0},{y:0,n:0},{y:0,n:0}]};
+        mentorStats[mn].depts.add(dept);mentorStats[mn].ratings.push(rt);mentorStats[mn].subjects.add(sn);
+        for(let q=1;q<=5;q++){
+          const ans=row[`subject${i}_Q${q}`]||'';
+          if(ans==='Yes')mentorStats[mn].qs[q-1].y++;
+          else if(ans==='No')mentorStats[mn].qs[q-1].n++;
+        }
+      }
     }
   });
 
@@ -679,10 +704,10 @@ function processSheetData(rows){
     const totalResponses=m.ratings.length;
     const avgXResponses=avg*totalResponses;
     const bayesianScore=((globalMean*totalAllResponses)+(avg*totalResponses))/(totalAllResponses+totalResponses);
-   return{name:m.name,depts:Array.from(m.depts),rating:parseFloat(avg.toFixed(2)),
-  avgXResponses:parseFloat(avgXResponses.toFixed(2)),
-  bayesianRating:parseFloat(bayesianScore.toFixed(7)),
-  subjects:m.subjects.size,responses:totalResponses,qs:m.qs};
+    return{name:m.name,depts:Array.from(m.depts),rating:parseFloat(avg.toFixed(2)),
+      avgXResponses:parseFloat(avgXResponses.toFixed(2)),
+      bayesianRating:parseFloat(bayesianScore.toFixed(7)),
+      subjects:m.subjects.size,responses:totalResponses,qs:m.qs};
   }).sort((a,b)=>b.bayesianRating-a.bayesianRating);
   MENTORS.forEach((m,idx)=>{m.rank=idx+1;m.percentile=MENTORS.length>1?Math.round((1-idx/(MENTORS.length-1))*100):100;});
   DEPT_LIST=Array.from(deptSet).sort();
@@ -722,17 +747,17 @@ function setDeptFilter(val,btn){
   if(currentPanel==='mentors'){renderMentorTable();renderInsightCharts(val);}
 }
 
-/* ── GET FILTERED MENTORS WITH RECALCULATED RANKS ── */
+/* ── GET FILTERED MENTORS ── */
 function getFilteredMentors(filterDept){
   let list;
-  if(!filterDept || filterDept==='all'){
-    list = [...MENTORS];
-  } else {
-    list = MENTORS.filter(m=>m.depts.some(d=>d===filterDept));
+  if(!filterDept||filterDept==='all'){
+    list=[...MENTORS];
+  }else{
+    list=MENTORS.filter(m=>m.depts.some(d=>d===filterDept));
   }
   list.forEach((m,idx)=>{
-    m.filteredRank = idx + 1;
-    m.filteredPercentile = list.length > 1 ? Math.round((1 - idx / (list.length - 1)) * 100) : 100;
+    m.filteredRank=idx+1;
+    m.filteredPercentile=list.length>1?Math.round((1-idx/(list.length-1))*100):100;
   });
   return list;
 }
@@ -1096,12 +1121,12 @@ function setInsightChart(type,btn){
 
 /* ── INSIGHT CHARTS ── */
 function renderInsightCharts(filterDept){
-  const list = getFilteredMentors(filterDept);
+  const list=getFilteredMentors(filterDept);
   document.getElementById('insightChartBadge').textContent=list.length>0?`${list.length} mentors`:'No data';
 
-  if(currentInsightChart==='scatter') renderScatterChart(list);
-  else if(currentInsightChart==='horizontal') renderHorizChart(list);
-  else if(currentInsightChart==='responses') renderResponseChart(list);
+  if(currentInsightChart==='scatter')renderScatterChart(list);
+  else if(currentInsightChart==='horizontal')renderHorizChart(list);
+  else if(currentInsightChart==='responses')renderResponseChart(list);
 }
 
 function renderScatterChart(list){
@@ -1195,12 +1220,12 @@ function renderScatterChart(list){
 
 function renderHorizChart(list){
   if(insightHorizInst){insightHorizInst.destroy();insightHorizInst=null;}
-  if(!list.length) return;
+  if(!list.length)return;
   if(!document.getElementById('insightHorizChart'))
     document.getElementById('insightHorizWrap').innerHTML='<canvas id="insightHorizChart"></canvas>';
 
-  const top5=list.slice(0,Math.min(5, list.length));
-  const bottom5=list.slice(-Math.min(5, list.length)).reverse();
+  const top5=list.slice(0,Math.min(5,list.length));
+  const bottom5=list.slice(-Math.min(5,list.length)).reverse();
   const combined=[...top5,...bottom5];
   const labels=combined.map((m,i)=>(i<top5.length?'▲ ':'▼ ')+m.name);
   const data=combined.map(m=>m.bayesianRating);
@@ -1258,7 +1283,7 @@ function renderHorizChart(list){
 
 function renderResponseChart(list){
   if(insightResponseInst){insightResponseInst.destroy();insightResponseInst=null;}
-  if(!list.length) return;
+  if(!list.length)return;
   if(!document.getElementById('insightResponseChart'))
     document.getElementById('insightResponseWrap').innerHTML='<canvas id="insightResponseChart"></canvas>';
 
@@ -1322,7 +1347,7 @@ function renderResponseChart(list){
 
 /* ── MENTOR TABLE ── */
 function renderMentorTable(){
-  const list = getFilteredMentors(currentDeptFilter);
+  const list=getFilteredMentors(currentDeptFilter);
   const sumResponses=list.reduce((s,m)=>s+m.responses,0);
   const sumAvgXResp=list.reduce((s,m)=>s+m.avgXResponses,0);
   const gm=sumResponses>0?(sumAvgXResp/sumResponses):0;
@@ -1330,25 +1355,26 @@ function renderMentorTable(){
   document.getElementById('mtSumTotalResp').textContent=sumResponses||'—';
   document.getElementById('mtSumAvgXResp').textContent=sumAvgXResp>0?sumAvgXResp.toFixed(2):'—';
   document.getElementById('mentorTableCountBadge').textContent=list.length>0?`${list.length} mentors`:'No data';
-  if(!list.length){document.getElementById('mentorTableBody').innerHTML='<tr><td colspan="8" style="text-align:center;padding:40px;color:var(--ink3)">No mentors found for this department</td></tr>';return;}
+  if(!list.length){
+    document.getElementById('mentorTableBody').innerHTML='<tr><td colspan="8" style="text-align:center;padding:40px;color:var(--ink3)">No mentors found for this department</td></tr>';
+    return;
+  }
 
-  // ── FIX: show only the selected department when a filter is active ──
-  const deptLabel = (currentDeptFilter && currentDeptFilter !== 'all')
-    ? currentDeptFilter
-    : null; // null means show all depts
-
+  const deptLabel=(currentDeptFilter&&currentDeptFilter!=='all')?currentDeptFilter:null;
   const rankColors={1:'#f5c842',2:'#e0e0e0',3:'#f0c498'};
+
   document.getElementById('mentorTableBody').innerHTML=list.map(m=>{
-    const displayRank = m.filteredRank;
+    const displayRank=m.filteredRank;
     const rankBg=rankColors[displayRank]||'transparent';
     const rankColor=displayRank<=3?'#3d2200':'var(--ink3)';
     const rankBorder=displayRank<=3?'none':'1px solid var(--border2)';
-    // Show only the filtered dept; if "All", show all depts the mentor belongs to
-    const displayDept = deptLabel || m.depts.join(', ');
-    const s=deptStyle(deptLabel || m.depts[0]||'');
+    const displayDept=deptLabel||m.depts.join(', ');
+    const s=deptStyle(deptLabel||m.depts[0]||'');
+    // FIX 3: use data-mentor attribute to safely pass mentor name (avoids apostrophe escaping bugs)
     return`<tr>
       <td style="text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:${rankBg};border:${rankBorder};font-size:11px;font-weight:700;color:${rankColor};">${displayRank}</span></td>
-<td><button onclick="openMentorModal('${m.name.replace(/'/g,"\\'")}'" style="background:none;border:none;color:#7a4f00;font-size:13.5px;font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:2px;font-family:var(--font-body);padding:0;">${m.name}</button></td>      <td><span class="badge" style="color:${s.color};background:${s.bg};border:1px solid ${s.border}">${displayDept}</span></td>
+      <td><button class="mentor-name-btn" data-mentor="${m.name.replace(/"/g,'&quot;')}" style="background:none;border:none;color:#7a4f00;font-size:13.5px;font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:2px;font-family:var(--font-body);padding:0;">${m.name}</button></td>
+      <td><span class="badge" style="color:${s.color};background:${s.bg};border:1px solid ${s.border}">${displayDept}</span></td>
       <td style="text-align:center;"><span style="font-family:var(--font-display);font-size:18px;color:var(--gold-dark);">${m.rating.toFixed(2)}</span><span style="font-size:11px;color:var(--ink4);">/5</span></td>
       <td style="text-align:center;font-family:var(--font-display);font-size:16px;color:var(--ink2);">${m.responses}</td>
       <td style="text-align:center;font-family:var(--font-display);font-size:16px;color:var(--gold-dark);">${m.avgXResponses.toFixed(2)}</td>
@@ -1356,6 +1382,13 @@ function renderMentorTable(){
       <td>${statusBadge(m.rating)}</td>
     </tr>`;
   }).join('');
+
+  // Bind click events via JS — works with any name including apostrophes
+  document.querySelectorAll('.mentor-name-btn').forEach(btn=>{
+    btn.addEventListener('click',function(){
+      openMentorModal(this.getAttribute('data-mentor'));
+    });
+  });
 }
 
 /* ── SUMMARY CHARTS ── */
@@ -1469,6 +1502,8 @@ table{width:100%;border-collapse:collapse;font-size:13px;}.sec{margin-bottom:40p
   a.download=`Report-${collegeName.replace(/[^a-z0-9]/gi,'-')}-${new Date().toISOString().split('T')[0]}.html`;
   a.click();URL.revokeObjectURL(a.href);
 }
+
+/* ── MENTOR MODAL ── */
 const MM_QUESTIONS=[
   "Sessions were clear and well-structured",
   "Professional behavior during sessions",
@@ -1476,9 +1511,10 @@ const MM_QUESTIONS=[
   "Supported doubt clearing and student queries",
   "Sessions improved understanding and skills"
 ];
+
 function openMentorModal(mentorName){
   const m=MENTORS.find(x=>x.name===mentorName);
-  if(!m)return;
+  if(!m){console.warn('Mentor not found:',mentorName);return;}
   document.getElementById('mmName').textContent=m.name;
   document.getElementById('mmSub').textContent=m.depts.join(', ')+' · '+m.responses+' responses · '+m.subjects+' subject(s)';
   const totalYes=m.qs.reduce((s,q)=>s+q.y,0);
@@ -1527,31 +1563,19 @@ function openMentorModal(mentorName){
       </div>
     </div>`;
   }).join('');
-  document.getElementById('mentorModalOverlay').style.display='flex';
+  // FIX 2: show modal using class toggle (modal is now properly inside <body>)
+  document.getElementById('mentorModalOverlay').classList.add('open');
 }
+
 function closeMentorModal(){
-  document.getElementById('mentorModalOverlay').style.display='none';
+  document.getElementById('mentorModalOverlay').classList.remove('open');
 }
+
 /* ── INIT ── */
 document.addEventListener('DOMContentLoaded',()=>{
   buildDropdown();
   document.getElementById('loadingOverlay').classList.add('hidden');
 });
 </script>
-  <div id="mentorModalOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:9999;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(2px);" onclick="if(event.target===this)closeMentorModal()">
-  <div style="background:#fff;border-radius:14px;border:1px solid rgba(120,80,10,0.15);width:100%;max-width:680px;max-height:88vh;overflow-y:auto;padding:28px;box-shadow:0 12px 40px rgba(90,50,0,0.35);animation:fadeUp 0.3s cubic-bezier(.22,1,.36,1);" onclick="event.stopPropagation()">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;">
-      <div>
-        <div style="font-family:var(--font-display);font-size:22px;color:var(--ink);" id="mmName">—</div>
-        <div style="font-size:12px;color:var(--ink3);margin-top:4px;" id="mmSub">—</div>
-      </div>
-      <button onclick="closeMentorModal()" style="border:1px solid var(--border2);border-radius:8px;width:32px;height:32px;background:var(--surface);cursor:pointer;font-size:18px;color:var(--ink3);transition:background 0.15s;" onmouseover="this.style.background='var(--bg2)'" onmouseout="this.style.background='var(--surface)'">×</button>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;" id="mmStats"></div>
-    <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:12px;">Question-by-question breakdown</div>
-    <div id="mmQRows"></div>
-    <div style="font-size:11px;color:var(--ink4);border-top:1px solid var(--border);padding-top:10px;margin-top:16px;">* Yes/No counts are aggregated across all subjects this mentor teaches.</div>
-  </div>
-</div>
 </body>
 </html>
