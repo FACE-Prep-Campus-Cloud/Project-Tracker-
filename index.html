@@ -387,7 +387,8 @@ tbody tr{transition:background 0.12s;}
     <button onclick="closeMentorModal()" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink3);">×</button>
     <h3 id="modalMentorName" style="font-family:var(--font-display); font-size:24px; color:var(--ink); margin-bottom:24px;"></h3>
     <div id="modalOverallRating" style="font-family:var(--font-display); font-size:32px; color:var(--gold-dark); margin-bottom:20px;"></div>
-    <div id="modalQuestions" style="display:grid; gap:16px; font-size:13px;"></div>
+    <div id="modalQuestions" style="display: grid; gap: 20px; margin-top: 24px;">
+  <!-- Questions populated dynamically -->
   </div>
 </div>
       <div class="table-wrap">
@@ -1495,37 +1496,48 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   let currentMentorData = null;
 
-function showMentorModal(name, data) {
-  document.getElementById('mentorModal').classList.add('show');
-  document.getElementById('modalMentorName').textContent = name;
-  document.getElementById('modalOverallRating').textContent = data.rating ? data.rating.toFixed(1) + '/5' : 'N/A';
+function showMentorModal(mentor) {
+  document.getElementById('modalMentorName').textContent = mentor.name;
+  document.getElementById('modalOverallRating').textContent = `${mentor.rating}/5 (${mentor.responses} responses)`;
+  
   const questionsEl = document.getElementById('modalQuestions');
-  const qs = [
-    'Were the sessions delivered by the Faculty clear and well-structured?',
-    'Are you convinced with the professional behavior of the Faculty during sessions?',
-    'Was the trainer effective in solving problems and explaining solutions with examples?',
-    'Did the trainer support doubt clearing and student queries?',
-    'Were the sessions useful in improving your understanding and skills?'
+  const questions = [
+    "Were the sessions delivered by the Faculty clear and well-structured?",
+    "Are you convinced with the professional behavior of the Faculty during sessions?",
+    "Was the trainer effective in solving problems and explaining solutions with examples?",
+    "Did the trainer support doubt clearing and student queries?",
+    "Were the sessions useful in improving your understanding and skills?"
   ];
-  questionsEl.innerHTML = qs.map((q, i) => {
-    const yes = data[`q${i+1}Yes`] || 0;
-    const no = data[`q${i+1}No`] || 0;
-    const total = yes + no;
-    return `<div><strong>${q}</strong><div style="margin-top:4px; font-size:12px;">Yes: ${yes} | No: ${no} ${total ? `(${Math.round(yes/total*100)}% Yes)` : ''}</div></div>`;
+  
+  let yesCounts = [0, 0, 0, 0, 0];
+  let noCounts = [0, 0, 0, 0, 0];
+  
+  // Filter rows for this mentor and count Yes/No (adjust column names to match sheet)
+  TABLEDATA.filter(row => row.mentor === mentor.name).forEach(row => {
+    questions.forEach((q, i) => {
+      const col = `q${i+1}`; // Match your Google Sheet column headers
+      if (row[col] === 'Yes') yesCounts[i]++;
+      else if (row[col] === 'No') noCounts[i]++;
+    });
+  });
+  
+  questionsEl.innerHTML = questions.map((q, i) => {
+    const total = yesCounts[i] + noCounts[i];
+    const yesPct = total ? Math.round((yesCounts[i] / total) * 100) : 0;
+    return `
+      <div style="padding: 16px; background: var(--surface2); border-radius: var(--radius); border-left: 4px solid var(--gold-mid);">
+        <div style="font-weight: 500; margin-bottom: 12px; color: var(--ink2);">${q}</div>
+        <div style="display: flex; gap: 24px; align-items: center; font-size: 14px;">
+          <span style="color: #10b981; font-weight: 600;">✅ Yes: ${yesCounts[i]} (${yesPct}%)</span>
+          <span style="color: #ef4444; font-weight: 600;">❌ No: ${noCounts[i]}</span>
+          <span style="color: var(--ink3); font-size: 12px;">Total: ${total}</span>
+        </div>
+      </div>
+    `;
   }).join('');
-  currentMentorData = data;
+  
+  document.getElementById('mentorModal').classList.add('show');
 }
-
-function closeMentorModal() {
-  document.getElementById('mentorModal').classList.remove('show');
-}
-
-  document.addEventListener('click', e => {
-  if (e.target.id === 'mentorModal') closeMentorModal();
-});
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeMentorModal();
-});
 </script>
 </body>
 </html>
