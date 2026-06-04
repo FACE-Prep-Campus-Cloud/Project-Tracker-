@@ -18,8 +18,6 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-siz
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:var(--bg3)}
 ::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:99px}
-
-/* LANDING */
 #landingScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);position:relative;overflow:hidden;}
 #landingScreen::before{content:'';position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(108,99,255,0.09) 0%,transparent 70%);top:-150px;right:-150px;pointer-events:none;}
 #landingScreen::after{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(22,163,74,0.07) 0%,transparent 70%);bottom:-100px;left:-100px;pointer-events:none;}
@@ -38,9 +36,6 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-siz
 .landing-btn{width:100%;padding:15px;background:var(--accent);border:none;border-radius:var(--radius-sm);color:#fff;font-family:var(--font-head);font-size:14px;font-weight:700;letter-spacing:0.05em;cursor:pointer;transition:all 0.15s;}
 .landing-btn:hover{background:var(--accent2);transform:translateY(-1px);}
 .landing-btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
-.college-count{text-align:center;font-size:12px;color:var(--ink3);margin-top:16px;}
-
-/* LOGIN */
 #loginScreen{min-height:100vh;display:none;align-items:center;justify-content:center;background:var(--bg);position:relative;overflow:hidden;}
 #loginScreen.show{display:flex;}
 .login-box{background:var(--bg2);border:1px solid var(--border2);border-radius:20px;padding:44px;width:100%;max-width:420px;animation:popIn 0.4s cubic-bezier(.22,1,.36,1);position:relative;z-index:1;box-shadow:0 8px 48px rgba(0,0,0,0.12);}
@@ -63,8 +58,6 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-siz
 .login-btn:hover{background:var(--accent2);transform:translateY(-1px);}
 .login-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
 .login-error{font-size:12px;color:var(--red);margin-top:10px;text-align:center;min-height:18px;}
-
-/* APP SHELL */
 #appShell{display:none;min-height:100vh;}
 .topbar{position:sticky;top:0;z-index:100;background:rgba(244,245,249,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border2);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;}
 .topbar-brand{font-family:var(--font-head);font-size:15px;font-weight:800;color:var(--ink);}
@@ -126,8 +119,6 @@ tbody tr:hover td{background:var(--surface);}
 .btn-outline{background:transparent;border:1px solid var(--border2);color:var(--ink2);}
 .btn-outline:hover{border-color:var(--accent);color:var(--accent2);}
 .btn-sm{padding:5px 12px;font-size:11px;}
-
-/* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);backdrop-filter:blur(4px);z-index:9999;display:none;align-items:center;justify-content:center;padding:16px;}
 .modal-overlay.open{display:flex;animation:fadeUp 0.2s ease;}
 .modal-box{background:var(--bg2);border:1px solid var(--border2);border-radius:18px;width:100%;max-width:760px;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.15);animation:popIn 0.25s cubic-bezier(.22,1,.36,1);}
@@ -138,8 +129,6 @@ tbody tr:hover td{background:var(--surface);}
 .modal-close:hover{background:var(--red-lt);color:var(--red);border-color:rgba(220,38,38,0.3);}
 .modal-body{padding:22px 26px;}
 .modal-footer{padding:16px 26px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px;}
-
-/* WEEK CARDS */
 .week-cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;}
 .week-card{border:2px solid var(--border2);border-radius:12px;overflow:hidden;background:var(--bg2);transition:all 0.2s;}
 .week-card.wk-completed{border-color:var(--green);}
@@ -158,14 +147,8 @@ tbody tr:hover td{background:var(--surface);}
 .week-textarea{width:100%;padding:8px 10px;background:var(--surface);border:1px solid var(--border2);border-radius:8px;color:var(--ink);font-family:var(--font-body);font-size:12px;outline:none;resize:none;height:90px;transition:border-color 0.15s;line-height:1.5;}
 .week-textarea:focus{border-color:var(--accent);background:var(--bg2);}
 .week-textarea::placeholder{color:var(--ink3);}
-.week-saved-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-left:5px;opacity:0;transition:opacity 0.3s;}
-.week-saved-dot.show{opacity:1;}
-
-/* PROGRESS TABLE WEEK CELLS */
 .prog-wk-wrap{display:flex;flex-direction:column;align-items:center;gap:3px;}
 .prog-wk-note{font-size:10px;color:var(--ink3);max-width:70px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:help;}
-
-/* SCORE */
 .score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .score-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;}
 .score-item-label{font-size:11px;color:var(--ink3);margin-bottom:6px;font-weight:500;}
@@ -178,7 +161,6 @@ tbody tr:hover td{background:var(--surface);}
 .score-total-row{display:flex;align-items:center;justify-content:space-between;background:var(--accent-lt);border:1px solid rgba(108,99,255,0.3);border-radius:var(--radius-sm);padding:14px 18px;margin-top:14px;}
 .score-total-label{font-size:13px;font-weight:600;color:var(--accent2);}
 .score-total-val{font-family:var(--font-head);font-size:28px;font-weight:800;color:var(--accent2);}
-
 .form-group{margin-bottom:18px;}
 .form-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink3);margin-bottom:7px;display:block;}
 .form-input,.form-textarea,.form-select{width:100%;padding:10px 14px;background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-sm);color:var(--ink);font-family:var(--font-body);font-size:13px;outline:none;transition:border-color 0.15s;}
@@ -225,7 +207,6 @@ tbody tr:hover td{background:var(--surface);}
 <!-- LANDING -->
 <div id="landingScreen">
   <div class="landing-wrap">
-    <div class="landing-badge"><span class="landing-badge-dot"></span>Mini Project Tracker &middot; 2024&ndash;25</div>
     <div class="landing-title">College <span>Project</span><br>Tracker Portal</div>
     <div class="landing-sub">Select your institution to access the project tracking dashboard for mentors and students.</div>
     <div class="landing-card">
@@ -259,7 +240,6 @@ tbody tr:hover td{background:var(--surface);}
         <span class="college-select-icon">&#9662;</span>
       </div>
       <button class="landing-btn" id="goBtn" onclick="goToLogin()" disabled>Continue &rarr;</button>
-      <div class="college-count">22 institutions &middot; I BCA &mdash; A &amp; B sections</div>
     </div>
   </div>
 </div>
@@ -311,7 +291,7 @@ tbody tr:hover td{background:var(--surface);}
       <div class="nav-item active" id="nav-dashboard" onclick="showPanel('dashboard',this)"><span class="nav-icon">&#8862;</span> Dashboard</div>
       <div class="nav-item" id="nav-students" onclick="showPanel('students',this)"><span class="nav-icon">&#9673;</span> My Students<span class="nav-badge" id="navStudentCount">0</span></div>
       <div class="nav-item" id="nav-progress" onclick="showPanel('progress',this)"><span class="nav-icon">&#9654;</span> Weekly Progress</div>
-      <div class="nav-item" id="nav-evaluation" onclick="showPanel('evaluation',this)"><span class="nav-icon">&#9672;</span> Evaluations</div>
+      <div class="nav-item" id="nav-evaluation" onclick="showPanel('evaluation',this)"><span class="nav-icon">&#9672;</span> Mentor Evaluation</div>
       <div class="nav-item" id="nav-admin" style="display:none;" onclick="showPanel('admin',this)"><span class="nav-icon">&#128737;</span> Admin View</div>
     </aside>
     <main class="content">
@@ -418,7 +398,7 @@ tbody tr:hover td{background:var(--surface);}
   </div>
 </div>
 
-<!-- ── WEEK MODAL (4 independent cards, each with own status + note) ── -->
+<!-- WEEK MODAL -->
 <div class="modal-overlay" id="weekModal" onclick="if(event.target===this)closeModal('weekModal')">
   <div class="modal-box" onclick="event.stopPropagation()">
     <div class="modal-header">
@@ -429,7 +409,6 @@ tbody tr:hover td{background:var(--surface);}
       <button class="modal-close" onclick="closeModal('weekModal')">&times;</button>
     </div>
     <div class="modal-body">
-      <!-- 4 week cards injected here -->
       <div class="week-cards-grid" id="weekCardsGrid"></div>
       <div style="background:var(--blue-lt);border:1px solid rgba(37,99,235,0.2);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--blue);font-weight:500;margin-top:4px;">
         &#128161; Click the status badge on any card to cycle: Not Started &rarr; In Progress &rarr; Completed. Add notes per week. Click <strong>Save All Weeks</strong> to persist all 4 weeks at once.
@@ -483,15 +462,9 @@ const COLLEGE_NAMES={'kamaraj':'Kamaraj College','kamaraj-women':"Kamaraj Women'
 /* ── STATE ── */
 let selectedCollegeKey=null,selectedCollegeName=null,selectedSection=null,selectedRole=null,currentUser=null;
 let students=[],allStudents=[];
-/* progressMap[studentId][weekNumber] = { id, student_id, week_number, status, note, ... } */
 let progressMap={},evalMap={},approvalMap={};
 let adminProgressMap={},adminEvalMap={},adminApprovalMap={};
 let currentWeekStudent=null,currentEvalStudent=null,adminTab='all';
-
-/*
-  weekDraft holds in-memory edits for all 4 weeks while the modal is open.
-  Shape: { 1: {status, note}, 2: {status, note}, 3: {status, note}, 4: {status, note} }
-*/
 let weekDraft={};
 
 /* ── SUPABASE ── */
@@ -549,11 +522,30 @@ async function doLogin(){
   document.getElementById('loginScreen').classList.remove('show');
   document.getElementById('userLabel').textContent=currentUser+' \u00b7 '+selectedCollegeName.split(' ')[0]+' '+selectedSection;
   document.getElementById('topbarCollege').textContent=selectedCollegeName+' \u2014 I BCA '+selectedSection;
-  if(currentUser==='Admin') document.getElementById('nav-admin').style.display='flex';
+
+  if(currentUser==='Admin'){
+    document.getElementById('nav-admin').style.display='flex';
+    document.getElementById('nav-students').style.display='none';
+    document.getElementById('nav-progress').style.display='none';
+    document.getElementById('nav-evaluation').style.display='none';
+  }
+
   await initApp();
 }
 function showLoginError(m){document.getElementById('loginError').textContent=m;}
-function doLogout(){currentUser=null;students=[];allStudents=[];progressMap={};evalMap={};approvalMap={};selectedRole=null;selectedSection=null;document.getElementById('appShell').style.display='none';document.getElementById('landingScreen').style.display='flex';document.getElementById('collegeSelect').value='';document.getElementById('goBtn').disabled=true;document.getElementById('nav-admin').style.display='none';showPanel('dashboard',document.getElementById('nav-dashboard'));}
+function doLogout(){
+  currentUser=null;students=[];allStudents=[];progressMap={};evalMap={};approvalMap={};
+  selectedRole=null;selectedSection=null;
+  document.getElementById('appShell').style.display='none';
+  document.getElementById('landingScreen').style.display='flex';
+  document.getElementById('collegeSelect').value='';
+  document.getElementById('goBtn').disabled=true;
+  document.getElementById('nav-admin').style.display='none';
+  document.getElementById('nav-students').style.display='flex';
+  document.getElementById('nav-progress').style.display='flex';
+  document.getElementById('nav-evaluation').style.display='flex';
+  showPanel('dashboard',document.getElementById('nav-dashboard'));
+}
 
 /* ── INIT ── */
 async function initApp(){
@@ -582,7 +574,10 @@ async function initApp(){
     ol.style.display='none';
     document.getElementById('appShell').style.display='block';
     renderDashboard();renderStudentList();renderProgressTable();renderEvalTable();
-    if(currentUser==='Admin'){renderAdminTable();renderAdminStats();}
+    if(currentUser==='Admin'){
+      renderAdminTable();renderAdminStats();
+      showPanel('admin',document.getElementById('nav-admin'));
+    }
   }catch(e){
     ol.style.display='none';
     document.getElementById('appShell').style.display='block';
@@ -591,15 +586,11 @@ async function initApp(){
   }
 }
 
-/*
-  buildMaps: stores weekly_progress indexed by [studentId][weekNumber].
-  Each row in weekly_progress has week_number 1-4, so this is naturally per-week.
-*/
 function buildMaps(prog,evals,apprs,isAdmin){
   const pm={},em={},am={};
   prog.forEach(p=>{
     if(!pm[p.student_id]) pm[p.student_id]={};
-    pm[p.student_id][p.week_number]=p;  /* key = week_number (1,2,3,4) */
+    pm[p.student_id][p.week_number]=p;
   });
   evals.forEach(e=>{em[e.student_id]=e;});
   apprs.forEach(a=>{am[a.student_id]=a;});
@@ -662,7 +653,6 @@ function renderProgressTable(){
     const weeks=progressMap[s.id]||{};
     const wCells=[1,2,3,4].map(w=>{
       const wd=weeks[w],cls=wd?wd.status:'not-started';
-      const color=cls==='completed'?'var(--green)':cls==='in-progress'?'var(--amber)':'var(--ink3)';
       const note=wd&&wd.note&&wd.note.trim()?wd.note:'';
       return`<td style="text-align:center;"><div class="prog-wk-wrap"><button class="week-btn ${cls}" onclick="openWeekModal(${s.id},'${esc(s.name)}',${w})" style="margin:auto;" title="W${w}: ${cls}${note?' — '+note.substring(0,50):''}">${cls==='completed'?'&#10003;':cls==='in-progress'?'~':w}</button>${note?`<div class="prog-wk-note" title="${esc(note)}">&#128172; ${note.substring(0,14)}${note.length>14?'&hellip;':''}</div>`:'<div style="height:14px;"></div>'}</div></td>`;
     }).join('');
@@ -670,15 +660,7 @@ function renderProgressTable(){
   }).join('');
 }
 
-/* ════════════════════════════════════════════════════════
-   WEEK MODAL — 4 independent cards
-   Each card has:
-     - A header with "Week N" label + clickable status badge (cycles)
-     - A textarea for that week's note
-   weekDraft = { 1:{status,note}, 2:{status,note}, 3:{status,note}, 4:{status,note} }
-   On Save All Weeks: for each of 1-4 we upsert/update separately → 4 rows in weekly_progress
-════════════════════════════════════════════════════════ */
-
+/* ── WEEK MODAL ── */
 const STATUS_CYCLE=['not-started','in-progress','completed'];
 const STATUS_LABEL={'not-started':'Not Started','in-progress':'In Progress','completed':'Completed'};
 const STATUS_ICON={'not-started':'&#9675;','in-progress':'&#9675;','completed':'&#10003;'};
@@ -687,22 +669,14 @@ function openWeekModal(studentId,studentName,focusWeek){
   currentWeekStudent={id:studentId,name:studentName};
   document.getElementById('weekModalTitle').textContent=studentName;
   const weeks=progressMap[studentId]||{};
-  /* Initialise draft from existing data (or defaults) */
   weekDraft={};
   [1,2,3,4].forEach(w=>{
     const row=weeks[w];
-    weekDraft[w]={
-      status: row ? row.status : 'not-started',
-      note:   row ? (row.note||'') : ''
-    };
+    weekDraft[w]={status:row?row.status:'not-started',note:row?(row.note||''):''};
   });
   renderWeekCards(focusWeek);
   document.getElementById('weekModal').classList.add('open');
-  /* Focus the textarea of the clicked week */
-  setTimeout(()=>{
-    const ta=document.getElementById('wk-ta-'+focusWeek);
-    if(ta) ta.focus();
-  },220);
+  setTimeout(()=>{const ta=document.getElementById('wk-ta-'+focusWeek);if(ta)ta.focus();},220);
 }
 
 function renderWeekCards(activeWeek){
@@ -713,27 +687,22 @@ function renderWeekCards(activeWeek){
     return`<div class="week-card wk-${d.status}" id="wk-card-${w}">
       <div class="week-card-head wk-${d.status}">
         <span class="week-card-label">Week ${w}${w===activeWeek?' &#9670;':''}</span>
-        <button class="wk-cycle-btn ${d.status}" id="wk-btn-${w}"
-          onclick="cycleWeekStatus(${w},event)"
-          title="Click to change status">
+        <button class="wk-cycle-btn ${d.status}" id="wk-btn-${w}" onclick="cycleWeekStatus(${w},event)" title="Click to change status">
           ${STATUS_ICON[d.status]} ${STATUS_LABEL[d.status]}
         </button>
       </div>
       <div class="week-card-body">
-        <textarea class="week-textarea" id="wk-ta-${w}"
-          placeholder="Week ${w} update: what was done, any blockers, next steps\u2026"
-          oninput="weekDraft[${w}].note=this.value">${safeNote}</textarea>
+        <textarea class="week-textarea" id="wk-ta-${w}" placeholder="Week ${w} update: what was done in this week\u2026" oninput="weekDraft[${w}].note=this.value">${safeNote}</textarea>
       </div>
     </div>`;
   }).join('');
 }
 
 function cycleWeekStatus(w,e){
-  if(e) e.stopPropagation();
+  if(e)e.stopPropagation();
   const cur=weekDraft[w].status;
   const next=STATUS_CYCLE[(STATUS_CYCLE.indexOf(cur)+1)%3];
   weekDraft[w].status=next;
-  /* Update just this card's classes and button without full re-render (keeps textarea focus) */
   const card=document.getElementById('wk-card-'+w);
   const head=card.querySelector('.week-card-head');
   const btn=document.getElementById('wk-btn-'+w);
@@ -743,17 +712,9 @@ function cycleWeekStatus(w,e){
   btn.innerHTML=STATUS_ICON[next]+' '+STATUS_LABEL[next];
 }
 
-/*
-  saveAllWeeks: persists all 4 weeks independently.
-  For each week 1-4:
-    - If a row already exists (progressMap[sid][w]) → PATCH it
-    - Otherwise → POST a new row with student_id + week_number + status + note
-  This guarantees each week is its own row, keyed by (student_id, week_number).
-*/
 async function saveAllWeeks(){
   const btn=document.getElementById('saveWeekBtn');
-  btn.disabled=true;
-  btn.innerHTML='<span class="spinner"></span> Saving&hellip;';
+  btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Saving&hellip;';
   const sid=currentWeekStudent.id;
   const existing=progressMap[sid]||{};
   try{
@@ -762,41 +723,20 @@ async function saveAllWeeks(){
       const note=d.note.trim()||null;
       const row=existing[w];
       if(row){
-        /* Update existing row */
-        await api.updateProgress(row.id,{
-          status:d.status,
-          note:note,
-          updated_by:currentUser,
-          updated_at:new Date().toISOString()
-        });
-        row.status=d.status;
-        row.note=note;
+        await api.updateProgress(row.id,{status:d.status,note:note,updated_by:currentUser,updated_at:new Date().toISOString()});
+        row.status=d.status;row.note=note;
       }else{
-        /* Insert new row for this week */
-        const res=await api.upsertProgress({
-          student_id:sid,
-          week_number:w,
-          status:d.status,
-          note:note,
-          updated_by:currentUser
-        });
-        if(!progressMap[sid]) progressMap[sid]={};
+        const res=await api.upsertProgress({student_id:sid,week_number:w,status:d.status,note:note,updated_by:currentUser});
+        if(!progressMap[sid])progressMap[sid]={};
         progressMap[sid][w]=Array.isArray(res)?res[0]:res;
       }
     }
     showToast('All 4 weeks saved!','success');
     closeModal('weekModal');
-    renderStudentList();
-    renderProgressTable();
-    renderDashboard();
+    renderStudentList();renderProgressTable();renderDashboard();
     if(currentUser==='Admin'){adminProgressMap=progressMap;renderAdminTable();renderAdminStats();}
-  }catch(e){
-    showToast('Error: '+e.message,'error');
-    console.error(e);
-  }finally{
-    btn.disabled=false;
-    btn.innerHTML='Save All Weeks';
-  }
+  }catch(e){showToast('Error: '+e.message,'error');console.error(e);}
+  finally{btn.disabled=false;btn.innerHTML='Save All Weeks';}
 }
 
 /* ── APPROVAL ── */
@@ -904,10 +844,10 @@ function exportCSV(){
   list.forEach((s,i)=>{
     const wks=adminProgressMap[s.id]||{},e=adminEvalMap[s.id],a=adminApprovalMap[s.id];
     rows.push([i+1,s.name,s.register_number,s.section||'',s.course,s.project_title,s.mentor_assigned,s.phone||'',s.email||'',
-      wks[1]?.status||'not-started', wks[1]?.note||'',
-      wks[2]?.status||'not-started', wks[2]?.note||'',
-      wks[3]?.status||'not-started', wks[3]?.note||'',
-      wks[4]?.status||'not-started', wks[4]?.note||'',
+      wks[1]?.status||'not-started',wks[1]?.note||'',
+      wks[2]?.status||'not-started',wks[2]?.note||'',
+      wks[3]?.status||'not-started',wks[3]?.note||'',
+      wks[4]?.status||'not-started',wks[4]?.note||'',
       e?.tech_quality??'',e?.problem_fit??'',e?.effort_ownership??'',e?.presentation??'',e?.practical_impact??'',e?.total_score??'',
       a?.status||'pending']);
   });
