@@ -28,7 +28,6 @@
   --red-lt: rgba(220,38,38,0.12);
   --blue: #2563eb;
   --blue-lt: rgba(37,99,235,0.12);
-  /* rest stays the same */
   --font-head: 'Syne', sans-serif;
   --font-body: 'DM Sans', sans-serif;
   --radius: 14px;
@@ -39,468 +38,265 @@
 html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 14px; min-height: 100vh; overflow-x: hidden; }
 
-/* ── ANIMATIONS ── */
 @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
 @keyframes spin { to { transform: rotate(360deg); } }
-@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
-@keyframes slideIn { from { opacity:0; transform:translateX(-12px); } to { opacity:1; transform:translateX(0); } }
 @keyframes popIn { from { opacity:0; transform:scale(0.94); } to { opacity:1; transform:scale(1); } }
+@keyframes shake { 0%,100% { transform:translateX(0); } 25% { transform:translateX(-6px); } 75% { transform:translateX(6px); } }
 
-/* ── SCROLLBAR ── */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
-::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-track { background: var(--bg3); }
 ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 99px; }
 
-/* ══════════════ LOGIN ══════════════ */
+/* LOGIN */
 #loginScreen {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--bg);
-  position: relative;
-  overflow: hidden;
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: var(--bg); position: relative; overflow: hidden;
 }
 #loginScreen::before {
-  content: '';
-  position: absolute;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(108,99,255,0.12) 0%, transparent 70%);
-  top: -100px; left: -100px;
-  pointer-events: none;
-}
-#loginScreen::after {
-  content: '';
-  position: absolute;
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
-  bottom: -50px; right: -50px;
-  pointer-events: none;
+  content:''; position:absolute; width:600px; height:600px;
+  background: radial-gradient(circle, rgba(108,99,255,0.1) 0%, transparent 70%);
+  top:-100px; left:-100px; pointer-events:none;
 }
 .login-box {
-  background: var(--bg2);
-  border: 1px solid var(--border2);
-  border-radius: 20px;
-  padding: 48px 44px;
-  width: 100%;
-  max-width: 420px;
-  animation: popIn 0.4s cubic-bezier(.22,1,.36,1);
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 8px 48px rgba(0,0,0,0.5);
+  background: var(--bg2); border: 1px solid var(--border2); border-radius: 20px;
+  padding: 48px 44px; width: 100%; max-width: 420px;
+  animation: popIn 0.4s cubic-bezier(.22,1,.36,1); position: relative; z-index: 1;
+  box-shadow: 0 8px 48px rgba(0,0,0,0.12);
 }
 .login-logo {
-  font-family: var(--font-head);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent2);
-  margin-bottom: 28px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-family: var(--font-head); font-size: 13px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent2);
+  margin-bottom: 28px; display: flex; align-items: center; gap: 8px;
 }
 .login-logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
-.login-title {
-  font-family: var(--font-head);
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--ink);
-  line-height: 1.2;
-  margin-bottom: 8px;
-}
+.login-title { font-family: var(--font-head); font-size: 28px; font-weight: 800; color: var(--ink); line-height: 1.2; margin-bottom: 8px; }
 .login-sub { font-size: 13px; color: var(--ink3); margin-bottom: 32px; }
 .login-label { font-size: 11px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink3); margin-bottom: 8px; }
 .login-select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
 .role-btn {
-  padding: 12px 10px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  color: var(--ink2);
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.15s;
-  text-align: center;
+  padding: 12px 10px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); color: var(--ink2); font-family: var(--font-body);
+  font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; text-align: center;
 }
 .role-btn:hover { border-color: var(--accent); color: var(--ink); }
 .role-btn.selected { background: var(--accent-lt); border-color: var(--accent); color: var(--accent2); font-weight: 600; }
 .pin-input-wrap { position: relative; margin-bottom: 20px; }
 .pin-input {
-  width: 100%;
-  padding: 14px 16px;
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  border-radius: var(--radius-sm);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: 18px;
-  letter-spacing: 0.3em;
-  outline: none;
-  transition: border-color 0.15s;
-  text-align: center;
+  width: 100%; padding: 14px 16px; background: var(--surface); border: 1px solid var(--border2);
+  border-radius: var(--radius-sm); color: var(--ink); font-family: var(--font-body);
+  font-size: 18px; letter-spacing: 0.3em; outline: none; transition: border-color 0.15s; text-align: center;
 }
 .pin-input:focus { border-color: var(--accent); }
 .pin-input.error { border-color: var(--red); animation: shake 0.3s; }
-@keyframes shake { 0%,100% { transform:translateX(0); } 25% { transform:translateX(-6px); } 75% { transform:translateX(6px); } }
 .login-btn {
-  width: 100%;
-  padding: 14px;
-  background: var(--accent);
-  border: none;
-  border-radius: var(--radius-sm);
-  color: #fff;
-  font-family: var(--font-head);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  cursor: pointer;
-  transition: all 0.15s;
+  width: 100%; padding: 14px; background: var(--accent); border: none;
+  border-radius: var(--radius-sm); color: #fff; font-family: var(--font-head);
+  font-size: 14px; font-weight: 700; letter-spacing: 0.05em; cursor: pointer; transition: all 0.15s;
 }
 .login-btn:hover { background: var(--accent2); transform: translateY(-1px); }
 .login-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 .login-error { font-size: 12px; color: var(--red); margin-top: 10px; text-align: center; min-height: 18px; }
 
-/* ══════════════ APP SHELL ══════════════ */
+/* APP SHELL */
 #appShell { display: none; min-height: 100vh; }
 
 .topbar {
   position: sticky; top: 0; z-index: 100;
-  background: rgba(13,15,20,0.92);
+  background: rgba(244,245,249,0.95);
   backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 28px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  border-bottom: 1px solid var(--border2);
+  padding: 0 28px; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
 }
-.topbar-left { display: flex; align-items: center; gap: 16px; }
-.topbar-brand {
-  font-family: var(--font-head);
-  font-size: 15px;
-  font-weight: 800;
-  color: var(--ink);
-  letter-spacing: -0.01em;
-}
+.topbar-brand { font-family: var(--font-head); font-size: 15px; font-weight: 800; color: var(--ink); letter-spacing: -0.01em; }
 .topbar-brand span { color: var(--accent2); }
 .topbar-right { display: flex; align-items: center; gap: 10px; }
 .user-pill {
-  display: flex; align-items: center; gap: 8px;
-  padding: 6px 14px;
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  border-radius: 99px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--ink2);
+  display: flex; align-items: center; gap: 8px; padding: 6px 14px;
+  background: var(--surface); border: 1px solid var(--border2);
+  border-radius: 99px; font-size: 12px; font-weight: 600; color: var(--ink2);
 }
 .user-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
 .logout-btn {
-  padding: 7px 14px;
-  background: transparent;
-  border: 1px solid var(--border2);
-  border-radius: 99px;
-  color: var(--ink3);
-  font-family: var(--font-body);
-  font-size: 12px;
-  cursor: pointer;
-  transition: all 0.15s;
+  padding: 7px 14px; background: transparent; border: 1px solid var(--border2);
+  border-radius: 99px; color: var(--ink3); font-family: var(--font-body);
+  font-size: 12px; cursor: pointer; transition: all 0.15s;
 }
 .logout-btn:hover { border-color: var(--red); color: var(--red); }
 
 .main-wrap { display: grid; grid-template-columns: 220px 1fr; min-height: calc(100vh - 60px); }
 
-/* ── SIDEBAR ── */
+/* SIDEBAR */
 .sidebar {
-  background: var(--bg2);
-  border-right: 1px solid var(--border);
-  padding: 24px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+  background: var(--bg2); border-right: 1px solid var(--border);
+  padding: 24px 0; display: flex; flex-direction: column; gap: 2px;
 }
 .nav-section-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink3);
-  padding: 12px 20px 5px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink3); padding: 12px 20px 5px;
 }
 .nav-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 20px;
-  color: var(--ink3);
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  border-left: 2px solid transparent;
-  transition: all 0.15s;
-  border-radius: 0;
+  display: flex; align-items: center; gap: 10px; padding: 10px 20px;
+  color: var(--ink3); font-size: 13px; font-weight: 500; cursor: pointer;
+  border-left: 2px solid transparent; transition: all 0.15s;
 }
 .nav-item:hover { color: var(--ink); background: var(--surface); }
 .nav-item.active { color: var(--accent2); background: var(--accent-lt); border-left-color: var(--accent); font-weight: 600; }
 .nav-icon { font-size: 15px; width: 20px; text-align: center; }
 .nav-badge {
-  margin-left: auto;
-  background: var(--accent);
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 1px 7px;
-  border-radius: 99px;
-  min-width: 20px;
-  text-align: center;
+  margin-left: auto; background: var(--accent); color: #fff;
+  font-size: 10px; font-weight: 700; padding: 1px 7px;
+  border-radius: 99px; min-width: 20px; text-align: center;
 }
 
-/* ── MAIN CONTENT ── */
+/* CONTENT */
 .content { padding: 28px 32px; overflow-y: auto; }
 
-/* ══════════════ PANELS ══════════════ */
 .panel { display: none; }
 .panel.active { display: block; animation: fadeUp 0.3s ease; }
 
-/* ── PAGE HEADER ── */
 .page-header { margin-bottom: 24px; }
 .page-eyebrow { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent2); margin-bottom: 5px; }
 .page-title { font-family: var(--font-head); font-size: 26px; font-weight: 800; color: var(--ink); }
 .page-sub { font-size: 13px; color: var(--ink3); margin-top: 4px; }
 
-/* ── CARDS ── */
 .card {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 22px 24px;
-  box-shadow: var(--shadow);
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 22px 24px; box-shadow: var(--shadow);
 }
 .card-title {
-  font-family: var(--font-head);
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-family: var(--font-head); font-size: 14px; font-weight: 700;
+  color: var(--ink); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
 }
 
-/* ── STATS ROW ── */
+/* STATS */
 .stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 22px; }
 .stat-card {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px 20px;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.2s;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 18px 20px;
+  position: relative; overflow: hidden; transition: transform 0.2s;
 }
 .stat-card:hover { transform: translateY(-2px); }
 .stat-card::after {
-  content: '';
-  position: absolute;
-  bottom: -20px; right: -20px;
-  width: 60px; height: 60px;
-  border-radius: 50%;
-  background: var(--accent-lt);
+  content:''; position:absolute; bottom:-20px; right:-20px;
+  width:60px; height:60px; border-radius:50%; background: var(--accent-lt);
 }
 .stat-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink3); }
 .stat-value { font-family: var(--font-head); font-size: 32px; font-weight: 800; color: var(--ink); line-height: 1.1; margin-top: 4px; }
 .stat-sub { font-size: 11px; color: var(--ink3); margin-top: 4px; }
 
-/* ── STUDENT TABLE ── */
+/* TABLE */
 .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
 thead th {
-  text-align: left;
-  padding: 12px 16px;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--ink3);
-  background: var(--bg3);
-  border-bottom: 1px solid var(--border);
-  white-space: nowrap;
+  text-align: left; padding: 12px 16px; font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink3);
+  background: var(--bg3); border-bottom: 1px solid var(--border); white-space: nowrap;
 }
-tbody td {
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border);
-  color: var(--ink2);
-  vertical-align: middle;
-}
+tbody td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--ink2); vertical-align: middle; }
 tbody tr:last-child td { border-bottom: none; }
 tbody tr:hover td { background: var(--surface); }
 tbody tr { transition: background 0.12s; }
 
-/* ── BADGES ── */
-.badge {
-  display: inline-flex; align-items: center;
-  font-size: 11px; font-weight: 600;
-  padding: 3px 10px; border-radius: 99px;
-}
+/* BADGES */
+.badge { display: inline-flex; align-items: center; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 99px; }
 .badge-green { background: var(--green-lt); color: var(--green); }
 .badge-amber { background: var(--amber-lt); color: var(--amber); }
 .badge-red { background: var(--red-lt); color: var(--red); }
 .badge-blue { background: var(--blue-lt); color: var(--blue); }
 .badge-purple { background: var(--accent-lt); color: var(--accent2); }
-.badge-grey { background: rgba(255,255,255,0.06); color: var(--ink3); }
+.badge-grey { background: var(--surface2); color: var(--ink3); border: 1px solid var(--border2); }
 
-/* ── WEEK PROGRESS BUTTONS ── */
+/* WEEK BUTTONS */
 .week-btns { display: flex; gap: 5px; }
 .week-btn {
-  width: 28px; height: 28px;
-  border-radius: 6px;
-  border: 1px solid var(--border2);
-  background: var(--surface);
-  color: var(--ink3);
-  font-size: 10px;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.15s;
-  font-family: var(--font-body);
+  width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border2);
+  background: var(--surface); color: var(--ink3); font-size: 10px; font-weight: 700;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s; font-family: var(--font-body);
 }
 .week-btn:hover { border-color: var(--accent); }
 .week-btn.completed { background: var(--green-lt); border-color: var(--green); color: var(--green); }
 .week-btn.in-progress { background: var(--amber-lt); border-color: var(--amber); color: var(--amber); }
 .week-btn.not-started { background: var(--surface); border-color: var(--border2); color: var(--ink3); }
 
-/* ── SCORE DISPLAY ── */
+/* SCORES */
 .score-display { font-family: var(--font-head); font-size: 18px; font-weight: 800; }
 .score-high { color: var(--green); }
 .score-mid { color: var(--amber); }
 .score-low { color: var(--red); }
 
-/* ── ACTION BUTTONS ── */
+/* BUTTONS */
 .btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 8px 18px;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s;
-  border: none;
+  display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px;
+  border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 12px;
+  font-weight: 600; cursor: pointer; transition: all 0.15s; border: none;
 }
 .btn-primary { background: var(--accent); color: #fff; }
 .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
 .btn-outline { background: transparent; border: 1px solid var(--border2); color: var(--ink2); }
 .btn-outline:hover { border-color: var(--accent); color: var(--accent2); }
 .btn-sm { padding: 5px 12px; font-size: 11px; }
-.btn-danger { background: var(--red-lt); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
-.btn-danger:hover { background: var(--red); color: #fff; }
 
-/* ── MODAL ── */
+/* MODAL */
 .modal-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(4px);
-  z-index: 9999;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
+  position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px); z-index: 9999; display: none;
+  align-items: center; justify-content: center; padding: 16px;
 }
 .modal-overlay.open { display: flex; animation: fadeUp 0.2s ease; }
 .modal-box {
-  background: var(--bg2);
-  border: 1px solid var(--border2);
-  border-radius: 18px;
-  width: 100%;
-  max-width: 600px;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-  animation: popIn 0.25s cubic-bezier(.22,1,.36,1);
+  background: var(--bg2); border: 1px solid var(--border2); border-radius: 18px;
+  width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15); animation: popIn 0.25s cubic-bezier(.22,1,.36,1);
 }
 .modal-header {
-  padding: 22px 26px 18px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  padding: 22px 26px 18px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: flex-start; justify-content: space-between;
 }
 .modal-title { font-family: var(--font-head); font-size: 18px; font-weight: 800; color: var(--ink); }
 .modal-sub { font-size: 12px; color: var(--ink3); margin-top: 3px; }
 .modal-close {
-  width: 30px; height: 30px;
-  border-radius: 8px;
-  border: 1px solid var(--border2);
-  background: var(--surface);
-  color: var(--ink3);
-  font-size: 16px;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.15s;
-  flex-shrink: 0;
+  width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--border2);
+  background: var(--surface); color: var(--ink3); font-size: 16px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: all 0.15s; flex-shrink: 0;
 }
-.modal-close:hover { background: var(--red-lt); color: var(--red); border-color: rgba(239,68,68,0.3); }
+.modal-close:hover { background: var(--red-lt); color: var(--red); border-color: rgba(220,38,38,0.3); }
 .modal-body { padding: 22px 26px; }
 .modal-footer { padding: 16px 26px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; }
 
-/* ── FORM ── */
+/* FORM */
 .form-group { margin-bottom: 18px; }
 .form-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink3); margin-bottom: 7px; display: block; }
 .form-input, .form-textarea, .form-select {
-  width: 100%;
-  padding: 10px 14px;
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  border-radius: var(--radius-sm);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: 13px;
-  outline: none;
-  transition: border-color 0.15s;
+  width: 100%; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border2);
+  border-radius: var(--radius-sm); color: var(--ink); font-family: var(--font-body);
+  font-size: 13px; outline: none; transition: border-color 0.15s;
 }
 .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--accent); }
 .form-textarea { resize: vertical; min-height: 80px; }
-.form-select { cursor: pointer; }
 .score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .score-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; }
 .score-item-label { font-size: 11px; color: var(--ink3); margin-bottom: 8px; font-weight: 500; }
 .score-item-input {
-  width: 100%;
-  padding: 8px 12px;
-  background: var(--bg3);
-  border: 1px solid var(--border2);
-  border-radius: 6px;
-  color: var(--ink);
-  font-family: var(--font-head);
-  font-size: 16px;
-  font-weight: 700;
-  text-align: center;
-  outline: none;
+  width: 100%; padding: 8px 12px; background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: 6px; color: var(--ink); font-family: var(--font-head); font-size: 16px;
+  font-weight: 700; text-align: center; outline: none;
 }
 .score-item-input:focus { border-color: var(--accent); }
 .score-total-row {
   display: flex; align-items: center; justify-content: space-between;
-  background: var(--accent-lt);
-  border: 1px solid rgba(108,99,255,0.3);
-  border-radius: var(--radius-sm);
-  padding: 14px 18px;
-  margin-top: 14px;
+  background: var(--accent-lt); border: 1px solid rgba(108,99,255,0.3);
+  border-radius: var(--radius-sm); padding: 14px 18px; margin-top: 14px;
 }
 .score-total-label { font-size: 13px; font-weight: 600; color: var(--accent2); }
 .score-total-val { font-family: var(--font-head); font-size: 28px; font-weight: 800; color: var(--accent2); }
 
-/* ── WEEK MODAL ── */
+/* WEEK STATUS MODAL */
 .week-status-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 16px; }
 .week-status-card {
-  background: var(--surface);
-  border: 2px solid var(--border);
-  border-radius: 10px;
-  padding: 14px 12px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.15s;
+  background: var(--surface); border: 2px solid var(--border);
+  border-radius: 10px; padding: 14px 12px; text-align: center; cursor: pointer; transition: all 0.15s;
 }
 .week-status-card:hover { border-color: var(--accent); }
 .week-status-card.active-completed { border-color: var(--green); background: var(--green-lt); }
@@ -509,36 +305,21 @@ tbody tr { transition: background 0.12s; }
 .wsc-week { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink3); margin-bottom: 8px; font-weight: 700; }
 .wsc-status { font-size: 12px; font-weight: 600; margin-top: 6px; }
 
-/* ── APPROVAL BUTTON ── */
+/* APPROVAL SELECT */
 .approval-select {
-  padding: 5px 10px;
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  border-radius: 6px;
-  color: var(--ink2);
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 600;
-  cursor: pointer;
-  outline: none;
+  padding: 5px 10px; background: var(--surface); border: 1px solid var(--border2);
+  border-radius: 6px; color: var(--ink2); font-family: var(--font-body);
+  font-size: 11px; font-weight: 600; cursor: pointer; outline: none;
 }
 
-/* ── TOAST ── */
+/* TOAST */
 .toast {
-  position: fixed; bottom: 24px; right: 24px;
-  background: var(--surface2);
-  border: 1px solid var(--border2);
-  border-radius: 10px;
-  padding: 12px 20px;
-  font-size: 13px;
-  color: var(--ink);
-  display: flex; align-items: center; gap: 10px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-  z-index: 99999;
-  transform: translateY(80px);
-  opacity: 0;
-  transition: all 0.3s cubic-bezier(.22,1,.36,1);
-  max-width: 340px;
+  position: fixed; bottom: 24px; right: 24px; background: var(--bg2);
+  border: 1px solid var(--border2); border-radius: 10px; padding: 12px 20px;
+  font-size: 13px; color: var(--ink); display: flex; align-items: center; gap: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12); z-index: 99999;
+  transform: translateY(80px); opacity: 0;
+  transition: all 0.3s cubic-bezier(.22,1,.36,1); max-width: 340px;
 }
 .toast.show { transform: translateY(0); opacity: 1; }
 .toast-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
@@ -546,89 +327,64 @@ tbody tr { transition: background 0.12s; }
 .toast-dot.error { background: var(--red); }
 .toast-dot.info { background: var(--accent); }
 
-/* ── LOADING SPINNER ── */
-.spinner { width: 18px; height: 18px; border: 2px solid var(--border2); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; }
+/* SPINNER */
+.spinner { width: 18px; height: 18px; border: 2px solid var(--border2); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; display:inline-block; }
 
-/* ── SEARCH BAR ── */
-.search-bar {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-}
+/* SEARCH */
+.search-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+.search-wrap { position: relative; flex: 1; min-width: 200px; }
 .search-input {
-  flex: 1; min-width: 200px;
-  padding: 9px 14px 9px 36px;
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  border-radius: var(--radius-sm);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: 13px;
-  outline: none;
-  transition: border-color 0.15s;
-  position: relative;
+  width: 100%; padding: 9px 14px 9px 36px; background: var(--surface);
+  border: 1px solid var(--border2); border-radius: var(--radius-sm); color: var(--ink);
+  font-family: var(--font-body); font-size: 13px; outline: none; transition: border-color 0.15s;
 }
 .search-input:focus { border-color: var(--accent); }
-.search-wrap { position: relative; flex: 1; min-width: 200px; }
 .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--ink3); font-size: 14px; pointer-events: none; }
 .filter-select {
-  padding: 9px 14px;
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  border-radius: var(--radius-sm);
-  color: var(--ink2);
-  font-family: var(--font-body);
-  font-size: 13px;
-  cursor: pointer;
-  outline: none;
+  padding: 9px 14px; background: var(--surface); border: 1px solid var(--border2);
+  border-radius: var(--radius-sm); color: var(--ink2); font-family: var(--font-body);
+  font-size: 13px; cursor: pointer; outline: none;
 }
 
-/* ── EMPTY STATE ── */
+/* EMPTY STATE */
 .empty-state { text-align: center; padding: 48px; color: var(--ink3); font-size: 13px; }
 .empty-icon { font-size: 36px; margin-bottom: 12px; }
 
-/* ── ADMIN TABS ── */
+/* TABS */
 .tab-row { display: flex; gap: 4px; margin-bottom: 20px; background: var(--bg3); border-radius: 10px; padding: 4px; width: fit-content; }
 .tab-btn {
-  padding: 8px 20px;
-  border-radius: 7px;
-  border: none;
-  background: transparent;
-  color: var(--ink3);
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s;
+  padding: 8px 20px; border-radius: 7px; border: none; background: transparent;
+  color: var(--ink3); font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s;
 }
-.tab-btn.active { background: var(--surface2); color: var(--ink); }
+.tab-btn.active { background: var(--bg2); color: var(--ink); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
 
-/* ── EXPORT BTN ── */
+/* EXPORT */
 .export-btn {
-  padding: 8px 16px;
-  background: var(--green-lt);
-  border: 1px solid rgba(34,197,94,0.3);
-  border-radius: var(--radius-sm);
-  color: var(--green);
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s;
+  padding: 8px 16px; background: var(--green-lt); border: 1px solid rgba(22,163,74,0.3);
+  border-radius: var(--radius-sm); color: var(--green); font-family: var(--font-body);
+  font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s;
 }
 .export-btn:hover { background: var(--green); color: #fff; }
 
-/* ── PROGRESS BAR ── */
+/* PROGRESS BAR */
 .prog-bar-wrap { display: flex; align-items: center; gap: 8px; }
 .prog-bar { flex: 1; height: 6px; background: var(--surface2); border-radius: 99px; overflow: hidden; }
 .prog-bar-fill { height: 100%; border-radius: 99px; background: var(--accent); transition: width 0.5s ease; }
 .prog-pct { font-size: 11px; font-weight: 600; color: var(--ink3); min-width: 30px; }
 
-/* ── STUDENT INFO CARD ── */
+/* INFO CARD */
 .student-info-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
 .info-item { background: var(--surface); border-radius: 8px; padding: 10px 14px; }
 .info-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink3); margin-bottom: 3px; font-weight: 600; }
 .info-value { font-size: 13px; color: var(--ink); font-weight: 500; }
+
+/* LOADING OVERLAY */
+#loadingOverlay {
+  position: fixed; inset: 0; background: var(--bg); z-index: 9999;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+}
+#loadingOverlay .spinner { width: 36px; height: 36px; border-width: 3px; }
+#loadingOverlay p { font-size: 13px; color: var(--ink3); }
 
 @media (max-width: 768px) {
   .main-wrap { grid-template-columns: 1fr; }
@@ -641,7 +397,13 @@ tbody tr { transition: background 0.12s; }
 </head>
 <body>
 
-<!-- ══════════════ LOGIN ══════════════ -->
+<!-- LOADING OVERLAY -->
+<div id="loadingOverlay" style="display:none;">
+  <div class="spinner"></div>
+  <p>Loading students…</p>
+</div>
+
+<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-box">
     <div class="login-logo"><span class="login-logo-dot"></span> I BCA — A · Project Tracker</div>
@@ -656,19 +418,18 @@ tbody tr { transition: background 0.12s; }
     </div>
     <div class="login-label">Enter PIN</div>
     <div class="pin-input-wrap">
-      <input type="password" class="pin-input" id="pinInput" maxlength="4" placeholder="••••" oninput="onPinInput()" onkeydown="if(event.key==='Enter')doLogin()">
+      <input type="password" class="pin-input" id="pinInput" maxlength="4" placeholder="••••"
+        oninput="onPinInput()" onkeydown="if(event.key==='Enter')doLogin()">
     </div>
     <button class="login-btn" id="loginBtn" onclick="doLogin()" disabled>Sign In →</button>
     <div class="login-error" id="loginError"></div>
   </div>
 </div>
 
-<!-- ══════════════ APP SHELL ══════════════ -->
+<!-- APP SHELL -->
 <div id="appShell">
   <header class="topbar">
-    <div class="topbar-left">
-      <div class="topbar-brand">Project<span>Tracker</span></div>
-    </div>
+    <div class="topbar-brand">Project<span>Tracker</span></div>
     <div class="topbar-right">
       <div class="user-pill"><span class="user-dot"></span><span id="userLabel">—</span></div>
       <button class="logout-btn" onclick="doLogout()">Logout</button>
@@ -676,7 +437,6 @@ tbody tr { transition: background 0.12s; }
   </header>
 
   <div class="main-wrap">
-    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
       <div class="nav-section-label">Navigation</div>
       <div class="nav-item active" id="nav-dashboard" onclick="showPanel('dashboard',this)">
@@ -697,7 +457,6 @@ tbody tr { transition: background 0.12s; }
       </div>
     </aside>
 
-    <!-- CONTENT -->
     <main class="content">
 
       <!-- DASHBOARD -->
@@ -771,8 +530,7 @@ tbody tr { transition: background 0.12s; }
             <table>
               <thead><tr>
                 <th>#</th><th>Name</th><th>Project Title</th>
-                <th>Week 1</th><th>Week 2</th><th>Week 3</th><th>Week 4</th>
-                <th>Overall</th>
+                <th>Week 1</th><th>Week 2</th><th>Week 3</th><th>Week 4</th><th>Overall</th>
               </tr></thead>
               <tbody id="progressTableBody"></tbody>
             </table>
@@ -845,15 +603,13 @@ tbody tr { transition: background 0.12s; }
   </div>
 </div>
 
-<!-- ══════════════ MODALS ══════════════ -->
-
-<!-- Week Progress Modal -->
+<!-- WEEK MODAL -->
 <div class="modal-overlay" id="weekModal" onclick="if(event.target===this)closeModal('weekModal')">
   <div class="modal-box" onclick="event.stopPropagation()">
     <div class="modal-header">
       <div>
         <div class="modal-title" id="weekModalTitle">Weekly Progress</div>
-        <div class="modal-sub" id="weekModalSub">Update week status</div>
+        <div class="modal-sub">Update week status</div>
       </div>
       <button class="modal-close" onclick="closeModal('weekModal')">×</button>
     </div>
@@ -871,7 +627,7 @@ tbody tr { transition: background 0.12s; }
   </div>
 </div>
 
-<!-- Evaluation Modal -->
+<!-- EVAL MODAL -->
 <div class="modal-overlay" id="evalModal" onclick="if(event.target===this)closeModal('evalModal')">
   <div class="modal-box" onclick="event.stopPropagation()">
     <div class="modal-header">
@@ -921,73 +677,62 @@ tbody tr { transition: background 0.12s; }
   </div>
 </div>
 
-<!-- Toast -->
+<!-- TOAST -->
 <div class="toast" id="toast">
   <span class="toast-dot success" id="toastDot"></span>
   <span id="toastMsg">Saved!</span>
 </div>
 
 <script>
-/* ══════════════════════════════════════
-   CONFIG
-══════════════════════════════════════ */
+/* ── CONFIG ── */
 const SUPABASE_URL = 'https://qjwbndrgzvboszfzrcuy.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqd2JuZHJnenZib3N6ZnpyY3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NTA3MzIsImV4cCI6MjA5NjEyNjczMn0.x-su_5f_XQ9_ql7iw3Aa_4E4ww9SJIqRGVdTHo6zSpE';
-
 const PINS = { 'Aparna': '4827', 'Arun Raj': '3159', 'Saral': '7634', 'Admin': '9201' };
 
-/* ══════════════════════════════════════
-   SUPABASE HELPERS
-══════════════════════════════════════ */
-async function sb(path, method='GET', body=null) {
-  const opts = {
-    method,
-    headers: {
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`,
-      'Content-Type': 'application/json',
-      'Prefer': method === 'POST' ? 'return=representation' : ''
-    }
+/* ── SUPABASE ── */
+async function sb(path, method = 'GET', body = null) {
+  const headers = {
+    'apikey': SUPABASE_KEY,
+    'Authorization': 'Bearer ' + SUPABASE_KEY,
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
   };
+  if (method === 'POST') headers['Prefer'] = 'return=representation';
+  if (method === 'PATCH') headers['Prefer'] = 'return=representation';
+
+  const opts = { method, headers };
   if (body) opts.body = JSON.stringify(body);
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, opts);
-  if (!res.ok) { const e = await res.text(); throw new Error(e); }
+
+  const res = await fetch(SUPABASE_URL + '/rest/v1/' + path, opts);
   const text = await res.text();
+  if (!res.ok) throw new Error(text || 'Request failed: ' + res.status);
   return text ? JSON.parse(text) : [];
 }
 
 const api = {
-  students: (filter='') => sb(`students?order=id${filter ? '&' + filter : ''}`),
-  myStudents: (mentor) => sb(`students?mentor_assigned=eq.${encodeURIComponent(mentor)}&order=id`),
-  progress: (studentIds) => sb(`weekly_progress?student_id=in.(${studentIds.join(',')})`),
-  evaluations: (studentIds) => sb(`mentor_evaluation?student_id=in.(${studentIds.join(',')})`),
-  approvals: (studentIds) => sb(`project_approval?student_id=in.(${studentIds.join(',')})`),
-  allProgress: () => sb('weekly_progress?order=student_id'),
-  allEvals: () => sb('mentor_evaluation?order=student_id'),
-  allApprovals: () => sb('project_approval?order=student_id'),
+  students: () => sb('students?order=id'),
+  myStudents: (mentor) => sb('students?mentor_assigned=eq.' + encodeURIComponent(mentor) + '&order=id'),
+  progress: (ids) => sb('weekly_progress?student_id=in.(' + ids.join(',') + ')'),
+  evaluations: (ids) => sb('mentor_evaluation?student_id=in.(' + ids.join(',') + ')'),
+  approvals: (ids) => sb('project_approval?student_id=in.(' + ids.join(',') + ')'),
   upsertProgress: (data) => sb('weekly_progress', 'POST', data),
   upsertEval: (data) => sb('mentor_evaluation', 'POST', data),
   upsertApproval: (data) => sb('project_approval', 'POST', data),
-  deleteProgress: (id) => sb(`weekly_progress?id=eq.${id}`, 'DELETE'),
-  deleteEval: (id) => sb(`mentor_evaluation?id=eq.${id}`, 'DELETE'),
-  updateProgress: (id, data) => sb(`weekly_progress?id=eq.${id}`, 'PATCH', data),
-  updateEval: (id, data) => sb(`mentor_evaluation?id=eq.${id}`, 'PATCH', data),
-  updateApproval: (id, data) => sb(`project_approval?id=eq.${id}`, 'PATCH', data),
+  updateProgress: (id, data) => sb('weekly_progress?id=eq.' + id, 'PATCH', data),
+  updateEval: (id, data) => sb('mentor_evaluation?id=eq.' + id, 'PATCH', data),
+  updateApproval: (id, data) => sb('project_approval?id=eq.' + id, 'PATCH', data),
 };
 
-/* ══════════════════════════════════════
-   STATE
-══════════════════════════════════════ */
+/* ── STATE ── */
 let currentUser = null;
 let students = [], allStudents = [];
 let progressMap = {}, evalMap = {}, approvalMap = {};
+let adminProgressMap = {}, adminEvalMap = {}, adminApprovalMap = {};
 let currentWeekStudent = null, currentEvalStudent = null;
 let adminTab = 'all';
-let weekStates = {};  // {weekNum: status}
+let weekStates = {};
 
-/* ══════════════════════════════════════
-   LOGIN
-══════════════════════════════════════ */
+/* ── LOGIN ── */
 let selectedRole = null;
 
 function selectRole(btn) {
@@ -1021,11 +766,8 @@ function doLogin() {
   }
   currentUser = selectedRole;
   document.getElementById('loginScreen').style.display = 'none';
-  document.getElementById('appShell').style.display = 'block';
   document.getElementById('userLabel').textContent = currentUser;
-  if (currentUser === 'Admin') {
-    document.getElementById('nav-admin').style.display = 'flex';
-  }
+  if (currentUser === 'Admin') document.getElementById('nav-admin').style.display = 'flex';
   initApp();
 }
 
@@ -1047,21 +789,26 @@ function doLogout() {
   showPanel('dashboard', document.getElementById('nav-dashboard'));
 }
 
-/* ══════════════════════════════════════
-   APP INIT
-══════════════════════════════════════ */
+/* ── INIT ── */
 async function initApp() {
+  const overlay = document.getElementById('loadingOverlay');
+  overlay.style.display = 'flex';
+
   try {
+    // Load students
     if (currentUser === 'Admin') {
       allStudents = await api.students();
       students = allStudents;
     } else {
-      students = await api.myStudents(currentUser);
-      allStudents = await api.students();
+      [students, allStudents] = await Promise.all([
+        api.myStudents(currentUser),
+        api.students()
+      ]);
     }
 
     document.getElementById('navStudentCount').textContent = students.length;
 
+    // Load related data for mentor's students
     if (students.length > 0) {
       const ids = students.map(s => s.id);
       const [prog, evals, apprs] = await Promise.all([
@@ -1069,54 +816,75 @@ async function initApp() {
         api.evaluations(ids),
         api.approvals(ids)
       ]);
-      buildMaps(prog, evals, apprs);
+      buildMaps(prog, evals, apprs, false);
     }
+
+    // For admin, also load all data
+    if (currentUser === 'Admin' && allStudents.length > 0) {
+      const allIds = allStudents.map(s => s.id);
+      const [prog, evals, apprs] = await Promise.all([
+        api.progress(allIds),
+        api.evaluations(allIds),
+        api.approvals(allIds)
+      ]);
+      buildMaps(prog, evals, apprs, true);
+    }
+
+    overlay.style.display = 'none';
+    document.getElementById('appShell').style.display = 'block';
 
     renderDashboard();
     renderStudentList();
     renderProgressTable();
     renderEvalTable();
-    if (currentUser === 'Admin') renderAdminView();
+    if (currentUser === 'Admin') renderAdminTable(), renderAdminStats();
 
-  } catch(e) {
-    showToast('Failed to load data: ' + e.message, 'error');
+  } catch (e) {
+    overlay.style.display = 'none';
+    document.getElementById('appShell').style.display = 'block';
+    showToast('Error loading data: ' + e.message, 'error');
+    console.error('Init error:', e);
   }
 }
 
-function buildMaps(prog, evals, apprs) {
-  progressMap = {};
+function buildMaps(prog, evals, apprs, isAdmin) {
+  const pm = {}, em = {}, am = {};
   prog.forEach(p => {
-    if (!progressMap[p.student_id]) progressMap[p.student_id] = {};
-    progressMap[p.student_id][p.week_number] = p;
+    if (!pm[p.student_id]) pm[p.student_id] = {};
+    pm[p.student_id][p.week_number] = p;
   });
-  evalMap = {};
-  evals.forEach(e => { evalMap[e.student_id] = e; });
-  approvalMap = {};
-  apprs.forEach(a => { approvalMap[a.student_id] = a; });
+  evals.forEach(e => { em[e.student_id] = e; });
+  apprs.forEach(a => { am[a.student_id] = a; });
+
+  if (isAdmin) {
+    adminProgressMap = pm; adminEvalMap = em; adminApprovalMap = am;
+    // Also use as main maps for admin
+    progressMap = pm; evalMap = em; approvalMap = am;
+  } else {
+    progressMap = pm; evalMap = em; approvalMap = am;
+  }
 }
 
-function getWeeksDone(studentId) {
-  const weeks = progressMap[studentId] || {};
+/* ── HELPERS ── */
+function getWeeksDone(studentId, useAdmin) {
+  const map = useAdmin ? adminProgressMap : progressMap;
+  const weeks = map[studentId] || {};
   return Object.values(weeks).filter(w => w.status === 'completed').length;
 }
-
-function getScore(studentId) {
-  const e = evalMap[studentId];
+function getScore(studentId, useAdmin) {
+  const map = useAdmin ? adminEvalMap : evalMap;
+  const e = map[studentId];
   return e ? e.total_score : null;
 }
-
-function getApproval(studentId) {
-  const a = approvalMap[studentId];
+function getApproval(studentId, useAdmin) {
+  const map = useAdmin ? adminApprovalMap : approvalMap;
+  const a = map[studentId];
   return a ? a.status : 'pending';
 }
-
 function scoreClass(s) {
   if (s === null) return '';
-  if (s >= 75) return 'score-high';
-  if (s >= 50) return 'score-mid';
-  return 'score-low';
+  return s >= 75 ? 'score-high' : s >= 50 ? 'score-mid' : 'score-low';
 }
-
 function approvalBadge(status) {
   const m = {
     'approved': '<span class="badge badge-green">Approved</span>',
@@ -1125,7 +893,6 @@ function approvalBadge(status) {
   };
   return m[status] || m['pending'];
 }
-
 function weeksBadge(n) {
   if (n >= 4) return '<span class="badge badge-green">4/4</span>';
   if (n >= 2) return '<span class="badge badge-amber">' + n + '/4</span>';
@@ -1133,40 +900,36 @@ function weeksBadge(n) {
   return '<span class="badge badge-grey">0/4</span>';
 }
 
-/* ══════════════════════════════════════
-   PANEL NAV
-══════════════════════════════════════ */
+/* ── PANEL NAV ── */
 function showPanel(id, el) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('panel-' + id).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   if (el) el.classList.add('active');
-  if (id === 'admin') renderAdminView();
 }
 
-/* ══════════════════════════════════════
-   DASHBOARD
-══════════════════════════════════════ */
+/* ── DASHBOARD ── */
 function renderDashboard() {
-  const isAdmin = currentUser === 'Admin';
-  document.getElementById('dashTitle').textContent = isAdmin ? 'Admin Dashboard' : `Welcome, ${currentUser}`;
-  document.getElementById('dashSub').textContent = `${students.length} students assigned · I BCA — A`;
+  document.getElementById('dashTitle').textContent = currentUser === 'Admin' ? 'Admin Dashboard' : 'Welcome, ' + currentUser;
+  document.getElementById('dashSub').textContent = students.length + ' students assigned · I BCA — A';
 
-  const totalStudents = students.length;
+  const total = students.length;
   const approved = students.filter(s => getApproval(s.id) === 'approved').length;
   const scored = students.filter(s => getScore(s.id) !== null).length;
-  const avgScore = students.filter(s => getScore(s.id) !== null).reduce((sum, s) => sum + getScore(s.id), 0) / (scored || 1);
+  const avgScore = scored > 0
+    ? (students.filter(s => getScore(s.id) !== null).reduce((sum, s) => sum + getScore(s.id), 0) / scored).toFixed(1)
+    : '—';
 
   document.getElementById('statsRow').innerHTML = `
-    <div class="stat-card"><div class="stat-label">Total Students</div><div class="stat-value">${totalStudents}</div><div class="stat-sub">I BCA — A</div></div>
-    <div class="stat-card"><div class="stat-label">Projects Approved</div><div class="stat-value" style="color:var(--green);">${approved}</div><div class="stat-sub">of ${totalStudents}</div></div>
+    <div class="stat-card"><div class="stat-label">Total Students</div><div class="stat-value">${total}</div><div class="stat-sub">I BCA — A</div></div>
+    <div class="stat-card"><div class="stat-label">Projects Approved</div><div class="stat-value" style="color:var(--green);">${approved}</div><div class="stat-sub">of ${total}</div></div>
     <div class="stat-card"><div class="stat-label">Evaluated</div><div class="stat-value" style="color:var(--accent2);">${scored}</div><div class="stat-sub">score submitted</div></div>
-    <div class="stat-card"><div class="stat-label">Avg Score</div><div class="stat-value" style="color:var(--amber);">${scored > 0 ? avgScore.toFixed(1) : '—'}</div><div class="stat-sub">out of 100</div></div>
+    <div class="stat-card"><div class="stat-label">Avg Score</div><div class="stat-value" style="color:var(--amber);">${avgScore}</div><div class="stat-sub">out of 100</div></div>
   `;
 
   const tbody = document.getElementById('dashTableBody');
   if (!students.length) {
-    tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state"><div class="empty-icon">📭</div>No students found</div></td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state"><div class="empty-icon">📭</div>No students found. Check Supabase connection.</div></td></tr>';
     return;
   }
   tbody.innerHTML = students.map((s, i) => {
@@ -1177,7 +940,7 @@ function renderDashboard() {
     return `<tr>
       <td style="color:var(--ink3);font-size:12px;">${i + 1}</td>
       <td style="font-weight:600;color:var(--ink);">${s.name}</td>
-      <td style="color:var(--ink3);font-size:12px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${s.project_title}</td>
+      <td style="color:var(--ink3);font-size:12px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${s.project_title}">${s.project_title}</td>
       <td><div class="prog-bar-wrap"><div class="prog-bar"><div class="prog-bar-fill" style="width:${prog}%"></div></div><span class="prog-pct">${prog}%</span></div></td>
       <td>${approvalBadge(approval)}</td>
       <td><span class="score-display ${scoreClass(score)}">${score !== null ? score : '—'}</span>${score !== null ? '<span style="font-size:11px;color:var(--ink3);"> /100</span>' : ''}</td>
@@ -1185,13 +948,11 @@ function renderDashboard() {
   }).join('');
 }
 
-/* ══════════════════════════════════════
-   STUDENT LIST
-══════════════════════════════════════ */
+/* ── STUDENT LIST ── */
 function renderStudentList() {
   const q = (document.getElementById('studentSearch').value || '').toLowerCase();
   const af = document.getElementById('approvalFilter').value;
-  let list = students.filter(s => {
+  const list = students.filter(s => {
     const matchQ = !q || s.name.toLowerCase().includes(q) || s.project_title.toLowerCase().includes(q);
     const matchA = !af || getApproval(s.id) === af;
     return matchQ && matchA;
@@ -1203,37 +964,33 @@ function renderStudentList() {
   }
   tbody.innerHTML = list.map((s, i) => {
     const weeks = progressMap[s.id] || {};
-    const weekBtns = [1,2,3,4].map(w => {
+    const weekBtns = [1, 2, 3, 4].map(w => {
       const wd = weeks[w];
-      const cls = wd ? wd.status.replace('-','-') : 'not-started';
+      const cls = wd ? wd.status : 'not-started';
       const icon = cls === 'completed' ? '✓' : cls === 'in-progress' ? '…' : w;
-      return `<button class="week-btn ${cls}" title="${cls}" onclick="openWeekModal(${s.id},'${s.name.replace(/'/g,"\\'")}',${w})">${icon}</button>`;
+      return `<button class="week-btn ${cls}" title="${cls}" onclick="openWeekModal(${s.id},'${s.name.replace(/'/g, "\\'")}',${w})">${icon}</button>`;
     }).join('');
     return `<tr>
-      <td style="color:var(--ink3);">${i+1}</td>
+      <td style="color:var(--ink3);">${i + 1}</td>
       <td><div style="font-weight:600;color:var(--ink);">${s.name}</div><div style="font-size:11px;color:var(--ink3);">${s.register_number}</div></td>
       <td style="font-size:12px;color:var(--ink3);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${s.project_title}</td>
       <td><div class="week-btns">${weekBtns}</div></td>
       <td>
         <select class="approval-select" onchange="saveApproval(${s.id},this.value)">
-          <option value="pending" ${getApproval(s.id)==='pending'?'selected':''}>Pending</option>
-          <option value="approved" ${getApproval(s.id)==='approved'?'selected':''}>Approved</option>
-          <option value="needs-revision" ${getApproval(s.id)==='needs-revision'?'selected':''}>Needs Revision</option>
+          <option value="pending" ${getApproval(s.id) === 'pending' ? 'selected' : ''}>Pending</option>
+          <option value="approved" ${getApproval(s.id) === 'approved' ? 'selected' : ''}>Approved</option>
+          <option value="needs-revision" ${getApproval(s.id) === 'needs-revision' ? 'selected' : ''}>Needs Revision</option>
         </select>
       </td>
-      <td>
-        <button class="btn btn-outline btn-sm" onclick="openEvalModal(${s.id},'${s.name.replace(/'/g,"\\'")}','${s.project_title.replace(/'/g,"\\'")}')">✏ Score</button>
-      </td>
+      <td><button class="btn btn-outline btn-sm" onclick="openEvalModal(${s.id},'${s.name.replace(/'/g, "\\'")}','${s.project_title.replace(/'/g, "\\'")}')">✏ Score</button></td>
     </tr>`;
   }).join('');
 }
 
-/* ══════════════════════════════════════
-   PROGRESS TABLE
-══════════════════════════════════════ */
+/* ── PROGRESS TABLE ── */
 function renderProgressTable() {
   const q = (document.getElementById('progressSearch').value || '').toLowerCase();
-  let list = students.filter(s => !q || s.name.toLowerCase().includes(q) || s.project_title.toLowerCase().includes(q));
+  const list = students.filter(s => !q || s.name.toLowerCase().includes(q) || s.project_title.toLowerCase().includes(q));
   const tbody = document.getElementById('progressTableBody');
   if (!list.length) {
     tbody.innerHTML = '<tr><td colspan="8"><div class="empty-state"><div class="empty-icon">📋</div>No students found</div></td></tr>';
@@ -1241,35 +998,32 @@ function renderProgressTable() {
   }
   tbody.innerHTML = list.map((s, i) => {
     const weeks = progressMap[s.id] || {};
-    const weekCells = [1,2,3,4].map(w => {
+    const weekCells = [1, 2, 3, 4].map(w => {
       const wd = weeks[w];
       const cls = wd ? wd.status : 'not-started';
       const icon = cls === 'completed' ? '✓' : cls === 'in-progress' ? '◌' : '○';
       const color = cls === 'completed' ? 'var(--green)' : cls === 'in-progress' ? 'var(--amber)' : 'var(--ink3)';
       return `<td style="text-align:center;">
-        <button class="week-btn ${cls}" onclick="openWeekModal(${s.id},'${s.name.replace(/'/g,"\\'")}',${w})" style="margin:auto;">
+        <button class="week-btn ${cls}" onclick="openWeekModal(${s.id},'${s.name.replace(/'/g, "\\'")}',${w})" style="margin:auto;">
           <span style="color:${color};">${icon}</span>
         </button>
         ${wd && wd.note ? `<div style="font-size:9px;color:var(--ink3);margin-top:3px;max-width:60px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${wd.note}">${wd.note}</div>` : ''}
       </td>`;
     }).join('');
-    const done = getWeeksDone(s.id);
     return `<tr>
-      <td style="color:var(--ink3);">${i+1}</td>
+      <td style="color:var(--ink3);">${i + 1}</td>
       <td style="font-weight:600;color:var(--ink);">${s.name}</td>
       <td style="font-size:12px;color:var(--ink3);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${s.project_title}</td>
       ${weekCells}
-      <td>${weeksBadge(done)}</td>
+      <td>${weeksBadge(getWeeksDone(s.id))}</td>
     </tr>`;
   }).join('');
 }
 
-/* ══════════════════════════════════════
-   EVAL TABLE
-══════════════════════════════════════ */
+/* ── EVAL TABLE ── */
 function renderEvalTable() {
   const q = (document.getElementById('evalSearch').value || '').toLowerCase();
-  let list = students.filter(s => !q || s.name.toLowerCase().includes(q) || s.project_title.toLowerCase().includes(q));
+  const list = students.filter(s => !q || s.name.toLowerCase().includes(q) || s.project_title.toLowerCase().includes(q));
   const tbody = document.getElementById('evalTableBody');
   if (!list.length) {
     tbody.innerHTML = '<tr><td colspan="10"><div class="empty-state"><div class="empty-icon">📊</div>No students found</div></td></tr>';
@@ -1277,10 +1031,10 @@ function renderEvalTable() {
   }
   tbody.innerHTML = list.map((s, i) => {
     const e = evalMap[s.id];
-    const sc = (key) => e ? (e[key] !== null ? e[key] : '—') : '—';
+    const sc = (key) => e ? (e[key] !== null && e[key] !== undefined ? e[key] : '—') : '—';
     const total = e ? e.total_score : null;
     return `<tr>
-      <td style="color:var(--ink3);">${i+1}</td>
+      <td style="color:var(--ink3);">${i + 1}</td>
       <td style="font-weight:600;color:var(--ink);">${s.name}</td>
       <td style="font-size:12px;color:var(--ink3);max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${s.project_title}</td>
       <td style="text-align:center;">${sc('tech_quality')}</td>
@@ -1289,58 +1043,42 @@ function renderEvalTable() {
       <td style="text-align:center;">${sc('presentation')}</td>
       <td style="text-align:center;">${sc('practical_impact')}</td>
       <td style="text-align:center;"><span class="score-display ${scoreClass(total)}">${total !== null ? total : '—'}</span></td>
-      <td><button class="btn btn-primary btn-sm" onclick="openEvalModal(${s.id},'${s.name.replace(/'/g,"\\'")}','${s.project_title.replace(/'/g,"\\'")}')">✏ ${e ? 'Edit' : 'Score'}</button></td>
+      <td><button class="btn btn-primary btn-sm" onclick="openEvalModal(${s.id},'${s.name.replace(/'/g, "\\'")}','${s.project_title.replace(/'/g, "\\'")}')">✏ ${e ? 'Edit' : 'Score'}</button></td>
     </tr>`;
   }).join('');
 }
 
-/* ══════════════════════════════════════
-   WEEK MODAL
-══════════════════════════════════════ */
+/* ── WEEK MODAL ── */
 function openWeekModal(studentId, studentName, weekNum) {
-  currentWeekStudent = { id: studentId, name: studentName };
+  currentWeekStudent = { id: studentId, name: studentName, activeWeek: weekNum };
   document.getElementById('weekModalTitle').textContent = studentName;
-  document.getElementById('weekModalSub').textContent = `Update weekly progress`;
-
   const weeks = progressMap[studentId] || {};
   weekStates = {};
-  [1,2,3,4].forEach(w => {
-    weekStates[w] = weeks[w] ? weeks[w].status : 'not-started';
-  });
-
-  // Set note for clicked week
+  [1, 2, 3, 4].forEach(w => { weekStates[w] = weeks[w] ? weeks[w].status : 'not-started'; });
   const clicked = weeks[weekNum];
   document.getElementById('weekNote').value = clicked ? (clicked.note || '') : '';
-  // Store active week
-  currentWeekStudent.activeWeek = weekNum;
-
   renderWeekStatusGrid(weekNum);
   document.getElementById('weekModal').classList.add('open');
 }
 
 function renderWeekStatusGrid(activeWeek) {
-  const statuses = ['completed', 'in-progress', 'not-started'];
   const icons = { 'completed': '✓', 'in-progress': '◌', 'not-started': '○' };
   const labels = { 'completed': 'Completed', 'in-progress': 'In Progress', 'not-started': 'Not Started' };
   const colors = { 'completed': 'var(--green)', 'in-progress': 'var(--amber)', 'not-started': 'var(--ink3)' };
-
-  const grid = document.getElementById('weekStatusGrid');
-  grid.innerHTML = [1,2,3,4].map(w => {
-    const current = weekStates[w];
+  document.getElementById('weekStatusGrid').innerHTML = [1, 2, 3, 4].map(w => {
+    const cur = weekStates[w];
     const isActive = w === activeWeek;
-    const activeClass = `active-${current}`;
-    return `<div class="week-status-card ${isActive ? activeClass : ''}" id="wsc-${w}" onclick="cycleWeekStatus(${w})">
+    return `<div class="week-status-card ${isActive ? 'active-' + cur : ''}" onclick="cycleWeekStatus(${w})">
       <div class="wsc-week">Week ${w}</div>
-      <div style="font-size:22px;color:${colors[current]};">${icons[current]}</div>
-      <div class="wsc-status" style="color:${colors[current]};">${labels[current]}</div>
+      <div style="font-size:22px;color:${colors[cur]};">${icons[cur]}</div>
+      <div class="wsc-status" style="color:${colors[cur]};">${labels[cur]}</div>
     </div>`;
   }).join('');
 }
 
 function cycleWeekStatus(w) {
   const order = ['not-started', 'in-progress', 'completed'];
-  const idx = order.indexOf(weekStates[w]);
-  weekStates[w] = order[(idx + 1) % 3];
+  weekStates[w] = order[(order.indexOf(weekStates[w]) + 1) % 3];
   currentWeekStudent.activeWeek = w;
   renderWeekStatusGrid(w);
 }
@@ -1351,38 +1089,34 @@ async function saveWeekProgress() {
   btn.innerHTML = '<div class="spinner"></div> Saving…';
   const note = document.getElementById('weekNote').value;
   const studentId = currentWeekStudent.id;
-
   try {
     const existing = progressMap[studentId] || {};
     for (const [w, status] of Object.entries(weekStates)) {
       const weekNum = parseInt(w);
-      const existingEntry = existing[weekNum];
-      if (existingEntry) {
-        await api.updateProgress(existingEntry.id, { status, note: weekNum === currentWeekStudent.activeWeek ? note : existingEntry.note, updated_by: currentUser, updated_at: new Date().toISOString() });
-        existingEntry.status = status;
-        if (weekNum === currentWeekStudent.activeWeek) existingEntry.note = note;
+      const entry = existing[weekNum];
+      const noteVal = weekNum === currentWeekStudent.activeWeek ? note : (entry ? entry.note : null);
+      if (entry) {
+        await api.updateProgress(entry.id, { status, note: noteVal, updated_by: currentUser, updated_at: new Date().toISOString() });
+        entry.status = status;
+        entry.note = noteVal;
       } else {
-        const newEntry = await api.upsertProgress({ student_id: studentId, week_number: weekNum, status, note: weekNum === currentWeekStudent.activeWeek ? note : null, updated_by: currentUser });
+        const res = await api.upsertProgress({ student_id: studentId, week_number: weekNum, status, note: noteVal, updated_by: currentUser });
         if (!progressMap[studentId]) progressMap[studentId] = {};
-        progressMap[studentId][weekNum] = Array.isArray(newEntry) ? newEntry[0] : newEntry;
+        progressMap[studentId][weekNum] = Array.isArray(res) ? res[0] : res;
       }
     }
     showToast('Progress saved!', 'success');
     closeModal('weekModal');
-    renderStudentList();
-    renderProgressTable();
-    renderDashboard();
-  } catch(e) {
+    renderStudentList(); renderProgressTable(); renderDashboard();
+    if (currentUser === 'Admin') { adminProgressMap = progressMap; renderAdminTable(); renderAdminStats(); }
+  } catch (e) {
     showToast('Error: ' + e.message, 'error');
   } finally {
-    btn.disabled = false;
-    btn.innerHTML = 'Save Progress';
+    btn.disabled = false; btn.innerHTML = 'Save Progress';
   }
 }
 
-/* ══════════════════════════════════════
-   APPROVAL
-══════════════════════════════════════ */
+/* ── APPROVAL ── */
 async function saveApproval(studentId, status) {
   try {
     const existing = approvalMap[studentId];
@@ -1395,14 +1129,13 @@ async function saveApproval(studentId, status) {
     }
     showToast('Approval updated!', 'success');
     renderDashboard();
-  } catch(e) {
+    if (currentUser === 'Admin') { adminApprovalMap = approvalMap; renderAdminTable(); renderAdminStats(); }
+  } catch (e) {
     showToast('Error: ' + e.message, 'error');
   }
 }
 
-/* ══════════════════════════════════════
-   EVAL MODAL
-══════════════════════════════════════ */
+/* ── EVAL MODAL ── */
 function openEvalModal(studentId, studentName, projectTitle) {
   currentEvalStudent = { id: studentId, name: studentName, project: projectTitle };
   document.getElementById('evalModalTitle').textContent = studentName;
@@ -1423,11 +1156,11 @@ function openEvalModal(studentId, studentName, projectTitle) {
 }
 
 function calcTotal() {
-  const vals = ['sc_tech','sc_fit','sc_effort','sc_pres','sc_impact'].map(id => {
+  const vals = ['sc_tech', 'sc_fit', 'sc_effort', 'sc_pres', 'sc_impact'].map(id => {
     const v = parseInt(document.getElementById(id).value);
     return isNaN(v) ? 0 : Math.min(20, Math.max(0, v));
   });
-  const total = vals.reduce((a,b) => a+b, 0);
+  const total = vals.reduce((a, b) => a + b, 0);
   const el = document.getElementById('scoreTotalDisplay');
   el.textContent = total + ' / 100';
   el.style.color = total >= 75 ? 'var(--green)' : total >= 50 ? 'var(--amber)' : 'var(--red)';
@@ -1437,16 +1170,18 @@ async function saveEvaluation() {
   const btn = document.getElementById('saveEvalBtn');
   btn.disabled = true;
   btn.innerHTML = '<div class="spinner"></div> Saving…';
-
   const get = (id) => { const v = parseInt(document.getElementById(id).value); return isNaN(v) ? 0 : Math.min(20, Math.max(0, v)); };
   const tech = get('sc_tech'), fit = get('sc_fit'), effort = get('sc_effort'), pres = get('sc_pres'), impact = get('sc_impact');
   const total = tech + fit + effort + pres + impact;
-  const remarks = document.getElementById('evalRemarks').value;
   const studentId = currentEvalStudent.id;
-
+  const data = {
+    student_id: studentId, tech_quality: tech, problem_fit: fit, effort_ownership: effort,
+    presentation: pres, practical_impact: impact, total_score: total,
+    remarks: document.getElementById('evalRemarks').value,
+    submitted_by: currentUser, submitted_at: new Date().toISOString()
+  };
   try {
     const existing = evalMap[studentId];
-    const data = { student_id: studentId, tech_quality: tech, problem_fit: fit, effort_ownership: effort, presentation: pres, practical_impact: impact, total_score: total, remarks, submitted_by: currentUser, submitted_at: new Date().toISOString() };
     if (existing) {
       await api.updateEval(existing.id, data);
       Object.assign(evalMap[studentId], data);
@@ -1456,62 +1191,28 @@ async function saveEvaluation() {
     }
     showToast('Evaluation saved!', 'success');
     closeModal('evalModal');
-    renderEvalTable();
-    renderDashboard();
-    renderStudentList();
-  } catch(e) {
+    renderEvalTable(); renderDashboard(); renderStudentList();
+    if (currentUser === 'Admin') { adminEvalMap = evalMap; renderAdminTable(); renderAdminStats(); }
+  } catch (e) {
     showToast('Error: ' + e.message, 'error');
   } finally {
-    btn.disabled = false;
-    btn.innerHTML = 'Save Evaluation';
+    btn.disabled = false; btn.innerHTML = 'Save Evaluation';
   }
 }
 
-/* ══════════════════════════════════════
-   ADMIN VIEW
-══════════════════════════════════════ */
-async function renderAdminView() {
-  try {
-    const allIds = allStudents.map(s => s.id);
-    if (allIds.length) {
-      const [prog, evals, apprs] = await Promise.all([
-        api.progress(allIds),
-        api.evaluations(allIds),
-        api.approvals(allIds)
-      ]);
-      buildAdminMaps(prog, evals, apprs);
-    }
-    renderAdminTable();
-    renderAdminStats();
-  } catch(e) {
-    showToast('Admin load error: ' + e.message, 'error');
-  }
-}
-
-let adminProgressMap = {}, adminEvalMap = {}, adminApprovalMap = {};
-function buildAdminMaps(prog, evals, apprs) {
-  adminProgressMap = {};
-  prog.forEach(p => { if (!adminProgressMap[p.student_id]) adminProgressMap[p.student_id] = {}; adminProgressMap[p.student_id][p.week_number] = p; });
-  adminEvalMap = {};
-  evals.forEach(e => { adminEvalMap[e.student_id] = e; });
-  adminApprovalMap = {};
-  apprs.forEach(a => { adminApprovalMap[a.student_id] = a; });
-}
-
+/* ── ADMIN ── */
 function setAdminTab(tab, btn) {
   adminTab = tab;
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  renderAdminTable();
-  renderAdminStats();
+  renderAdminTable(); renderAdminStats();
 }
 
 function renderAdminStats() {
   const list = adminTab === 'all' ? allStudents : allStudents.filter(s => s.mentor_assigned === adminTab);
   const approved = list.filter(s => (adminApprovalMap[s.id]?.status) === 'approved').length;
   const scored = list.filter(s => adminEvalMap[s.id]).length;
-  const totalScore = list.reduce((sum, s) => sum + (adminEvalMap[s.id]?.total_score || 0), 0);
-  const avgScore = scored > 0 ? (totalScore / scored).toFixed(1) : '—';
+  const avgScore = scored > 0 ? (list.reduce((sum, s) => sum + (adminEvalMap[s.id]?.total_score || 0), 0) / scored).toFixed(1) : '—';
   document.getElementById('adminStatsRow').innerHTML = `
     <div class="stat-card"><div class="stat-label">Students</div><div class="stat-value">${list.length}</div></div>
     <div class="stat-card"><div class="stat-label">Approved</div><div class="stat-value" style="color:var(--green);">${approved}</div></div>
@@ -1522,20 +1223,16 @@ function renderAdminStats() {
 function renderAdminTable() {
   const list = adminTab === 'all' ? allStudents : allStudents.filter(s => s.mentor_assigned === adminTab);
   const tbody = document.getElementById('adminTableBody');
-  if (!list.length) {
-    tbody.innerHTML = '<tr><td colspan="7"><div class="empty-state">No students</div></td></tr>';
-    return;
-  }
+  if (!list.length) { tbody.innerHTML = '<tr><td colspan="7"><div class="empty-state">No students</div></td></tr>'; return; }
   tbody.innerHTML = list.map((s, i) => {
-    const weeks = adminProgressMap[s.id] || {};
-    const done = Object.values(weeks).filter(w => w.status === 'completed').length;
-    const score = adminEvalMap[s.id]?.total_score ?? null;
-    const approval = adminApprovalMap[s.id]?.status || 'pending';
-    const mentorColor = s.mentor_assigned === 'Aparna' ? 'var(--accent2)' : s.mentor_assigned === 'Arun Raj' ? 'var(--green)' : 'var(--amber)';
+    const done = getWeeksDone(s.id, true);
+    const score = getScore(s.id, true);
+    const approval = getApproval(s.id, true);
+    const mc = s.mentor_assigned === 'Aparna' ? 'var(--accent2)' : s.mentor_assigned === 'Arun Raj' ? 'var(--green)' : 'var(--amber)';
     return `<tr>
-      <td style="color:var(--ink3);">${i+1}</td>
+      <td style="color:var(--ink3);">${i + 1}</td>
       <td style="font-weight:600;color:var(--ink);">${s.name}</td>
-      <td><span style="font-size:12px;font-weight:600;color:${mentorColor};">${s.mentor_assigned}</span></td>
+      <td><span style="font-size:12px;font-weight:600;color:${mc};">${s.mentor_assigned}</span></td>
       <td style="font-size:12px;color:var(--ink3);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${s.project_title}</td>
       <td style="text-align:center;">${weeksBadge(done)}</td>
       <td>${approvalBadge(approval)}</td>
@@ -1544,47 +1241,39 @@ function renderAdminTable() {
   }).join('');
 }
 
-/* ══════════════════════════════════════
-   EXPORT CSV
-══════════════════════════════════════ */
+/* ── EXPORT CSV ── */
 function exportCSV() {
   const list = adminTab === 'all' ? allStudents : allStudents.filter(s => s.mentor_assigned === adminTab);
-  const rows = [['#','Name','Register No','Course','Project Title','Mentor','Phone','Email','Week1','Week2','Week3','Week4','Tech Quality','Problem Fit','Effort','Presentation','Impact','Total Score','Approval']];
+  const rows = [['#', 'Name', 'Register No', 'Course', 'Project Title', 'Mentor', 'Phone', 'Email', 'Week1', 'Week2', 'Week3', 'Week4', 'Tech Quality', 'Problem Fit', 'Effort', 'Presentation', 'Impact', 'Total Score', 'Approval']];
   list.forEach((s, i) => {
     const weeks = adminProgressMap[s.id] || {};
     const e = adminEvalMap[s.id];
     const a = adminApprovalMap[s.id];
-    rows.push([
-      i+1, s.name, s.register_number, s.course, s.project_title, s.mentor_assigned, s.phone, s.email,
-      weeks[1]?.status||'not-started', weeks[2]?.status||'not-started', weeks[3]?.status||'not-started', weeks[4]?.status||'not-started',
-      e?.tech_quality||'', e?.problem_fit||'', e?.effort_ownership||'', e?.presentation||'', e?.practical_impact||'', e?.total_score||'',
-      a?.status||'pending'
-    ]);
+    rows.push([i + 1, s.name, s.register_number, s.course, s.project_title, s.mentor_assigned, s.phone, s.email,
+      weeks[1]?.status || 'not-started', weeks[2]?.status || 'not-started', weeks[3]?.status || 'not-started', weeks[4]?.status || 'not-started',
+      e?.tech_quality || '', e?.problem_fit || '', e?.effort_ownership || '', e?.presentation || '', e?.practical_impact || '', e?.total_score || '',
+      a?.status || 'pending']);
   });
-  const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
-  const blob = new Blob([csv], {type:'text/csv'});
+  const csv = rows.map(r => r.map(v => '"' + String(v).replace(/"/g, '""') + '"').join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a'); a.href = url; a.download = `students_${adminTab}_${new Date().toISOString().split('T')[0]}.csv`;
+  const a = document.createElement('a');
+  a.href = url; a.download = 'students_' + adminTab + '_' + new Date().toISOString().split('T')[0] + '.csv';
   a.click(); URL.revokeObjectURL(url);
   showToast('CSV exported!', 'success');
 }
 
-/* ══════════════════════════════════════
-   MODAL HELPERS
-══════════════════════════════════════ */
+/* ── HELPERS ── */
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
-/* ══════════════════════════════════════
-   TOAST
-══════════════════════════════════════ */
 let toastTimeout;
-function showToast(msg, type='success') {
+function showToast(msg, type = 'success') {
   const t = document.getElementById('toast');
   document.getElementById('toastMsg').textContent = msg;
   document.getElementById('toastDot').className = 'toast-dot ' + type;
   t.classList.add('show');
   clearTimeout(toastTimeout);
-  toastTimeout = setTimeout(() => t.classList.remove('show'), 3000);
+  toastTimeout = setTimeout(() => t.classList.remove('show'), 3500);
 }
 </script>
 </body>
