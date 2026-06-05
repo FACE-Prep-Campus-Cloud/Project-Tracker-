@@ -22,8 +22,6 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-siz
 #landingScreen::before{content:'';position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(108,99,255,0.09) 0%,transparent 70%);top:-150px;right:-150px;pointer-events:none;}
 #landingScreen::after{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(22,163,74,0.07) 0%,transparent 70%);bottom:-100px;left:-100px;pointer-events:none;}
 .landing-wrap{width:100%;max-width:520px;padding:24px;position:relative;z-index:1;animation:fadeUp 0.5s cubic-bezier(.22,1,.36,1);}
-.landing-badge{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;background:var(--accent-lt);border:1px solid rgba(108,99,255,0.25);border-radius:99px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:24px;}
-.landing-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite;}
 .landing-title{font-family:var(--font-head);font-size:38px;font-weight:800;color:var(--ink);line-height:1.1;margin-bottom:8px;letter-spacing:-0.02em;}
 .landing-title span{color:var(--accent2);}
 .landing-sub{font-size:14px;color:var(--ink3);margin-bottom:32px;line-height:1.6;}
@@ -38,7 +36,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-siz
 .landing-btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
 #loginScreen{min-height:100vh;display:none;align-items:center;justify-content:center;background:var(--bg);position:relative;overflow:hidden;}
 #loginScreen.show{display:flex;}
-.login-box{background:var(--bg2);border:1px solid var(--border2);border-radius:20px;padding:44px;width:100%;max-width:420px;animation:popIn 0.4s cubic-bezier(.22,1,.36,1);position:relative;z-index:1;box-shadow:0 8px 48px rgba(0,0,0,0.12);}
+.login-box{background:var(--bg2);border:1px solid var(--border2);border-radius:20px;padding:44px;width:100%;max-width:440px;animation:popIn 0.4s cubic-bezier(.22,1,.36,1);position:relative;z-index:1;box-shadow:0 8px 48px rgba(0,0,0,0.12);}
 .login-college-pill{display:flex;align-items:center;gap:8px;padding:7px 14px;background:var(--accent-lt);border:1px solid rgba(108,99,255,0.2);border-radius:99px;margin-bottom:24px;cursor:pointer;width:fit-content;transition:all 0.15s;font-size:12px;}
 .login-college-pill:hover{background:rgba(108,99,255,0.15);}
 .login-college-name{font-weight:700;color:var(--accent2);}
@@ -46,7 +44,6 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-siz
 .login-title{font-family:var(--font-head);font-size:26px;font-weight:800;color:var(--ink);margin-bottom:6px;}
 .login-sub{font-size:13px;color:var(--ink3);margin-bottom:28px;}
 .login-label{font-size:11px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;}
-.login-select-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;}
 .role-btn{padding:12px 10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--ink2);font-family:var(--font-body);font-size:12px;font-weight:500;cursor:pointer;transition:all 0.15s;text-align:center;}
 .role-btn:hover{border-color:var(--accent);color:var(--ink);}
 .role-btn.selected{background:var(--accent-lt);border-color:var(--accent);color:var(--accent2);font-weight:600;}
@@ -62,7 +59,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-siz
 .topbar{position:sticky;top:0;z-index:100;background:rgba(244,245,249,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border2);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;}
 .topbar-brand{font-family:var(--font-head);font-size:15px;font-weight:800;color:var(--ink);}
 .topbar-brand span{color:var(--accent2);}
-.topbar-college{font-size:11px;font-weight:600;color:var(--ink3);background:var(--surface);border:1px solid var(--border2);border-radius:99px;padding:4px 12px;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.topbar-college{font-size:11px;font-weight:600;color:var(--ink3);background:var(--surface);border:1px solid var(--border2);border-radius:99px;padding:4px 12px;max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .topbar-right{display:flex;align-items:center;gap:10px;}
 .user-pill{display:flex;align-items:center;gap:8px;padding:6px 14px;background:var(--surface);border:1px solid var(--border2);border-radius:99px;font-size:12px;font-weight:600;color:var(--ink2);}
 .user-dot{width:7px;height:7px;border-radius:50%;background:var(--green);}
@@ -181,8 +178,8 @@ tbody tr:hover td{background:var(--surface);}
 .filter-select{padding:9px 14px;background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-sm);color:var(--ink2);font-family:var(--font-body);font-size:13px;cursor:pointer;outline:none;}
 .empty-state{text-align:center;padding:48px;color:var(--ink3);font-size:13px;}
 .empty-icon{font-size:36px;margin-bottom:12px;}
-.tab-row{display:flex;gap:4px;margin-bottom:20px;background:var(--bg3);border-radius:10px;padding:4px;width:fit-content;}
-.tab-btn{padding:8px 20px;border-radius:7px;border:none;background:transparent;color:var(--ink3);font-family:var(--font-body);font-size:12px;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.tab-row{display:flex;gap:4px;margin-bottom:20px;background:var(--bg3);border-radius:10px;padding:4px;width:fit-content;flex-wrap:wrap;}
+.tab-btn{padding:8px 16px;border-radius:7px;border:none;background:transparent;color:var(--ink3);font-family:var(--font-body);font-size:12px;font-weight:600;cursor:pointer;transition:all 0.15s;}
 .tab-btn.active{background:var(--bg2);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,0.08);}
 .export-btn{padding:8px 16px;background:var(--green-lt);border:1px solid rgba(22,163,74,0.3);border-radius:var(--radius-sm);color:var(--green);font-family:var(--font-body);font-size:12px;font-weight:600;cursor:pointer;transition:all 0.15s;}
 .export-btn:hover{background:var(--green);color:#fff;}
@@ -255,16 +252,20 @@ tbody tr:hover td{background:var(--surface);}
     <div class="login-title">Mentor Login</div>
     <div class="login-sub">Select section, role and enter your PIN</div>
     <div class="login-label">Select Section</div>
-    <div class="login-select-grid" style="margin-bottom:14px;">
-      <button class="role-btn" data-section="A" onclick="selectSection(this)">I BCA &mdash; A</button>
-      <button class="role-btn" data-section="B" onclick="selectSection(this)">I BCA &mdash; B</button>
+    <div class="college-select-wrap" style="margin-bottom:14px;">
+      <select class="college-select" id="sectionSelect" onchange="selectSectionFromDropdown(this)">
+        <option value="">&mdash; Choose your section &mdash;</option>
+        <option value="A">I BCA &mdash; A</option>
+        <option value="B">I BCA &mdash; B</option>
+        <option value="II">II BCA</option>
+        <option value="BCH">I B.Com Honours</option>
+        <option value="BBADM">I BBA Digital Marketing</option>
+      </select>
+      <span class="college-select-icon">&#9662;</span>
     </div>
     <div class="login-label">Select Role</div>
-    <div class="login-select-grid">
-      <button class="role-btn" data-role="Aparna" onclick="selectRole(this)">Aparna</button>
-      <button class="role-btn" data-role="Arun Raj" onclick="selectRole(this)">Arun Raj</button>
-      <button class="role-btn" data-role="Saral" onclick="selectRole(this)">Saral</button>
-      <button class="role-btn" data-role="Admin" onclick="selectRole(this)">&#128737; Admin</button>
+    <div id="roleButtonsWrap" class="login-select-grid" style="grid-template-columns:1fr 1fr;">
+      <!-- Populated dynamically based on section -->
     </div>
     <div class="login-label" style="margin-top:16px;">Enter PIN</div>
     <div class="pin-input-wrap">
@@ -380,10 +381,13 @@ tbody tr:hover td{background:var(--surface);}
         </div>
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
           <div class="tab-row">
-            <button class="tab-btn active" onclick="setAdminTab('all',this)">All Students</button>
+            <button class="tab-btn active" onclick="setAdminTab('all',this)">All</button>
             <button class="tab-btn" onclick="setAdminTab('Aparna',this)">Aparna</button>
             <button class="tab-btn" onclick="setAdminTab('Arun Raj',this)">Arun Raj</button>
             <button class="tab-btn" onclick="setAdminTab('Saral',this)">Saral</button>
+            <button class="tab-btn" onclick="setAdminTab('Bavani Sri',this)">Bavani Sri</button>
+            <button class="tab-btn" onclick="setAdminTab('Jane Rhinu',this)">Jane Rhinu</button>
+            <button class="tab-btn" onclick="setAdminTab('BBADM',this)">BBA Digital Mktg</button>
           </div>
           <button class="export-btn" onclick="exportCSV()">&darr; Export CSV</button>
         </div>
@@ -456,8 +460,48 @@ tbody tr:hover td{background:var(--surface);}
 /* ── CONFIG ── */
 const SUPABASE_URL='https://qjwbndrgzvboszfzrcuy.supabase.co';
 const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqd2JuZHJnenZib3N6ZnpyY3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NTA3MzIsImV4cCI6MjA5NjEyNjczMn0.x-su_5f_XQ9_ql7iw3Aa_4E4ww9SJIqRGVdTHo6zSpE';
-const PINS={'Aparna':'4827','Arun Raj':'3159','Saral':'7634','Admin':'9201'};
-const COLLEGE_NAMES={'kamaraj':'Kamaraj College','kamaraj-women':"Kamaraj Women's College",'sdnb':'SDNB Vaishnav College for Women','patrician':'Patrician College of Arts & Science','terf':"TERF's College of Arts and Science",'sst':'Sree Saraswathi Thyagaraja College','tjs':'TJS College of Arts and Science','bharathidasan':'Bharathidasan College of Arts & Science','nagarathinam':'Nagarathinam Angalammal Arts & Science College','vinayaga':"Vinayaga Mission's Research Foundation School of Arts & Science",'amaraavathi':'Sri Amaraavathi College of Arts & Science','takshashila':'Takshashila University','studyworld':'Study World Group of Institution','rathinam':'Rathinam College of Arts & Science','niche':'Noorul Islam Centre for Higher Education (NICHE)','amet':'AMET University','joy':'Joy University','sasurie':'Sasurie College of Arts and Science','alliance':'Alliance University','kristu':'Kristu Jayanti (Deemed to be University)','svyasa':'S-VYASA University','asb':'Asian School of Business'};
+
+/* ── PINS ── */
+const PINS={
+  'Aparna':     '4827',
+  'Arun Raj':   '3159',
+  'Saral':      '7634',
+  'Admin':      '9201',
+  'Bavani Sri': '5541',
+  'Jane Rhinu': '6673'
+};
+
+/* ── ROLES PER SECTION ── */
+const SECTION_ROLES={
+  'A':     ['Aparna','Arun Raj','Saral','Admin'],
+  'B':     ['Aparna','Arun Raj','Saral','Admin'],
+  'II':    ['Aparna','Arun Raj','Saral','Admin'],
+  'BCH':   ['Bavani Sri','Jane Rhinu','Admin'],
+  'BBADM': ['Bavani Sri','Jane Rhinu','Admin']
+};
+
+const COLLEGE_NAMES={
+  'kamaraj':'Kamaraj College','kamaraj-women':"Kamaraj Women's College",
+  'sdnb':'SDNB Vaishnav College for Women','patrician':'Patrician College of Arts & Science',
+  'terf':"TERF's College of Arts and Science",'sst':'Sree Saraswathi Thyagaraja College',
+  'tjs':'TJS College of Arts and Science','bharathidasan':'Bharathidasan College of Arts & Science',
+  'nagarathinam':'Nagarathinam Angalammal Arts & Science College',
+  'vinayaga':"Vinayaga Mission's Research Foundation School of Arts & Science",
+  'amaraavathi':'Sri Amaraavathi College of Arts & Science','takshashila':'Takshashila University',
+  'studyworld':'Study World Group of Institution','rathinam':'Rathinam College of Arts & Science',
+  'niche':'Noorul Islam Centre for Higher Education (NICHE)','amet':'AMET University',
+  'joy':'Joy University','sasurie':'Sasurie College of Arts and Science',
+  'alliance':'Alliance University','kristu':'Kristu Jayanti (Deemed to be University)',
+  'svyasa':'S-VYASA University','asb':'Asian School of Business'
+};
+
+/* ── FIX 1: getSectionLabel — BBADM now correctly maps ── */
+function getSectionLabel(sec){
+  if(sec==='II')    return 'II BCA';
+  if(sec==='BCH')   return 'I B.Com Honours';
+  if(sec==='BBADM') return 'I BBA Digital Marketing';
+  return 'I BCA - '+sec;
+}
 
 /* ── STATE ── */
 let selectedCollegeKey=null,selectedCollegeName=null,selectedSection=null,selectedRole=null,currentUser=null;
@@ -505,14 +549,39 @@ function goToLogin(){
   document.getElementById('loginBtn').disabled=true;
   document.getElementById('loginError').textContent='';
   document.querySelectorAll('.role-btn').forEach(b=>b.classList.remove('selected'));
+  document.getElementById('sectionSelect').value='';
+  renderRoleButtons(null);
 }
 function backToLanding(){document.getElementById('loginScreen').classList.remove('show');document.getElementById('landingScreen').style.display='flex';}
 
+/* ── Render role buttons based on selected section ── */
+function renderRoleButtons(sec){
+  const wrap=document.getElementById('roleButtonsWrap');
+  if(!sec){wrap.innerHTML='<div style="grid-column:1/-1;font-size:12px;color:var(--ink3);padding:8px 0;">\u2190 Select a section first</div>';return;}
+  const roles=SECTION_ROLES[sec]||['Aparna','Arun Raj','Saral','Admin'];
+  wrap.style.gridTemplateColumns=roles.length<=3?'1fr 1fr 1fr':'1fr 1fr';
+  wrap.innerHTML=roles.map(r=>`<button class="role-btn" data-role="${r}" onclick="selectRole(this)">${r==='Admin'?'&#128737; ':''} ${r}</button>`).join('');
+}
+
 /* ── LOGIN ── */
-function selectSection(btn){document.querySelectorAll('[data-section]').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');selectedSection=btn.getAttribute('data-section');checkLoginReady();}
+function selectSectionFromDropdown(sel){
+  selectedSection=sel.value||null;
+  selectedRole=null;
+  renderRoleButtons(selectedSection);
+  checkLoginReady();
+}
+function selectSection(btn){
+  document.querySelectorAll('[data-section]').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedSection=btn.getAttribute('data-section');
+  selectedRole=null;
+  renderRoleButtons(selectedSection);
+  checkLoginReady();
+}
 function selectRole(btn){document.querySelectorAll('[data-role]').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');selectedRole=btn.getAttribute('data-role');document.getElementById('loginError').textContent='';checkLoginReady();}
 function onPinInput(){document.getElementById('loginError').textContent='';document.getElementById('pinInput').classList.remove('error');checkLoginReady();}
 function checkLoginReady(){const p=document.getElementById('pinInput').value;document.getElementById('loginBtn').disabled=!(selectedSection&&selectedRole&&p.length===4);}
+
 async function doLogin(){
   const pin=document.getElementById('pinInput').value;
   if(!selectedSection){showLoginError('Please select a section');return;}
@@ -520,19 +589,20 @@ async function doLogin(){
   if(PINS[selectedRole]!==pin){showLoginError('Incorrect PIN.');document.getElementById('pinInput').classList.add('error');document.getElementById('pinInput').value='';checkLoginReady();return;}
   currentUser=selectedRole;
   document.getElementById('loginScreen').classList.remove('show');
-  document.getElementById('userLabel').textContent=currentUser+' \u00b7 '+selectedCollegeName.split(' ')[0]+' '+selectedSection;
-  document.getElementById('topbarCollege').textContent=selectedCollegeName+' \u2014 I BCA '+selectedSection;
-
+  const sectionLabel=getSectionLabel(selectedSection);
+  document.getElementById('userLabel').textContent=currentUser+' \u00b7 '+selectedCollegeName.split(' ')[0]+' '+sectionLabel;
+  document.getElementById('topbarCollege').textContent=selectedCollegeName+' \u2014 '+sectionLabel;
   if(currentUser==='Admin'){
     document.getElementById('nav-admin').style.display='flex';
     document.getElementById('nav-students').style.display='none';
     document.getElementById('nav-progress').style.display='none';
     document.getElementById('nav-evaluation').style.display='none';
   }
-
   await initApp();
 }
+
 function showLoginError(m){document.getElementById('loginError').textContent=m;}
+
 function doLogout(){
   currentUser=null;students=[];allStudents=[];progressMap={};evalMap={};approvalMap={};
   selectedRole=null;selectedSection=null;
@@ -553,12 +623,25 @@ async function initApp(){
   document.getElementById('loadingMsg').textContent='Loading students\u2026';
   ol.style.display='flex';
   try{
-    const col=selectedCollegeName,sec='I BCA - '+selectedSection;
+    const col=selectedCollegeName;
+    const sec=getSectionLabel(selectedSection);
     if(currentUser==='Admin'){
-      const[sA,sB]=await Promise.all([api.students(col,'I BCA - A'),api.students(col,'I BCA - B')]);
-      allStudents=[...sA,...sB];students=allStudents;
+      /* FIX 2: Destructure all 5 variables including sBBADM */
+      const[sA,sB,sII,sBCH,sBBADM]=await Promise.all([
+        api.students(col,'I BCA - A'),
+        api.students(col,'I BCA - B'),
+        api.students(col,'II BCA'),
+        api.students(col,'I B.Com Honours'),
+        api.students(col,'I BBA Digital Marketing')
+      ]);
+      /* FIX 2 cont: Include sBBADM in allStudents */
+      allStudents=[...sA,...sB,...sII,...sBCH,...sBBADM];
+      students=allStudents;
     }else{
-      [students,allStudents]=await Promise.all([api.myStudents(col,sec,currentUser),api.students(col,sec)]);
+      [students,allStudents]=await Promise.all([
+        api.myStudents(col,sec,currentUser),
+        api.students(col,sec)
+      ]);
     }
     document.getElementById('navStudentCount').textContent=students.length;
     if(students.length>0){
@@ -588,10 +671,7 @@ async function initApp(){
 
 function buildMaps(prog,evals,apprs,isAdmin){
   const pm={},em={},am={};
-  prog.forEach(p=>{
-    if(!pm[p.student_id]) pm[p.student_id]={};
-    pm[p.student_id][p.week_number]=p;
-  });
+  prog.forEach(p=>{if(!pm[p.student_id])pm[p.student_id]={};pm[p.student_id][p.week_number]=p;});
   evals.forEach(e=>{em[e.student_id]=e;});
   apprs.forEach(a=>{am[a.student_id]=a;});
   if(isAdmin){adminProgressMap=pm;adminEvalMap=em;adminApprovalMap=am;progressMap=pm;evalMap=em;approvalMap=am;}
@@ -610,12 +690,17 @@ function showPanel(id,el){document.querySelectorAll('.panel').forEach(p=>p.class
 
 /* ── DASHBOARD ── */
 function renderDashboard(){
+  const secLbl=getSectionLabel(selectedSection);
   document.getElementById('dashTitle').textContent=currentUser==='Admin'?'Admin Dashboard':'Welcome, '+currentUser;
-  document.getElementById('dashSub').textContent=students.length+' students \u00b7 '+selectedCollegeName+' \u2014 I BCA '+selectedSection;
+  document.getElementById('dashSub').textContent=students.length+' students \u00b7 '+selectedCollegeName+' \u2014 '+secLbl;
   const total=students.length,approved=students.filter(s=>getApproval(s.id)==='approved').length;
   const scored=students.filter(s=>getScore(s.id)!==null).length;
   const avg=scored>0?(students.filter(s=>getScore(s.id)!==null).reduce((sm,s)=>sm+getScore(s.id),0)/scored).toFixed(1):'--';
-  document.getElementById('statsRow').innerHTML=`<div class="stat-card"><div class="stat-label">Total Students</div><div class="stat-value">${total}</div><div class="stat-sub">I BCA ${selectedSection}</div></div><div class="stat-card"><div class="stat-label">Projects Approved</div><div class="stat-value" style="color:var(--green);">${approved}</div><div class="stat-sub">of ${total}</div></div><div class="stat-card"><div class="stat-label">Evaluated</div><div class="stat-value" style="color:var(--accent2);">${scored}</div><div class="stat-sub">score submitted</div></div><div class="stat-card"><div class="stat-label">Avg Score</div><div class="stat-value" style="color:var(--amber);">${avg}</div><div class="stat-sub">out of 100</div></div>`;
+  document.getElementById('statsRow').innerHTML=`
+    <div class="stat-card"><div class="stat-label">Total Students</div><div class="stat-value">${total}</div><div class="stat-sub">${secLbl}</div></div>
+    <div class="stat-card"><div class="stat-label">Projects Approved</div><div class="stat-value" style="color:var(--green);">${approved}</div><div class="stat-sub">of ${total}</div></div>
+    <div class="stat-card"><div class="stat-label">Evaluated</div><div class="stat-value" style="color:var(--accent2);">${scored}</div><div class="stat-sub">score submitted</div></div>
+    <div class="stat-card"><div class="stat-label">Avg Score</div><div class="stat-value" style="color:var(--amber);">${avg}</div><div class="stat-sub">out of 100</div></div>`;
   const tb=document.getElementById('dashTableBody');
   if(!students.length){tb.innerHTML='<tr><td colspan="6"><div class="empty-state"><div class="empty-icon">&#128235;</div>No students found.</div></td></tr>';return;}
   tb.innerHTML=students.map((s,i)=>{
@@ -654,7 +739,7 @@ function renderProgressTable(){
     const wCells=[1,2,3,4].map(w=>{
       const wd=weeks[w],cls=wd?wd.status:'not-started';
       const note=wd&&wd.note&&wd.note.trim()?wd.note:'';
-      return`<td style="text-align:center;"><div class="prog-wk-wrap"><button class="week-btn ${cls}" onclick="openWeekModal(${s.id},'${esc(s.name)}',${w})" style="margin:auto;" title="W${w}: ${cls}${note?' — '+note.substring(0,50):''}">${cls==='completed'?'&#10003;':cls==='in-progress'?'~':w}</button>${note?`<div class="prog-wk-note" title="${esc(note)}">&#128172; ${note.substring(0,14)}${note.length>14?'&hellip;':''}</div>`:'<div style="height:14px;"></div>'}</div></td>`;
+      return`<td style="text-align:center;"><div class="prog-wk-wrap"><button class="week-btn ${cls}" onclick="openWeekModal(${s.id},'${esc(s.name)}',${w})" style="margin:auto;" title="W${w}: ${cls}${note?' \u2014 '+note.substring(0,50):''}">${cls==='completed'?'&#10003;':cls==='in-progress'?'~':w}</button>${note?`<div class="prog-wk-note" title="${esc(note)}">&#128172; ${note.substring(0,14)}${note.length>14?'&hellip;':''}</div>`:'<div style="height:14px;"></div>'}</div></td>`;
     }).join('');
     return`<tr><td style="color:var(--ink3);">${i+1}</td><td style="font-weight:600;color:var(--ink);">${s.name}</td><td style="font-size:12px;color:var(--ink3);max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${s.project_title}</td>${wCells}<td>${weeksBadge(getWeeksDone(s.id))}</td></tr>`;
   }).join('');
@@ -670,10 +755,7 @@ function openWeekModal(studentId,studentName,focusWeek){
   document.getElementById('weekModalTitle').textContent=studentName;
   const weeks=progressMap[studentId]||{};
   weekDraft={};
-  [1,2,3,4].forEach(w=>{
-    const row=weeks[w];
-    weekDraft[w]={status:row?row.status:'not-started',note:row?(row.note||''):''};
-  });
+  [1,2,3,4].forEach(w=>{const row=weeks[w];weekDraft[w]={status:row?row.status:'not-started',note:row?(row.note||''):''};});
   renderWeekCards(focusWeek);
   document.getElementById('weekModal').classList.add('open');
   setTimeout(()=>{const ta=document.getElementById('wk-ta-'+focusWeek);if(ta)ta.focus();},220);
@@ -781,6 +863,7 @@ function openEvalModal(sid,sName,pTitle){
   calcTotal();
   document.getElementById('evalModal').classList.add('open');
 }
+
 function calcTotal(){
   const fields=[{id:'sc_tech',bar:'bar_tech'},{id:'sc_fit',bar:'bar_fit'},{id:'sc_effort',bar:'bar_effort'},{id:'sc_pres',bar:'bar_pres'},{id:'sc_impact',bar:'bar_impact'}];
   let total=0;
@@ -797,6 +880,7 @@ function calcTotal(){
   el.textContent=total+' / 100';
   el.style.color=total>=75?'var(--green)':total>=50?'var(--amber)':'var(--red)';
 }
+
 async function saveEvaluation(){
   const btn=document.getElementById('saveEvalBtn');
   btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Saving&hellip;';
@@ -816,28 +900,54 @@ async function saveEvaluation(){
 }
 
 /* ── ADMIN ── */
-function setAdminTab(tab,btn){adminTab=tab;document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderAdminTable();renderAdminStats();}
+function setAdminTab(tab,btn){
+  adminTab=tab;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderAdminTable();
+  renderAdminStats();
+}
+
+/* FIX 3: Section-based filter for BBADM tab */
+function getAdminList(){
+  if(adminTab==='all') return allStudents;
+  if(adminTab==='BBADM') return allStudents.filter(s=>s.section==='I BBA Digital Marketing');
+  return allStudents.filter(s=>s.mentor_assigned===adminTab);
+}
+
 function renderAdminStats(){
-  const list=adminTab==='all'?allStudents:allStudents.filter(s=>s.mentor_assigned===adminTab);
+  const list=getAdminList();
   const approved=list.filter(s=>(adminApprovalMap[s.id]?.status)==='approved').length;
   const scored=list.filter(s=>adminEvalMap[s.id]).length;
   const avg=scored>0?(list.reduce((sm,s)=>sm+(adminEvalMap[s.id]?.total_score||0),0)/scored).toFixed(1):'--';
-  document.getElementById('adminStatsRow').innerHTML=`<div class="stat-card"><div class="stat-label">Students</div><div class="stat-value">${list.length}</div></div><div class="stat-card"><div class="stat-label">Approved</div><div class="stat-value" style="color:var(--green);">${approved}</div></div><div class="stat-card"><div class="stat-label">Avg Score</div><div class="stat-value" style="color:var(--amber);">${avg}</div></div>`;
+  document.getElementById('adminStatsRow').innerHTML=`
+    <div class="stat-card"><div class="stat-label">Students</div><div class="stat-value">${list.length}</div></div>
+    <div class="stat-card"><div class="stat-label">Approved</div><div class="stat-value" style="color:var(--green);">${approved}</div></div>
+    <div class="stat-card"><div class="stat-label">Avg Score</div><div class="stat-value" style="color:var(--amber);">${avg}</div></div>`;
 }
+
+const MENTOR_COLORS={
+  'Aparna':     'var(--accent2)',
+  'Arun Raj':   'var(--green)',
+  'Saral':      'var(--amber)',
+  'Bavani Sri': '#0891b2',
+  'Jane Rhinu': '#9333ea'
+};
+
 function renderAdminTable(){
-  const list=adminTab==='all'?allStudents:allStudents.filter(s=>s.mentor_assigned===adminTab);
+  const list=getAdminList();
   const tb=document.getElementById('adminTableBody');
   if(!list.length){tb.innerHTML='<tr><td colspan="8"><div class="empty-state">No students</div></td></tr>';return;}
   tb.innerHTML=list.map((s,i)=>{
     const done=getWeeksDone(s.id,true),score=getScore(s.id,true),approval=getApproval(s.id,true);
-    const mc=s.mentor_assigned==='Aparna'?'var(--accent2)':s.mentor_assigned==='Arun Raj'?'var(--green)':'var(--amber)';
+    const mc=MENTOR_COLORS[s.mentor_assigned]||'var(--ink2)';
     return`<tr><td style="color:var(--ink3);">${i+1}</td><td style="font-weight:600;color:var(--ink);">${s.name}</td><td><span style="font-size:11px;font-weight:700;color:var(--blue);background:var(--blue-lt);padding:2px 8px;border-radius:99px;">${s.section||''}</span></td><td><span style="font-size:12px;font-weight:600;color:${mc};">${s.mentor_assigned}</span></td><td style="font-size:12px;color:var(--ink3);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${s.project_title}</td><td style="text-align:center;">${weeksBadge(done)}</td><td>${approvalBadge(approval)}</td><td style="text-align:center;"><span class="score-display ${scoreClass(score)}">${score!==null?score:'--'}</span></td></tr>`;
   }).join('');
 }
 
 /* ── EXPORT CSV ── */
 function exportCSV(){
-  const list=adminTab==='all'?allStudents:allStudents.filter(s=>s.mentor_assigned===adminTab);
+  const list=getAdminList();
   const rows=[['#','Name','Register No','Section','Course','Project Title','Mentor','Phone','Email',
     'W1 Status','W1 Note','W2 Status','W2 Note','W3 Status','W3 Note','W4 Status','W4 Note',
     'Tech Quality','Problem Fit','Effort','Presentation','Impact','Total Score','Approval']];
