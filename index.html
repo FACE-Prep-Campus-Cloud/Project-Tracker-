@@ -19,6 +19,12 @@ body{background:linear-gradient(135deg,#EBF3FA 0%,#F4F8FC 60%,#FFFFFF 100%);colo
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:var(--bg3)}
 ::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:99px}
+
+/* ── HIDE NUMBER INPUT SPINNERS ── */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+input[type=number]{-moz-appearance:textfield;appearance:textfield;}
+
 #landingScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:transparent;position:relative;overflow:hidden;}
 #landingScreen::before{content:'';position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(9,209,199,0.13) 0%,transparent 70%);top:-150px;right:-150px;pointer-events:none;}
 #landingScreen::after{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(128,238,107,0.09) 0%,transparent 70%);bottom:-100px;left:-100px;pointer-events:none;}
@@ -95,25 +101,25 @@ tbody td{padding:10px 16px;border-bottom:1px solid var(--border);color:var(--ink
 tbody tr:last-child td{border-bottom:none;}
 tbody tr:hover td{background:var(--surface);}
 
-/* ── EVAL TABLE FIX: no horizontal scroll, fixed layout ── */
-.eval-table-wrap{overflow-x:hidden;}
-.eval-table{table-layout:fixed;width:100%;font-size:11px;}
-.eval-table thead th{padding:10px 6px;font-size:9.5px;white-space:normal;line-height:1.35;text-align:center;}
-.eval-table thead th:nth-child(1){width:34px;text-align:left;}
-.eval-table thead th:nth-child(2){width:14%;text-align:left;}
-.eval-table thead th:nth-child(3){width:11%;}
-.eval-table thead th:nth-child(4){width:11%;}
-.eval-table thead th:nth-child(5){width:11%;}
-.eval-table thead th:nth-child(6){width:10%;}
-.eval-table thead th:nth-child(7){width:10%;}
-.eval-table thead th:nth-child(8){width:10%;}
-.eval-table thead th:nth-child(9){width:78px;}
-.eval-table tbody td{padding:8px 6px;vertical-align:middle;text-align:center;}
+/* ── EVAL TABLE: full-width, no horizontal scroll, comfortable columns ── */
+.eval-table-wrap{overflow-x:hidden;width:100%;}
+.eval-table{table-layout:auto;width:100%;font-size:12px;}
+.eval-table thead th{padding:12px 10px;font-size:10.5px;white-space:nowrap;line-height:1.3;text-align:center;background:var(--bg3);}
+.eval-table thead th:nth-child(1){width:36px;text-align:left;}
+.eval-table thead th:nth-child(2){min-width:130px;max-width:180px;text-align:left;}
+.eval-table thead th:nth-child(3),
+.eval-table thead th:nth-child(4),
+.eval-table thead th:nth-child(5),
+.eval-table thead th:nth-child(6),
+.eval-table thead th:nth-child(7){width:9%;min-width:60px;}
+.eval-table thead th:nth-child(8){width:88px;}
+.eval-table thead th:nth-child(9){width:96px;}
+.eval-table tbody td{padding:10px 10px;vertical-align:middle;text-align:center;}
 .eval-table tbody td:nth-child(1){text-align:left;color:var(--ink3);}
 .eval-table tbody td:nth-child(2){text-align:left;}
-.eval-table .student-name-link{font-size:11px;word-break:break-word;white-space:normal;}
-.eval-table .score-display{font-size:14px;}
-.eval-table .btn-sm{padding:4px 8px;font-size:10px;white-space:nowrap;}
+.eval-table .student-name-link{font-size:12px;word-break:break-word;white-space:normal;}
+.eval-table .score-display{font-size:15px;}
+.eval-table .btn-sm{padding:6px 12px;font-size:11px;white-space:nowrap;}
 
 .badge{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:3px 10px;border-radius:99px;}
 .badge-green{background:var(--green-lt);color:var(--green);}
@@ -165,18 +171,23 @@ tbody tr:hover td{background:var(--surface);}
 .week-textarea{width:100%;padding:8px 10px;background:var(--surface);border:1px solid var(--border2);border-radius:8px;color:var(--ink);font-family:var(--font-body);font-size:12px;outline:none;resize:none;height:auto;min-height:90px;overflow:hidden;transition:border-color 0.15s;line-height:1.5;}
 .week-textarea:focus{border-color:var(--accent);background:var(--bg2);}
 .week-textarea::placeholder{color:var(--ink3);}
-.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.score-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;}
-.score-item-label{font-size:11px;color:var(--ink3);margin-bottom:6px;font-weight:500;}
-.score-item-max{font-size:10px;color:var(--accent2);font-weight:700;background:var(--accent-lt);padding:1px 6px;border-radius:99px;float:right;margin-top:1px;}
-.score-item-input{width:100%;padding:8px 12px;background:var(--bg3);border:1.5px solid var(--border2);border-radius:6px;color:var(--ink);font-family:var(--font-head);font-size:20px;font-weight:700;text-align:center;outline:none;transition:border-color 0.2s;}
-.score-item-input:focus{border-color:var(--accent);}
+
+/* ── SCORE GRID: 2-col layout, spacious ── */
+.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.score-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 18px;}
+.score-item-label{font-size:12px;color:var(--ink2);margin-bottom:10px;font-weight:600;display:flex;align-items:center;justify-content:space-between;}
+.score-item-max{font-size:10px;color:var(--accent2);font-weight:700;background:var(--accent-lt);padding:2px 8px;border-radius:99px;}
+/* Clean number input — no spinner arrows, big centered value */
+.score-item-input{width:100%;padding:12px 14px;background:var(--bg2);border:2px solid var(--border2);border-radius:8px;color:var(--ink);font-family:var(--font-head);font-size:26px;font-weight:800;text-align:center;outline:none;transition:border-color 0.2s,box-shadow 0.2s;letter-spacing:0.02em;}
+.score-item-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-lt);}
 .score-item-input.over-limit{border-color:var(--red)!important;background:var(--red-lt);}
-.score-item-bar{height:4px;background:var(--surface2);border-radius:99px;margin-top:8px;overflow:hidden;}
+.score-item-input::placeholder{color:var(--ink3);font-size:22px;}
+.score-item-bar{height:5px;background:var(--surface2);border-radius:99px;margin-top:10px;overflow:hidden;}
 .score-item-bar-fill{height:100%;border-radius:99px;background:var(--accent);transition:width 0.3s ease,background 0.3s;}
-.score-total-row{display:flex;align-items:center;justify-content:space-between;background:rgba(9,209,199,0.12);border:1px solid rgba(9,209,199,0.3);border-radius:var(--radius-sm);padding:14px 18px;margin-top:14px;}
-.score-total-label{font-size:13px;font-weight:600;color:var(--accent2);}
-.score-total-val{font-family:var(--font-head);font-size:28px;font-weight:800;color:var(--accent2);}
+.score-total-row{display:flex;align-items:center;justify-content:space-between;background:rgba(9,209,199,0.12);border:1px solid rgba(9,209,199,0.3);border-radius:var(--radius-sm);padding:16px 20px;margin-top:14px;}
+.score-total-label{font-size:14px;font-weight:600;color:var(--accent2);}
+.score-total-val{font-family:var(--font-head);font-size:34px;font-weight:800;color:var(--accent2);}
+
 .form-group{margin-bottom:18px;}
 .form-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink3);margin-bottom:7px;display:block;}
 .form-input,.form-textarea,.form-select{width:100%;padding:10px 14px;background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-sm);color:var(--ink);font-family:var(--font-body);font-size:13px;outline:none;transition:border-color 0.15s;}
@@ -493,15 +504,35 @@ tbody tr:hover td{background:var(--surface);}
     </div>
     <div class="modal-body">
       <div class="student-info-row" id="evalStudentInfo"></div>
-      <div style="background:var(--amber-lt);border:1px solid rgba(217,119,6,0.3);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--amber);font-weight:600;">
+      <div style="background:var(--amber-lt);border:1px solid rgba(217,119,6,0.3);border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:var(--amber);font-weight:600;">
         Each score must be 0&ndash;20. Values above 20 are auto-capped.
       </div>
       <div class="score-grid">
-        <div class="score-item"><div class="score-item-label">Tech / Functional Quality <span class="score-item-max">max 20</span></div><input type="number" class="score-item-input" id="sc_tech" min="0" max="20" placeholder="0" oninput="calcTotal()"><div class="score-item-bar"><div class="score-item-bar-fill" id="bar_tech" style="width:0%"></div></div></div>
-        <div class="score-item"><div class="score-item-label">Problem-Solution Fit <span class="score-item-max">max 20</span></div><input type="number" class="score-item-input" id="sc_fit" min="0" max="20" placeholder="0" oninput="calcTotal()"><div class="score-item-bar"><div class="score-item-bar-fill" id="bar_fit" style="width:0%"></div></div></div>
-        <div class="score-item"><div class="score-item-label">Effort &amp; Ownership <span class="score-item-max">max 20</span></div><input type="number" class="score-item-input" id="sc_effort" min="0" max="20" placeholder="0" oninput="calcTotal()"><div class="score-item-bar"><div class="score-item-bar-fill" id="bar_effort" style="width:0%"></div></div></div>
-        <div class="score-item"><div class="score-item-label">Presentation <span class="score-item-max">max 20</span></div><input type="number" class="score-item-input" id="sc_pres" min="0" max="20" placeholder="0" oninput="calcTotal()"><div class="score-item-bar"><div class="score-item-bar-fill" id="bar_pres" style="width:0%"></div></div></div>
-        <div class="score-item" style="grid-column:1/-1;"><div class="score-item-label">Practical Impact <span class="score-item-max">max 20</span></div><input type="number" class="score-item-input" id="sc_impact" min="0" max="20" placeholder="0" oninput="calcTotal()"><div class="score-item-bar"><div class="score-item-bar-fill" id="bar_impact" style="width:0%"></div></div></div>
+        <div class="score-item">
+          <div class="score-item-label">Tech / Functional Quality <span class="score-item-max">max 20</span></div>
+          <input type="number" class="score-item-input" id="sc_tech" min="0" max="20" placeholder="0" oninput="calcTotal()">
+          <div class="score-item-bar"><div class="score-item-bar-fill" id="bar_tech" style="width:0%"></div></div>
+        </div>
+        <div class="score-item">
+          <div class="score-item-label">Problem-Solution Fit <span class="score-item-max">max 20</span></div>
+          <input type="number" class="score-item-input" id="sc_fit" min="0" max="20" placeholder="0" oninput="calcTotal()">
+          <div class="score-item-bar"><div class="score-item-bar-fill" id="bar_fit" style="width:0%"></div></div>
+        </div>
+        <div class="score-item">
+          <div class="score-item-label">Effort &amp; Ownership <span class="score-item-max">max 20</span></div>
+          <input type="number" class="score-item-input" id="sc_effort" min="0" max="20" placeholder="0" oninput="calcTotal()">
+          <div class="score-item-bar"><div class="score-item-bar-fill" id="bar_effort" style="width:0%"></div></div>
+        </div>
+        <div class="score-item">
+          <div class="score-item-label">Presentation <span class="score-item-max">max 20</span></div>
+          <input type="number" class="score-item-input" id="sc_pres" min="0" max="20" placeholder="0" oninput="calcTotal()">
+          <div class="score-item-bar"><div class="score-item-bar-fill" id="bar_pres" style="width:0%"></div></div>
+        </div>
+        <div class="score-item" style="grid-column:1/-1;">
+          <div class="score-item-label">Practical Impact <span class="score-item-max">max 20</span></div>
+          <input type="number" class="score-item-input" id="sc_impact" min="0" max="20" placeholder="0" oninput="calcTotal()">
+          <div class="score-item-bar"><div class="score-item-bar-fill" id="bar_impact" style="width:0%"></div></div>
+        </div>
       </div>
       <div class="score-total-row"><div><div class="score-total-label">Total Score</div><div style="font-size:11px;color:var(--ink3);margin-top:2px;">Sum of all 5 criteria</div></div><div class="score-total-val" id="scoreTotalDisplay">0 / 100</div></div>
       <div class="form-group" style="margin-top:14px;margin-bottom:0;"><label class="form-label">Remarks (optional)</label><textarea class="form-textarea" id="evalRemarks" placeholder="Add evaluation remarks, strengths, areas for improvement&hellip;"></textarea></div>
