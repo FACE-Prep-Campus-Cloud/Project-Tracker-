@@ -464,13 +464,13 @@ tbody tr:hover td{background:var(--surface);}
       <div style="background:var(--amber-lt);border:1px solid rgba(217,119,6,0.3);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--amber);font-weight:600;">
         Each score must be 0&ndash;20. Values above 20 are auto-capped.
       </div>
-      <div class="score-grid">
-        <div class="score-item"><div class="score-item-label">Tech / Functional Quality <span class="score-item-max">max 20</span></div><input type="number" class="score-item-input" id="sc_tech" min="0" max="20" placeholder="0" oninput="calcTotal()"><div class="score-item-bar"><div class="score-item-bar-fill" id="bar_tech" style="width:0%"></div></div></div>
-        <div class="score-item"><div class="score-item-label">Problem-Solution Fit <span class="score-item-max">max 20</span></div><input type="number" class="score-item-input" id="sc_fit" min="0" max="20" placeholder="0" oninput="calcTotal()"><div class="score-item-bar"><div class="score-item-bar-fill" id="bar_fit" style="width:0%"></div></div></div>
-        <div class="score-item"><div class="score-item-label">Effort &amp; Ownership <span class="score-item-max">max 20</span></div><input type="number" class="score-item-input" id="sc_effort" min="0" max="20" placeholder="0" oninput="calcTotal()"><div class="score-item-bar"><div class="score-item-bar-fill" id="bar_effort" style="width:0%"></div></div></div>
-        <div class="score-item"><div class="score-item-label">Presentation <span class="score-item-max">max 20</span></div><input type="number" class="score-item-input" id="sc_pres" min="0" max="20" placeholder="0" oninput="calcTotal()"><div class="score-item-bar"><div class="score-item-bar-fill" id="bar_pres" style="width:0%"></div></div></div>
-        <div class="score-item" style="grid-column:1/-1;"><div class="score-item-label">Practical Impact <span class="score-item-max">max 20</span></div><input type="number" class="score-item-input" id="sc_impact" min="0" max="20" placeholder="0" oninput="calcTotal()"><div class="score-item-bar"><div class="score-item-bar-fill" id="bar_impact" style="width:0%"></div></div></div>
-      </div>
+     <div style="display:flex;flex-direction:column;gap:16px;">
+  <div class="score-item"><div class="score-item-label" style="font-size:14px;font-weight:700;color:var(--ink);">Tech / Functional Quality <span class="score-item-max">max 20</span></div><input type="number" class="score-item-input" id="sc_tech" min="0" max="20" placeholder="0" oninput="calcTotal()"><div class="score-item-bar"><div class="score-item-bar-fill" id="bar_tech" style="width:0%"></div></div></div>
+  <div class="score-item"><div class="score-item-label" style="font-size:14px;font-weight:700;color:var(--ink);">Problem-Solution Fit <span class="score-item-max">max 20</span></div><input type="number" class="score-item-input" id="sc_fit" min="0" max="20" placeholder="0" oninput="calcTotal()"><div class="score-item-bar"><div class="score-item-bar-fill" id="bar_fit" style="width:0%"></div></div></div>
+  <div class="score-item"><div class="score-item-label" style="font-size:14px;font-weight:700;color:var(--ink);">Effort &amp; Ownership <span class="score-item-max">max 20</span></div><input type="number" class="score-item-input" id="sc_effort" min="0" max="20" placeholder="0" oninput="calcTotal()"><div class="score-item-bar"><div class="score-item-bar-fill" id="bar_effort" style="width:0%"></div></div></div>
+  <div class="score-item"><div class="score-item-label" style="font-size:14px;font-weight:700;color:var(--ink);">Presentation <span class="score-item-max">max 20</span></div><input type="number" class="score-item-input" id="sc_pres" min="0" max="20" placeholder="0" oninput="calcTotal()"><div class="score-item-bar"><div class="score-item-bar-fill" id="bar_pres" style="width:0%"></div></div></div>
+  <div class="score-item"><div class="score-item-label" style="font-size:14px;font-weight:700;color:var(--ink);">Practical Impact <span class="score-item-max">max 20</span></div><input type="number" class="score-item-input" id="sc_impact" min="0" max="20" placeholder="0" oninput="calcTotal()"><div class="score-item-bar"><div class="score-item-bar-fill" id="bar_impact" style="width:0%"></div></div></div>
+</div>
       <div class="score-total-row"><div><div class="score-total-label">Total Score</div><div style="font-size:11px;color:var(--ink3);margin-top:2px;">Sum of all 5 criteria</div></div><div class="score-total-val" id="scoreTotalDisplay">0 / 100</div></div>
       <div class="form-group" style="margin-top:14px;margin-bottom:0;"><label class="form-label">Remarks (optional)</label><textarea class="form-textarea" id="evalRemarks" placeholder="Add evaluation remarks, strengths, areas for improvement&hellip;"></textarea></div>
     </div>
@@ -825,7 +825,7 @@ async function doLogin(){
   /* FIX: show topbar college label for all users including Admin */
   const topbarCol=document.getElementById('topbarCollege');
   topbarCol.textContent=selectedCollegeName+' \u2014 '+sectionLabel;
-  topbarCol.style.display='';
+  topbarCol.style.display='none';
   if(currentUser==='Admin'){
     document.getElementById('nav-admin').style.display='flex';
     document.getElementById('nav-students').style.display='none';
