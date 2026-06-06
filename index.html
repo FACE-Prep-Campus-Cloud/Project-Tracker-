@@ -24,7 +24,7 @@ body{background:linear-gradient(135deg,#EBF3FA 0%,#F4F8FC 60%,#FFFFFF 100%);colo
 #landingScreen::after{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(128,238,107,0.09) 0%,transparent 70%);bottom:-100px;left:-100px;pointer-events:none;}
 .landing-wrap{width:100%;max-width:520px;padding:24px;position:relative;z-index:1;animation:fadeUp 0.5s cubic-bezier(.22,1,.36,1);}
 .landing-title{font-family:var(--font-head);font-size:38px;font-weight:800;color:var(--ink);line-height:1.1;margin-bottom:8px;letter-spacing:-0.02em;}
-.landing-title span { color: #7F00FF; }.landing-sub{font-size:14px;color:var(--ink3);margin-bottom:32px;line-height:1.6;}
+.landing-title span{color:#7F00FF;}.landing-sub{font-size:14px;color:var(--ink3);margin-bottom:32px;line-height:1.6;}
 .landing-card{background:var(--bg2);border:1px solid var(--border2);border-radius:20px;padding:32px;box-shadow:0 8px 40px rgba(0,0,0,0.1);}
 .landing-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px;}
 .college-select-wrap{position:relative;margin-bottom:20px;}
@@ -94,6 +94,27 @@ thead th{text-align:left;padding:12px 16px;font-size:10px;font-weight:700;text-t
 tbody td{padding:10px 16px;border-bottom:1px solid var(--border);color:var(--ink2);vertical-align:middle;}
 tbody tr:last-child td{border-bottom:none;}
 tbody tr:hover td{background:var(--surface);}
+
+/* ── EVAL TABLE FIX: no horizontal scroll, fixed layout ── */
+.eval-table-wrap{overflow-x:hidden;}
+.eval-table{table-layout:fixed;width:100%;font-size:11px;}
+.eval-table thead th{padding:10px 6px;font-size:9.5px;white-space:normal;line-height:1.35;text-align:center;}
+.eval-table thead th:nth-child(1){width:34px;text-align:left;}
+.eval-table thead th:nth-child(2){width:14%;text-align:left;}
+.eval-table thead th:nth-child(3){width:11%;}
+.eval-table thead th:nth-child(4){width:11%;}
+.eval-table thead th:nth-child(5){width:11%;}
+.eval-table thead th:nth-child(6){width:10%;}
+.eval-table thead th:nth-child(7){width:10%;}
+.eval-table thead th:nth-child(8){width:10%;}
+.eval-table thead th:nth-child(9){width:78px;}
+.eval-table tbody td{padding:8px 6px;vertical-align:middle;text-align:center;}
+.eval-table tbody td:nth-child(1){text-align:left;color:var(--ink3);}
+.eval-table tbody td:nth-child(2){text-align:left;}
+.eval-table .student-name-link{font-size:11px;word-break:break-word;white-space:normal;}
+.eval-table .score-display{font-size:14px;}
+.eval-table .btn-sm{padding:4px 8px;font-size:10px;white-space:nowrap;}
+
 .badge{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:3px 10px;border-radius:99px;}
 .badge-green{background:var(--green-lt);color:var(--green);}
 .badge-amber{background:var(--amber-lt);color:var(--amber);}
@@ -390,10 +411,24 @@ tbody tr:hover td{background:var(--surface);}
           <div class="search-wrap"><span class="search-icon">&#8981;</span><input type="text" class="search-input" id="evalSearch" placeholder="Search student&hellip;" oninput="renderEvalTable()"></div>
           <button class="export-btn" onclick="exportEvalCSV()">&darr; Export CSV</button>
         </div>
-        <div class="card" style="padding:0;overflow:hidden;"><div class="table-wrap"><table>
-          <thead><tr><th>#</th><th>Name</th><th>Tech / Functional Quality</th><th>Problem-Solution Fit</th><th>Effort &amp; Ownership</th><th>Presentation</th><th>Practical Impact</th><th>Total /100</th><th>Action</th></tr></thead>
-          <tbody id="evalTableBody"></tbody>
-        </table></div></div>
+        <div class="card" style="padding:0;overflow:hidden;">
+          <div class="table-wrap eval-table-wrap">
+            <table class="eval-table">
+              <thead><tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Tech Quality</th>
+                <th>Problem Fit</th>
+                <th>Effort</th>
+                <th>Presentation</th>
+                <th>Impact</th>
+                <th>Total /100</th>
+                <th>Action</th>
+              </tr></thead>
+              <tbody id="evalTableBody"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       <!-- ADMIN -->
@@ -588,7 +623,6 @@ const SST_IBBA_STUDENTS=[
   {name:'Narmatha Sri',    register_number:'25BBA017', course:'I BBA', project_title:'Bike Workshop',                                                      mentor_assigned:'Kavipriya', phone:'8675554020', email:'narmathasri74@gmail.com'}
 ];
 
-/* ── SST I MCA STUDENTS (placeholder — add when available) ── */
 const SST_IMCA_STUDENTS=[];
 
 /* ── SECTION LABEL MAP ── */
@@ -609,7 +643,7 @@ function getSectionLabel(sec){
   return 'I BCA - '+sec;
 }
 
-/* ── ADMIN TABS — DEPARTMENT-WISE ── */
+/* ── ADMIN TABS ── */
 const COLLEGE_ADMIN_TABS={
   'default':[
     {key:'all',                    label:'All'},
@@ -695,7 +729,6 @@ document.addEventListener('input',function(e){
 /* ── POPOVER ── */
 let popoverHideTimer=null;
 
-/* FIX: safe popover data via dataset instead of inline JS string escaping */
 function showProjectPopover(el){
   clearTimeout(popoverHideTimer);
   const pop=document.getElementById('projPopover');
@@ -732,7 +765,7 @@ function escHTML(s){
     .replace(/'/g,'&#39;');
 }
 
-/* ── STUDENT NAME BUTTON — uses data-* attributes (safe for all characters) ── */
+/* ── STUDENT NAME BUTTON ── */
 function nameBtn(student){
   return `<button class="student-name-link"
     data-project="${escHTML(student.project_title||'')}"
@@ -819,7 +852,6 @@ async function doLogin(){
   document.getElementById('loginScreen').classList.remove('show');
   const sectionLabel=getSectionLabel(selectedSection);
   document.getElementById('userLabel').textContent=currentUser+' \u00b7 '+selectedCollegeName.split(' ')[0]+' '+sectionLabel;
-  /* FIX: show topbar college label for all users including Admin */
   const topbarCol=document.getElementById('topbarCollege');
   topbarCol.textContent=selectedCollegeName+' \u2014 '+sectionLabel;
   topbarCol.style.display='';
@@ -959,7 +991,7 @@ function downloadCSV(rows,filename){
   showToast('CSV exported!','success');
 }
 
-/* ── SAFE SEARCH FILTER (handles missing project_title) ── */
+/* ── SAFE SEARCH FILTER ── */
 function studentMatchesQuery(s,q){
   if(!q) return true;
   const name=(s.name||'').toLowerCase();
@@ -1148,8 +1180,6 @@ function cycleWeekStatus(w,e){
   btn.innerHTML=STATUS_ICON[next]+' '+STATUS_LABEL[next];
 }
 
-/* FIX: removed auto-override that forced "completed" when a note was present,
-   so manual status selections are now respected. */
 async function saveAllWeeks(){
   const btn=document.getElementById('saveWeekBtn');
   btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Saving&hellip;';
@@ -1159,12 +1189,9 @@ async function saveAllWeeks(){
     for(const w of [1,2,3,4]){
       const d=weekDraft[w];
       const note=d.note.trim()||null;
-
-      // Auto-set to completed if note is filled, keep manual status otherwise
       if(note && d.status==='not-started'){
         d.status='completed';
       }
-
       const row=existing[w];
       if(row){
         await api.updateProgress(row.id,{status:d.status,note:note,updated_by:currentUser,updated_at:new Date().toISOString()});
@@ -1175,14 +1202,15 @@ async function saveAllWeeks(){
         progressMap[sid][w]=Array.isArray(res)?res[0]:res;
       }
     }
-const savedCount=[1,2,3,4].filter(w=>weekDraft[w].note&&weekDraft[w].note.trim()).length;
-showToast(savedCount===1?'Week saved!':savedCount+' weeks saved!','success');
+    const savedCount=[1,2,3,4].filter(w=>weekDraft[w].note&&weekDraft[w].note.trim()).length;
+    showToast(savedCount===1?'Week saved!':savedCount+' weeks saved!','success');
     closeModal('weekModal');
     renderStudentList();renderProgressTable();renderDashboard();
     if(currentUser==='Admin'){adminProgressMap=progressMap;renderAdminTable();renderAdminStats();}
   }catch(e){showToast('Error: '+e.message,'error');console.error(e);}
   finally{btn.disabled=false;btn.innerHTML='Save';}
 }
+
 /* ── APPROVAL ── */
 async function saveApproval(sid,status){
   try{
@@ -1207,14 +1235,14 @@ function renderEvalTable(){
     const safeName=escHTML(s.name).replace(/'/g,'&#39;');
     const safeProj=escHTML(s.project_title||'').replace(/'/g,'&#39;');
     return`<tr>
-      <td style="color:var(--ink3);">${i+1}</td>
+      <td>${i+1}</td>
       <td>${nameBtn(s)}</td>
-      <td style="text-align:center;">${sc('tech_quality')}</td>
-      <td style="text-align:center;">${sc('problem_fit')}</td>
-      <td style="text-align:center;">${sc('effort_ownership')}</td>
-      <td style="text-align:center;">${sc('presentation')}</td>
-      <td style="text-align:center;">${sc('practical_impact')}</td>
-      <td style="text-align:center;"><span class="score-display ${scoreClass(total)}">${total!==null?total:'--'}</span>${total!==null?'<span style="font-size:10px;color:var(--ink3);"> /100</span>':''}</td>
+      <td>${sc('tech_quality')}</td>
+      <td>${sc('problem_fit')}</td>
+      <td>${sc('effort_ownership')}</td>
+      <td>${sc('presentation')}</td>
+      <td>${sc('practical_impact')}</td>
+      <td><span class="score-display ${scoreClass(total)}">${total!==null?total:'--'}</span>${total!==null?'<span style="font-size:10px;color:var(--ink3);"> /100</span>':''}</td>
       <td><button class="btn btn-primary btn-sm" onclick="openEvalModal(${s.id},'${safeName}','${safeProj}')">&#9998; ${e?'Edit':'Score'}</button></td>
     </tr>`;
   }).join('');
