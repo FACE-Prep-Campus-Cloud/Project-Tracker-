@@ -463,34 +463,39 @@ tbody tr:hover td{background:var(--surface);}
       <div style="background:var(--amber-lt);border:1px solid rgba(217,119,6,0.3);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--amber);font-weight:600;">
         Each score must be 0&ndash;20. Values above 20 are auto-capped.
       </div>
-      <div style="display:flex;flex-direction:column;gap:6px;">
-  <div class="score-item" style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:12px;">
-    <span style="font-size:13px;font-weight:600;color:var(--ink);flex:1;">Tech / Functional Quality</span>
-<div style="display:flex;align-items:center;gap:6px;">      <input type="number" class="score-item-input" id="sc_tech" min="0" max="20" placeholder="0" oninput="calcTotal()" style="width:72px;font-size:15px;padding:6px 8px;text-align:center;">
+     <div style="display:flex;flex-direction:column;gap:6px;">
+  <div class="score-item" style="padding:12px 16px;">
+    <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:8px;">Tech / Functional Quality</div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <input type="number" class="score-item-input" id="sc_tech" min="0" max="20" placeholder="0" oninput="calcTotal()" style="width:80px;font-size:15px;padding:6px 8px;text-align:center;">
       <span class="score-item-max" style="float:none;">max 20</span>
     </div>
   </div>
-  <div class="score-item" style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:12px;">
-    <span style="font-size:13px;font-weight:600;color:var(--ink);flex:1;">Problem-Solution Fit</span>
-<div style="display:flex;align-items:center;gap:6px;">      <input type="number" class="score-item-input" id="sc_fit" min="0" max="20" placeholder="0" oninput="calcTotal()" style="width:72px;font-size:15px;padding:6px 8px;text-align:center;">
+  <div class="score-item" style="padding:12px 16px;">
+    <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:8px;">Problem-Solution Fit</div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <input type="number" class="score-item-input" id="sc_fit" min="0" max="20" placeholder="0" oninput="calcTotal()" style="width:80px;font-size:15px;padding:6px 8px;text-align:center;">
       <span class="score-item-max" style="float:none;">max 20</span>
     </div>
   </div>
-  <div class="score-item" style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:12px;">
-    <span style="font-size:13px;font-weight:600;color:var(--ink);flex:1;">Effort &amp; Ownership</span>
-<div style="display:flex;align-items:center;gap:6px;">      <input type="number" class="score-item-input" id="sc_effort" min="0" max="20" placeholder="0" oninput="calcTotal()" style="width:72px;font-size:15px;padding:6px 8px;text-align:center;">
+  <div class="score-item" style="padding:12px 16px;">
+    <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:8px;">Effort &amp; Ownership</div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <input type="number" class="score-item-input" id="sc_effort" min="0" max="20" placeholder="0" oninput="calcTotal()" style="width:80px;font-size:15px;padding:6px 8px;text-align:center;">
       <span class="score-item-max" style="float:none;">max 20</span>
     </div>
   </div>
-  <div class="score-item" style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:12px;">
-    <span style="font-size:13px;font-weight:600;color:var(--ink);flex:1;">Presentation</span>
-<div style="display:flex;align-items:center;gap:6px;">      <input type="number" class="score-item-input" id="sc_pres" min="0" max="20" placeholder="0" oninput="calcTotal()" style="width:72px;font-size:15px;padding:6px 8px;text-align:center;">
+  <div class="score-item" style="padding:12px 16px;">
+    <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:8px;">Presentation</div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <input type="number" class="score-item-input" id="sc_pres" min="0" max="20" placeholder="0" oninput="calcTotal()" style="width:80px;font-size:15px;padding:6px 8px;text-align:center;">
       <span class="score-item-max" style="float:none;">max 20</span>
     </div>
   </div>
-  <div class="score-item" style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:12px;">
-    <span style="font-size:13px;font-weight:600;color:var(--ink);flex:1;">Practical Impact</span>
-<div style="display:flex;align-items:center;gap:6px;">      <input type="number" class="score-item-input" id="sc_impact" min="0" max="20" placeholder="0" oninput="calcTotal()" style="width:72px;font-size:15px;padding:6px 8px;text-align:center;">
+  <div class="score-item" style="padding:12px 16px;">
+    <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:8px;">Practical Impact</div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <input type="number" class="score-item-input" id="sc_impact" min="0" max="20" placeholder="0" oninput="calcTotal()" style="width:80px;font-size:15px;padding:6px 8px;text-align:center;">
       <span class="score-item-max" style="float:none;">max 20</span>
     </div>
   </div>
