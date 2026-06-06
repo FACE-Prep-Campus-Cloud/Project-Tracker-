@@ -275,10 +275,10 @@ tbody tr:hover td{background:var(--surface);}
 <!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-box">
-    <div class="login-college-pill" onclick="backToLanding()">
-      <span class="login-college-name" id="loginCollegeName">&mdash;</span>
-      <span class="login-college-back">&larr; Change</span>
-    </div>
+    <div style="margin-bottom:24px;">
+  <div style="font-size:13px;font-weight:600;color:var(--ink3);">Signing in to</div>
+  <div style="font-family:var(--font-head);font-size:18px;font-weight:800;color:var(--ink);margin-top:2px;" id="loginCollegeName">&mdash;</div>
+</div>
     <div class="login-title">Mentor Login</div>
     <div class="login-sub">Select section, role and enter your PIN</div>
     <div class="login-label">Select Section</div>
@@ -295,7 +295,8 @@ tbody tr:hover td{background:var(--surface);}
       <input type="password" class="pin-input" id="pinInput" maxlength="4" placeholder="&bull;&bull;&bull;&bull;" oninput="onPinInput()" onkeydown="if(event.key==='Enter')doLogin()">
     </div>
     <button class="login-btn" id="loginBtn" onclick="doLogin()" disabled>Sign In &rarr;</button>
-    <div class="login-error" id="loginError"></div>
+<div class="login-error" id="loginError"></div>
+<button onclick="backToLanding()" style="width:100%;margin-top:12px;padding:11px;background:transparent;border:1px solid var(--border2);border-radius:var(--radius-sm);color:var(--ink3);font-family:var(--font-body);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent2)'" onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--ink3)'">&larr; Back to College Selection</button>
   </div>
 </div>
 
