@@ -1563,16 +1563,14 @@ async function loadPeerReviews() {
   document.getElementById('peerSummaryCards').innerHTML = '';
   document.getElementById('peerStatsRow').innerHTML = '';
   try {
-    if (currentUser === 'Admin') {
+  if (currentUser === 'Admin') {
       peerReviews = await api.peerAll();
     } else {
       const all = await api.peerAll();
-      const myStudentRegs = new Set([...students, ...allStudents].map(s => s.register_number));
-      peerReviews = all.filter(r =>
-        (r.reviewer_college_name || r.reviewer_college || '') === selectedCollegeName ||
-        myStudentRegs.has(r.project_reg) ||
-        myStudentRegs.has(r.reviewer_reg)
-      );
+      // Only show peer reviews where the project owner is one of THIS mentor's own assigned students
+      // e.g. Sowmiya only sees reviews for her students, not other mentors' students in the same section
+      const myStudentRegs = new Set(students.map(s => s.register_number));
+      peerReviews = all.filter(r => myStudentRegs.has(r.project_reg));
     }
     renderPeerTabs();
     renderPeerTable();
