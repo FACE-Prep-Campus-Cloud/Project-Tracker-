@@ -856,7 +856,7 @@ async function doLogin(){
   document.getElementById('userLabel').textContent=currentUser+' \u00b7 '+selectedCollegeName.split(' ')[0]+' '+sectionLabel;
   const topbarCol=document.getElementById('topbarCollege');
   topbarCol.textContent=selectedCollegeName+' \u2014 '+sectionLabel;
-  topbarCol.style.display='';
+  topbarCol.style.display='none';
   if(currentUser==='Admin'){
     document.getElementById('nav-admin').style.display='flex';
     document.getElementById('nav-students').style.display='none';
