@@ -490,43 +490,24 @@ tbody tr:hover td{background:var(--surface);}
           <div class="page-title">Peer Evaluation</div>
           <div class="page-sub">Student-to-student scores from the peer review portal &mdash; filtered by your college</div>
         </div>
-
-        <!-- College Tabs -->
         <div id="peerTabRow" class="tab-row" style="margin-bottom:16px;"></div>
-
-        <!-- Stats Row -->
         <div class="stats-row" id="peerStatsRow" style="grid-template-columns:repeat(4,1fr);margin-bottom:20px;"></div>
-
-        <!-- Search + Export -->
         <div class="search-bar">
           <div class="search-wrap">
             <span class="search-icon">&#8981;</span>
             <input type="text" class="search-input" id="peerSearch" placeholder="Search by project title or reviewer name&hellip;" oninput="renderPeerTable()">
           </div>
-          <select class="filter-select" id="peerCollegeFilter" onchange="setPeerTabFromSelect(this.value)" style="display:none;">
-            <option value="all">All Colleges</option>
-          </select>
           <button class="export-btn" onclick="exportPeerCSV()">&darr; Export CSV</button>
         </div>
-
-        <!-- Reviews Table -->
         <div class="card" style="padding:0;overflow:hidden;margin-bottom:20px;">
           <div class="table-wrap">
             <table>
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Project</th>
-                  <th>Owner</th>
-                  <th>Reviewer</th>
-                  <th>Reviewer College</th>
-                  <th style="text-align:center;">Clarity</th>
-                  <th style="text-align:center;">Innovation</th>
-                  <th style="text-align:center;">Execution</th>
-                  <th style="text-align:center;">Usability</th>
-                  <th style="text-align:center;">Overall</th>
-                  <th style="text-align:center;">Avg</th>
-                  <th>Comments</th>
+                  <th>#</th><th>Project</th><th>Owner</th><th>Reviewer</th><th>Reviewer College</th>
+                  <th style="text-align:center;">Clarity</th><th style="text-align:center;">Innovation</th>
+                  <th style="text-align:center;">Execution</th><th style="text-align:center;">Usability</th>
+                  <th style="text-align:center;">Overall</th><th style="text-align:center;">Avg</th><th>Comments</th>
                 </tr>
               </thead>
               <tbody id="peerTableBody">
@@ -535,8 +516,6 @@ tbody tr:hover td{background:var(--surface);}
             </table>
           </div>
         </div>
-
-        <!-- Project Summary Cards -->
         <div style="margin-bottom:10px;">
           <div style="font-family:var(--font-head);font-size:16px;font-weight:700;color:var(--ink);margin-bottom:4px;">Project Averages</div>
           <div style="font-size:12px;color:var(--ink3);">Average peer score per project &mdash; scored out of 10 per criterion</div>
@@ -551,14 +530,12 @@ tbody tr:hover td{background:var(--surface);}
           <div class="page-title">All Students</div>
           <div class="page-sub">Click any student name to see their project title</div>
         </div>
-
         <div id="sstSeedPanel" style="display:none;" class="seed-panel">
           <div class="seed-panel-title">First-time Setup: Seed SST Students</div>
           <p>Insert all I BBA and I MCA students into the database. Run once only.</p>
           <button class="btn btn-primary" id="seedBtn" onclick="seedSSTStudents()">&#43; Insert SST Students</button>
           <span id="seedStatus" style="font-size:12px;color:var(--ink3);margin-left:14px;"></span>
         </div>
-
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
           <div class="tab-row" id="adminTabRow"></div>
           <button class="export-btn" onclick="exportCSV()">&darr; Export CSV</button>
@@ -658,11 +635,9 @@ tbody tr:hover td{background:var(--surface);}
 ══════════════════════════════════════ */
 const SUPABASE_URL = 'https://qjwbndrgzvboszfzrcuy.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqd2JuZHJnenZib3N6ZnpyY3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NTA3MzIsImV4cCI6MjA5NjEyNjczMn0.x-su_5f_XQ9_ql7iw3Aa_4E4ww9SJIqRGVdTHo6zSpE';
-// ── ADD THESE TWO NEW CONSTANTS (peer portal DB) ──
 const PEER_SUPABASE_URL = 'https://zykmcumlzhucnvxqhpgm.supabase.co';
 const PEER_SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5a21jdW1semh1Y252eHFocGdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3NzE5MDYsImV4cCI6MjA5NTM0NzkwNn0.kqUgSpGFSwMXpHkWRihhVJXDtVfl0tGdU24POxmXHWc';
 
-// ── ADD THIS PEER-SPECIFIC FETCH FUNCTION ──
 async function sbPeer(path) {
   const res = await fetch(PEER_SUPABASE_URL + '/rest/v1/' + path, {
     headers: {
@@ -675,15 +650,27 @@ async function sbPeer(path) {
   if (!res.ok) throw new Error(text || 'Peer DB error: ' + res.status);
   return text ? JSON.parse(text) : [];
 }
+
 /* ══════════════════════════════════════
    PINS
 ══════════════════════════════════════ */
 const PINS = {
-  'Aparna':       '1212', 'Arun Raj':    '1212', 'Saral':        '1212',
-  'Admin':        '1212', 'Bavani Sri':  '1212', 'Jane Rhinu':   '1212',
-  'Kavipriya':    '1212', 'Sneha':       '1212', 'Gokilavaani':  '1212',
-  'Mohanasree N': '1212', 'Srisaradha S':'1212', 'Anish N':      '1212',
-  'Dharshan K':   '1212'
+  'Aparna':       '1212',
+  'Arun Raj':     '1212',
+  'Saral':        '1212',
+  'Admin':        '1212',
+  'Bavani Sri':   '1212',
+  'Jane Rhinu':   '1212',
+  'Kavipriya':    '1212',
+  'Sneha':        '1212',
+  'Gokilavaani':  '1212',
+  'Mohanasree N': '1212',
+  'Srisaradha S': '1212',
+  'Anish N':      '1212',
+  'Dharshan K':   '1212',
+  /* ── NEW: Kamaraj Women's College mentors ── */
+  'Sowmiya':      '1212',
+  'Arun':         '1212'
 };
 
 /* ══════════════════════════════════════
@@ -696,6 +683,10 @@ const COLLEGE_SECTIONS = {
     {value:'II',    label:'II BCA'},
     {value:'BCH',   label:'I B.Com Honours'},
     {value:'BBADM', label:'I BBA Digital Marketing'}
+  ],
+  /* ── NEW: Kamaraj Women's College ── */
+  'kamaraj-women': [
+    {value:'KW_A', label:'I BCA - A'}
   ],
   'sst': [
     {value:'IBBA',  label:'I BBA'},
@@ -722,35 +713,57 @@ const SECTION_ROLES = {
   'NAIG_IIBSCAI': ['Mohanasree N','Srisaradha S','Admin'],
   'NAIG_BCFT':    ['Anish N','Admin'],
   'NAIG_BBADM':   ['Dharshan K','Admin'],
-  'NAIG_IBSCCC':  ['Srisaradha S','Mohanasree N','Admin']
+  'NAIG_IBSCCC':  ['Srisaradha S','Mohanasree N','Admin'],
+  /* ── NEW: Kamaraj Women's College sections ── */
+  'KW_A':         ['Sowmiya','Arun','Aparna','Saral','Admin']
 };
 
 const COLLEGE_NAMES = {
-  'kamaraj':'Kamaraj College','kamaraj-women':"Kamaraj Women's College",
-  'sdnb':'SDNB Vaishnav College for Women','patrician':'Patrician College of Arts & Science',
-  'terf':"TERF's College of Arts and Science",'sst':'Sree Saraswathi Thyagaraja College',
-  'tjs':'TJS College of Arts and Science','bharathidasan':'Bharathidasan College of Arts & Science',
-  'nagarathinam':'Nagarathinam Angalammal Arts & Science College',
-  'vinayaga':"Vinayaga Mission's Research Foundation School of Arts & Science",
-  'amaraavathi':'Sri Amaraavathi College of Arts & Science','takshashila':'Takshashila University',
-  'studyworld':'Study World Group of Institution','rathinam':'Rathinam College of Arts & Science',
-  'niche':'Noorul Islam Centre for Higher Education (NICHE)','amet':'AMET University',
-  'joy':'Joy University','sasurie':'Sasurie College of Arts and Science',
-  'alliance':'Alliance University','kristu':'Kristu Jayanti (Deemed to be University)',
-  'svyasa':'S-VYASA University','asb':'Asian School of Business'
+  'kamaraj':        'Kamaraj College',
+  'kamaraj-women':  "Kamaraj Women's College",
+  'sdnb':           'SDNB Vaishnav College for Women',
+  'patrician':      'Patrician College of Arts & Science',
+  'terf':           "TERF's College of Arts and Science",
+  'sst':            'Sree Saraswathi Thyagaraja College',
+  'tjs':            'TJS College of Arts and Science',
+  'bharathidasan':  'Bharathidasan College of Arts & Science',
+  'nagarathinam':   'Nagarathinam Angalammal Arts & Science College',
+  'vinayaga':       "Vinayaga Mission's Research Foundation School of Arts & Science",
+  'amaraavathi':    'Sri Amaraavathi College of Arts & Science',
+  'takshashila':    'Takshashila University',
+  'studyworld':     'Study World Group of Institution',
+  'rathinam':       'Rathinam College of Arts & Science',
+  'niche':          'Noorul Islam Centre for Higher Education (NICHE)',
+  'amet':           'AMET University',
+  'joy':            'Joy University',
+  'sasurie':        'Sasurie College of Arts and Science',
+  'alliance':       'Alliance University',
+  'kristu':         'Kristu Jayanti (Deemed to be University)',
+  'svyasa':         'S-VYASA University',
+  'asb':            'Asian School of Business'
 };
 
 const COLLEGE_ADMIN_SECTIONS = {
-  'default': ['I BCA - A','I BCA - B','II BCA','I B.Com Honours','I BBA Digital Marketing'],
-  'sst':     ['I BBA','I MCA'],
-  'nagarathinam': ['I B.Sc AI','II B.Sc AI','B.Com BC & FT','BBA DM','I B.Sc CC']
+  'default':       ['I BCA - A','I BCA - B','II BCA','I B.Com Honours','I BBA Digital Marketing'],
+  /* ── NEW ── */
+  'kamaraj-women': ['I BCA - A'],
+  'sst':           ['I BBA','I MCA'],
+  'nagarathinam':  ['I B.Sc AI','II B.Sc AI','B.Com BC & FT','BBA DM','I B.Sc CC']
 };
 
 const SECTION_LABEL_MAP = {
-  'II':'II BCA','BCH':'I B.Com Honours','BBADM':'I BBA Digital Marketing',
-  'IBBA':'I BBA','IMCA':'I MCA',
-  'NAIG_IBSCAI':'I B.Sc AI','NAIG_IIBSCAI':'II B.Sc AI',
-  'NAIG_BCFT':'B.Com BC & FT','NAIG_BBADM':'BBA DM','NAIG_IBSCCC':'I B.Sc CC'
+  'II':            'II BCA',
+  'BCH':           'I B.Com Honours',
+  'BBADM':         'I BBA Digital Marketing',
+  'IBBA':          'I BBA',
+  'IMCA':          'I MCA',
+  'NAIG_IBSCAI':   'I B.Sc AI',
+  'NAIG_IIBSCAI':  'II B.Sc AI',
+  'NAIG_BCFT':     'B.Com BC & FT',
+  'NAIG_BBADM':    'BBA DM',
+  'NAIG_IBSCCC':   'I B.Sc CC',
+  /* ── NEW ── */
+  'KW_A':          'I BCA - A'
 };
 
 const COLLEGE_ADMIN_TABS = {
@@ -760,7 +773,14 @@ const COLLEGE_ADMIN_TABS = {
     {key:'I B.Com Honours',label:'I B.Com Honours'},
     {key:'I BBA Digital Marketing',label:'I BBA Digital Mktg'}
   ],
-  'sst': [{key:'all',label:'All'},{key:'I BBA',label:'I BBA'},{key:'I MCA',label:'I MCA'}],
+  /* ── NEW ── */
+  'kamaraj-women': [
+    {key:'all',label:'All'},
+    {key:'I BCA - A',label:'I BCA - A'}
+  ],
+  'sst': [
+    {key:'all',label:'All'},{key:'I BBA',label:'I BBA'},{key:'I MCA',label:'I MCA'}
+  ],
   'nagarathinam': [
     {key:'all',label:'All'},{key:'I B.Sc AI',label:'I B.Sc AI'},
     {key:'II B.Sc AI',label:'II B.Sc AI'},{key:'B.Com BC & FT',label:'B.Com BC & FT'},
@@ -769,10 +789,21 @@ const COLLEGE_ADMIN_TABS = {
 };
 
 const MENTOR_COLORS = {
-  'Aparna':'var(--accent2)','Arun Raj':'var(--green)','Saral':'var(--amber)',
-  'Bavani Sri':'#0891b2','Jane Rhinu':'#9333ea','Kavipriya':'#db2777',
-  'Sneha':'#0891b2','Gokilavaani':'#16a34a','Mohanasree N':'#7c3aed',
-  'Srisaradha S':'#0369a1','Anish N':'#b45309','Dharshan K':'#047857'
+  'Aparna':       'var(--accent2)',
+  'Arun Raj':     'var(--green)',
+  'Saral':        'var(--amber)',
+  'Bavani Sri':   '#0891b2',
+  'Jane Rhinu':   '#9333ea',
+  'Kavipriya':    '#db2777',
+  'Sneha':        '#0891b2',
+  'Gokilavaani':  '#16a34a',
+  'Mohanasree N': '#7c3aed',
+  'Srisaradha S': '#0369a1',
+  'Anish N':      '#b45309',
+  'Dharshan K':   '#047857',
+  /* ── NEW ── */
+  'Sowmiya':      '#e11d48',
+  'Arun':         '#0d9488'
 };
 
 /* SST Students */
@@ -813,7 +844,6 @@ let adminProgressMap = {}, adminEvalMap = {}, adminApprovalMap = {};
 let currentWeekStudent = null, currentEvalStudent = null, adminTab = 'all';
 let weekDraft = {};
 
-// Peer evaluation state
 let peerReviews = [];
 let peerTab = 'all';
 let peerLoaded = false;
@@ -838,24 +868,22 @@ async function sb(path, method = 'GET', body = null) {
 }
 
 const api = {
-  students:      (c, s)  => sb('students?college=eq.' + encodeURIComponent(c) + '&section=eq.' + encodeURIComponent(s) + '&order=id'),
+  students:      (c, s)    => sb('students?college=eq.' + encodeURIComponent(c) + '&section=eq.' + encodeURIComponent(s) + '&order=id'),
   myStudents:    (c, s, m) => sb('students?college=eq.' + encodeURIComponent(c) + '&section=eq.' + encodeURIComponent(s) + '&mentor_assigned=eq.' + encodeURIComponent(m) + '&order=id'),
-  progress:      (ids)   => sb('weekly_progress?student_id=in.(' + ids.join(',') + ')'),
-  evaluations:   (ids)   => sb('mentor_evaluation?student_id=in.(' + ids.join(',') + ')'),
-  approvals:     (ids)   => sb('project_approval?student_id=in.(' + ids.join(',') + ')'),
-  upsertProgress:(d)     => sb('weekly_progress', 'POST', d),
-  upsertEval:    (d)     => sb('mentor_evaluation', 'POST', d),
-  upsertApproval:(d)     => sb('project_approval', 'POST', d),
-  updateProgress:(id, d) => sb('weekly_progress?id=eq.' + id, 'PATCH', d),
-  updateEval:    (id, d) => sb('mentor_evaluation?id=eq.' + id, 'PATCH', d),
-  updateApproval:(id, d) => sb('project_approval?id=eq.' + id, 'PATCH', d),
-  insertStudent: (d)     => sb('students', 'POST', d),
-
-  // Peer reviews — uses reviews_named view
-  // For mentors: filter by reviewer_college (college name stored on review row)
- peerByCollege:      (col) => sbPeer('reviews_named?reviewer_college=eq.' + encodeURIComponent(col) + '&order=created_at.desc'),
-peerByOwnerCollege: (col) => sbPeer('reviews_named?order=created_at.desc'),
-peerAll:            ()    => sbPeer('reviews_named?order=created_at.desc'),};
+  progress:      (ids)     => sb('weekly_progress?student_id=in.(' + ids.join(',') + ')'),
+  evaluations:   (ids)     => sb('mentor_evaluation?student_id=in.(' + ids.join(',') + ')'),
+  approvals:     (ids)     => sb('project_approval?student_id=in.(' + ids.join(',') + ')'),
+  upsertProgress:(d)       => sb('weekly_progress', 'POST', d),
+  upsertEval:    (d)       => sb('mentor_evaluation', 'POST', d),
+  upsertApproval:(d)       => sb('project_approval', 'POST', d),
+  updateProgress:(id, d)   => sb('weekly_progress?id=eq.' + id, 'PATCH', d),
+  updateEval:    (id, d)   => sb('mentor_evaluation?id=eq.' + id, 'PATCH', d),
+  updateApproval:(id, d)   => sb('project_approval?id=eq.' + id, 'PATCH', d),
+  insertStudent: (d)       => sb('students', 'POST', d),
+  peerByCollege:      (col) => sbPeer('reviews_named?reviewer_college=eq.' + encodeURIComponent(col) + '&order=created_at.desc'),
+  peerByOwnerCollege: (col) => sbPeer('reviews_named?order=created_at.desc'),
+  peerAll:            ()    => sbPeer('reviews_named?order=created_at.desc')
+};
 
 /* ══════════════════════════════════════
    UTILS
@@ -869,8 +897,8 @@ document.addEventListener('input', function(e) {
 
 function escHTML(s) {
   return String(s == null ? '' : s)
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 
 function getSectionLabel(sec) {
@@ -1121,10 +1149,7 @@ function showPanel(id, el) {
   document.getElementById('panel-' + id).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   if (el) el.classList.add('active');
-  // Lazy-load peer reviews when tab first opened
-  if (id === 'peer' && !peerLoaded) {
-    loadPeerReviews();
-  }
+  if (id === 'peer' && !peerLoaded) loadPeerReviews();
 }
 
 /* ══════════════════════════════════════
@@ -1148,9 +1173,9 @@ function scoreClass(s) {
 }
 function approvalBadge(s) {
   const m = {
-    'approved':      '<span class="badge badge-green">Approved</span>',
-    'needs-revision':'<span class="badge badge-red">Needs Revision</span>',
-    'pending':       '<span class="badge badge-grey">Pending</span>'
+    'approved':       '<span class="badge badge-green">Approved</span>',
+    'needs-revision': '<span class="badge badge-red">Needs Revision</span>',
+    'pending':        '<span class="badge badge-grey">Pending</span>'
   };
   return m[s] || m['pending'];
 }
@@ -1162,8 +1187,8 @@ function weeksBadge(n) {
 }
 
 function downloadCSV(rows, filename) {
-  const csv = rows.map(r => r.map(v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"').join(',')).join('\n');
-  const blob = new Blob([csv], {type: 'text/csv'});
+  const csv = rows.map(r => r.map(v => '"' + String(v == null ? '' : v).replace(/"/g,'""') + '"').join(',')).join('\n');
+  const blob = new Blob([csv], {type:'text/csv'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a'); a.href = url; a.download = filename; a.click();
   URL.revokeObjectURL(url);
@@ -1262,7 +1287,7 @@ function renderStudentList() {
       const wd = weeks[w], cls = wd ? wd.status : 'not-started';
       const icon = cls === 'completed' ? '&#10003;' : cls === 'in-progress' ? '&#8230;' : String(w);
       const note = wd && wd.note && wd.note.trim() ? wd.note.substring(0, 40) : '';
-      const safeName = escHTML(s.name).replace(/'/g, '&#39;');
+      const safeName = escHTML(s.name).replace(/'/g,'&#39;');
       return `<button class="week-btn ${cls}" title="Week ${w}: ${cls}${note ? ' | ' + escHTML(note) : ''}" onclick="openWeekModal(${s.id},'${safeName}',${w})">${icon}</button>`;
     }).join('');
     return `<tr>
@@ -1296,7 +1321,7 @@ function renderProgressTable() {
       const wd = weeks[w], cls = wd ? wd.status : 'not-started';
       const note = wd && wd.note && wd.note.trim() ? wd.note : '';
       const statusLabel = cls === 'completed' ? 'Completed' : cls === 'in-progress' ? 'In Progress' : 'Not Started';
-      const safeName = escHTML(s.name).replace(/'/g, '&#39;');
+      const safeName = escHTML(s.name).replace(/'/g,'&#39;');
       return `<td style="padding:8px 10px;vertical-align:top;">
         <div class="prog-week-cell">
           <button class="prog-week-card ${cls}" onclick="openWeekModal(${s.id},'${safeName}',${w})">
@@ -1318,9 +1343,9 @@ function renderProgressTable() {
 /* ══════════════════════════════════════
    WEEK MODAL
 ══════════════════════════════════════ */
-const STATUS_CYCLE  = ['not-started', 'in-progress', 'completed'];
-const STATUS_LABEL  = {'not-started':'Not Started', 'in-progress':'In Progress', 'completed':'Completed'};
-const STATUS_ICON   = {'not-started':'&#9675;', 'in-progress':'&#9675;', 'completed':'&#10003;'};
+const STATUS_CYCLE  = ['not-started','in-progress','completed'];
+const STATUS_LABEL  = {'not-started':'Not Started','in-progress':'In Progress','completed':'Completed'};
+const STATUS_ICON   = {'not-started':'&#9675;','in-progress':'&#9675;','completed':'&#10003;'};
 
 function openWeekModal(studentId, studentName, focusWeek) {
   currentWeekStudent = {id: studentId, name: studentName};
@@ -1432,8 +1457,8 @@ function renderEvalTable() {
     const e = evalMap[s.id];
     const sc = (k) => e ? (e[k] !== null && e[k] !== undefined ? e[k] : '--') : '--';
     const total = e ? e.total_score : null;
-    const safeName = escHTML(s.name).replace(/'/g, '&#39;');
-    const safeProj = escHTML(s.project_title || '').replace(/'/g, '&#39;');
+    const safeName = escHTML(s.name).replace(/'/g,'&#39;');
+    const safeProj = escHTML(s.project_title || '').replace(/'/g,'&#39;');
     return `<tr>
       <td style="color:var(--ink3);">${i+1}</td>
       <td>${nameBtn(s)}</td>
@@ -1456,10 +1481,10 @@ function openEvalModal(sid, sName, pTitle) {
     `<div class="info-item"><div class="info-label">Student Name</div><div class="info-value">${escHTML(sName)}</div></div>
      <div class="info-item"><div class="info-label">Project</div><div class="info-value">${escHTML(pTitle)}</div></div>`;
   const e = evalMap[sid];
-  document.getElementById('sc_tech').value   = e ? (e.tech_quality   ?? '') : '';
-  document.getElementById('sc_fit').value    = e ? (e.problem_fit    ?? '') : '';
+  document.getElementById('sc_tech').value   = e ? (e.tech_quality    ?? '') : '';
+  document.getElementById('sc_fit').value    = e ? (e.problem_fit     ?? '') : '';
   document.getElementById('sc_effort').value = e ? (e.effort_ownership ?? '') : '';
-  document.getElementById('sc_pres').value   = e ? (e.presentation   ?? '') : '';
+  document.getElementById('sc_pres').value   = e ? (e.presentation    ?? '') : '';
   document.getElementById('sc_impact').value = e ? (e.practical_impact ?? '') : '';
   document.getElementById('evalRemarks').value = e ? (e.remarks || '') : '';
   ['sc_tech','sc_fit','sc_effort','sc_pres','sc_impact'].forEach(id => {
@@ -1472,8 +1497,8 @@ function openEvalModal(sid, sName, pTitle) {
 
 function calcTotal() {
   const fields = [
-    {id:'sc_tech',bar:'bar_tech'}, {id:'sc_fit',bar:'bar_fit'},
-    {id:'sc_effort',bar:'bar_effort'}, {id:'sc_pres',bar:'bar_pres'},
+    {id:'sc_tech',bar:'bar_tech'},{id:'sc_fit',bar:'bar_fit'},
+    {id:'sc_effort',bar:'bar_effort'},{id:'sc_pres',bar:'bar_pres'},
     {id:'sc_impact',bar:'bar_impact'}
   ];
   let total = 0;
@@ -1538,13 +1563,9 @@ async function loadPeerReviews() {
   document.getElementById('peerSummaryCards').innerHTML = '';
   document.getElementById('peerStatsRow').innerHTML = '';
   try {
-    // Admin sees all; mentors see reviews for their college (as reviewer) OR their students' projects
     if (currentUser === 'Admin') {
       peerReviews = await api.peerAll();
     } else {
-      // Load all reviews then filter client-side:
-      // show reviews WHERE reviewer college = selectedCollegeName (students from this college reviewed others)
-      // OR project owner is a student in this college's section
       const all = await api.peerAll();
       const myStudentRegs = new Set([...students, ...allStudents].map(s => s.register_number));
       peerReviews = all.filter(r =>
@@ -1566,7 +1587,6 @@ async function loadPeerReviews() {
 }
 
 function renderPeerTabs() {
-  // Build unique college list from reviewer_college field
   const colleges = [...new Set(
     peerReviews.map(r => r.reviewer_college_name || r.reviewer_college || '').filter(Boolean)
   )].sort();
@@ -1643,7 +1663,7 @@ function renderPeerTable() {
       <td style="text-align:center;">${peerScoreChip(r.usability)}</td>
       <td style="text-align:center;">${peerScoreChip(r.overall)}</td>
       <td style="text-align:center;"><span class="score-display ${peerAvgClass(parseFloat(avg))}" style="font-size:16px;">${avg}</span><span style="font-size:10px;color:var(--ink3);"> /10</span></td>
-      <td style="font-size:11px;color:var(--ink3);max-width:140px;line-height:1.5;">${r.comments ? escHTML(r.comments.substring(0, 80)) + (r.comments.length > 80 ? '&hellip;' : '') : '&mdash;'}</td>
+      <td style="font-size:11px;color:var(--ink3);max-width:140px;line-height:1.5;">${r.comments ? escHTML(r.comments.substring(0,80)) + (r.comments.length > 80 ? '&hellip;' : '') : '&mdash;'}</td>
     </tr>`;
   }).join('');
 }
@@ -1665,20 +1685,14 @@ function renderPeerStats() {
 
 function renderPeerSummary() {
   const list = getFilteredPeerReviews();
-  // Group by project
   const byProject = {};
   list.forEach(r => {
     const key = r.project_reg;
-    if (!byProject[key]) byProject[key] = {
-      title: r.project_title, owner: r.project_owner_name,
-      type: r.project_type, reviews: []
-    };
+    if (!byProject[key]) byProject[key] = {title: r.project_title, owner: r.project_owner_name, type: r.project_type, reviews: []};
     byProject[key].reviews.push(r);
   });
-
   const container = document.getElementById('peerSummaryCards');
   if (!Object.keys(byProject).length) { container.innerHTML = ''; return; }
-
   container.innerHTML = Object.values(byProject)
     .sort((a, b) => b.reviews.length - a.reviews.length)
     .map(p => {
