@@ -855,7 +855,7 @@ const api = {
   // For mentors: filter by reviewer_college (college name stored on review row)
  peerByCollege:      (col) => sbPeer('reviews_named?reviewer_college=eq.' + encodeURIComponent(col) + '&order=created_at.desc'),
 peerByOwnerCollege: (col) => sbPeer('reviews_named?order=created_at.desc'),
-peerAll:            ()    => sbPeer('reviews_named?order=created_at.desc'),
+peerAll:            ()    => sbPeer('reviews_named?order=created_at.desc'),};
 
 /* ══════════════════════════════════════
    UTILS
