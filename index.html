@@ -257,11 +257,17 @@ tbody tr:hover td{background:var(--surface);}
 .peer-project-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
 .peer-project-title{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:4px;line-height:1.4;}
 .peer-project-owner{font-size:11px;color:var(--ink3);margin-bottom:10px;}
-.peer-criteria-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
-.peer-criterion-pill{font-size:10px;font-weight:600;padding:2px 7px;border-radius:99px;background:var(--surface2);color:var(--ink3);}
 .peer-avg-large{font-family:var(--font-head);font-size:26px;font-weight:800;line-height:1;}
 .peer-review-count{font-size:11px;color:var(--ink3);margin-top:4px;}
 .loading-peer{text-align:center;padding:32px;color:var(--ink3);font-size:13px;display:flex;align-items:center;justify-content:center;gap:10px;}
+
+/* ── FINAL SCORE ── */
+.formula-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.formula-pill{background:var(--surface);border:1px solid var(--border2);border-radius:8px;padding:8px 14px;font-size:12px;color:var(--ink2);}
+.formula-pill strong{color:var(--ink);font-weight:600;}
+.final-grade-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;}
+.final-grade-legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink3);}
+.final-grade-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;}
 
 /* ── RESPONSIVE ── */
 @media(max-width:768px){
@@ -391,6 +397,9 @@ tbody tr:hover td{background:var(--surface);}
       <div class="nav-item" id="nav-peer" onclick="showPanel('peer',this)">
         <span class="nav-icon">&#9670;</span> Peer Evaluation
       </div>
+      <div class="nav-item" id="nav-finalscore" onclick="showPanel('finalscore',this)">
+        <span class="nav-icon">&#9733;</span> Final Score
+      </div>
       <div class="nav-item" id="nav-admin" style="display:none;" onclick="showPanel('admin',this)">
         <span class="nav-icon">&#9632;</span> Admin View
       </div>
@@ -485,14 +494,11 @@ tbody tr:hover td{background:var(--surface);}
         </div>
         <div id="peerTabRow" class="tab-row" style="margin-bottom:16px;"></div>
         <div class="stats-row" id="peerStatsRow" style="grid-template-columns:repeat(4,1fr);margin-bottom:20px;"></div>
-
-        <!-- PROJECT AVERAGES — above the table -->
         <div style="margin-bottom:14px;">
           <div style="font-family:var(--font-head);font-size:16px;font-weight:700;color:var(--ink);margin-bottom:4px;">Project Totals</div>
           <div style="font-size:12px;color:var(--ink3);margin-bottom:12px;">Total peer score per project &mdash; out of 50 (sum of 5 criteria &#215; 10)</div>
           <div class="peer-summary-grid" id="peerSummaryCards"></div>
         </div>
-
         <div class="search-bar">
           <div class="search-wrap">
             <span class="search-icon">&#8981;</span>
@@ -516,6 +522,57 @@ tbody tr:hover td{background:var(--surface);}
               </tbody>
             </table>
           </div>
+        </div>
+      </div>
+
+      <!-- FINAL SCORE -->
+      <div class="panel" id="panel-finalscore">
+        <div class="page-header">
+          <div class="page-eyebrow">Results</div>
+          <div class="page-title">Final Score Summary</div>
+          <div class="page-sub">Peer score weighted at 30%, Mentor score at 70% &mdash; total out of 100</div>
+        </div>
+        <div class="formula-pills">
+          <div class="formula-pill"><strong>Peer Score (30)</strong> = Peer Raw &divide; 50 &times; 30</div>
+          <div class="formula-pill"><strong>Mentor Score (70)</strong> = Mentor Raw &divide; 100 &times; 70</div>
+          <div class="formula-pill"><strong>Final Score (100)</strong> = Peer Score + Mentor Score</div>
+        </div>
+        <div style="background:var(--accent-lt);border:1px solid rgba(108,99,255,0.2);border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:var(--accent2);font-weight:500;">
+          &#9733; Grades: &ge;85 Excellent &nbsp;&middot;&nbsp; &ge;70 Very Good &nbsp;&middot;&nbsp; &ge;55 Good &nbsp;&middot;&nbsp; &ge;40 Pass &nbsp;&middot;&nbsp; below 40 = Fail &nbsp;&middot;&nbsp; No scores = Not Started
+        </div>
+        <div class="stats-row" id="finalStatsRow" style="grid-template-columns:repeat(4,1fr);"></div>
+        <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:12px;">
+          <button class="export-btn" onclick="exportFinalCSV()">&darr; Export CSV</button>
+        </div>
+        <div class="card" style="padding:0;overflow:hidden;">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Student Name</th>
+                  <th>Register No.</th>
+                  <th>Course</th>
+                  <th>Mentor</th>
+                  <th style="text-align:center;">Peer Raw<br>(50)</th>
+                  <th style="text-align:center;">Peer Score<br>(30)</th>
+                  <th style="text-align:center;">Mentor Raw<br>(100)</th>
+                  <th style="text-align:center;">Mentor Score<br>(70)</th>
+                  <th style="text-align:center;">Final Score<br>(100)</th>
+                  <th style="text-align:center;">Grade</th>
+                </tr>
+              </thead>
+              <tbody id="finalTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="final-grade-legend">
+          <div class="final-grade-legend-item"><span class="final-grade-dot" style="background:var(--green);"></span>Excellent (&ge;85)</div>
+          <div class="final-grade-legend-item"><span class="final-grade-dot" style="background:var(--blue);"></span>Very Good (&ge;70)</div>
+          <div class="final-grade-legend-item"><span class="final-grade-dot" style="background:var(--amber);"></span>Good (&ge;55)</div>
+          <div class="final-grade-legend-item"><span class="final-grade-dot" style="background:var(--accent);"></span>Pass (&ge;40)</div>
+          <div class="final-grade-legend-item"><span class="final-grade-dot" style="background:var(--red);"></span>Fail (&lt;40)</div>
+          <div class="final-grade-legend-item"><span class="final-grade-dot" style="background:var(--surface2);border:1px solid var(--border2);"></span>Not Started</div>
         </div>
       </div>
 
@@ -947,6 +1004,8 @@ function doLogout() {
   document.getElementById('peerSummaryCards').innerHTML = '';
   document.getElementById('peerTabRow').innerHTML = '';
   document.getElementById('peerStatsRow').innerHTML = '';
+  document.getElementById('finalTableBody').innerHTML = '';
+  document.getElementById('finalStatsRow').innerHTML = '';
   showPanel('dashboard', document.getElementById('nav-dashboard'));
 }
 
@@ -1012,6 +1071,7 @@ function showPanel(id, el) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   if (el) el.classList.add('active');
   if (id === 'peer' && !peerLoaded) loadPeerReviews();
+  if (id === 'finalscore') renderFinalTable();
 }
 
 function getWeeksDone(sid, ua) {
@@ -1342,9 +1402,6 @@ async function saveEvaluation() {
 
 /* ══════════════════════════════════════
    PEER EVALUATION
-   - Mentors see ONLY reviews for their own assigned students (matched by project_reg)
-   - Scores shown as total /50 (sum of 5 criteria × 10), not average
-   - Project Totals cards displayed ABOVE the reviews table
 ══════════════════════════════════════ */
 async function loadPeerReviews() {
   peerLoaded = true;
@@ -1357,12 +1414,11 @@ async function loadPeerReviews() {
       peerReviews = await api.peerAll();
     } else {
       const all = await api.peerAll();
-      // Only show reviews where the reviewed project belongs to THIS mentor's own students
       const myStudentRegs = new Set(students.map(s => s.register_number));
       peerReviews = all.filter(r => myStudentRegs.has(r.project_reg));
     }
     renderPeerTabs();
-    renderPeerSummary(); // summary cards first (above table)
+    renderPeerSummary();
     renderPeerTable();
     renderPeerStats();
   } catch(e) {
@@ -1410,7 +1466,6 @@ function peerScoreChip(v) {
   return `<span class="peer-score-chip ${cls}">${v}</span>`;
 }
 
-// Colour helper based on total/50 (35+= high, 25+= mid, else low)
 function peerTotalClass(total50) {
   return total50 >= 35 ? 'score-high' : total50 >= 25 ? 'score-mid' : 'score-low';
 }
@@ -1423,7 +1478,6 @@ function renderPeerTable() {
     return;
   }
   tb.innerHTML = list.map((r, i) => {
-    // Total out of 50
     const total50 = (r.clarity||0) + (r.innovation||0) + (r.execution||0) + (r.usability||0) + (r.overall||0);
     const college = r.reviewer_college_name||r.reviewer_college||'—';
     const collegePill = `<span style="font-size:10px;font-weight:700;color:var(--blue);background:var(--blue-lt);padding:2px 7px;border-radius:99px;white-space:nowrap;">${escHTML(college)}</span>`;
@@ -1459,7 +1513,6 @@ function renderPeerStats() {
   const total = list.length;
   const projects = new Set(list.map(r => r.project_reg)).size;
   const reviewers = new Set(list.map(r => r.reviewer_reg)).size;
-  // Average total score out of 50
   const avgTotal = total > 0
     ? (list.reduce((s,r) => s + (r.clarity+r.innovation+r.execution+r.usability+r.overall), 0) / total).toFixed(1)
     : '--';
@@ -1486,11 +1539,9 @@ function renderPeerSummary() {
       const n = p.reviews.length;
       const criteria = ['clarity','innovation','execution','usability','overall'];
       const criteriaLabels = ['Clarity','Innovation','Execution','Usability','Overall'];
-      // Average score per criterion across all reviews (each criterion is /10)
       const criteriaAvgs = criteria.map(c =>
         (p.reviews.reduce((s,r) => s+(r[c]||0), 0) / n).toFixed(1)
       );
-      // Total out of 50 = sum of all 5 criterion averages
       const totalOut50 = criteriaAvgs.reduce((s,v) => s+parseFloat(v), 0).toFixed(1);
       const cls = peerTotalClass(parseFloat(totalOut50));
       const criteriaHTML = criteriaAvgs.map((v,i) =>
@@ -1535,6 +1586,126 @@ function exportPeerCSV() {
   downloadCSV(rows,'peer_reviews_'+peerTab.replace(/\s+/g,'-')+'_'+new Date().toISOString().split('T')[0]+'.csv');
 }
 
+/* ══════════════════════════════════════
+   FINAL SCORE
+══════════════════════════════════════ */
+function getFinalGrade(score, notStarted) {
+  if (notStarted) return {label:'Not Started', cls:'badge-grey'};
+  if (score >= 85) return {label:'Excellent',  cls:'badge-green'};
+  if (score >= 70) return {label:'Very Good',  cls:'badge-blue'};
+  if (score >= 55) return {label:'Good',        cls:'badge-amber'};
+  if (score >= 40) return {label:'Pass',        cls:'badge-grey'};
+  return {label:'Fail', cls:'badge-red'};
+}
+
+function getPeerRawForStudent(reg) {
+  // Average total /50 across all peer reviews received by this student's project
+  const reviews = peerReviews.filter(r => r.project_reg === reg);
+  if (!reviews.length) return 0;
+  const avg = reviews.reduce((sum, r) =>
+    sum + (r.clarity||0) + (r.innovation||0) + (r.execution||0) + (r.usability||0) + (r.overall||0), 0
+  ) / reviews.length;
+  return parseFloat(avg.toFixed(1));
+}
+
+function renderFinalTable() {
+  const list = students;
+  const tb = document.getElementById('finalTableBody');
+  if (!list.length) {
+    tb.innerHTML = '<tr><td colspan="11"><div class="empty-state"><div class="empty-icon">&#9733;</div>No students found.</div></td></tr>';
+    renderFinalStats([]);
+    return;
+  }
+  tb.innerHTML = list.map((s, i) => {
+    const peerRaw    = getPeerRawForStudent(s.register_number);
+    const mentorRaw  = getScore(s.id);
+    const peerScore  = parseFloat((peerRaw / 50 * 30).toFixed(1));
+    const mentorScore = mentorRaw !== null ? parseFloat((mentorRaw / 100 * 70).toFixed(1)) : null;
+    const notStarted = peerRaw === 0 && mentorRaw === null;
+    const finalScore = notStarted ? 0 : parseFloat((peerScore + (mentorScore ?? 0)).toFixed(1));
+    const grade = getFinalGrade(finalScore, notStarted);
+
+    const peerScoreCls   = notStarted ? '' : (peerScore  >= 22 ? 'score-high' : peerScore  >= 15 ? 'score-mid' : 'score-low');
+    const mentorScoreCls = mentorScore !== null ? (mentorScore >= 52 ? 'score-high' : mentorScore >= 35 ? 'score-mid' : 'score-low') : '';
+    const finalCls = notStarted ? '' : (finalScore >= 75 ? 'score-high' : finalScore >= 50 ? 'score-mid' : 'score-low');
+    const mc = MENTOR_COLORS[s.mentor_assigned] || 'var(--ink2)';
+
+    return `<tr>
+      <td style="color:var(--ink3);">${i+1}</td>
+      <td>${nameBtn(s)}</td>
+      <td style="font-size:12px;color:var(--ink3);">${escHTML(s.register_number||'')}</td>
+      <td style="font-size:12px;">${escHTML(s.course||'')}</td>
+      <td style="font-size:12px;color:${mc};font-weight:600;">${escHTML(s.mentor_assigned||'—')}</td>
+      <td style="text-align:center;">
+        <span class="score-display" style="font-size:15px;">${peerRaw}</span>
+        <span style="font-size:10px;color:var(--ink3);"> /50</span>
+      </td>
+      <td style="text-align:center;">
+        <span class="score-display ${peerScoreCls}" style="font-size:15px;">${peerScore}</span>
+        <span style="font-size:10px;color:var(--ink3);"> /30</span>
+      </td>
+      <td style="text-align:center;">
+        ${mentorRaw !== null
+          ? `<span class="score-display" style="font-size:15px;">${mentorRaw}</span><span style="font-size:10px;color:var(--ink3);"> /100</span>`
+          : `<span style="color:var(--ink3);">—</span>`}
+      </td>
+      <td style="text-align:center;">
+        ${mentorScore !== null
+          ? `<span class="score-display ${mentorScoreCls}" style="font-size:15px;">${mentorScore}</span><span style="font-size:10px;color:var(--ink3);"> /70</span>`
+          : `<span style="color:var(--ink3);">—</span>`}
+      </td>
+      <td style="text-align:center;">
+        <span class="score-display ${finalCls}" style="font-size:20px;">${finalScore}</span>
+        <span style="font-size:10px;color:var(--ink3);"> /100</span>
+      </td>
+      <td style="text-align:center;"><span class="badge ${grade.cls}">${grade.label}</span></td>
+    </tr>`;
+  }).join('');
+
+  renderFinalStats(list);
+}
+
+function renderFinalStats(list) {
+  const scored = list.filter(s => {
+    const pr = getPeerRawForStudent(s.register_number);
+    const mr = getScore(s.id);
+    return !(pr === 0 && mr === null);
+  });
+  const finals = scored.map(s => {
+    const pr = getPeerRawForStudent(s.register_number);
+    const mr = getScore(s.id);
+    return parseFloat(((pr/50*30) + ((mr??0)/100*70)).toFixed(1));
+  });
+  const avg       = finals.length ? (finals.reduce((a,b)=>a+b,0)/finals.length).toFixed(1) : '--';
+  const excellent = finals.filter(f => f >= 85).length;
+  const vgood     = finals.filter(f => f >= 70 && f < 85).length;
+  document.getElementById('finalStatsRow').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Total Students</div><div class="stat-value">${list.length}</div><div class="stat-sub">in this section</div></div>
+    <div class="stat-card"><div class="stat-label">Evaluated</div><div class="stat-value" style="color:var(--accent2);">${scored.length}</div><div class="stat-sub">with scores</div></div>
+    <div class="stat-card"><div class="stat-label">Avg Final Score</div><div class="stat-value" style="color:var(--amber);">${avg}</div><div class="stat-sub">out of 100</div></div>
+    <div class="stat-card"><div class="stat-label">Excellent / Very Good</div><div class="stat-value" style="color:var(--green);">${excellent+vgood}</div><div class="stat-sub">${excellent} excellent, ${vgood} very good</div></div>`;
+}
+
+function exportFinalCSV() {
+  const rows = [['#','Name','Register No','Course','Mentor',
+    'Peer Raw (/50)','Peer Score (/30)','Mentor Raw (/100)','Mentor Score (/70)','Final Score (/100)','Grade']];
+  students.forEach((s, i) => {
+    const peerRaw    = getPeerRawForStudent(s.register_number);
+    const mentorRaw  = getScore(s.id);
+    const peerScore  = parseFloat((peerRaw/50*30).toFixed(1));
+    const mentorScore = mentorRaw !== null ? parseFloat((mentorRaw/100*70).toFixed(1)) : '';
+    const notStarted = peerRaw === 0 && mentorRaw === null;
+    const finalScore = notStarted ? 0 : parseFloat((peerScore + (mentorScore||0)).toFixed(1));
+    const grade = getFinalGrade(finalScore, notStarted);
+    rows.push([i+1,s.name,s.register_number,s.course||'',s.mentor_assigned||'',
+      peerRaw,peerScore,mentorRaw??'',mentorScore,finalScore,grade.label]);
+  });
+  downloadCSV(rows,'final_scores_'+new Date().toISOString().split('T')[0]+'.csv');
+}
+
+/* ══════════════════════════════════════
+   ADMIN
+══════════════════════════════════════ */
 async function seedSSTStudents() {
   const btn = document.getElementById('seedBtn');
   const status = document.getElementById('seedStatus');
