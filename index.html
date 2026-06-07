@@ -532,15 +532,7 @@ tbody tr:hover td{background:var(--surface);}
           <div class="page-title">Final Score Summary</div>
           <div class="page-sub">Peer score weighted at 30%, Mentor score at 70% &mdash; total out of 100</div>
         </div>
-        <div class="formula-pills">
-          <div class="formula-pill"><strong>Peer Score (30)</strong> = Peer Raw &divide; 50 &times; 30</div>
-          <div class="formula-pill"><strong>Mentor Score (70)</strong> = Mentor Raw &divide; 100 &times; 70</div>
-          <div class="formula-pill"><strong>Final Score (100)</strong> = Peer Score + Mentor Score</div>
-        </div>
-        <div style="background:var(--accent-lt);border:1px solid rgba(108,99,255,0.2);border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:var(--accent2);font-weight:500;">
-          &#9733; Grades: &ge;85 Excellent &nbsp;&middot;&nbsp; &ge;70 Very Good &nbsp;&middot;&nbsp; &ge;55 Good &nbsp;&middot;&nbsp; &ge;40 Pass &nbsp;&middot;&nbsp; below 40 = Fail &nbsp;&middot;&nbsp; No scores = Not Started
-        </div>
-        <div class="stats-row" id="finalStatsRow" style="grid-template-columns:repeat(4,1fr);"></div>
+       <div class="stats-row" id="finalStatsRow" style="grid-template-columns:repeat(4,1fr);"></div>
         <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:12px;">
           <button class="export-btn" onclick="exportFinalCSV()">&darr; Export CSV</button>
         </div>
