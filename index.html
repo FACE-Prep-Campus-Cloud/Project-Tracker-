@@ -347,15 +347,15 @@ tbody tr:hover td{background:var(--surface);}
       <div style="font-family:var(--font-head);font-size:18px;font-weight:800;color:var(--ink);margin-top:2px;" id="loginCollegeName">&mdash;</div>
     </div>
     <div class="login-title">Mentor Login</div>
-    <div class="login-sub">Select section, role and enter your PIN</div>
-    <div class="login-label">Select Section</div>
+    <div class="login-sub">Select Department, role and enter your PIN</div>
+    <div class="login-label">Select Department</div>
     <div class="college-select-wrap" style="margin-bottom:14px;">
       <select class="college-select" id="sectionSelect" onchange="selectSectionFromDropdown(this)">
-        <option value="">&mdash; Choose your section &mdash;</option>
+        <option value="">&mdash; Choose your Department &mdash;</option>
       </select>
       <span class="college-select-icon">&#9662;</span>
     </div>
-    <div class="login-label">Select Role</div>
+    <div class="login-label">Select Your Name</div>
     <div id="roleButtonsWrap" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;"></div>
     <div class="login-label" style="margin-top:4px;">Enter PIN</div>
     <div class="pin-input-wrap">
@@ -917,7 +917,7 @@ function populateSectionDropdown(collegeKey) {
 
 function renderRoleButtons(sec) {
   const wrap = document.getElementById('roleButtonsWrap');
-  if (!sec) { wrap.innerHTML = '<div style="grid-column:1/-1;font-size:12px;color:var(--ink3);padding:8px 0;">\u2190 Select a section first</div>'; return; }
+  if (!sec) { wrap.innerHTML = '<div style="grid-column:1/-1;font-size:12px;color:var(--ink3);padding:8px 0;">\u2190 Select a Department first</div>'; return; }
   const roles = SECTION_ROLES[sec] || ['Admin'];
   wrap.style.gridTemplateColumns = roles.length <= 3 ? 'repeat('+roles.length+',1fr)' : '1fr 1fr';
   wrap.innerHTML = roles.map(r => `<button class="role-btn" data-role="${escHTML(r)}" onclick="selectRole(this)">${escHTML(r)}</button>`).join('');
