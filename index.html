@@ -658,7 +658,23 @@ tbody tr:hover td{background:var(--surface);}
 ══════════════════════════════════════ */
 const SUPABASE_URL = 'https://qjwbndrgzvboszfzrcuy.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqd2JuZHJnenZib3N6ZnpyY3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NTA3MzIsImV4cCI6MjA5NjEyNjczMn0.x-su_5f_XQ9_ql7iw3Aa_4E4ww9SJIqRGVdTHo6zSpE';
+// ── ADD THESE TWO NEW CONSTANTS (peer portal DB) ──
+const PEER_SUPABASE_URL = 'https://zykmcumlzhucnvxqhpgm.supabase.co';
+const PEER_SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5a21jdW1semh1Y252eHFocGdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3NzE5MDYsImV4cCI6MjA5NTM0NzkwNn0.kqUgSpGFSwMXpHkWRihhVJXDtVfl0tGdU24POxmXHWc';
 
+// ── ADD THIS PEER-SPECIFIC FETCH FUNCTION ──
+async function sbPeer(path) {
+  const res = await fetch(PEER_SUPABASE_URL + '/rest/v1/' + path, {
+    headers: {
+      'apikey': PEER_SUPABASE_KEY,
+      'Authorization': 'Bearer ' + PEER_SUPABASE_KEY,
+      'Accept': 'application/json'
+    }
+  });
+  const text = await res.text();
+  if (!res.ok) throw new Error(text || 'Peer DB error: ' + res.status);
+  return text ? JSON.parse(text) : [];
+}
 /* ══════════════════════════════════════
    PINS
 ══════════════════════════════════════ */
@@ -837,14 +853,9 @@ const api = {
 
   // Peer reviews — uses reviews_named view
   // For mentors: filter by reviewer_college (college name stored on review row)
-  peerByCollege: (col)   => sb('reviews_named?reviewer_college=eq.' + encodeURIComponent(col) + '&order=created_at.desc'),
-  // Also load reviews WHERE the project owner's college matches (so mentors see reviews ON their students)
-  peerByOwnerCollege: (col) => sb('reviews_named?order=created_at.desc').then(rows =>
-    rows.filter(r => (r.reviewer_college_name || r.reviewer_college || '') === col ||
-                     (r.project_owner_name != null)) // fallback: all
-  ),
-  peerAll:       ()      => sb('reviews_named?order=created_at.desc'),
-};
+ peerByCollege:      (col) => sbPeer('reviews_named?reviewer_college=eq.' + encodeURIComponent(col) + '&order=created_at.desc'),
+peerByOwnerCollege: (col) => sbPeer('reviews_named?order=created_at.desc'),
+peerAll:            ()    => sbPeer('reviews_named?order=created_at.desc'),
 
 /* ══════════════════════════════════════
    UTILS
