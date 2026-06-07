@@ -252,7 +252,7 @@ tbody tr:hover td{background:var(--surface);}
 .peer-score-mid{background:var(--amber-lt);color:var(--amber);}
 .peer-score-low{background:var(--red-lt);color:var(--red);}
 .peer-score-na{background:var(--surface2);color:var(--ink3);}
-.peer-summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:16px;}
+.peer-summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:24px;}
 .peer-project-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;transition:transform 0.2s;cursor:default;}
 .peer-project-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
 .peer-project-title{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:4px;line-height:1.4;}
@@ -293,9 +293,7 @@ tbody tr:hover td{background:var(--surface);}
   <div class="proj-popover-hint">Hover to see project details</div>
 </div>
 
-<!-- ══════════════════════════════════════
-     LANDING SCREEN
-══════════════════════════════════════ -->
+<!-- LANDING SCREEN -->
 <div id="landingScreen">
   <div class="landing-wrap">
     <div class="landing-title">College <span>Project</span><br>Tracker Portal</div>
@@ -335,9 +333,7 @@ tbody tr:hover td{background:var(--surface);}
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     LOGIN SCREEN
-══════════════════════════════════════ -->
+<!-- LOGIN SCREEN -->
 <div id="loginScreen">
   <div class="login-box">
     <div style="margin-bottom:24px;">
@@ -365,9 +361,7 @@ tbody tr:hover td{background:var(--surface);}
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     APP SHELL
-══════════════════════════════════════ -->
+<!-- APP SHELL -->
 <div id="appShell">
   <header class="topbar">
     <div><div class="topbar-brand">Project<span>Tracker</span></div></div>
@@ -379,7 +373,6 @@ tbody tr:hover td{background:var(--surface);}
   </header>
 
   <div class="main-wrap">
-    <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="nav-section-label">Navigation</div>
       <div class="nav-item active" id="nav-dashboard" onclick="showPanel('dashboard',this)">
@@ -405,7 +398,7 @@ tbody tr:hover td{background:var(--surface);}
 
     <main class="content">
 
-      <!-- ══ DASHBOARD ══ -->
+      <!-- DASHBOARD -->
       <div class="panel active" id="panel-dashboard">
         <div class="page-header">
           <div class="page-eyebrow">Overview</div>
@@ -422,7 +415,7 @@ tbody tr:hover td{background:var(--surface);}
         </div>
       </div>
 
-      <!-- ══ STUDENTS ══ -->
+      <!-- STUDENTS -->
       <div class="panel" id="panel-students">
         <div class="page-header">
           <div class="page-eyebrow">Student List</div>
@@ -444,7 +437,7 @@ tbody tr:hover td{background:var(--surface);}
         </table></div></div>
       </div>
 
-      <!-- ══ WEEKLY PROGRESS ══ -->
+      <!-- WEEKLY PROGRESS -->
       <div class="panel" id="panel-progress">
         <div class="page-header">
           <div class="page-eyebrow">Track Progress</div>
@@ -466,7 +459,7 @@ tbody tr:hover td{background:var(--surface);}
         </div>
       </div>
 
-      <!-- ══ MENTOR EVALUATION ══ -->
+      <!-- MENTOR EVALUATION -->
       <div class="panel" id="panel-evaluation">
         <div class="page-header">
           <div class="page-eyebrow">Mentor Evaluation</div>
@@ -483,15 +476,23 @@ tbody tr:hover td{background:var(--surface);}
         </table></div></div>
       </div>
 
-      <!-- ══ PEER EVALUATION ══ -->
+      <!-- PEER EVALUATION -->
       <div class="panel" id="panel-peer">
         <div class="page-header">
           <div class="page-eyebrow">Peer Review</div>
           <div class="page-title">Peer Evaluation</div>
-          <div class="page-sub">Student-to-student scores from the peer review portal &mdash; filtered by your college</div>
+          <div class="page-sub">Student-to-student scores &mdash; total out of 50 per project</div>
         </div>
         <div id="peerTabRow" class="tab-row" style="margin-bottom:16px;"></div>
         <div class="stats-row" id="peerStatsRow" style="grid-template-columns:repeat(4,1fr);margin-bottom:20px;"></div>
+
+        <!-- PROJECT AVERAGES — above the table -->
+        <div style="margin-bottom:14px;">
+          <div style="font-family:var(--font-head);font-size:16px;font-weight:700;color:var(--ink);margin-bottom:4px;">Project Totals</div>
+          <div style="font-size:12px;color:var(--ink3);margin-bottom:12px;">Total peer score per project &mdash; out of 50 (sum of 5 criteria &#215; 10)</div>
+          <div class="peer-summary-grid" id="peerSummaryCards"></div>
+        </div>
+
         <div class="search-bar">
           <div class="search-wrap">
             <span class="search-icon">&#8981;</span>
@@ -507,7 +508,7 @@ tbody tr:hover td{background:var(--surface);}
                   <th>#</th><th>Project</th><th>Owner</th><th>Reviewer</th><th>Reviewer College</th>
                   <th style="text-align:center;">Clarity</th><th style="text-align:center;">Innovation</th>
                   <th style="text-align:center;">Execution</th><th style="text-align:center;">Usability</th>
-                  <th style="text-align:center;">Overall</th><th style="text-align:center;">Avg</th><th>Comments</th>
+                  <th style="text-align:center;">Overall</th><th style="text-align:center;">Total /50</th><th>Comments</th>
                 </tr>
               </thead>
               <tbody id="peerTableBody">
@@ -516,14 +517,9 @@ tbody tr:hover td{background:var(--surface);}
             </table>
           </div>
         </div>
-        <div style="margin-bottom:10px;">
-          <div style="font-family:var(--font-head);font-size:16px;font-weight:700;color:var(--ink);margin-bottom:4px;">Project Averages</div>
-          <div style="font-size:12px;color:var(--ink3);">Average peer score per project &mdash; scored out of 10 per criterion</div>
-        </div>
-        <div class="peer-summary-grid" id="peerSummaryCards"></div>
       </div>
 
-      <!-- ══ ADMIN ══ -->
+      <!-- ADMIN -->
       <div class="panel" id="panel-admin">
         <div class="page-header">
           <div class="page-eyebrow">Admin View</div>
@@ -551,9 +547,7 @@ tbody tr:hover td{background:var(--surface);}
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     WEEK MODAL
-══════════════════════════════════════ -->
+<!-- WEEK MODAL -->
 <div class="modal-overlay" id="weekModal" onclick="if(event.target===this)closeModal('weekModal')">
   <div class="modal-box" onclick="event.stopPropagation()">
     <div class="modal-header">
@@ -576,9 +570,7 @@ tbody tr:hover td{background:var(--surface);}
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     EVAL MODAL
-══════════════════════════════════════ -->
+<!-- EVAL MODAL -->
 <div class="modal-overlay" id="evalModal" onclick="if(event.target===this)closeModal('evalModal')">
   <div class="modal-box" onclick="event.stopPropagation()">
     <div class="modal-header">
@@ -630,9 +622,6 @@ tbody tr:hover td{background:var(--surface);}
 <div class="toast" id="toast"><span class="toast-dot success" id="toastDot"></span><span id="toastMsg">Saved!</span></div>
 
 <script>
-/* ══════════════════════════════════════
-   CONFIG
-══════════════════════════════════════ */
 const SUPABASE_URL = 'https://qjwbndrgzvboszfzrcuy.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqd2JuZHJnenZib3N6ZnpyY3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NTA3MzIsImV4cCI6MjA5NjEyNjczMn0.x-su_5f_XQ9_ql7iw3Aa_4E4ww9SJIqRGVdTHo6zSpE';
 const PEER_SUPABASE_URL = 'https://zykmcumlzhucnvxqhpgm.supabase.co';
@@ -640,173 +629,96 @@ const PEER_SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
 async function sbPeer(path) {
   const res = await fetch(PEER_SUPABASE_URL + '/rest/v1/' + path, {
-    headers: {
-      'apikey': PEER_SUPABASE_KEY,
-      'Authorization': 'Bearer ' + PEER_SUPABASE_KEY,
-      'Accept': 'application/json'
-    }
+    headers: {'apikey': PEER_SUPABASE_KEY,'Authorization': 'Bearer ' + PEER_SUPABASE_KEY,'Accept': 'application/json'}
   });
   const text = await res.text();
   if (!res.ok) throw new Error(text || 'Peer DB error: ' + res.status);
   return text ? JSON.parse(text) : [];
 }
 
-/* ══════════════════════════════════════
-   PINS
-══════════════════════════════════════ */
 const PINS = {
-  'Aparna':       '1212',
-  'Arun Raj':     '1212',
-  'Saral':        '1212',
-  'Admin':        '1212',
-  'Bavani Sri':   '1212',
-  'Jane Rhinu':   '1212',
-  'Kavipriya':    '1212',
-  'Sneha':        '1212',
-  'Gokilavaani':  '1212',
-  'Mohanasree N': '1212',
-  'Srisaradha S': '1212',
-  'Anish N':      '1212',
-  'Dharshan K':   '1212',
-  /* ── NEW: Kamaraj Women's College mentors ── */
-  'Sowmiya':      '1212',
-  'Arun':         '1212'
+  'Aparna':'1212','Arun Raj':'1212','Saral':'1212','Admin':'1212',
+  'Bavani Sri':'1212','Jane Rhinu':'1212','Kavipriya':'1212','Sneha':'1212',
+  'Gokilavaani':'1212','Mohanasree N':'1212','Srisaradha S':'1212',
+  'Anish N':'1212','Dharshan K':'1212','Sowmiya':'1212','Arun':'1212'
 };
 
-/* ══════════════════════════════════════
-   SECTIONS PER COLLEGE
-══════════════════════════════════════ */
 const COLLEGE_SECTIONS = {
   'default': [
-    {value:'A',     label:'I BCA - A'},
-    {value:'B',     label:'I BCA - B'},
-    {value:'II',    label:'II BCA'},
-    {value:'BCH',   label:'I B.Com Honours'},
-    {value:'BBADM', label:'I BBA Digital Marketing'}
+    {value:'A',label:'I BCA - A'},{value:'B',label:'I BCA - B'},
+    {value:'II',label:'II BCA'},{value:'BCH',label:'I B.Com Honours'},
+    {value:'BBADM',label:'I BBA Digital Marketing'}
   ],
-  /* ── NEW: Kamaraj Women's College ── */
-  'kamaraj-women': [
-    {value:'KW_A', label:'I BCA - A'}
-  ],
-  'sst': [
-    {value:'IBBA',  label:'I BBA'},
-    {value:'IMCA',  label:'I MCA'}
-  ],
+  'kamaraj-women': [{value:'KW_A',label:'I BCA - A'}],
+  'sst': [{value:'IBBA',label:'I BBA'},{value:'IMCA',label:'I MCA'}],
   'nagarathinam': [
-    {value:'NAIG_IBSCAI',  label:'I B.Sc AI'},
-    {value:'NAIG_IIBSCAI', label:'II B.Sc AI'},
-    {value:'NAIG_BCFT',    label:'B.Com BC & FT'},
-    {value:'NAIG_BBADM',   label:'BBA DM'},
-    {value:'NAIG_IBSCCC',  label:'I B.Sc CC'}
+    {value:'NAIG_IBSCAI',label:'I B.Sc AI'},{value:'NAIG_IIBSCAI',label:'II B.Sc AI'},
+    {value:'NAIG_BCFT',label:'B.Com BC & FT'},{value:'NAIG_BBADM',label:'BBA DM'},
+    {value:'NAIG_IBSCCC',label:'I B.Sc CC'}
   ]
 };
 
 const SECTION_ROLES = {
-  'A':            ['Aparna','Arun Raj','Saral','Admin'],
-  'B':            ['Aparna','Arun Raj','Saral','Admin'],
-  'II':           ['Aparna','Arun Raj','Saral','Admin'],
-  'BCH':          ['Bavani Sri','Jane Rhinu','Admin'],
-  'BBADM':        ['Bavani Sri','Jane Rhinu','Admin'],
-  'IBBA':         ['Kavipriya','Admin'],
-  'IMCA':         ['Sneha','Gokilavaani','Admin'],
-  'NAIG_IBSCAI':  ['Mohanasree N','Srisaradha S','Admin'],
-  'NAIG_IIBSCAI': ['Mohanasree N','Srisaradha S','Admin'],
-  'NAIG_BCFT':    ['Anish N','Admin'],
-  'NAIG_BBADM':   ['Dharshan K','Admin'],
-  'NAIG_IBSCCC':  ['Srisaradha S','Mohanasree N','Admin'],
-  /* ── NEW: Kamaraj Women's College sections ── */
-  'KW_A':         ['Sowmiya','Arun','Aparna','Saral','Admin']
+  'A':['Aparna','Arun Raj','Saral','Admin'],'B':['Aparna','Arun Raj','Saral','Admin'],
+  'II':['Aparna','Arun Raj','Saral','Admin'],'BCH':['Bavani Sri','Jane Rhinu','Admin'],
+  'BBADM':['Bavani Sri','Jane Rhinu','Admin'],'IBBA':['Kavipriya','Admin'],
+  'IMCA':['Sneha','Gokilavaani','Admin'],
+  'NAIG_IBSCAI':['Mohanasree N','Srisaradha S','Admin'],
+  'NAIG_IIBSCAI':['Mohanasree N','Srisaradha S','Admin'],
+  'NAIG_BCFT':['Anish N','Admin'],'NAIG_BBADM':['Dharshan K','Admin'],
+  'NAIG_IBSCCC':['Srisaradha S','Mohanasree N','Admin'],
+  'KW_A':['Sowmiya','Arun','Aparna','Saral','Admin']
 };
 
 const COLLEGE_NAMES = {
-  'kamaraj':        'Kamaraj College',
-  'kamaraj-women':  "Kamaraj Women's College",
-  'sdnb':           'SDNB Vaishnav College for Women',
-  'patrician':      'Patrician College of Arts & Science',
-  'terf':           "TERF's College of Arts and Science",
-  'sst':            'Sree Saraswathi Thyagaraja College',
-  'tjs':            'TJS College of Arts and Science',
-  'bharathidasan':  'Bharathidasan College of Arts & Science',
-  'nagarathinam':   'Nagarathinam Angalammal Arts & Science College',
-  'vinayaga':       "Vinayaga Mission's Research Foundation School of Arts & Science",
-  'amaraavathi':    'Sri Amaraavathi College of Arts & Science',
-  'takshashila':    'Takshashila University',
-  'studyworld':     'Study World Group of Institution',
-  'rathinam':       'Rathinam College of Arts & Science',
-  'niche':          'Noorul Islam Centre for Higher Education (NICHE)',
-  'amet':           'AMET University',
-  'joy':            'Joy University',
-  'sasurie':        'Sasurie College of Arts and Science',
-  'alliance':       'Alliance University',
-  'kristu':         'Kristu Jayanti (Deemed to be University)',
-  'svyasa':         'S-VYASA University',
-  'asb':            'Asian School of Business'
+  'kamaraj':'Kamaraj College','kamaraj-women':"Kamaraj Women's College",
+  'sdnb':'SDNB Vaishnav College for Women','patrician':'Patrician College of Arts & Science',
+  'terf':"TERF's College of Arts and Science",'sst':'Sree Saraswathi Thyagaraja College',
+  'tjs':'TJS College of Arts and Science','bharathidasan':'Bharathidasan College of Arts & Science',
+  'nagarathinam':'Nagarathinam Angalammal Arts & Science College',
+  'vinayaga':"Vinayaga Mission's Research Foundation School of Arts & Science",
+  'amaraavathi':'Sri Amaraavathi College of Arts & Science','takshashila':'Takshashila University',
+  'studyworld':'Study World Group of Institution','rathinam':'Rathinam College of Arts & Science',
+  'niche':'Noorul Islam Centre for Higher Education (NICHE)','amet':'AMET University',
+  'joy':'Joy University','sasurie':'Sasurie College of Arts and Science',
+  'alliance':'Alliance University','kristu':'Kristu Jayanti (Deemed to be University)',
+  'svyasa':'S-VYASA University','asb':'Asian School of Business'
 };
 
 const COLLEGE_ADMIN_SECTIONS = {
-  'default':       ['I BCA - A','I BCA - B','II BCA','I B.Com Honours','I BBA Digital Marketing'],
-  /* ── NEW ── */
-  'kamaraj-women': ['I BCA - A'],
-  'sst':           ['I BBA','I MCA'],
-  'nagarathinam':  ['I B.Sc AI','II B.Sc AI','B.Com BC & FT','BBA DM','I B.Sc CC']
+  'default':['I BCA - A','I BCA - B','II BCA','I B.Com Honours','I BBA Digital Marketing'],
+  'kamaraj-women':['I BCA - A'],'sst':['I BBA','I MCA'],
+  'nagarathinam':['I B.Sc AI','II B.Sc AI','B.Com BC & FT','BBA DM','I B.Sc CC']
 };
 
 const SECTION_LABEL_MAP = {
-  'II':            'II BCA',
-  'BCH':           'I B.Com Honours',
-  'BBADM':         'I BBA Digital Marketing',
-  'IBBA':          'I BBA',
-  'IMCA':          'I MCA',
-  'NAIG_IBSCAI':   'I B.Sc AI',
-  'NAIG_IIBSCAI':  'II B.Sc AI',
-  'NAIG_BCFT':     'B.Com BC & FT',
-  'NAIG_BBADM':    'BBA DM',
-  'NAIG_IBSCCC':   'I B.Sc CC',
-  /* ── NEW ── */
-  'KW_A':          'I BCA - A'
+  'II':'II BCA','BCH':'I B.Com Honours','BBADM':'I BBA Digital Marketing',
+  'IBBA':'I BBA','IMCA':'I MCA','NAIG_IBSCAI':'I B.Sc AI','NAIG_IIBSCAI':'II B.Sc AI',
+  'NAIG_BCFT':'B.Com BC & FT','NAIG_BBADM':'BBA DM','NAIG_IBSCCC':'I B.Sc CC','KW_A':'I BCA - A'
 };
 
 const COLLEGE_ADMIN_TABS = {
-  'default': [
-    {key:'all',label:'All'},{key:'I BCA - A',label:'I BCA - A'},
-    {key:'I BCA - B',label:'I BCA - B'},{key:'II BCA',label:'II BCA'},
-    {key:'I B.Com Honours',label:'I B.Com Honours'},
+  'default':[
+    {key:'all',label:'All'},{key:'I BCA - A',label:'I BCA - A'},{key:'I BCA - B',label:'I BCA - B'},
+    {key:'II BCA',label:'II BCA'},{key:'I B.Com Honours',label:'I B.Com Honours'},
     {key:'I BBA Digital Marketing',label:'I BBA Digital Mktg'}
   ],
-  /* ── NEW ── */
-  'kamaraj-women': [
-    {key:'all',label:'All'},
-    {key:'I BCA - A',label:'I BCA - A'}
-  ],
-  'sst': [
-    {key:'all',label:'All'},{key:'I BBA',label:'I BBA'},{key:'I MCA',label:'I MCA'}
-  ],
-  'nagarathinam': [
-    {key:'all',label:'All'},{key:'I B.Sc AI',label:'I B.Sc AI'},
-    {key:'II B.Sc AI',label:'II B.Sc AI'},{key:'B.Com BC & FT',label:'B.Com BC & FT'},
-    {key:'BBA DM',label:'BBA DM'},{key:'I B.Sc CC',label:'I B.Sc CC'}
+  'kamaraj-women':[{key:'all',label:'All'},{key:'I BCA - A',label:'I BCA - A'}],
+  'sst':[{key:'all',label:'All'},{key:'I BBA',label:'I BBA'},{key:'I MCA',label:'I MCA'}],
+  'nagarathinam':[
+    {key:'all',label:'All'},{key:'I B.Sc AI',label:'I B.Sc AI'},{key:'II B.Sc AI',label:'II B.Sc AI'},
+    {key:'B.Com BC & FT',label:'B.Com BC & FT'},{key:'BBA DM',label:'BBA DM'},{key:'I B.Sc CC',label:'I B.Sc CC'}
   ]
 };
 
 const MENTOR_COLORS = {
-  'Aparna':       'var(--accent2)',
-  'Arun Raj':     'var(--green)',
-  'Saral':        'var(--amber)',
-  'Bavani Sri':   '#0891b2',
-  'Jane Rhinu':   '#9333ea',
-  'Kavipriya':    '#db2777',
-  'Sneha':        '#0891b2',
-  'Gokilavaani':  '#16a34a',
-  'Mohanasree N': '#7c3aed',
-  'Srisaradha S': '#0369a1',
-  'Anish N':      '#b45309',
-  'Dharshan K':   '#047857',
-  /* ── NEW ── */
-  'Sowmiya':      '#e11d48',
-  'Arun':         '#0d9488'
+  'Aparna':'var(--accent2)','Arun Raj':'var(--green)','Saral':'var(--amber)',
+  'Bavani Sri':'#0891b2','Jane Rhinu':'#9333ea','Kavipriya':'#db2777',
+  'Sneha':'#0891b2','Gokilavaani':'#16a34a','Mohanasree N':'#7c3aed',
+  'Srisaradha S':'#0369a1','Anish N':'#b45309','Dharshan K':'#047857',
+  'Sowmiya':'#e11d48','Arun':'#0d9488'
 };
 
-/* SST Students */
 const SST_IBBA_STUDENTS = [
   {name:'Irfan R',register_number:'25BBA010',course:'I BBA',project_title:'Green Flowers Smart Order & Delivery System',mentor_assigned:'Kavipriya',phone:'8838224191',email:'irfan208.802@gmail.com'},
   {name:'Yatin',register_number:'25BBA029',course:'I BBA',project_title:'Study on Consumer Satisfaction towards Sports Gear Quality',mentor_assigned:'Kavipriya',phone:'8189846535',email:'yatinggyatin@gmail.com'},
@@ -833,9 +745,6 @@ const SST_IBBA_STUDENTS = [
 ];
 const SST_IMCA_STUDENTS = [];
 
-/* ══════════════════════════════════════
-   STATE
-══════════════════════════════════════ */
 let selectedCollegeKey = null, selectedCollegeName = null;
 let selectedSection = null, selectedRole = null, currentUser = null;
 let students = [], allStudents = [];
@@ -843,20 +752,12 @@ let progressMap = {}, evalMap = {}, approvalMap = {};
 let adminProgressMap = {}, adminEvalMap = {}, adminApprovalMap = {};
 let currentWeekStudent = null, currentEvalStudent = null, adminTab = 'all';
 let weekDraft = {};
+let peerReviews = [], peerTab = 'all', peerLoaded = false;
 
-let peerReviews = [];
-let peerTab = 'all';
-let peerLoaded = false;
-
-/* ══════════════════════════════════════
-   SUPABASE
-══════════════════════════════════════ */
 async function sb(path, method = 'GET', body = null) {
   const h = {
-    'apikey': SUPABASE_KEY,
-    'Authorization': 'Bearer ' + SUPABASE_KEY,
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
+    'apikey': SUPABASE_KEY,'Authorization': 'Bearer ' + SUPABASE_KEY,
+    'Content-Type': 'application/json','Accept': 'application/json'
   };
   if (method === 'POST' || method === 'PATCH') h['Prefer'] = 'return=representation';
   const opts = { method, headers: h };
@@ -868,26 +769,21 @@ async function sb(path, method = 'GET', body = null) {
 }
 
 const api = {
-  students:      (c, s)    => sb('students?college=eq.' + encodeURIComponent(c) + '&section=eq.' + encodeURIComponent(s) + '&order=id'),
-  myStudents:    (c, s, m) => sb('students?college=eq.' + encodeURIComponent(c) + '&section=eq.' + encodeURIComponent(s) + '&mentor_assigned=eq.' + encodeURIComponent(m) + '&order=id'),
-  progress:      (ids)     => sb('weekly_progress?student_id=in.(' + ids.join(',') + ')'),
-  evaluations:   (ids)     => sb('mentor_evaluation?student_id=in.(' + ids.join(',') + ')'),
-  approvals:     (ids)     => sb('project_approval?student_id=in.(' + ids.join(',') + ')'),
-  upsertProgress:(d)       => sb('weekly_progress', 'POST', d),
-  upsertEval:    (d)       => sb('mentor_evaluation', 'POST', d),
-  upsertApproval:(d)       => sb('project_approval', 'POST', d),
-  updateProgress:(id, d)   => sb('weekly_progress?id=eq.' + id, 'PATCH', d),
-  updateEval:    (id, d)   => sb('mentor_evaluation?id=eq.' + id, 'PATCH', d),
-  updateApproval:(id, d)   => sb('project_approval?id=eq.' + id, 'PATCH', d),
-  insertStudent: (d)       => sb('students', 'POST', d),
-  peerByCollege:      (col) => sbPeer('reviews_named?reviewer_college=eq.' + encodeURIComponent(col) + '&order=created_at.desc'),
-  peerByOwnerCollege: (col) => sbPeer('reviews_named?order=created_at.desc'),
-  peerAll:            ()    => sbPeer('reviews_named?order=created_at.desc')
+  students:      (c,s)    => sb('students?college=eq.'+encodeURIComponent(c)+'&section=eq.'+encodeURIComponent(s)+'&order=id'),
+  myStudents:    (c,s,m)  => sb('students?college=eq.'+encodeURIComponent(c)+'&section=eq.'+encodeURIComponent(s)+'&mentor_assigned=eq.'+encodeURIComponent(m)+'&order=id'),
+  progress:      (ids)    => sb('weekly_progress?student_id=in.('+ids.join(',')+')'),
+  evaluations:   (ids)    => sb('mentor_evaluation?student_id=in.('+ids.join(',')+')'),
+  approvals:     (ids)    => sb('project_approval?student_id=in.('+ids.join(',')+')'),
+  upsertProgress:(d)      => sb('weekly_progress','POST',d),
+  upsertEval:    (d)      => sb('mentor_evaluation','POST',d),
+  upsertApproval:(d)      => sb('project_approval','POST',d),
+  updateProgress:(id,d)   => sb('weekly_progress?id=eq.'+id,'PATCH',d),
+  updateEval:    (id,d)   => sb('mentor_evaluation?id=eq.'+id,'PATCH',d),
+  updateApproval:(id,d)   => sb('project_approval?id=eq.'+id,'PATCH',d),
+  insertStudent: (d)      => sb('students','POST',d),
+  peerAll:       ()       => sbPeer('reviews_named?order=created_at.desc')
 };
 
-/* ══════════════════════════════════════
-   UTILS
-══════════════════════════════════════ */
 document.addEventListener('input', function(e) {
   if (e.target.classList.contains('week-textarea')) {
     e.target.style.height = 'auto';
@@ -896,30 +792,20 @@ document.addEventListener('input', function(e) {
 });
 
 function escHTML(s) {
-  return String(s == null ? '' : s)
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
-
-function getSectionLabel(sec) {
-  return SECTION_LABEL_MAP[sec] || ('I BCA - ' + sec);
-}
+function getSectionLabel(sec) { return SECTION_LABEL_MAP[sec] || ('I BCA - ' + sec); }
 
 function nameBtn(student) {
   return `<button class="student-name-link"
-    data-project="${escHTML(student.project_title || '')}"
-    data-reg="${escHTML(student.register_number || '')}"
-    data-course="${escHTML(student.course || '')}"
-    data-mentor="${escHTML(student.mentor_assigned || '')}"
-    onmouseenter="showProjectPopover(this)"
-    onmouseleave="hideProjectPopover()"
-    onclick="showProjectPopover(this)"
+    data-project="${escHTML(student.project_title||'')}"
+    data-reg="${escHTML(student.register_number||'')}"
+    data-course="${escHTML(student.course||'')}"
+    data-mentor="${escHTML(student.mentor_assigned||'')}"
+    onmouseenter="showProjectPopover(this)" onmouseleave="hideProjectPopover()" onclick="showProjectPopover(this)"
   >${escHTML(student.name)}</button>`;
 }
 
-/* ══════════════════════════════════════
-   POPOVER
-══════════════════════════════════════ */
 let popoverHideTimer = null;
 function showProjectPopover(el) {
   clearTimeout(popoverHideTimer);
@@ -935,18 +821,13 @@ function showProjectPopover(el) {
   let left = rect.left, top = rect.bottom + 8;
   if (left + 320 > window.innerWidth - 12) left = window.innerWidth - 332;
   if (top + 180 > window.innerHeight - 12) top = rect.top - 188;
-  pop.style.left = Math.max(8, left) + 'px';
-  pop.style.top  = Math.max(8, top) + 'px';
+  pop.style.left = Math.max(8,left) + 'px';
+  pop.style.top  = Math.max(8,top) + 'px';
 }
 function hideProjectPopover() {
-  popoverHideTimer = setTimeout(() => {
-    document.getElementById('projPopover').style.display = 'none';
-  }, 200);
+  popoverHideTimer = setTimeout(() => { document.getElementById('projPopover').style.display = 'none'; }, 200);
 }
 
-/* ══════════════════════════════════════
-   LANDING
-══════════════════════════════════════ */
 function onCollegeChange() {
   const v = document.getElementById('collegeSelect').value;
   document.getElementById('goBtn').disabled = !v;
@@ -978,8 +859,7 @@ function populateSectionDropdown(collegeKey) {
   sel.innerHTML = '<option value="">&mdash; Choose your section &mdash;</option>';
   sections.forEach(s => {
     const opt = document.createElement('option');
-    opt.value = s.value; opt.textContent = s.label;
-    sel.appendChild(opt);
+    opt.value = s.value; opt.textContent = s.label; sel.appendChild(opt);
   });
   sel.value = '';
   renderRoleButtons(null);
@@ -987,15 +867,10 @@ function populateSectionDropdown(collegeKey) {
 
 function renderRoleButtons(sec) {
   const wrap = document.getElementById('roleButtonsWrap');
-  if (!sec) {
-    wrap.innerHTML = '<div style="grid-column:1/-1;font-size:12px;color:var(--ink3);padding:8px 0;">\u2190 Select a section first</div>';
-    return;
-  }
+  if (!sec) { wrap.innerHTML = '<div style="grid-column:1/-1;font-size:12px;color:var(--ink3);padding:8px 0;">\u2190 Select a section first</div>'; return; }
   const roles = SECTION_ROLES[sec] || ['Admin'];
-  wrap.style.gridTemplateColumns = roles.length <= 3 ? 'repeat(' + roles.length + ',1fr)' : '1fr 1fr';
-  wrap.innerHTML = roles.map(r =>
-    `<button class="role-btn" data-role="${escHTML(r)}" onclick="selectRole(this)">${escHTML(r)}</button>`
-  ).join('');
+  wrap.style.gridTemplateColumns = roles.length <= 3 ? 'repeat('+roles.length+',1fr)' : '1fr 1fr';
+  wrap.innerHTML = roles.map(r => `<button class="role-btn" data-role="${escHTML(r)}" onclick="selectRole(this)">${escHTML(r)}</button>`).join('');
 }
 
 function selectSectionFromDropdown(sel) {
@@ -1033,8 +908,7 @@ async function doLogin() {
     showLoginError('Incorrect PIN.');
     document.getElementById('pinInput').classList.add('error');
     document.getElementById('pinInput').value = '';
-    checkLoginReady();
-    return;
+    checkLoginReady(); return;
   }
   currentUser = selectedRole;
   document.getElementById('loginScreen').classList.remove('show');
@@ -1043,7 +917,6 @@ async function doLogin() {
   const topbarCol = document.getElementById('topbarCollege');
   topbarCol.textContent = selectedCollegeName + ' \u2014 ' + sectionLabel;
   topbarCol.style.display = 'none';
-
   if (currentUser === 'Admin') {
     document.getElementById('nav-admin').style.display = 'flex';
     document.getElementById('nav-students').style.display = 'none';
@@ -1070,17 +943,13 @@ function doLogout() {
   document.getElementById('nav-progress').style.display = 'flex';
   document.getElementById('nav-evaluation').style.display = 'flex';
   document.getElementById('topbarCollege').style.display = 'none';
-  document.getElementById('peerTableBody').innerHTML =
-    '<tr><td colspan="12"><div class="loading-peer"><span class="spinner"></span> Loading peer reviews&hellip;</div></td></tr>';
+  document.getElementById('peerTableBody').innerHTML = '<tr><td colspan="12"><div class="loading-peer"><span class="spinner"></span> Loading peer reviews&hellip;</div></td></tr>';
   document.getElementById('peerSummaryCards').innerHTML = '';
   document.getElementById('peerTabRow').innerHTML = '';
   document.getElementById('peerStatsRow').innerHTML = '';
   showPanel('dashboard', document.getElementById('nav-dashboard'));
 }
 
-/* ══════════════════════════════════════
-   APP INIT
-══════════════════════════════════════ */
 async function initApp() {
   const ol = document.getElementById('loadingOverlay');
   document.getElementById('loadingMsg').textContent = 'Loading students\u2026';
@@ -1133,17 +1002,10 @@ function buildMaps(prog, evals, apprs, isAdmin) {
   prog.forEach(p  => { if (!pm[p.student_id]) pm[p.student_id] = {}; pm[p.student_id][p.week_number] = p; });
   evals.forEach(e => { em[e.student_id] = e; });
   apprs.forEach(a => { am[a.student_id] = a; });
-  if (isAdmin) {
-    adminProgressMap = pm; adminEvalMap = em; adminApprovalMap = am;
-    progressMap = pm; evalMap = em; approvalMap = am;
-  } else {
-    progressMap = pm; evalMap = em; approvalMap = am;
-  }
+  if (isAdmin) { adminProgressMap = pm; adminEvalMap = em; adminApprovalMap = am; progressMap = pm; evalMap = em; approvalMap = am; }
+  else { progressMap = pm; evalMap = em; approvalMap = am; }
 }
 
-/* ══════════════════════════════════════
-   NAVIGATION
-══════════════════════════════════════ */
 function showPanel(id, el) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('panel-' + id).classList.add('active');
@@ -1152,42 +1014,26 @@ function showPanel(id, el) {
   if (id === 'peer' && !peerLoaded) loadPeerReviews();
 }
 
-/* ══════════════════════════════════════
-   HELPERS
-══════════════════════════════════════ */
 function getWeeksDone(sid, ua) {
   const m = ua ? adminProgressMap : progressMap;
   return Object.values(m[sid] || {}).filter(w => w.status === 'completed').length;
 }
-function getScore(sid, ua) {
-  const m = ua ? adminEvalMap : evalMap;
-  const e = m[sid]; return e ? e.total_score : null;
-}
-function getApproval(sid, ua) {
-  const m = ua ? adminApprovalMap : approvalMap;
-  const a = m[sid]; return a ? a.status : 'pending';
-}
-function scoreClass(s) {
-  if (s === null) return '';
-  return s >= 75 ? 'score-high' : s >= 50 ? 'score-mid' : 'score-low';
-}
+function getScore(sid, ua) { const m = ua ? adminEvalMap : evalMap; const e = m[sid]; return e ? e.total_score : null; }
+function getApproval(sid, ua) { const m = ua ? adminApprovalMap : approvalMap; const a = m[sid]; return a ? a.status : 'pending'; }
+function scoreClass(s) { if (s === null) return ''; return s >= 75 ? 'score-high' : s >= 50 ? 'score-mid' : 'score-low'; }
 function approvalBadge(s) {
-  const m = {
-    'approved':       '<span class="badge badge-green">Approved</span>',
-    'needs-revision': '<span class="badge badge-red">Needs Revision</span>',
-    'pending':        '<span class="badge badge-grey">Pending</span>'
-  };
+  const m = {'approved':'<span class="badge badge-green">Approved</span>','needs-revision':'<span class="badge badge-red">Needs Revision</span>','pending':'<span class="badge badge-grey">Pending</span>'};
   return m[s] || m['pending'];
 }
 function weeksBadge(n) {
   if (n >= 4) return '<span class="badge badge-green">4/4</span>';
-  if (n >= 2) return '<span class="badge badge-amber">' + n + '/4</span>';
-  if (n >= 1) return '<span class="badge badge-blue">' + n + '/4</span>';
+  if (n >= 2) return '<span class="badge badge-amber">'+n+'/4</span>';
+  if (n >= 1) return '<span class="badge badge-blue">'+n+'/4</span>';
   return '<span class="badge badge-grey">0/4</span>';
 }
 
 function downloadCSV(rows, filename) {
-  const csv = rows.map(r => r.map(v => '"' + String(v == null ? '' : v).replace(/"/g,'""') + '"').join(',')).join('\n');
+  const csv = rows.map(r => r.map(v => '"'+String(v==null?'':v).replace(/"/g,'""')+'"').join(',')).join('\n');
   const blob = new Blob([csv], {type:'text/csv'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a'); a.href = url; a.download = filename; a.click();
@@ -1197,48 +1043,38 @@ function downloadCSV(rows, filename) {
 
 function studentMatchesQuery(s, q) {
   if (!q) return true;
-  const name = (s.name || '').toLowerCase();
-  const proj = (s.project_title || '').toLowerCase();
-  return name.includes(q) || proj.includes(q);
+  return (s.name||'').toLowerCase().includes(q) || (s.project_title||'').toLowerCase().includes(q);
 }
 
-/* ══════════════════════════════════════
-   EXPORTS
-══════════════════════════════════════ */
 function exportProgressCSV() {
   const q = (document.getElementById('progressSearch').value || '').toLowerCase();
   const list = students.filter(s => studentMatchesQuery(s, q));
   const rows = [['#','Name','Register No','Section','Course','Project Title','Mentor',
-    'W1 Status','W1 Note','W2 Status','W2 Note','W3 Status','W3 Note','W4 Status','W4 Note',
-    'Weeks Completed','Approval Status']];
+    'W1 Status','W1 Note','W2 Status','W2 Note','W3 Status','W3 Note','W4 Status','W4 Note','Weeks Completed','Approval Status']];
   list.forEach((s, i) => {
     const wks = progressMap[s.id] || {}, done = getWeeksDone(s.id), approval = getApproval(s.id);
-    rows.push([i+1, s.name, s.register_number, s.section||'', s.course||'', s.project_title||'', s.mentor_assigned||'',
-      wks[1]?.status||'not-started', wks[1]?.note||'', wks[2]?.status||'not-started', wks[2]?.note||'',
-      wks[3]?.status||'not-started', wks[3]?.note||'', wks[4]?.status||'not-started', wks[4]?.note||'',
-      done+'/4', approval]);
+    rows.push([i+1,s.name,s.register_number,s.section||'',s.course||'',s.project_title||'',s.mentor_assigned||'',
+      wks[1]?.status||'not-started',wks[1]?.note||'',wks[2]?.status||'not-started',wks[2]?.note||'',
+      wks[3]?.status||'not-started',wks[3]?.note||'',wks[4]?.status||'not-started',wks[4]?.note||'',
+      done+'/4',approval]);
   });
-  downloadCSV(rows, 'weekly_progress_' + new Date().toISOString().split('T')[0] + '.csv');
+  downloadCSV(rows, 'weekly_progress_'+new Date().toISOString().split('T')[0]+'.csv');
 }
 
 function exportEvalCSV() {
   const q = (document.getElementById('evalSearch').value || '').toLowerCase();
   const list = students.filter(s => studentMatchesQuery(s, q));
   const rows = [['#','Name','Register No','Section','Course','Project Title','Mentor',
-    'Tech Quality (/20)','Problem-Solution Fit (/20)','Effort & Ownership (/20)',
-    'Presentation (/20)','Practical Impact (/20)','Total Score (/100)','Remarks']];
+    'Tech Quality (/20)','Problem-Solution Fit (/20)','Effort & Ownership (/20)','Presentation (/20)','Practical Impact (/20)','Total Score (/100)','Remarks']];
   list.forEach((s, i) => {
     const e = evalMap[s.id];
-    rows.push([i+1, s.name, s.register_number, s.section||'', s.course||'', s.project_title||'', s.mentor_assigned||'',
-      e?.tech_quality??'', e?.problem_fit??'', e?.effort_ownership??'', e?.presentation??'', e?.practical_impact??'',
-      e?.total_score??'', e?.remarks||'']);
+    rows.push([i+1,s.name,s.register_number,s.section||'',s.course||'',s.project_title||'',s.mentor_assigned||'',
+      e?.tech_quality??'',e?.problem_fit??'',e?.effort_ownership??'',e?.presentation??'',e?.practical_impact??'',
+      e?.total_score??'',e?.remarks||'']);
   });
-  downloadCSV(rows, 'mentor_evaluation_' + new Date().toISOString().split('T')[0] + '.csv');
+  downloadCSV(rows, 'mentor_evaluation_'+new Date().toISOString().split('T')[0]+'.csv');
 }
 
-/* ══════════════════════════════════════
-   DASHBOARD
-══════════════════════════════════════ */
 function renderDashboard() {
   const secLbl = getSectionLabel(selectedSection);
   document.getElementById('dashTitle').textContent = currentUser === 'Admin' ? 'Admin Dashboard' : 'Welcome, ' + currentUser;
@@ -1246,106 +1082,83 @@ function renderDashboard() {
   const total = students.length;
   const approved = students.filter(s => getApproval(s.id) === 'approved').length;
   const scored = students.filter(s => getScore(s.id) !== null).length;
-  const avg = scored > 0 ? (students.filter(s => getScore(s.id) !== null).reduce((sm, s) => sm + getScore(s.id), 0) / scored).toFixed(1) : '--';
+  const avg = scored > 0 ? (students.filter(s => getScore(s.id) !== null).reduce((sm,s) => sm+getScore(s.id),0)/scored).toFixed(1) : '--';
   document.getElementById('statsRow').innerHTML = `
     <div class="stat-card"><div class="stat-label">Total Students</div><div class="stat-value">${total}</div><div class="stat-sub">${escHTML(secLbl)}</div></div>
     <div class="stat-card"><div class="stat-label">Projects Approved</div><div class="stat-value" style="color:var(--green);">${approved}</div><div class="stat-sub">of ${total}</div></div>
     <div class="stat-card"><div class="stat-label">Evaluated</div><div class="stat-value" style="color:var(--accent2);">${scored}</div><div class="stat-sub">score submitted</div></div>
     <div class="stat-card"><div class="stat-label">Avg Score</div><div class="stat-value" style="color:var(--amber);">${avg}</div><div class="stat-sub">out of 100</div></div>`;
   const tb = document.getElementById('dashTableBody');
-  if (!students.length) {
-    tb.innerHTML = '<tr><td colspan="5"><div class="empty-state"><div class="empty-icon">&#128235;</div>No students found.</div></td></tr>';
-    return;
-  }
+  if (!students.length) { tb.innerHTML = '<tr><td colspan="5"><div class="empty-state"><div class="empty-icon">&#128235;</div>No students found.</div></td></tr>'; return; }
   tb.innerHTML = students.map((s, i) => {
-    const done = getWeeksDone(s.id), score = getScore(s.id), approval = getApproval(s.id), prog = Math.round(done / 4 * 100);
+    const done = getWeeksDone(s.id), score = getScore(s.id), approval = getApproval(s.id), prog = Math.round(done/4*100);
     return `<tr>
       <td style="color:var(--ink3);">${i+1}</td>
       <td>${nameBtn(s)}</td>
       <td><div class="prog-bar-wrap"><div class="prog-bar"><div class="prog-bar-fill" style="width:${prog}%"></div></div><span class="prog-pct">${prog}%</span></div></td>
       <td>${approvalBadge(approval)}</td>
-      <td><span class="score-display ${scoreClass(score)}">${score !== null ? score : '--'}</span>${score !== null ? '<span style="font-size:11px;color:var(--ink3);"> /100</span>' : ''}</td>
+      <td><span class="score-display ${scoreClass(score)}">${score!==null?score:'--'}</span>${score!==null?'<span style="font-size:11px;color:var(--ink3);"> /100</span>':''}</td>
     </tr>`;
   }).join('');
 }
 
-/* ══════════════════════════════════════
-   STUDENT LIST
-══════════════════════════════════════ */
 function renderStudentList() {
-  const q  = (document.getElementById('studentSearch').value || '').toLowerCase();
+  const q = (document.getElementById('studentSearch').value||'').toLowerCase();
   const af = document.getElementById('approvalFilter').value;
-  const list = students.filter(s => studentMatchesQuery(s, q) && (!af || getApproval(s.id) === af));
+  const list = students.filter(s => studentMatchesQuery(s,q) && (!af||getApproval(s.id)===af));
   const tb = document.getElementById('studentTableBody');
-  if (!list.length) {
-    tb.innerHTML = '<tr><td colspan="5"><div class="empty-state"><div class="empty-icon">&#128269;</div>No students match</div></td></tr>';
-    return;
-  }
+  if (!list.length) { tb.innerHTML = '<tr><td colspan="5"><div class="empty-state"><div class="empty-icon">&#128269;</div>No students match</div></td></tr>'; return; }
   tb.innerHTML = list.map((s, i) => {
     const weeks = progressMap[s.id] || {};
     const wbtns = [1,2,3,4].map(w => {
       const wd = weeks[w], cls = wd ? wd.status : 'not-started';
-      const icon = cls === 'completed' ? '&#10003;' : cls === 'in-progress' ? '&#8230;' : String(w);
-      const note = wd && wd.note && wd.note.trim() ? wd.note.substring(0, 40) : '';
+      const icon = cls==='completed'?'&#10003;':cls==='in-progress'?'&#8230;':String(w);
+      const note = wd&&wd.note&&wd.note.trim()?wd.note.substring(0,40):'';
       const safeName = escHTML(s.name).replace(/'/g,'&#39;');
-      return `<button class="week-btn ${cls}" title="Week ${w}: ${cls}${note ? ' | ' + escHTML(note) : ''}" onclick="openWeekModal(${s.id},'${safeName}',${w})">${icon}</button>`;
+      return `<button class="week-btn ${cls}" title="Week ${w}: ${cls}${note?' | '+escHTML(note):''}" onclick="openWeekModal(${s.id},'${safeName}',${w})">${icon}</button>`;
     }).join('');
     return `<tr>
       <td style="color:var(--ink3);">${i+1}</td>
       <td>${nameBtn(s)}</td>
-      <td style="font-size:12px;color:var(--ink3);">${escHTML(s.register_number || '')}</td>
+      <td style="font-size:12px;color:var(--ink3);">${escHTML(s.register_number||'')}</td>
       <td><div class="week-btns">${wbtns}</div></td>
       <td><select class="approval-select status-${getApproval(s.id)}" onchange="saveApproval(${s.id},this.value,this)">
-        <option value="pending" ${getApproval(s.id) === 'pending' ? 'selected' : ''}>Pending</option>
-        <option value="approved" ${getApproval(s.id) === 'approved' ? 'selected' : ''}>Approved</option>
-        <option value="needs-revision" ${getApproval(s.id) === 'needs-revision' ? 'selected' : ''}>Needs Revision</option>
+        <option value="pending" ${getApproval(s.id)==='pending'?'selected':''}>Pending</option>
+        <option value="approved" ${getApproval(s.id)==='approved'?'selected':''}>Approved</option>
+        <option value="needs-revision" ${getApproval(s.id)==='needs-revision'?'selected':''}>Needs Revision</option>
       </select></td>
     </tr>`;
   }).join('');
 }
 
-/* ══════════════════════════════════════
-   PROGRESS TABLE
-══════════════════════════════════════ */
 function renderProgressTable() {
-  const q = (document.getElementById('progressSearch').value || '').toLowerCase();
-  const list = students.filter(s => studentMatchesQuery(s, q));
+  const q = (document.getElementById('progressSearch').value||'').toLowerCase();
+  const list = students.filter(s => studentMatchesQuery(s,q));
   const tb = document.getElementById('progressTableBody');
-  if (!list.length) {
-    tb.innerHTML = '<tr><td colspan="7"><div class="empty-state"><div class="empty-icon">&#128203;</div>No students found</div></td></tr>';
-    return;
-  }
+  if (!list.length) { tb.innerHTML = '<tr><td colspan="7"><div class="empty-state"><div class="empty-icon">&#128203;</div>No students found</div></td></tr>'; return; }
   tb.innerHTML = list.map((s, i) => {
     const weeks = progressMap[s.id] || {};
     const wCells = [1,2,3,4].map(w => {
-      const wd = weeks[w], cls = wd ? wd.status : 'not-started';
-      const note = wd && wd.note && wd.note.trim() ? wd.note : '';
-      const statusLabel = cls === 'completed' ? 'Completed' : cls === 'in-progress' ? 'In Progress' : 'Not Started';
+      const wd = weeks[w], cls = wd?wd.status:'not-started';
+      const note = wd&&wd.note&&wd.note.trim()?wd.note:'';
+      const statusLabel = cls==='completed'?'Completed':cls==='in-progress'?'In Progress':'Not Started';
       const safeName = escHTML(s.name).replace(/'/g,'&#39;');
       return `<td style="padding:8px 10px;vertical-align:top;">
         <div class="prog-week-cell">
           <button class="prog-week-card ${cls}" onclick="openWeekModal(${s.id},'${safeName}',${w})">
             <span class="prog-wk-status ${cls}">${statusLabel}</span>
-            <span class="prog-wk-note-text">${note ? escHTML(note) : '&mdash;'}</span>
+            <span class="prog-wk-note-text">${note?escHTML(note):'&mdash;'}</span>
           </button>
         </div>
       </td>`;
     }).join('');
-    return `<tr>
-      <td style="color:var(--ink3);">${i+1}</td>
-      <td>${nameBtn(s)}</td>
-      ${wCells}
-      <td>${weeksBadge(getWeeksDone(s.id))}</td>
-    </tr>`;
+    return `<tr><td style="color:var(--ink3);">${i+1}</td><td>${nameBtn(s)}</td>${wCells}<td>${weeksBadge(getWeeksDone(s.id))}</td></tr>`;
   }).join('');
 }
 
-/* ══════════════════════════════════════
-   WEEK MODAL
-══════════════════════════════════════ */
-const STATUS_CYCLE  = ['not-started','in-progress','completed'];
-const STATUS_LABEL  = {'not-started':'Not Started','in-progress':'In Progress','completed':'Completed'};
-const STATUS_ICON   = {'not-started':'&#9675;','in-progress':'&#9675;','completed':'&#10003;'};
+const STATUS_CYCLE = ['not-started','in-progress','completed'];
+const STATUS_LABEL = {'not-started':'Not Started','in-progress':'In Progress','completed':'Completed'};
+const STATUS_ICON  = {'not-started':'&#9675;','in-progress':'&#9675;','completed':'&#10003;'};
 
 function openWeekModal(studentId, studentName, focusWeek) {
   currentWeekStudent = {id: studentId, name: studentName};
@@ -1354,11 +1167,11 @@ function openWeekModal(studentId, studentName, focusWeek) {
   weekDraft = {};
   [1,2,3,4].forEach(w => {
     const row = weeks[w];
-    weekDraft[w] = {status: row ? row.status : 'not-started', note: row ? (row.note || '') : ''};
+    weekDraft[w] = {status: row?row.status:'not-started', note: row?(row.note||''):''};
   });
   renderWeekCards(focusWeek);
   document.getElementById('weekModal').classList.add('open');
-  setTimeout(() => { const ta = document.getElementById('wk-ta-' + focusWeek); if (ta) ta.focus(); }, 220);
+  setTimeout(() => { const ta = document.getElementById('wk-ta-'+focusWeek); if (ta) ta.focus(); }, 220);
 }
 
 function renderWeekCards(activeWeek) {
@@ -1367,7 +1180,7 @@ function renderWeekCards(activeWeek) {
     const d = weekDraft[w];
     return `<div class="week-card wk-${d.status}" id="wk-card-${w}">
       <div class="week-card-head wk-${d.status}">
-        <span class="week-card-label">Week ${w}${w === activeWeek ? ' &diams;' : ''}</span>
+        <span class="week-card-label">Week ${w}${w===activeWeek?' &diams;':''}</span>
         <button class="wk-cycle-btn ${d.status}" id="wk-btn-${w}" onclick="cycleWeekStatus(${w},event)">
           ${STATUS_ICON[d.status]} ${STATUS_LABEL[d.status]}
         </button>
@@ -1382,15 +1195,15 @@ function renderWeekCards(activeWeek) {
 function cycleWeekStatus(w, e) {
   if (e) e.stopPropagation();
   const cur = weekDraft[w].status;
-  const next = STATUS_CYCLE[(STATUS_CYCLE.indexOf(cur) + 1) % 3];
+  const next = STATUS_CYCLE[(STATUS_CYCLE.indexOf(cur)+1)%3];
   weekDraft[w].status = next;
-  const card = document.getElementById('wk-card-' + w);
+  const card = document.getElementById('wk-card-'+w);
   const head = card.querySelector('.week-card-head');
-  const btn  = document.getElementById('wk-btn-' + w);
-  card.className = 'week-card wk-' + next;
-  head.className = 'week-card-head wk-' + next;
-  btn.className  = 'wk-cycle-btn ' + next;
-  btn.innerHTML  = STATUS_ICON[next] + ' ' + STATUS_LABEL[next];
+  const btn  = document.getElementById('wk-btn-'+w);
+  card.className = 'week-card wk-'+next;
+  head.className = 'week-card-head wk-'+next;
+  btn.className  = 'wk-cycle-btn '+next;
+  btn.innerHTML  = STATUS_ICON[next]+' '+STATUS_LABEL[next];
 }
 
 async function saveAllWeeks() {
@@ -1405,60 +1218,50 @@ async function saveAllWeeks() {
       if (note && d.status === 'not-started') d.status = 'completed';
       const row = existing[w];
       if (row) {
-        await api.updateProgress(row.id, {status: d.status, note, updated_by: currentUser, updated_at: new Date().toISOString()});
+        await api.updateProgress(row.id, {status:d.status,note,updated_by:currentUser,updated_at:new Date().toISOString()});
         row.status = d.status; row.note = note;
       } else {
-        const res = await api.upsertProgress({student_id: sid, week_number: w, status: d.status, note, updated_by: currentUser});
+        const res = await api.upsertProgress({student_id:sid,week_number:w,status:d.status,note,updated_by:currentUser});
         if (!progressMap[sid]) progressMap[sid] = {};
-        progressMap[sid][w] = Array.isArray(res) ? res[0] : res;
+        progressMap[sid][w] = Array.isArray(res)?res[0]:res;
       }
     }
     showToast('Weeks saved!', 'success');
     closeModal('weekModal');
     renderStudentList(); renderProgressTable(); renderDashboard();
-    if (currentUser === 'Admin') { adminProgressMap = progressMap; renderAdminTable(); renderAdminStats(); }
-  } catch(e) {
-    showToast('Error: ' + e.message, 'error');
-    console.error(e);
-  } finally {
-    btn.disabled = false; btn.innerHTML = 'Save';
-  }
+    if (currentUser==='Admin') { adminProgressMap=progressMap; renderAdminTable(); renderAdminStats(); }
+  } catch(e) { showToast('Error: '+e.message,'error'); console.error(e); }
+  finally { btn.disabled=false; btn.innerHTML='Save'; }
 }
 
 async function saveApproval(sid, status, selectEl) {
-  if (selectEl) selectEl.className = 'approval-select status-' + status;
+  if (selectEl) selectEl.className = 'approval-select status-'+status;
   try {
     const ex = approvalMap[sid];
     if (ex) {
-      await api.updateApproval(ex.id, {status, approved_by: currentUser, approved_at: new Date().toISOString()});
+      await api.updateApproval(ex.id, {status,approved_by:currentUser,approved_at:new Date().toISOString()});
       approvalMap[sid].status = status;
     } else {
-      const r = await api.upsertApproval({student_id: sid, status, approved_by: currentUser});
-      approvalMap[sid] = Array.isArray(r) ? r[0] : r;
+      const r = await api.upsertApproval({student_id:sid,status,approved_by:currentUser});
+      approvalMap[sid] = Array.isArray(r)?r[0]:r;
     }
-    showToast('Approval updated!', 'success');
+    showToast('Approval updated!','success');
     renderDashboard();
-    if (currentUser === 'Admin') { adminApprovalMap = approvalMap; renderAdminTable(); renderAdminStats(); }
-  } catch(e) { showToast('Error: ' + e.message, 'error'); }
+    if (currentUser==='Admin') { adminApprovalMap=approvalMap; renderAdminTable(); renderAdminStats(); }
+  } catch(e) { showToast('Error: '+e.message,'error'); }
 }
 
-/* ══════════════════════════════════════
-   EVAL TABLE & MODAL
-══════════════════════════════════════ */
 function renderEvalTable() {
-  const q = (document.getElementById('evalSearch').value || '').toLowerCase();
-  const list = students.filter(s => studentMatchesQuery(s, q));
+  const q = (document.getElementById('evalSearch').value||'').toLowerCase();
+  const list = students.filter(s => studentMatchesQuery(s,q));
   const tb = document.getElementById('evalTableBody');
-  if (!list.length) {
-    tb.innerHTML = '<tr><td colspan="9"><div class="empty-state"><div class="empty-icon">&#128202;</div>No students</div></td></tr>';
-    return;
-  }
+  if (!list.length) { tb.innerHTML = '<tr><td colspan="9"><div class="empty-state"><div class="empty-icon">&#128202;</div>No students</div></td></tr>'; return; }
   tb.innerHTML = list.map((s, i) => {
     const e = evalMap[s.id];
-    const sc = (k) => e ? (e[k] !== null && e[k] !== undefined ? e[k] : '--') : '--';
-    const total = e ? e.total_score : null;
+    const sc = (k) => e?(e[k]!==null&&e[k]!==undefined?e[k]:'--'):'--';
+    const total = e?e.total_score:null;
     const safeName = escHTML(s.name).replace(/'/g,'&#39;');
-    const safeProj = escHTML(s.project_title || '').replace(/'/g,'&#39;');
+    const safeProj = escHTML(s.project_title||'').replace(/'/g,'&#39;');
     return `<tr>
       <td style="color:var(--ink3);">${i+1}</td>
       <td>${nameBtn(s)}</td>
@@ -1467,26 +1270,26 @@ function renderEvalTable() {
       <td style="text-align:center;">${sc('effort_ownership')}</td>
       <td style="text-align:center;">${sc('presentation')}</td>
       <td style="text-align:center;">${sc('practical_impact')}</td>
-      <td style="text-align:center;"><span class="score-display ${scoreClass(total)}">${total !== null ? total : '--'}</span>${total !== null ? '<span style="font-size:10px;color:var(--ink3);"> /100</span>' : ''}</td>
-      <td><button class="btn btn-primary btn-sm" onclick="openEvalModal(${s.id},'${safeName}','${safeProj}')">&#9998; ${e ? 'Edit' : 'Score'}</button></td>
+      <td style="text-align:center;"><span class="score-display ${scoreClass(total)}">${total!==null?total:'--'}</span>${total!==null?'<span style="font-size:10px;color:var(--ink3);"> /100</span>':''}</td>
+      <td><button class="btn btn-primary btn-sm" onclick="openEvalModal(${s.id},'${safeName}','${safeProj}')">&#9998; ${e?'Edit':'Score'}</button></td>
     </tr>`;
   }).join('');
 }
 
 function openEvalModal(sid, sName, pTitle) {
-  currentEvalStudent = {id: sid, name: sName, project: pTitle};
+  currentEvalStudent = {id:sid,name:sName,project:pTitle};
   document.getElementById('evalModalTitle').textContent = sName;
   document.getElementById('evalModalSub').textContent = pTitle;
   document.getElementById('evalStudentInfo').innerHTML =
     `<div class="info-item"><div class="info-label">Student Name</div><div class="info-value">${escHTML(sName)}</div></div>
      <div class="info-item"><div class="info-label">Project</div><div class="info-value">${escHTML(pTitle)}</div></div>`;
   const e = evalMap[sid];
-  document.getElementById('sc_tech').value   = e ? (e.tech_quality    ?? '') : '';
-  document.getElementById('sc_fit').value    = e ? (e.problem_fit     ?? '') : '';
-  document.getElementById('sc_effort').value = e ? (e.effort_ownership ?? '') : '';
-  document.getElementById('sc_pres').value   = e ? (e.presentation    ?? '') : '';
-  document.getElementById('sc_impact').value = e ? (e.practical_impact ?? '') : '';
-  document.getElementById('evalRemarks').value = e ? (e.remarks || '') : '';
+  document.getElementById('sc_tech').value   = e?(e.tech_quality??''):'';
+  document.getElementById('sc_fit').value    = e?(e.problem_fit??''):'';
+  document.getElementById('sc_effort').value = e?(e.effort_ownership??''):'';
+  document.getElementById('sc_pres').value   = e?(e.presentation??''):'';
+  document.getElementById('sc_impact').value = e?(e.practical_impact??''):'';
+  document.getElementById('evalRemarks').value = e?(e.remarks||''):'';
   ['sc_tech','sc_fit','sc_effort','sc_pres','sc_impact'].forEach(id => {
     document.getElementById(id).classList.remove('over-limit');
     document.getElementById(id).style.borderColor = '';
@@ -1496,65 +1299,52 @@ function openEvalModal(sid, sName, pTitle) {
 }
 
 function calcTotal() {
-  const fields = [
-    {id:'sc_tech',bar:'bar_tech'},{id:'sc_fit',bar:'bar_fit'},
-    {id:'sc_effort',bar:'bar_effort'},{id:'sc_pres',bar:'bar_pres'},
-    {id:'sc_impact',bar:'bar_impact'}
-  ];
+  const fields = [{id:'sc_tech',bar:'bar_tech'},{id:'sc_fit',bar:'bar_fit'},{id:'sc_effort',bar:'bar_effort'},{id:'sc_pres',bar:'bar_pres'},{id:'sc_impact',bar:'bar_impact'}];
   let total = 0;
-  fields.forEach(({id, bar}) => {
+  fields.forEach(({id,bar}) => {
     const inp = document.getElementById(id);
     let v = parseInt(inp.value);
-    if (isNaN(v) || v < 0) v = 0;
-    if (v > 20) {
+    if (isNaN(v)||v<0) v=0;
+    if (v>20) {
       inp.classList.add('over-limit');
-      setTimeout(() => {
-        inp.value = 20; inp.classList.remove('over-limit');
-        inp.style.borderColor = 'var(--green)';
-        setTimeout(() => inp.style.borderColor = '', 1000);
-        calcTotal();
-      }, 600);
-      v = 20;
-    } else { inp.classList.remove('over-limit'); inp.style.borderColor = ''; }
+      setTimeout(() => { inp.value=20; inp.classList.remove('over-limit'); inp.style.borderColor='var(--green)'; setTimeout(()=>inp.style.borderColor='',1000); calcTotal(); }, 600);
+      v=20;
+    } else { inp.classList.remove('over-limit'); inp.style.borderColor=''; }
     total += v;
     const b = document.getElementById(bar);
-    if (b) {
-      b.style.width = (v / 20 * 100) + '%';
-      b.style.background = v >= 16 ? 'var(--green)' : v >= 10 ? 'var(--accent)' : v >= 5 ? 'var(--amber)' : 'var(--red)';
-    }
+    if (b) { b.style.width=(v/20*100)+'%'; b.style.background=v>=16?'var(--green)':v>=10?'var(--accent)':v>=5?'var(--amber)':'var(--red)'; }
   });
   const el = document.getElementById('scoreTotalDisplay');
   el.textContent = total + ' / 100';
-  el.style.color = total >= 75 ? 'var(--green)' : total >= 50 ? 'var(--amber)' : 'var(--red)';
+  el.style.color = total>=75?'var(--green)':total>=50?'var(--amber)':'var(--red)';
 }
 
 async function saveEvaluation() {
   const btn = document.getElementById('saveEvalBtn');
-  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Saving&hellip;';
-  const g = (id) => { const v = parseInt(document.getElementById(id).value); return isNaN(v) ? 0 : Math.min(20, Math.max(0, v)); };
-  const tech = g('sc_tech'), fit = g('sc_fit'), effort = g('sc_effort'), pres = g('sc_pres'), impact = g('sc_impact');
-  const total = tech + fit + effort + pres + impact;
-  const sid = currentEvalStudent.id;
-  const data = {
-    student_id: sid, tech_quality: tech, problem_fit: fit, effort_ownership: effort,
-    presentation: pres, practical_impact: impact, total_score: total,
-    remarks: document.getElementById('evalRemarks').value,
-    submitted_by: currentUser, submitted_at: new Date().toISOString()
-  };
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Saving&hellip;';
+  const g = (id) => { const v=parseInt(document.getElementById(id).value); return isNaN(v)?0:Math.min(20,Math.max(0,v)); };
+  const tech=g('sc_tech'),fit=g('sc_fit'),effort=g('sc_effort'),pres=g('sc_pres'),impact=g('sc_impact');
+  const total=tech+fit+effort+pres+impact;
+  const sid=currentEvalStudent.id;
+  const data={student_id:sid,tech_quality:tech,problem_fit:fit,effort_ownership:effort,presentation:pres,practical_impact:impact,total_score:total,
+    remarks:document.getElementById('evalRemarks').value,submitted_by:currentUser,submitted_at:new Date().toISOString()};
   try {
-    const ex = evalMap[sid];
-    if (ex) { await api.updateEval(ex.id, data); Object.assign(evalMap[sid], data); }
-    else { const r = await api.upsertEval(data); evalMap[sid] = Array.isArray(r) ? r[0] : r; }
-    showToast('Evaluation saved!', 'success');
+    const ex=evalMap[sid];
+    if (ex) { await api.updateEval(ex.id,data); Object.assign(evalMap[sid],data); }
+    else { const r=await api.upsertEval(data); evalMap[sid]=Array.isArray(r)?r[0]:r; }
+    showToast('Evaluation saved!','success');
     closeModal('evalModal');
     renderEvalTable(); renderDashboard(); renderStudentList();
-    if (currentUser === 'Admin') { adminEvalMap = evalMap; renderAdminTable(); renderAdminStats(); }
-  } catch(e) { showToast('Error: ' + e.message, 'error'); }
-  finally { btn.disabled = false; btn.innerHTML = 'Save Evaluation'; }
+    if (currentUser==='Admin') { adminEvalMap=evalMap; renderAdminTable(); renderAdminStats(); }
+  } catch(e) { showToast('Error: '+e.message,'error'); }
+  finally { btn.disabled=false; btn.innerHTML='Save Evaluation'; }
 }
 
 /* ══════════════════════════════════════
    PEER EVALUATION
+   - Mentors see ONLY reviews for their own assigned students (matched by project_reg)
+   - Scores shown as total /50 (sum of 5 criteria × 10), not average
+   - Project Totals cards displayed ABOVE the reviews table
 ══════════════════════════════════════ */
 async function loadPeerReviews() {
   peerLoaded = true;
@@ -1563,38 +1353,32 @@ async function loadPeerReviews() {
   document.getElementById('peerSummaryCards').innerHTML = '';
   document.getElementById('peerStatsRow').innerHTML = '';
   try {
-  if (currentUser === 'Admin') {
+    if (currentUser === 'Admin') {
       peerReviews = await api.peerAll();
     } else {
       const all = await api.peerAll();
-      // Only show peer reviews where the project owner is one of THIS mentor's own assigned students
-      // e.g. Sowmiya only sees reviews for her students, not other mentors' students in the same section
+      // Only show reviews where the reviewed project belongs to THIS mentor's own students
       const myStudentRegs = new Set(students.map(s => s.register_number));
       peerReviews = all.filter(r => myStudentRegs.has(r.project_reg));
     }
     renderPeerTabs();
+    renderPeerSummary(); // summary cards first (above table)
     renderPeerTable();
-    renderPeerSummary();
     renderPeerStats();
   } catch(e) {
     document.getElementById('peerTableBody').innerHTML =
       `<tr><td colspan="12"><div class="empty-state"><div class="empty-icon">&#9888;</div>Failed to load peer reviews: ${escHTML(e.message)}</div></td></tr>`;
-    showToast('Peer review error: ' + e.message, 'error');
+    showToast('Peer review error: '+e.message,'error');
     console.error(e);
   }
 }
 
 function renderPeerTabs() {
-  const colleges = [...new Set(
-    peerReviews.map(r => r.reviewer_college_name || r.reviewer_college || '').filter(Boolean)
-  )].sort();
-  const tabs = [
-    {key:'all', label:'All (' + peerReviews.length + ')'},
-    ...colleges.map(c => ({key: c, label: c.split(' ').slice(0,2).join(' ')}))
-  ];
+  const colleges = [...new Set(peerReviews.map(r => r.reviewer_college_name||r.reviewer_college||'').filter(Boolean))].sort();
+  const tabs = [{key:'all',label:'All ('+peerReviews.length+')'}, ...colleges.map(c => ({key:c,label:c.split(' ').slice(0,2).join(' ')}))];
   const row = document.getElementById('peerTabRow');
-  row.innerHTML = tabs.map((t, i) =>
-    `<button class="tab-btn${i === 0 ? ' active' : ''}" onclick="setPeerTab('${escHTML(t.key).replace(/'/g,'&#39;')}',this)">${escHTML(t.label)}</button>`
+  row.innerHTML = tabs.map((t,i) =>
+    `<button class="tab-btn${i===0?' active':''}" onclick="setPeerTab('${escHTML(t.key).replace(/'/g,'&#39;')}',this)">${escHTML(t.label)}</button>`
   ).join('');
   peerTab = 'all';
 }
@@ -1603,31 +1387,32 @@ function setPeerTab(tab, btn) {
   peerTab = tab;
   document.querySelectorAll('#peerTabRow .tab-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
-  renderPeerTable();
   renderPeerSummary();
+  renderPeerTable();
   renderPeerStats();
 }
 
 function getFilteredPeerReviews() {
-  const q = (document.getElementById('peerSearch').value || '').toLowerCase();
+  const q = (document.getElementById('peerSearch').value||'').toLowerCase();
   return peerReviews.filter(r => {
-    const matchTab = peerTab === 'all' || (r.reviewer_college_name || r.reviewer_college || '') === peerTab;
-    const matchSearch = !q ||
-      (r.project_title || '').toLowerCase().includes(q) ||
-      (r.reviewer_name || '').toLowerCase().includes(q) ||
-      (r.project_owner_name || '').toLowerCase().includes(q);
+    const matchTab = peerTab==='all'||(r.reviewer_college_name||r.reviewer_college||'')===peerTab;
+    const matchSearch = !q||
+      (r.project_title||'').toLowerCase().includes(q)||
+      (r.reviewer_name||'').toLowerCase().includes(q)||
+      (r.project_owner_name||'').toLowerCase().includes(q);
     return matchTab && matchSearch;
   });
 }
 
 function peerScoreChip(v) {
-  if (v === null || v === undefined) return '<span class="peer-score-chip peer-score-na">—</span>';
-  const cls = v >= 8 ? 'peer-score-high' : v >= 5 ? 'peer-score-mid' : 'peer-score-low';
+  if (v===null||v===undefined) return '<span class="peer-score-chip peer-score-na">—</span>';
+  const cls = v>=8?'peer-score-high':v>=5?'peer-score-mid':'peer-score-low';
   return `<span class="peer-score-chip ${cls}">${v}</span>`;
 }
 
-function peerAvgClass(avg) {
-  return avg >= 7 ? 'score-high' : avg >= 5 ? 'score-mid' : 'score-low';
+// Colour helper based on total/50 (35+= high, 25+= mid, else low)
+function peerTotalClass(total50) {
+  return total50 >= 35 ? 'score-high' : total50 >= 25 ? 'score-mid' : 'score-low';
 }
 
 function renderPeerTable() {
@@ -1638,21 +1423,21 @@ function renderPeerTable() {
     return;
   }
   tb.innerHTML = list.map((r, i) => {
-    const scores = [r.clarity, r.innovation, r.execution, r.usability, r.overall];
-    const avg = (scores.reduce((a, b) => a + (b || 0), 0) / 5).toFixed(1);
-    const college = r.reviewer_college_name || r.reviewer_college || '—';
+    // Total out of 50
+    const total50 = (r.clarity||0) + (r.innovation||0) + (r.execution||0) + (r.usability||0) + (r.overall||0);
+    const college = r.reviewer_college_name||r.reviewer_college||'—';
     const collegePill = `<span style="font-size:10px;font-weight:700;color:var(--blue);background:var(--blue-lt);padding:2px 7px;border-radius:99px;white-space:nowrap;">${escHTML(college)}</span>`;
-    const submittedAt = r.created_at ? new Date(r.created_at).toLocaleDateString('en-IN', {day:'numeric',month:'short'}) : '';
+    const submittedAt = r.created_at ? new Date(r.created_at).toLocaleDateString('en-IN',{day:'numeric',month:'short'}) : '';
     return `<tr>
       <td style="color:var(--ink3);font-size:11px;">${i+1}</td>
       <td style="max-width:160px;">
-        <div style="font-size:12px;font-weight:700;color:var(--ink);line-height:1.4;">${escHTML(r.project_title || '—')}</div>
-        ${r.project_type ? `<div style="font-size:10px;color:var(--ink3);margin-top:2px;">${escHTML(r.project_type)}</div>` : ''}
+        <div style="font-size:12px;font-weight:700;color:var(--ink);line-height:1.4;">${escHTML(r.project_title||'—')}</div>
+        ${r.project_type?`<div style="font-size:10px;color:var(--ink3);margin-top:2px;">${escHTML(r.project_type)}</div>`:''}
       </td>
-      <td style="font-size:12px;color:var(--ink2);font-weight:600;">${escHTML(r.project_owner_name || '—')}</td>
+      <td style="font-size:12px;color:var(--ink2);font-weight:600;">${escHTML(r.project_owner_name||'—')}</td>
       <td>
-        <div style="font-size:12px;color:var(--accent2);font-weight:700;">${escHTML(r.reviewer_name || '—')}</div>
-        ${submittedAt ? `<div style="font-size:10px;color:var(--ink3);">${submittedAt}</div>` : ''}
+        <div style="font-size:12px;color:var(--accent2);font-weight:700;">${escHTML(r.reviewer_name||'—')}</div>
+        ${submittedAt?`<div style="font-size:10px;color:var(--ink3);">${submittedAt}</div>`:''}
       </td>
       <td>${collegePill}</td>
       <td style="text-align:center;">${peerScoreChip(r.clarity)}</td>
@@ -1660,8 +1445,11 @@ function renderPeerTable() {
       <td style="text-align:center;">${peerScoreChip(r.execution)}</td>
       <td style="text-align:center;">${peerScoreChip(r.usability)}</td>
       <td style="text-align:center;">${peerScoreChip(r.overall)}</td>
-      <td style="text-align:center;"><span class="score-display ${peerAvgClass(parseFloat(avg))}" style="font-size:16px;">${avg}</span><span style="font-size:10px;color:var(--ink3);"> /10</span></td>
-      <td style="font-size:11px;color:var(--ink3);max-width:140px;line-height:1.5;">${r.comments ? escHTML(r.comments.substring(0,80)) + (r.comments.length > 80 ? '&hellip;' : '') : '&mdash;'}</td>
+      <td style="text-align:center;">
+        <span class="score-display ${peerTotalClass(total50)}" style="font-size:16px;">${total50}</span>
+        <span style="font-size:10px;color:var(--ink3);"> /50</span>
+      </td>
+      <td style="font-size:11px;color:var(--ink3);max-width:140px;line-height:1.5;">${r.comments?escHTML(r.comments.substring(0,80))+(r.comments.length>80?'&hellip;':''):'&mdash;'}</td>
     </tr>`;
   }).join('');
 }
@@ -1671,14 +1459,15 @@ function renderPeerStats() {
   const total = list.length;
   const projects = new Set(list.map(r => r.project_reg)).size;
   const reviewers = new Set(list.map(r => r.reviewer_reg)).size;
-  const avgOverall = total > 0
-    ? (list.reduce((s, r) => s + ((r.clarity + r.innovation + r.execution + r.usability + r.overall) / 5), 0) / total).toFixed(1)
+  // Average total score out of 50
+  const avgTotal = total > 0
+    ? (list.reduce((s,r) => s + (r.clarity+r.innovation+r.execution+r.usability+r.overall), 0) / total).toFixed(1)
     : '--';
   document.getElementById('peerStatsRow').innerHTML = `
     <div class="stat-card"><div class="stat-label">Total Reviews</div><div class="stat-value" style="color:var(--accent2);">${total}</div><div class="stat-sub">peer submissions</div></div>
     <div class="stat-card"><div class="stat-label">Projects Reviewed</div><div class="stat-value" style="color:var(--blue);">${projects}</div><div class="stat-sub">unique projects</div></div>
     <div class="stat-card"><div class="stat-label">Unique Reviewers</div><div class="stat-value" style="color:var(--green);">${reviewers}</div><div class="stat-sub">students who reviewed</div></div>
-    <div class="stat-card"><div class="stat-label">Avg Score</div><div class="stat-value" style="color:var(--amber);">${avgOverall}</div><div class="stat-sub">out of 10</div></div>`;
+    <div class="stat-card"><div class="stat-label">Avg Total Score</div><div class="stat-value" style="color:var(--amber);">${avgTotal}</div><div class="stat-sub">out of 50</div></div>`;
 }
 
 function renderPeerSummary() {
@@ -1686,23 +1475,25 @@ function renderPeerSummary() {
   const byProject = {};
   list.forEach(r => {
     const key = r.project_reg;
-    if (!byProject[key]) byProject[key] = {title: r.project_title, owner: r.project_owner_name, type: r.project_type, reviews: []};
+    if (!byProject[key]) byProject[key] = {title:r.project_title,owner:r.project_owner_name,type:r.project_type,reviews:[]};
     byProject[key].reviews.push(r);
   });
   const container = document.getElementById('peerSummaryCards');
   if (!Object.keys(byProject).length) { container.innerHTML = ''; return; }
   container.innerHTML = Object.values(byProject)
-    .sort((a, b) => b.reviews.length - a.reviews.length)
+    .sort((a,b) => b.reviews.length - a.reviews.length)
     .map(p => {
       const n = p.reviews.length;
       const criteria = ['clarity','innovation','execution','usability','overall'];
       const criteriaLabels = ['Clarity','Innovation','Execution','Usability','Overall'];
+      // Average score per criterion across all reviews (each criterion is /10)
       const criteriaAvgs = criteria.map(c =>
-        (p.reviews.reduce((s, r) => s + (r[c] || 0), 0) / n).toFixed(1)
+        (p.reviews.reduce((s,r) => s+(r[c]||0), 0) / n).toFixed(1)
       );
-      const overallAvg = (criteriaAvgs.reduce((s, v) => s + parseFloat(v), 0) / 5).toFixed(1);
-      const cls = peerAvgClass(parseFloat(overallAvg));
-      const criteriaHTML = criteriaAvgs.map((v, i) =>
+      // Total out of 50 = sum of all 5 criterion averages
+      const totalOut50 = criteriaAvgs.reduce((s,v) => s+parseFloat(v), 0).toFixed(1);
+      const cls = peerTotalClass(parseFloat(totalOut50));
+      const criteriaHTML = criteriaAvgs.map((v,i) =>
         `<div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);">
           <span style="font-size:11px;color:var(--ink3);">${criteriaLabels[i]}</span>
           <div style="display:flex;align-items:center;gap:6px;">
@@ -1714,17 +1505,15 @@ function renderPeerSummary() {
         </div>`
       ).join('');
       return `<div class="peer-project-card">
-        <div class="peer-project-title">${escHTML(p.title || '—')}</div>
-        <div class="peer-project-owner">${escHTML(p.owner || '—')}${p.type ? ' &middot; <em>' + escHTML(p.type) + '</em>' : ''}</div>
+        <div class="peer-project-title">${escHTML(p.title||'—')}</div>
+        <div class="peer-project-owner">${escHTML(p.owner||'—')}${p.type?' &middot; <em>'+escHTML(p.type)+'</em>':''}</div>
         <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:12px;">
           <div>
-            <div class="peer-avg-large ${cls}">${overallAvg}<span style="font-size:13px;font-weight:400;color:var(--ink3);"> /10</span></div>
-            <div class="peer-review-count">${n} review${n !== 1 ? 's' : ''}</div>
+            <div class="peer-avg-large ${cls}">${totalOut50}<span style="font-size:13px;font-weight:400;color:var(--ink3);"> /50</span></div>
+            <div class="peer-review-count">${n} review${n!==1?'s':''}</div>
           </div>
           <div style="text-align:right;">
-            ${n >= 4 ? '<span class="badge badge-green">Well Reviewed</span>' :
-              n >= 2 ? '<span class="badge badge-amber">Few Reviews</span>' :
-              '<span class="badge badge-grey">1 Review</span>'}
+            ${n>=4?'<span class="badge badge-green">Well Reviewed</span>':n>=2?'<span class="badge badge-amber">Few Reviews</span>':'<span class="badge badge-grey">1 Review</span>'}
           </div>
         </div>
         <div>${criteriaHTML}</div>
@@ -1735,55 +1524,49 @@ function renderPeerSummary() {
 function exportPeerCSV() {
   const list = getFilteredPeerReviews();
   const rows = [['#','Project Title','Project Type','Owner','Owner Reg','Reviewer','Reviewer Reg','Reviewer College',
-    'Clarity (/10)','Innovation (/10)','Execution (/10)','Usability (/10)','Overall (/10)','Avg (/10)','Comments','Submitted At']];
+    'Clarity (/10)','Innovation (/10)','Execution (/10)','Usability (/10)','Overall (/10)','Total (/50)','Comments','Submitted At']];
   list.forEach((r, i) => {
-    const avg = ((r.clarity + r.innovation + r.execution + r.usability + r.overall) / 5).toFixed(1);
-    rows.push([i+1, r.project_title||'', r.project_type||'', r.project_owner_name||'', r.project_reg||'',
-      r.reviewer_name||'', r.reviewer_reg||'', r.reviewer_college_name||r.reviewer_college||'',
-      r.clarity, r.innovation, r.execution, r.usability, r.overall, avg, r.comments||'',
-      r.created_at ? new Date(r.created_at).toLocaleString() : '']);
+    const total50 = (r.clarity||0)+(r.innovation||0)+(r.execution||0)+(r.usability||0)+(r.overall||0);
+    rows.push([i+1,r.project_title||'',r.project_type||'',r.project_owner_name||'',r.project_reg||'',
+      r.reviewer_name||'',r.reviewer_reg||'',r.reviewer_college_name||r.reviewer_college||'',
+      r.clarity,r.innovation,r.execution,r.usability,r.overall,total50,r.comments||'',
+      r.created_at?new Date(r.created_at).toLocaleString():'']);
   });
-  downloadCSV(rows, 'peer_reviews_' + peerTab.replace(/\s+/g,'-') + '_' + new Date().toISOString().split('T')[0] + '.csv');
+  downloadCSV(rows,'peer_reviews_'+peerTab.replace(/\s+/g,'-')+'_'+new Date().toISOString().split('T')[0]+'.csv');
 }
 
-/* ══════════════════════════════════════
-   ADMIN
-══════════════════════════════════════ */
 async function seedSSTStudents() {
   const btn = document.getElementById('seedBtn');
   const status = document.getElementById('seedStatus');
-  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Inserting\u2026';
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Inserting\u2026';
   const col = selectedCollegeName;
-  let inserted = 0, errors = 0;
-  const allToInsert = [
-    ...SST_IBBA_STUDENTS.map(s => ({...s, section:'I BBA'})),
-    ...SST_IMCA_STUDENTS.map(s => ({...s, section:'I MCA'}))
-  ];
+  let inserted=0,errors=0;
+  const allToInsert = [...SST_IBBA_STUDENTS.map(s=>({...s,section:'I BBA'})),...SST_IMCA_STUDENTS.map(s=>({...s,section:'I MCA'}))];
   for (const s of allToInsert) {
     try {
-      await api.insertStudent({college:col, section:s.section, name:s.name, register_number:s.register_number,
-        course:s.course, project_title:s.project_title, mentor_assigned:s.mentor_assigned, phone:s.phone, email:s.email});
-      inserted++; status.textContent = inserted + ' inserted\u2026';
-    } catch(e) { errors++; console.warn('Failed:', s.name, e.message); }
+      await api.insertStudent({college:col,section:s.section,name:s.name,register_number:s.register_number,
+        course:s.course,project_title:s.project_title,mentor_assigned:s.mentor_assigned,phone:s.phone,email:s.email});
+      inserted++; status.textContent=inserted+' inserted\u2026';
+    } catch(e) { errors++; console.warn('Failed:',s.name,e.message); }
   }
-  btn.disabled = false; btn.innerHTML = '&#43; Insert SST Students';
-  if (errors === 0) {
-    status.textContent = '\u2713 All ' + inserted + ' students inserted!';
-    status.style.color = 'var(--green)';
-    document.getElementById('sstSeedPanel').style.display = 'none';
-    showToast(inserted + ' SST students added!', 'success');
+  btn.disabled=false; btn.innerHTML='&#43; Insert SST Students';
+  if (errors===0) {
+    status.textContent='\u2713 All '+inserted+' students inserted!';
+    status.style.color='var(--green)';
+    document.getElementById('sstSeedPanel').style.display='none';
+    showToast(inserted+' SST students added!','success');
     await initApp();
   } else {
-    status.textContent = inserted + ' inserted, ' + errors + ' errors';
-    status.style.color = 'var(--red)';
-    showToast(errors + ' students failed to insert', 'error');
+    status.textContent=inserted+' inserted, '+errors+' errors';
+    status.style.color='var(--red)';
+    showToast(errors+' students failed to insert','error');
   }
 }
 
 function renderAdminTabs() {
-  const tabs = COLLEGE_ADMIN_TABS[selectedCollegeKey] || COLLEGE_ADMIN_TABS['default'];
+  const tabs = COLLEGE_ADMIN_TABS[selectedCollegeKey]||COLLEGE_ADMIN_TABS['default'];
   const row = document.getElementById('adminTabRow');
-  row.innerHTML = tabs.map((t, i) =>
+  row.innerHTML = tabs.map((t,i) =>
     `<button class="tab-btn${i===0?' active':''}" onclick="setAdminTab('${escHTML(t.key).replace(/'/g,'&#39;')}',this)">${escHTML(t.label)}</button>`
   ).join('');
   adminTab = 'all';
@@ -1797,17 +1580,15 @@ function setAdminTab(tab, btn) {
 }
 
 function getAdminList() {
-  if (adminTab === 'all') return allStudents;
-  return allStudents.filter(s => s.section === adminTab);
+  if (adminTab==='all') return allStudents;
+  return allStudents.filter(s => s.section===adminTab);
 }
 
 function renderAdminStats() {
   const list = getAdminList();
-  const approved = list.filter(s => (adminApprovalMap[s.id]?.status) === 'approved').length;
+  const approved = list.filter(s => adminApprovalMap[s.id]?.status==='approved').length;
   const scored = list.filter(s => adminEvalMap[s.id]).length;
-  const avg = scored > 0
-    ? (list.reduce((sm, s) => sm + (adminEvalMap[s.id]?.total_score || 0), 0) / scored).toFixed(1)
-    : '--';
+  const avg = scored>0?(list.reduce((sm,s) => sm+(adminEvalMap[s.id]?.total_score||0),0)/scored).toFixed(1):'--';
   document.getElementById('adminStatsRow').innerHTML = `
     <div class="stat-card"><div class="stat-label">Students</div><div class="stat-value">${list.length}</div></div>
     <div class="stat-card"><div class="stat-label">Approved</div><div class="stat-value" style="color:var(--green);">${approved}</div></div>
@@ -1817,13 +1598,10 @@ function renderAdminStats() {
 function renderAdminTable() {
   const list = getAdminList();
   const tb = document.getElementById('adminTableBody');
-  if (!list.length) {
-    tb.innerHTML = '<tr><td colspan="7"><div class="empty-state">No students</div></td></tr>';
-    return;
-  }
-  tb.innerHTML = list.map((s, i) => {
-    const done = getWeeksDone(s.id, true), score = getScore(s.id, true), approval = getApproval(s.id, true);
-    const mc = MENTOR_COLORS[s.mentor_assigned] || 'var(--ink2)';
+  if (!list.length) { tb.innerHTML='<tr><td colspan="7"><div class="empty-state">No students</div></td></tr>'; return; }
+  tb.innerHTML = list.map((s,i) => {
+    const done=getWeeksDone(s.id,true),score=getScore(s.id,true),approval=getApproval(s.id,true);
+    const mc = MENTOR_COLORS[s.mentor_assigned]||'var(--ink2)';
     return `<tr>
       <td style="color:var(--ink3);">${i+1}</td>
       <td>${nameBtn(s)}</td>
@@ -1831,7 +1609,7 @@ function renderAdminTable() {
       <td><span style="font-size:12px;font-weight:600;color:${mc};">${escHTML(s.mentor_assigned||'')}</span></td>
       <td style="text-align:center;">${weeksBadge(done)}</td>
       <td>${approvalBadge(approval)}</td>
-      <td style="text-align:center;"><span class="score-display ${scoreClass(score)}">${score !== null ? score : '--'}</span></td>
+      <td style="text-align:center;"><span class="score-display ${scoreClass(score)}">${score!==null?score:'--'}</span></td>
     </tr>`;
   }).join('');
 }
@@ -1841,28 +1619,25 @@ function exportCSV() {
   const rows = [['#','Name','Register No','Section','Course','Project Title','Mentor','Phone','Email',
     'W1 Status','W1 Note','W2 Status','W2 Note','W3 Status','W3 Note','W4 Status','W4 Note',
     'Tech Quality','Problem Fit','Effort','Presentation','Impact','Total Score','Approval']];
-  list.forEach((s, i) => {
-    const wks = adminProgressMap[s.id] || {}, e = adminEvalMap[s.id], a = adminApprovalMap[s.id];
-    rows.push([i+1, s.name, s.register_number, s.section||'', s.course||'', s.project_title||'',
-      s.mentor_assigned||'', s.phone||'', s.email||'',
-      wks[1]?.status||'not-started', wks[1]?.note||'', wks[2]?.status||'not-started', wks[2]?.note||'',
-      wks[3]?.status||'not-started', wks[3]?.note||'', wks[4]?.status||'not-started', wks[4]?.note||'',
-      e?.tech_quality??'', e?.problem_fit??'', e?.effort_ownership??'', e?.presentation??'',
-      e?.practical_impact??'', e?.total_score??'', a?.status||'pending']);
+  list.forEach((s,i) => {
+    const wks=adminProgressMap[s.id]||{},e=adminEvalMap[s.id],a=adminApprovalMap[s.id];
+    rows.push([i+1,s.name,s.register_number,s.section||'',s.course||'',s.project_title||'',
+      s.mentor_assigned||'',s.phone||'',s.email||'',
+      wks[1]?.status||'not-started',wks[1]?.note||'',wks[2]?.status||'not-started',wks[2]?.note||'',
+      wks[3]?.status||'not-started',wks[3]?.note||'',wks[4]?.status||'not-started',wks[4]?.note||'',
+      e?.tech_quality??'',e?.problem_fit??'',e?.effort_ownership??'',e?.presentation??'',
+      e?.practical_impact??'',e?.total_score??'',a?.status||'pending']);
   });
-  downloadCSV(rows, 'students_' + adminTab + '_' + new Date().toISOString().split('T')[0] + '.csv');
+  downloadCSV(rows,'students_'+adminTab+'_'+new Date().toISOString().split('T')[0]+'.csv');
 }
 
-/* ══════════════════════════════════════
-   MODAL & TOAST
-══════════════════════════════════════ */
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
 let toastTimeout;
-function showToast(msg, type = 'success') {
+function showToast(msg, type='success') {
   const t = document.getElementById('toast');
   document.getElementById('toastMsg').textContent = msg;
-  document.getElementById('toastDot').className = 'toast-dot ' + type;
+  document.getElementById('toastDot').className = 'toast-dot '+type;
   t.classList.add('show');
   clearTimeout(toastTimeout);
   toastTimeout = setTimeout(() => t.classList.remove('show'), 3500);
