@@ -148,8 +148,6 @@ tbody tr:hover td{background:var(--surface);}
 .score-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0;}
 .score-item-label{font-size:11px;color:var(--ink3);margin-bottom:6px;font-weight:500;}
 .score-item-max{font-size:10px;color:var(--accent2);font-weight:700;background:var(--accent-lt);padding:1px 6px;border-radius:99px;float:right;margin-top:1px;}
-.score-item-input:focus{border-color:var(--accent);}
-/* UPDATED score-item-input per doc 2 */
 .score-item-input{
   width:100%;
   padding:8px 4px;
@@ -478,121 +476,95 @@ tbody tr:hover td{background:var(--surface);}
     </div>
     <div class="modal-body">
       <div class="student-info-row" id="evalStudentInfo"></div>
-      <div style="background:var(--amber-lt);border:1px solid rgba(217,119,6,0.3);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--amber);font-weight:600;">
+
+      <div style="background:var(--amber-lt);border:1px solid rgba(217,119,6,0.3);border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:var(--amber);font-weight:600;">
         Each score must be 0&ndash;20. Values above 20 are auto-capped.
       </div>
 
-      <!-- GAUGE BARS (Style 4 from doc 2) -->
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:14px;">
+      <!-- VERTICAL SCORE ROWS -->
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
 
-        <div style="display:grid;grid-template-columns:150px 1fr 72px;align-items:center;border-bottom:1px solid var(--border);">
-          <div style="padding:12px 14px;border-right:1px solid var(--border);display:flex;align-items:center;gap:8px;">
-            <span style="font-size:15px;">&#128187;</span>
-            <span style="font-size:12px;color:var(--ink3);">Tech quality</span>
+        <div style="display:grid;grid-template-columns:160px 1fr 90px;align-items:center;gap:0;border:1px solid var(--border2);border-radius:var(--radius-sm);overflow:hidden;background:var(--bg2);">
+          <div style="padding:14px 16px;background:var(--surface);border-right:1px solid var(--border2);font-size:12px;color:var(--ink3);font-weight:500;">&#128187; Tech quality</div>
+          <div style="padding:8px 16px;">
+            <input type="number" id="sc_tech" min="0" max="20" placeholder="0"
+              style="width:100%;border:1.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--surface);color:var(--ink);font-family:var(--font-head);font-size:22px;font-weight:800;text-align:center;outline:none;padding:6px 4px;transition:border-color 0.2s;"
+              oninput="calcTotal()" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border2)'">
           </div>
-          <div style="padding:0 16px;">
-            <div style="height:7px;background:var(--surface2);border-radius:99px;overflow:hidden;">
-              <div id="bar_tech" style="height:100%;border-radius:99px;width:0%;background:#378ADD;transition:width .4s cubic-bezier(.4,0,.2,1);"></div>
-            </div>
-          </div>
-          <div style="padding:10px 12px;border-left:1px solid var(--border);text-align:center;">
-            <div id="gn_tech" style="font-family:var(--font-head);font-size:18px;font-weight:800;color:var(--ink);line-height:1;">0</div>
-            <div style="font-size:10px;color:var(--ink3);margin-top:2px;">/ 20</div>
+          <div style="padding:14px 12px;border-left:1px solid var(--border2);text-align:center;background:var(--surface);">
+            <span id="gn_tech" style="font-family:var(--font-head);font-size:20px;font-weight:800;color:var(--ink);">0</span>
+            <span style="font-size:10px;color:var(--ink3);display:block;margin-top:1px;">/ 20</span>
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:150px 1fr 72px;align-items:center;border-bottom:1px solid var(--border);">
-          <div style="padding:12px 14px;border-right:1px solid var(--border);display:flex;align-items:center;gap:8px;">
-            <span style="font-size:15px;">&#128161;</span>
-            <span style="font-size:12px;color:var(--ink3);">Problem fit</span>
+        <div style="display:grid;grid-template-columns:160px 1fr 90px;align-items:center;gap:0;border:1px solid var(--border2);border-radius:var(--radius-sm);overflow:hidden;background:var(--bg2);">
+          <div style="padding:14px 16px;background:var(--surface);border-right:1px solid var(--border2);font-size:12px;color:var(--ink3);font-weight:500;">&#128161; Problem fit</div>
+          <div style="padding:8px 16px;">
+            <input type="number" id="sc_fit" min="0" max="20" placeholder="0"
+              style="width:100%;border:1.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--surface);color:var(--ink);font-family:var(--font-head);font-size:22px;font-weight:800;text-align:center;outline:none;padding:6px 4px;transition:border-color 0.2s;"
+              oninput="calcTotal()" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border2)'">
           </div>
-          <div style="padding:0 16px;">
-            <div style="height:7px;background:var(--surface2);border-radius:99px;overflow:hidden;">
-              <div id="bar_fit" style="height:100%;border-radius:99px;width:0%;background:#7F77DD;transition:width .4s cubic-bezier(.4,0,.2,1);"></div>
-            </div>
-          </div>
-          <div style="padding:10px 12px;border-left:1px solid var(--border);text-align:center;">
-            <div id="gn_fit" style="font-family:var(--font-head);font-size:18px;font-weight:800;color:var(--ink);line-height:1;">0</div>
-            <div style="font-size:10px;color:var(--ink3);margin-top:2px;">/ 20</div>
+          <div style="padding:14px 12px;border-left:1px solid var(--border2);text-align:center;background:var(--surface);">
+            <span id="gn_fit" style="font-family:var(--font-head);font-size:20px;font-weight:800;color:var(--ink);">0</span>
+            <span style="font-size:10px;color:var(--ink3);display:block;margin-top:1px;">/ 20</span>
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:150px 1fr 72px;align-items:center;border-bottom:1px solid var(--border);">
-          <div style="padding:12px 14px;border-right:1px solid var(--border);display:flex;align-items:center;gap:8px;">
-            <span style="font-size:15px;">&#128293;</span>
-            <span style="font-size:12px;color:var(--ink3);">Effort &amp; ownership</span>
+        <div style="display:grid;grid-template-columns:160px 1fr 90px;align-items:center;gap:0;border:1px solid var(--border2);border-radius:var(--radius-sm);overflow:hidden;background:var(--bg2);">
+          <div style="padding:14px 16px;background:var(--surface);border-right:1px solid var(--border2);font-size:12px;color:var(--ink3);font-weight:500;">&#128293; Effort &amp; ownership</div>
+          <div style="padding:8px 16px;">
+            <input type="number" id="sc_effort" min="0" max="20" placeholder="0"
+              style="width:100%;border:1.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--surface);color:var(--ink);font-family:var(--font-head);font-size:22px;font-weight:800;text-align:center;outline:none;padding:6px 4px;transition:border-color 0.2s;"
+              oninput="calcTotal()" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border2)'">
           </div>
-          <div style="padding:0 16px;">
-            <div style="height:7px;background:var(--surface2);border-radius:99px;overflow:hidden;">
-              <div id="bar_effort" style="height:100%;border-radius:99px;width:0%;background:#1D9E75;transition:width .4s cubic-bezier(.4,0,.2,1);"></div>
-            </div>
-          </div>
-          <div style="padding:10px 12px;border-left:1px solid var(--border);text-align:center;">
-            <div id="gn_effort" style="font-family:var(--font-head);font-size:18px;font-weight:800;color:var(--ink);line-height:1;">0</div>
-            <div style="font-size:10px;color:var(--ink3);margin-top:2px;">/ 20</div>
+          <div style="padding:14px 12px;border-left:1px solid var(--border2);text-align:center;background:var(--surface);">
+            <span id="gn_effort" style="font-family:var(--font-head);font-size:20px;font-weight:800;color:var(--ink);">0</span>
+            <span style="font-size:10px;color:var(--ink3);display:block;margin-top:1px;">/ 20</span>
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:150px 1fr 72px;align-items:center;border-bottom:1px solid var(--border);">
-          <div style="padding:12px 14px;border-right:1px solid var(--border);display:flex;align-items:center;gap:8px;">
-            <span style="font-size:15px;">&#127908;</span>
-            <span style="font-size:12px;color:var(--ink3);">Presentation</span>
+        <div style="display:grid;grid-template-columns:160px 1fr 90px;align-items:center;gap:0;border:1px solid var(--border2);border-radius:var(--radius-sm);overflow:hidden;background:var(--bg2);">
+          <div style="padding:14px 16px;background:var(--surface);border-right:1px solid var(--border2);font-size:12px;color:var(--ink3);font-weight:500;">&#127908; Presentation</div>
+          <div style="padding:8px 16px;">
+            <input type="number" id="sc_pres" min="0" max="20" placeholder="0"
+              style="width:100%;border:1.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--surface);color:var(--ink);font-family:var(--font-head);font-size:22px;font-weight:800;text-align:center;outline:none;padding:6px 4px;transition:border-color 0.2s;"
+              oninput="calcTotal()" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border2)'">
           </div>
-          <div style="padding:0 16px;">
-            <div style="height:7px;background:var(--surface2);border-radius:99px;overflow:hidden;">
-              <div id="bar_pres" style="height:100%;border-radius:99px;width:0%;background:#D4537E;transition:width .4s cubic-bezier(.4,0,.2,1);"></div>
-            </div>
-          </div>
-          <div style="padding:10px 12px;border-left:1px solid var(--border);text-align:center;">
-            <div id="gn_pres" style="font-family:var(--font-head);font-size:18px;font-weight:800;color:var(--ink);line-height:1;">0</div>
-            <div style="font-size:10px;color:var(--ink3);margin-top:2px;">/ 20</div>
+          <div style="padding:14px 12px;border-left:1px solid var(--border2);text-align:center;background:var(--surface);">
+            <span id="gn_pres" style="font-family:var(--font-head);font-size:20px;font-weight:800;color:var(--ink);">0</span>
+            <span style="font-size:10px;color:var(--ink3);display:block;margin-top:1px;">/ 20</span>
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:150px 1fr 72px;align-items:center;">
-          <div style="padding:12px 14px;border-right:1px solid var(--border);display:flex;align-items:center;gap:8px;">
-            <span style="font-size:15px;">&#127758;</span>
-            <span style="font-size:12px;color:var(--ink3);">Practical impact</span>
+        <div style="display:grid;grid-template-columns:160px 1fr 90px;align-items:center;gap:0;border:1px solid var(--border2);border-radius:var(--radius-sm);overflow:hidden;background:var(--bg2);">
+          <div style="padding:14px 16px;background:var(--surface);border-right:1px solid var(--border2);font-size:12px;color:var(--ink3);font-weight:500;">&#127758; Practical impact</div>
+          <div style="padding:8px 16px;">
+            <input type="number" id="sc_impact" min="0" max="20" placeholder="0"
+              style="width:100%;border:1.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--surface);color:var(--ink);font-family:var(--font-head);font-size:22px;font-weight:800;text-align:center;outline:none;padding:6px 4px;transition:border-color 0.2s;"
+              oninput="calcTotal()" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border2)'">
           </div>
-          <div style="padding:0 16px;">
-            <div style="height:7px;background:var(--surface2);border-radius:99px;overflow:hidden;">
-              <div id="bar_impact" style="height:100%;border-radius:99px;width:0%;background:#BA7517;transition:width .4s cubic-bezier(.4,0,.2,1);"></div>
-            </div>
-          </div>
-          <div style="padding:10px 12px;border-left:1px solid var(--border);text-align:center;">
-            <div id="gn_impact" style="font-family:var(--font-head);font-size:18px;font-weight:800;color:var(--ink);line-height:1;">0</div>
-            <div style="font-size:10px;color:var(--ink3);margin-top:2px;">/ 20</div>
+          <div style="padding:14px 12px;border-left:1px solid var(--border2);text-align:center;background:var(--surface);">
+            <span id="gn_impact" style="font-family:var(--font-head);font-size:20px;font-weight:800;color:var(--ink);">0</span>
+            <span style="font-size:10px;color:var(--ink3);display:block;margin-top:1px;">/ 20</span>
           </div>
         </div>
 
       </div>
 
-      <!-- COMPACT INPUT STRIP -->
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px;">
-        <div style="text-align:center;">
-          <div style="font-size:10px;color:var(--ink3);margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;">Tech</div>
-          <input type="number" class="score-item-input" id="sc_tech" min="0" max="20" placeholder="0" oninput="calcTotal()">
+      <!-- TOTAL ROW -->
+      <div class="score-total-row">
+        <div>
+          <div class="score-total-label">Total Score</div>
+          <div style="font-size:11px;color:var(--ink3);margin-top:2px;">Sum of all 5 criteria</div>
         </div>
-        <div style="text-align:center;">
-          <div style="font-size:10px;color:var(--ink3);margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;">Fit</div>
-          <input type="number" class="score-item-input" id="sc_fit" min="0" max="20" placeholder="0" oninput="calcTotal()">
-        </div>
-        <div style="text-align:center;">
-          <div style="font-size:10px;color:var(--ink3);margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;">Effort</div>
-          <input type="number" class="score-item-input" id="sc_effort" min="0" max="20" placeholder="0" oninput="calcTotal()">
-        </div>
-        <div style="text-align:center;">
-          <div style="font-size:10px;color:var(--ink3);margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;">Present</div>
-          <input type="number" class="score-item-input" id="sc_pres" min="0" max="20" placeholder="0" oninput="calcTotal()">
-        </div>
-        <div style="text-align:center;">
-          <div style="font-size:10px;color:var(--ink3);margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;">Impact</div>
-          <input type="number" class="score-item-input" id="sc_impact" min="0" max="20" placeholder="0" oninput="calcTotal()">
-        </div>
+        <div class="score-total-val" id="scoreTotalDisplay">0 / 100</div>
       </div>
 
-      <div class="score-total-row"><div><div class="score-total-label">Total Score</div><div style="font-size:11px;color:var(--ink3);margin-top:2px;">Sum of all 5 criteria</div></div><div class="score-total-val" id="scoreTotalDisplay">0 / 100</div></div>
-      <div class="form-group" style="margin-top:14px;margin-bottom:0;"><label class="form-label">Remarks (optional)</label><textarea class="form-textarea" id="evalRemarks" placeholder="Add evaluation remarks, strengths, areas for improvement&hellip;"></textarea></div>
+      <!-- REMARKS -->
+      <div class="form-group" style="margin-top:14px;margin-bottom:0;">
+        <label class="form-label">Remarks (optional)</label>
+        <textarea class="form-textarea" id="evalRemarks" placeholder="Add evaluation remarks, strengths, areas for improvement&hellip;"></textarea>
+      </div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-outline" onclick="closeModal('evalModal')">Cancel</button>
@@ -1356,41 +1328,34 @@ function openEvalModal(sid,sName,pTitle){
   document.getElementById('sc_impact').value=e?(e.practical_impact??''):'';
   document.getElementById('evalRemarks').value=e?(e.remarks||''):'';
   ['sc_tech','sc_fit','sc_effort','sc_pres','sc_impact'].forEach(id=>{
-    document.getElementById(id).classList.remove('over-limit');
-    document.getElementById(id).style.borderColor='';
+    const el=document.getElementById(id);
+    el.style.borderColor='var(--border2)';
   });
   calcTotal();
   document.getElementById('evalModal').classList.add('open');
 }
 
-/* ── UPDATED calcTotal (drives bars + live number displays) ── */
+/* ── UPDATED calcTotal (vertical rows — no gauge bars) ── */
 function calcTotal(){
   const fields=[
-    {id:'sc_tech',   bar:'bar_tech',   num:'gn_tech',   color:'#378ADD'},
-    {id:'sc_fit',    bar:'bar_fit',    num:'gn_fit',    color:'#7F77DD'},
-    {id:'sc_effort', bar:'bar_effort', num:'gn_effort', color:'#1D9E75'},
-    {id:'sc_pres',   bar:'bar_pres',   num:'gn_pres',   color:'#D4537E'},
-    {id:'sc_impact', bar:'bar_impact', num:'gn_impact', color:'#BA7517'}
+    {id:'sc_tech',  num:'gn_tech'},
+    {id:'sc_fit',   num:'gn_fit'},
+    {id:'sc_effort',num:'gn_effort'},
+    {id:'sc_pres',  num:'gn_pres'},
+    {id:'sc_impact',num:'gn_impact'}
   ];
   let total=0;
-  fields.forEach(({id,bar,num,color})=>{
+  fields.forEach(({id,num})=>{
     const inp=document.getElementById(id);
     let v=parseInt(inp.value);
     if(isNaN(v)||v<0) v=0;
     if(v>20){
-      inp.classList.add('over-limit');
-      setTimeout(()=>{inp.value=20;inp.classList.remove('over-limit');calcTotal();},600);
+      inp.style.borderColor='var(--red)';
+      setTimeout(()=>{inp.value=20;inp.style.borderColor='var(--border2)';calcTotal();},600);
       v=20;
-    } else {
-      inp.classList.remove('over-limit');
     }
     total+=v;
-    const barEl=document.getElementById(bar);
     const numEl=document.getElementById(num);
-    if(barEl){
-      barEl.style.width=(v/20*100)+'%';
-      barEl.style.background=color;
-    }
     if(numEl) numEl.textContent=v;
   });
   const el=document.getElementById('scoreTotalDisplay');
