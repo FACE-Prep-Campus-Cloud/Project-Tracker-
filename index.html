@@ -646,7 +646,7 @@ tbody tr:hover td{background:var(--surface);}
 <div class="toast" id="toast"><span class="toast-dot success" id="toastDot"></span><span id="toastMsg">Saved!</span></div>
 
 <script>
-const SUPABASE_URL='https://qjwbndrgzvboszfzrcuy.supabase.co';
+  const SUPABASE_URL='https://qjwbndrgzvboszfzrcuy.supabase.co';
 const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqd2JuZHJnenZib3N6ZnpyY3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NTA3MzIsImV4cCI6MjA5NjEyNjczMn0.x-su_5f_XQ9_ql7iw3Aa_4E4ww9SJIqRGVdTHo6zSpE';
 const PEER_SUPABASE_URL='https://zykmcumlzhucnvxqhpgm.supabase.co';
 const PEER_SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5a21jdW1semh1Y252eHFocGdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3NzE5MDYsImV4cCI6MjA5NTM0NzkwNn0.kqUgSpGFSwMXpHkWRihhVJXDtVfl0tGdU24POxmXHWc';
@@ -664,7 +664,11 @@ const PINS={
   'Gokilavaani':'1212','Mohanasree N':'1212','Srisaradha S':'1212',
   'Anish N':'1212','Dharshan K':'1212','Sowmiya':'1212','Arun':'1212',
   'Shahul':'1212','Anto Jegan':'1212','Buvaneshwari':'1212','Ajeetha':'1212',
-  'Senthil Nathan':'1212','Dharmaprakash':'1212','Bhargavi':'1212'
+  'Senthil Nathan':'1212','Dharmaprakash':'1212','Bhargavi':'1212',
+  // Alliance University mentors
+  'Abhishek':'1212','Mary Agnes':'1212','Tanisha Das':'1212',
+  'Aman Kumar':'1212','Raghav Reddy':'1212','Gomathy V':'1212',
+  'Nagashri':'1212','Sanjivini':'1212'
 };
 
 const COLLEGE_SECTIONS={
@@ -686,6 +690,11 @@ const COLLEGE_SECTIONS={
   'bharathidasan':[
     {value:'BCAS_IIBSCCT',label:'II B.Sc CT'},
     {value:'BCAS_IBSCCT',label:'I B.Sc CT'}
+  ],
+  'alliance':[
+    {value:'ALU_IMCA_A',label:'I MCA - A'},
+    {value:'ALU_IMCA_B',label:'I MCA - B'},
+    {value:'ALU_IIBCA_AIML',label:'II BCA AI & ML (A+B)'}
   ]
 };
 
@@ -709,6 +718,10 @@ const SECTION_ROLES={
   'RCAS_BCA':['Buvaneshwari','Admin'],
   'BCAS_IIBSCCT':['Senthil Nathan','Dharmaprakash','Admin'],
   'BCAS_IBSCCT':['Senthil Nathan','Dharmaprakash','Admin'],
+  // Alliance University sections
+  'ALU_IMCA_A':['Abhishek','Admin'],
+  'ALU_IMCA_B':['Mary Agnes','Tanisha Das','Admin'],
+  'ALU_IIBCA_AIML':['Aman Kumar','Raghav Reddy','Gomathy V','Nagashri','Sanjivini','Admin']
 };
 
 const COLLEGE_NAMES={
@@ -732,7 +745,8 @@ const COLLEGE_ADMIN_SECTIONS={
   'nagarathinam':['I B.Sc AI','II B.Sc AI','B.Com BC & FT','BBA DM','I B.Sc CC'],
   'studyworld':['BCA'],'terf':['II B.Sc IT'],
   'rathinam':['B.Sc CT (GenAI)','BCA (AI)'],
-  'bharathidasan':['II B.Sc CT','I B.Sc CT']
+  'bharathidasan':['II B.Sc CT','I B.Sc CT'],
+  'alliance':['I MCA - A','I MCA - B','II BCA AI & ML (A+B)']
 };
 
 const SECTION_LABEL_MAP={
@@ -741,7 +755,9 @@ const SECTION_LABEL_MAP={
   'NAIG_BCFT':'B.Com BC & FT','NAIG_BBADM':'BBA DM','NAIG_IBSCCC':'I B.Sc CC',
   'KW_A':'I BCA - A','BCA':'BCA','TERF_IIBSCIT':'II B.Sc IT',
   'RCAS_BSCT':'B.Sc CT (GenAI)','RCAS_BCA':'BCA (AI)',
-  'BCAS_IIBSCCT':'II B.Sc CT','BCAS_IBSCCT':'I B.Sc CT'
+  'BCAS_IIBSCCT':'II B.Sc CT','BCAS_IBSCCT':'I B.Sc CT',
+  // Alliance University
+  'ALU_IMCA_A':'I MCA - A','ALU_IMCA_B':'I MCA - B','ALU_IIBCA_AIML':'II BCA AI & ML (A+B)'
 };
 
 const COLLEGE_ADMIN_TABS={
@@ -759,7 +775,13 @@ const COLLEGE_ADMIN_TABS={
   'studyworld':[{key:'all',label:'All'},{key:'BCA',label:'BCA'}],
   'terf':[{key:'all',label:'All'},{key:'II B.Sc IT',label:'II B.Sc IT'}],
   'rathinam':[{key:'all',label:'All'},{key:'B.Sc CT (GenAI)',label:'B.Sc CT (GenAI)'},{key:'BCA (AI)',label:'BCA (AI)'}],
-  'bharathidasan':[{key:'all',label:'All'},{key:'II B.Sc CT',label:'II B.Sc CT'},{key:'I B.Sc CT',label:'I B.Sc CT'}]
+  'bharathidasan':[{key:'all',label:'All'},{key:'II B.Sc CT',label:'II B.Sc CT'},{key:'I B.Sc CT',label:'I B.Sc CT'}],
+  'alliance':[
+    {key:'all',label:'All'},
+    {key:'I MCA - A',label:'I MCA - A'},
+    {key:'I MCA - B',label:'I MCA - B'},
+    {key:'II BCA AI & ML (A+B)',label:'II BCA AI & ML'}
+  ]
 };
 
 const MENTOR_COLORS={
@@ -769,7 +791,11 @@ const MENTOR_COLORS={
   'Srisaradha S':'#0369a1','Anish N':'#b45309','Dharshan K':'#047857',
   'Sowmiya':'#e11d48','Arun':'#0d9488','Shahul':'#7c3aed','Ajeetha':'#0ea5e9',
   'Anto Jegan':'#0891b2','Buvaneshwari':'#9333ea',
-  'Senthil Nathan':'#0d9488','Dharmaprakash':'#7c3aed','Bhargavi':'#db2777'
+  'Senthil Nathan':'#0d9488','Dharmaprakash':'#7c3aed','Bhargavi':'#db2777',
+  // Alliance University mentors
+  'Abhishek':'#0d9488','Mary Agnes':'#9333ea','Tanisha Das':'#db2777',
+  'Aman Kumar':'#0891b2','Raghav Reddy':'#b45309','Gomathy V':'#16a34a',
+  'Nagashri':'#e11d48','Sanjivini':'#7c3aed'
 };
 
 // ════════ SEED DATA ════════
@@ -913,7 +939,6 @@ const TERF_IIBSCIT_STUDENTS=[
   {name:'Abdul Kalam Azad J',register_number:'2426J0623',course:'II B.Sc IT',project_title:'Farm Care',mentor_assigned:'Ajeetha',phone:'7904299008',email:'azaddpm2007@gmail.com'}
 ];
 
-// ── BHARATHIDASAN — full detail seed arrays ──
 const BCAS_IIBSCCT_STUDENTS=[
   {name:'sneha G.A.',register_number:'2426K0132',course:'II B.Sc CT',project_title:'Smart Grocery Price Tracker System',mentor_assigned:'Senthil Nathan',phone:'9500697080',email:'gasneha2024@gmail.com',problem_statement:'Small grocery shops face difficulties managing daily operations efficiently due to manual record-keeping methods.',impact_of_problem:'The Smart Grocery Price Tracker System helps digitize and automate daily operations of small grocery shops, reducing errors and improving billing accuracy.',brand_name:'Cartify',project_type:'Smart Retail & Inventory Management System',target_users:'Students; Families; General Public; Small shop owners',key_outcome:'Develop a smart Grocery Price Tracker system that simplifies and automates daily operations of small grocery shops.'},
   {name:'M. Rebekkha Thavamani',register_number:'2426K0124',course:'II B.Sc CT',project_title:'GlowNest - Facial Products',mentor_assigned:'Dharmaprakash',phone:'9345003531',email:'rebekkhathavamani@gmail.com',problem_statement:'Many skincare consumers struggle to identify their specific skin type, leading to purchase of ineffective or irritating products.',impact_of_problem:'GlowNest integrates an interactive Skin Guide into the shopping experience, empowering users to self-diagnose accurately and find the right products.',brand_name:'GlowNest',project_type:'E-commerce / Assistive Healthcare Technology',target_users:'Students; Elderly People; General Public',key_outcome:'Democratize expert skincare advice through technology so professional-grade skin analysis is accessible to everyone.'},
@@ -959,6 +984,27 @@ const BCAS_IBSCCT_STUDENTS=[
   {name:'Devika Sundaram',register_number:'2CT25023',course:'I B.Sc CT',project_title:'Students Skills Exchange and Learning Platform',mentor_assigned:'Dharmaprakash',phone:'6382349074',email:'devsundardevika@gmail.com',problem_statement:'Students need a way to learn different things from each other.',impact_of_problem:'A website called student skills exchange platform to make the current situation better.',brand_name:'bharathidasan college of arts and science',project_type:'Education',target_users:'Students',key_outcome:'Improve peer learning and skill sharing.'},
   {name:'SATHYA SUNDARAM',register_number:'2CT-25_022',course:'I B.Sc CT',project_title:'Modeling Application',mentor_assigned:'Senthil Nathan',phone:'6369987493',email:'SATHYASUNDARAM1624@GMAIL.COM',problem_statement:'Develop a Python-based modeling application that analyzes input data and predicts outcomes using machine learning.',impact_of_problem:'Without a proper modeling application, data analysis becomes time-consuming and prone to errors.',brand_name:'Bharathidhasan college of arts and science',project_type:'Fashion',target_users:'All women',key_outcome:'Develop a Python-based modeling application for data analysis and machine learning.'},
   {name:'BHAVAN SHRI S',register_number:'2ct-25-028',course:'I B.Sc CT',project_title:'Online Learning Platform [Course, Videos, Quiz]',mentor_assigned:'Senthil Nathan',phone:'7305799734',email:'bhavanbhavan2205@gmail.com',problem_statement:'Many students face difficulties in accessing structured and interactive learning resources.',impact_of_problem:'Poor understanding, no system to test knowledge, low student engagement, difficulty tracking progress.',brand_name:'Learnx',project_type:'Online learning platform',target_users:'Students',key_outcome:'Develop a simple, user-friendly online learning platform that enables students to access courses, watch videos, and take quizzes.'}
+];
+
+// ════════ ALLIANCE UNIVERSITY SEED DATA ════════
+const ALLIANCE_IMCA_A_STUDENTS=[
+  {name:'Nandhu S',register_number:'2411022250023',course:'I MCA - A',project_title:'Integrated Paddy Farm Payroll and Profit Optimization System',mentor_assigned:'Abhishek',phone:'6238621371',email:'nandhus5270kvk@gmail.com'}
+];
+
+const ALLIANCE_IMCA_B_STUDENTS=[
+  {name:'Anu A',register_number:'2511022250085',course:'I MCA - B',project_title:'Community Resource Sharing System',mentor_assigned:'Mary Agnes',phone:'7259109591',email:'aanuMCA25@stu.alliance.edu.in'},
+  {name:'Karthikeyan R',register_number:'2511022250092',course:'I MCA - B',project_title:'AI DevOps Intelligence Agent (RAG + CI/CD Automation Platform)',mentor_assigned:'Tanisha Das',phone:'9108354667',email:'karthikeyan9108354@gmail.com'}
+];
+
+const ALLIANCE_IIBCA_AIML_STUDENTS=[
+  {name:'Preksha V',register_number:'2511021240063',course:'II BCA AI & ML (A+B)',project_title:'Smart Retail: Customer Behavior & Churn Analytics Dashboard',mentor_assigned:'Aman Kumar',phone:'9353016818',email:'prekshav205@gmail.com'},
+  {name:'R Monisha Bangera',register_number:'2511021240053',course:'II BCA AI & ML (A+B)',project_title:'Zennia',mentor_assigned:'Raghav Reddy',phone:'7975463207',email:'monishabangera2007@gmail.com'},
+  {name:'Keerthi N',register_number:'2411021240024',course:'II BCA AI & ML (A+B)',project_title:'AgriBridge – Smart Farming and Crop Waste Marketplace',mentor_assigned:'Gomathy V',phone:'8951471903',email:'nkeerthireddy19@gmail.com'},
+  {name:'Prakruthi BR',register_number:'2411021240038',course:'II BCA AI & ML (A+B)',project_title:'AgriBridge – Smart Farming and Crop Waste Marketplace',mentor_assigned:'Gomathy V',phone:'8431624705',email:'prakruthibr2006@gmail.com'},
+  {name:'Pragathi BR',register_number:'2411021240037',course:'II BCA AI & ML (A+B)',project_title:'Smart Women Safety and Emergency Response System',mentor_assigned:'Nagashri',phone:'8431897695',email:'pragathidevanga11@gmail.com'},
+  {name:'Bhumika R',register_number:'2411021240026',course:'II BCA AI & ML (A+B)',project_title:'Smart Women Safety and Emergency Response System',mentor_assigned:'Nagashri',phone:'9980850740',email:'bhumikaravi2006@gmail.com'},
+  {name:'Kailash Kumar B',register_number:'2411021240071',course:'II BCA AI & ML (A+B)',project_title:'FestNest - Centralized platform for college events, hackathons, workshops, and competitions',mentor_assigned:'Sanjivini',phone:'8088309340',email:'kkailashBCA24@ced.alliance.edu.in'},
+  {name:'Adarsh Kumar Gupta Kasaudhan',register_number:'2411021240076',course:'II BCA AI & ML (A+B)',project_title:'FestNest - Centralized platform for college events, hackathons, workshops, and competitions',mentor_assigned:'Sanjivini',phone:'7054054583',email:'gadarsh960@gmail.com'}
 ];
 
 // ════════ STATE ════════
@@ -1046,7 +1092,6 @@ async function sb(path,method='GET',body=null){
   return text?JSON.parse(text):[];
 }
 
-// ── PATCH 1 & 2: select=* ensures all columns (including new detail cols) are returned ──
 const api={
   students:(c,s)=>sb('students?select=*&college=eq.'+encodeURIComponent(c)+'&section=eq.'+encodeURIComponent(s)+'&order=id'),
   myStudents:(c,s,m)=>sb('students?select=*&college=eq.'+encodeURIComponent(c)+'&section=eq.'+encodeURIComponent(s)+'&mentor_assigned=eq.'+encodeURIComponent(m)+'&order=id'),
@@ -1167,11 +1212,13 @@ async function initApp(){
       allStudents=results.flat();students=allStudents;
       if(allStudents.length===0){
         document.getElementById('sstSeedPanel').style.display='block';
+        const isAlliance=selectedCollegeKey==='alliance';
         const isBharathidasan=selectedCollegeKey==='bharathidasan';
         const isRathinam=selectedCollegeKey==='rathinam';
         const isTerf=selectedCollegeKey==='terf';
         let seedFn='seedSSTStudents()';let seedLabel='SST';let seedDesc='Insert all I BBA and I MCA students into the database. Run once only.';
-        if(isBharathidasan){seedFn='seedBharathidasanStudents()';seedLabel='Bharathidasan';seedDesc='Insert all II B.Sc CT and I B.Sc CT students into the database. Run once only.';}
+        if(isAlliance){seedFn='seedAllianceStudents()';seedLabel='Alliance';seedDesc='Insert all Alliance University students into the database. Run once only.';}
+        else if(isBharathidasan){seedFn='seedBharathidasanStudents()';seedLabel='Bharathidasan';seedDesc='Insert all II B.Sc CT and I B.Sc CT students into the database. Run once only.';}
         else if(isRathinam){seedFn='seedRathinamStudents()';seedLabel='Rathinam';seedDesc='Insert all B.Sc CT (GenAI) and BCA (AI) students into the database. Run once only.';}
         else if(isTerf){seedFn='seedTerfStudents()';seedLabel='TERF';seedDesc='Insert all II B.Sc IT students into the database. Run once only.';}
         document.getElementById('seedBtn').setAttribute('onclick',seedFn);
@@ -1447,7 +1494,6 @@ async function seedTerfStudents(){
   else{status.textContent=inserted+' inserted, '+errors+' errors';status.style.color='var(--red)';showToast(errors+' students failed','error');}
 }
 
-// ── PATCH 3: Bharathidasan seed now includes all detail fields ──
 async function seedBharathidasanStudents(){
   const btn=document.getElementById('seedBtn');
   const status=document.getElementById('seedStatus');
@@ -1492,6 +1538,53 @@ async function seedBharathidasanStudents(){
     status.style.color='var(--green)';
     document.getElementById('sstSeedPanel').style.display='none';
     showToast(inserted+' Bharathidasan students added!','success');
+    await initApp();
+  }else{
+    status.textContent=inserted+' inserted, '+errors+' errors';
+    status.style.color='var(--red)';
+    showToast(errors+' students failed — check console','error');
+  }
+}
+
+async function seedAllianceStudents(){
+  const btn=document.getElementById('seedBtn');
+  const status=document.getElementById('seedStatus');
+  btn.disabled=true;
+  btn.innerHTML='<span class="spinner"></span> Inserting\u2026';
+  const col=selectedCollegeName;
+  const allToInsert=[
+    ...ALLIANCE_IMCA_A_STUDENTS.map(s=>({...s,section:'I MCA - A'})),
+    ...ALLIANCE_IMCA_B_STUDENTS.map(s=>({...s,section:'I MCA - B'})),
+    ...ALLIANCE_IIBCA_AIML_STUDENTS.map(s=>({...s,section:'II BCA AI & ML (A+B)'}))
+  ];
+  let inserted=0,errors=0;
+  for(const s of allToInsert){
+    try{
+      await api.insertStudent({
+        college:         col,
+        section:         s.section,
+        name:            s.name,
+        register_number: s.register_number,
+        course:          s.course,
+        project_title:   s.project_title,
+        mentor_assigned: s.mentor_assigned,
+        phone:           s.phone || null,
+        email:           s.email
+      });
+      inserted++;
+      status.textContent=inserted+' inserted\u2026';
+    }catch(e){
+      errors++;
+      console.warn('Failed:',s.name,e.message);
+    }
+  }
+  btn.disabled=false;
+  btn.innerHTML='&#43; Insert Alliance Students';
+  if(errors===0){
+    status.textContent='\u2713 All '+inserted+' students inserted!';
+    status.style.color='var(--green)';
+    document.getElementById('sstSeedPanel').style.display='none';
+    showToast(inserted+' Alliance students added!','success');
     await initApp();
   }else{
     status.textContent=inserted+' inserted, '+errors+' errors';
