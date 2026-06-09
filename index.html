@@ -710,7 +710,7 @@ const COLLEGE_SECTIONS={
   // ── Bharathidasan ──
   'bharathidasan':[
     {value:'BCAS_IIBSCCT', label:'II B.Sc CT'},
-    {value:'BCAS_IBSCCT',  label:'I B.Sc CT'},
+    {value:'BCAS_IBSCCT',  label:'I B.Sc CT'}
   ]
 };
 
@@ -774,7 +774,7 @@ const COLLEGE_ADMIN_SECTIONS={
   'terf':['II B.Sc IT'],
   'rathinam':['B.Sc CT (GenAI)','BCA (AI)'],
   // ── Bharathidasan ──
-  'bharathidasan':['II B.Sc CT','I B.Sc CT','I BBA CA']
+  'bharathidasan':['II B.Sc CT','I B.Sc CT']
 };
 
 // ── SECTION VALUE → DISPLAY LABEL ────────────────────────────
@@ -796,8 +796,7 @@ const SECTION_LABEL_MAP={
   'RCAS_BCA': 'BCA (AI)',
   // ── Bharathidasan ──
   'BCAS_IIBSCCT':'II B.Sc CT',
-  'BCAS_IBSCCT': 'I B.Sc CT',
-  'BCAS_IBBACA': 'I BBA CA'
+  'BCAS_IBSCCT': 'I B.Sc CT'
 };
 
 // ── ADMIN TAB CONFIGS ─────────────────────────────────────────
@@ -831,8 +830,7 @@ const COLLEGE_ADMIN_TABS={
   'bharathidasan':[
     {key:'all',          label:'All'},
     {key:'II B.Sc CT',   label:'II B.Sc CT'},
-    {key:'I B.Sc CT',    label:'I B.Sc CT'},
-    {key:'I BBA CA',     label:'I BBA CA'}
+    {key:'I B.Sc CT',    label:'I B.Sc CT'}
   ]
 };
 
@@ -1577,44 +1575,56 @@ async function seedTerfStudents(){
 
 // ── NEW: Bharathidasan seed ───────────────────────────────────
 async function seedBharathidasanStudents(){
-  const btn=document.getElementById('seedBtn');const status=document.getElementById('seedStatus');
-  btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Inserting\u2026';
+  const btn=document.getElementById('seedBtn');
+  const status=document.getElementById('seedStatus');
+  btn.disabled=true;
+  btn.innerHTML='<span class="spinner"></span> Inserting\u2026';
   const col=selectedCollegeName;
+ 
+  // Only II B.Sc CT and I B.Sc CT — I BBA CA removed
   const allToInsert=[
     ...BCAS_IIBSCCT_STUDENTS.map(s=>({...s,section:'II B.Sc CT'})),
-    ...BCAS_IBSCCT_STUDENTS.map(s=>({...s,section:'I B.Sc CT'})),
-    ...BCAS_IBBACA_STUDENTS.map(s=>({...s,section:'I BBA CA'}))
+    ...BCAS_IBSCCT_STUDENTS.map(s=>({...s,section:'I B.Sc CT'}))
   ];
+ 
   let inserted=0,errors=0;
   for(const s of allToInsert){
     try{
+      // Only send columns that exist in the students table
       await api.insertStudent({
-        college:col,section:s.section,name:s.name,
-        register_number:s.register_number,course:s.course,
-        project_title:s.project_title,mentor_assigned:s.mentor_assigned,
-        phone:s.phone,email:s.email,
-        problem_statement:s.problem_statement||null,
-        impact_of_problem:s.impact_of_problem||null,
-        brand_name:s.brand_name||null,
-        project_type:s.project_type||null,
-        target_users:s.target_users||null,
-        key_outcome:s.key_outcome||null
+        college:          col,
+        section:          s.section,
+        name:             s.name,
+        register_number:  s.register_number,
+        course:           s.course,
+        project_title:    s.project_title,
+        mentor_assigned:  s.mentor_assigned,
+        phone:            s.phone  || null,
+        email:            s.email
       });
-      inserted++;status.textContent=inserted+' inserted\u2026';
-    }catch(e){errors++;console.warn('Failed:',s.name,e.message);}
+      inserted++;
+      status.textContent=inserted+' inserted\u2026';
+    }catch(e){
+      errors++;
+      console.warn('Failed:',s.name,e.message);
+    }
   }
-  btn.disabled=false;btn.innerHTML='&#43; Insert Bharathidasan Students';
+ 
+  btn.disabled=false;
+  btn.innerHTML='&#43; Insert Bharathidasan Students';
+ 
   if(errors===0){
-    status.textContent='\u2713 All '+inserted+' students inserted!';status.style.color='var(--green)';
+    status.textContent='\u2713 All '+inserted+' students inserted!';
+    status.style.color='var(--green)';
     document.getElementById('sstSeedPanel').style.display='none';
     showToast(inserted+' Bharathidasan students added!','success');
     await initApp();
   }else{
-    status.textContent=inserted+' inserted, '+errors+' errors';status.style.color='var(--red)';
-    showToast(errors+' students failed','error');
+    status.textContent=inserted+' inserted, '+errors+' errors';
+    status.style.color='var(--red)';
+    showToast(errors+' students failed — check console','error');
   }
 }
-
 function renderAdminTabs(){const tabs=COLLEGE_ADMIN_TABS[selectedCollegeKey]||COLLEGE_ADMIN_TABS['default'];const row=document.getElementById('adminTabRow');row.innerHTML=tabs.map((t,i)=>`<button class="tab-btn${i===0?' active':''}" onclick="setAdminTab('${escHTML(t.key).replace(/'/g,'&#39;')}',this)">${escHTML(t.label)}</button>`).join('');adminTab='all';}
 function setAdminTab(tab,btn){adminTab=tab;document.querySelectorAll('#adminTabRow .tab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderAdminTable();renderAdminStats();}
 function getAdminList(){if(adminTab==='all')return allStudents;return allStudents.filter(s=>s.section===adminTab);}
