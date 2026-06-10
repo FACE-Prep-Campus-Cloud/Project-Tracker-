@@ -698,8 +698,8 @@ const COLLEGE_SECTIONS={
     {value:'ALU_IIBCA_AIML',label:'II BCA AI & ML (A+B)'}
   ],
   'kristu':[
-    {value:'KJ_BBAAIDS',label:'I BBA AI & DS'},
-    {value:'KJ_BBAFN',label:'I BBA FinTech'}
+    {value:'KJ_BBAAIDS',label:'BBA - AI & DS'},
+    {value:'KJ_BBAFN',label:'BBA - FinTech'}
   ]
 };
 
@@ -753,7 +753,7 @@ const COLLEGE_ADMIN_SECTIONS={
   'rathinam':['B.Sc CT (GenAI)','BCA (AI)'],
   'bharathidasan':['II B.Sc CT','I B.Sc CT'],
   'alliance':['I MCA - A','I MCA - B','II BCA AI & ML (A+B)'],
-  'kristu':['I BBA AI & DS','I BBA FinTech']
+  'kristu':['BBA - AI & DS','BBA - FinTech']
 };
 
 const SECTION_LABEL_MAP={
@@ -764,8 +764,8 @@ const SECTION_LABEL_MAP={
   'RCAS_BSCT':'B.Sc CT (GenAI)','RCAS_BCA':'BCA (AI)',
   'BCAS_IIBSCCT':'II B.Sc CT','BCAS_IBSCCT':'I B.Sc CT',
   'ALU_IMCA_A':'I MCA - A','ALU_IMCA_B':'I MCA - B','ALU_IIBCA_AIML':'II BCA AI & ML (A+B)',
-  'KJ_BBAAIDS':'I BBA AI & DS',
-  'KJ_BBAFN':'I BBA FinTech'
+  'KJ_BBAAIDS':'BBA - AI & DS',
+  'KJ_BBAFN':'BBA - FinTech'
 };
 
 const COLLEGE_ADMIN_TABS={
@@ -792,8 +792,8 @@ const COLLEGE_ADMIN_TABS={
   ],
   'kristu':[
     {key:'all',label:'All'},
-    {key:'I BBA AI & DS',label:'I BBA AI & DS'},
-    {key:'I BBA FinTech',label:'I BBA FinTech'}
+    {key:'BBA - AI & DS',label:'BBA - AI & DS'},
+    {key:'BBA - FinTech',label:'BBA - FinTech'}
   ]
 };
 
@@ -1270,7 +1270,7 @@ async function initApp(){
         else if(isBharathidasan){seedFn='seedBharathidasanStudents()';seedLabel='Bharathidasan';seedDesc='Insert all II B.Sc CT and I B.Sc CT students into the database. Run once only.';}
         else if(isRathinam){seedFn='seedRathinamStudents()';seedLabel='Rathinam';seedDesc='Insert all B.Sc CT (GenAI) and BCA (AI) students into the database. Run once only.';}
         else if(isTerf){seedFn='seedTerfStudents()';seedLabel='TERF';seedDesc='Insert all II B.Sc IT students into the database. Run once only.';}
-        else if(isKristu){seedFn='seedKristuStudents()';seedLabel='Kristu';seedDesc='Insert all I BBA AI & DS and I BBA FinTech students into the database. Run once only.';}
+        else if(isKristu){seedFn='seedKristuStudents()';seedLabel='Kristu';seedDesc='Insert all BBA - AI & DS and BBA - FinTech students into the database. Run once only.';}
         document.getElementById('seedBtn').setAttribute('onclick',seedFn);
         document.getElementById('seedBtn').textContent='+ Insert '+seedLabel+' Students';
         document.querySelector('.seed-panel-title').textContent='First-time Setup: Seed '+seedLabel+' Students';
@@ -1650,8 +1650,8 @@ async function seedKristuStudents(){
   btn.innerHTML='<span class="spinner"></span> Inserting\u2026';
   const col=selectedCollegeName;
   const allToInsert=[
-    ...KJ_BBAAIDS_STUDENTS.map(s=>({...s,section:'I BBA AI & DS'})),
-    ...KJ_BBAFN_STUDENTS.map(s=>({...s,section:'I BBA FinTech'}))
+    ...KJ_BBAAIDS_STUDENTS.map(s=>({...s,section:'BBA - AI & DS'})),
+    ...KJ_BBAFN_STUDENTS.map(s=>({...s,section:'BBA - FinTech'}))
   ];
   let inserted=0,errors=0;
   for(const s of allToInsert){
