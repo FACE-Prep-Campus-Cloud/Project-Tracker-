@@ -646,7 +646,7 @@ tbody tr:hover td{background:var(--surface);}
 <div class="toast" id="toast"><span class="toast-dot success" id="toastDot"></span><span id="toastMsg">Saved!</span></div>
 
 <script>
-  const SUPABASE_URL='https://qjwbndrgzvboszfzrcuy.supabase.co';
+const SUPABASE_URL='https://qjwbndrgzvboszfzrcuy.supabase.co';
 const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqd2JuZHJnenZib3N6ZnpyY3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NTA3MzIsImV4cCI6MjA5NjEyNjczMn0.x-su_5f_XQ9_ql7iw3Aa_4E4ww9SJIqRGVdTHo6zSpE';
 const PEER_SUPABASE_URL='https://zykmcumlzhucnvxqhpgm.supabase.co';
 const PEER_SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5a21jdW1semh1Y252eHFocGdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3NzE5MDYsImV4cCI6MjA5NTM0NzkwNn0.kqUgSpGFSwMXpHkWRihhVJXDtVfl0tGdU24POxmXHWc';
@@ -665,11 +665,11 @@ const PINS={
   'Anish N':'1212','Dharshan K':'1212','Sowmiya':'1212','Arun':'1212',
   'Shahul':'1212','Anto Jegan':'1212','Buvaneshwari':'1212','Ajeetha':'1212',
   'Senthil Nathan S':'1212','Dharmaprakash L':'1212','Bhargavi':'1212',
-  // Alliance University mentors
   'Abhishek':'1212','Mary Agnes':'1212','Tanisha Das':'1212',
   'Aman Kumar':'1212','Raghav Reddy':'1212','Gomathy V':'1212',
   'Nagashri':'1212','Sanjivini':'1212',
-  'Mr Lakshaya': '1212', 'Ms Nagashree': '1212', 'Mr. Neeraj': '1212', 'Ms. Rakshitha': '1212'
+  'Mr Lakshaya':'1212','Ms Nagashree':'1212','Mr. Neeraj':'1212','Ms. Rakshitha':'1212',
+  'Ishika Bhattacharjee':'1212'
 };
 
 const COLLEGE_SECTIONS={
@@ -697,8 +697,10 @@ const COLLEGE_SECTIONS={
     {value:'ALU_IMCA_B',label:'I MCA - B'},
     {value:'ALU_IIBCA_AIML',label:'II BCA AI & ML (A+B)'}
   ],
-  'kristu': [{ value: 'KJ_IIBCA', label: 'II BCA' }]
-
+  'kristu':[
+    {value:'KJ_BBAAIDS',label:'I BBA AI & DS'},
+    {value:'KJ_BBAFN',label:'I BBA FinTech'}
+  ]
 };
 
 const SECTION_ROLES={
@@ -721,11 +723,11 @@ const SECTION_ROLES={
   'RCAS_BCA':['Buvaneshwari','Admin'],
   'BCAS_IIBSCCT':['Senthil Nathan S','Dharmaprakash L','Admin'],
   'BCAS_IBSCCT':['Senthil Nathan S','Dharmaprakash L','Admin'],
-  // Alliance University sections
   'ALU_IMCA_A':['Abhishek','Admin'],
   'ALU_IMCA_B':['Mary Agnes','Tanisha Das','Admin'],
   'ALU_IIBCA_AIML':['Aman Kumar','Raghav Reddy','Gomathy V','Nagashri','Sanjivini','Admin'],
-  'KJ_IIBCA': ['Mr Lakshaya', 'Ms Nagashree', 'Mr. Neeraj', 'Ms. Rakshitha', 'Admin']
+  'KJ_BBAAIDS':['Ishika Bhattacharjee','Admin'],
+  'KJ_BBAFN':['Ishika Bhattacharjee','Admin']
 };
 
 const COLLEGE_NAMES={
@@ -751,7 +753,7 @@ const COLLEGE_ADMIN_SECTIONS={
   'rathinam':['B.Sc CT (GenAI)','BCA (AI)'],
   'bharathidasan':['II B.Sc CT','I B.Sc CT'],
   'alliance':['I MCA - A','I MCA - B','II BCA AI & ML (A+B)'],
-  'kristu': ['II BCA']
+  'kristu':['I BBA AI & DS','I BBA FinTech']
 };
 
 const SECTION_LABEL_MAP={
@@ -761,9 +763,9 @@ const SECTION_LABEL_MAP={
   'KW_A':'I BCA - A','BCA':'BCA','TERF_IIBSCIT':'II B.Sc IT',
   'RCAS_BSCT':'B.Sc CT (GenAI)','RCAS_BCA':'BCA (AI)',
   'BCAS_IIBSCCT':'II B.Sc CT','BCAS_IBSCCT':'I B.Sc CT',
-  // Alliance University
   'ALU_IMCA_A':'I MCA - A','ALU_IMCA_B':'I MCA - B','ALU_IIBCA_AIML':'II BCA AI & ML (A+B)',
-  'KJ_IIBCA': 'II BCA'
+  'KJ_BBAAIDS':'I BBA AI & DS',
+  'KJ_BBAFN':'I BBA FinTech'
 };
 
 const COLLEGE_ADMIN_TABS={
@@ -788,7 +790,11 @@ const COLLEGE_ADMIN_TABS={
     {key:'I MCA - B',label:'I MCA - B'},
     {key:'II BCA AI & ML (A+B)',label:'II BCA AI & ML'}
   ],
-  'kristu': [{ key: 'all', label: 'All' }, { key: 'II BCA', label: 'II BCA' }]
+  'kristu':[
+    {key:'all',label:'All'},
+    {key:'I BBA AI & DS',label:'I BBA AI & DS'},
+    {key:'I BBA FinTech',label:'I BBA FinTech'}
+  ]
 };
 
 const MENTOR_COLORS={
@@ -799,12 +805,11 @@ const MENTOR_COLORS={
   'Sowmiya':'#e11d48','Arun':'#0d9488','Shahul':'#7c3aed','Ajeetha':'#0ea5e9',
   'Anto Jegan':'#0891b2','Buvaneshwari':'#9333ea',
   'Senthil Nathan S':'#0d9488','Dharmaprakash L':'#7c3aed','Bhargavi':'#db2777',
-  // Alliance University mentors
   'Abhishek':'#0d9488','Mary Agnes':'#9333ea','Tanisha Das':'#db2777',
   'Aman Kumar':'#0891b2','Raghav Reddy':'#b45309','Gomathy V':'#16a34a',
   'Nagashri':'#e11d48','Sanjivini':'#7c3aed',
-  'Mr Lakshaya': '#0d9488', 'Ms Nagashree': '#9333ea', 'Mr. Neeraj': '#0891b2', 'Ms. Rakshitha': '#db2777'
-
+  'Mr Lakshaya':'#0d9488','Ms Nagashree':'#9333ea','Mr. Neeraj':'#0891b2','Ms. Rakshitha':'#db2777',
+  'Ishika Bhattacharjee':'#0891b2'
 };
 
 // ════════ SEED DATA ════════
@@ -1016,6 +1021,40 @@ const ALLIANCE_IIBCA_AIML_STUDENTS=[
   {name:'Adarsh Kumar Gupta Kasaudhan',register_number:'2411021240076',course:'II BCA AI & ML (A+B)',project_title:'FestNest - Centralized platform for college events, hackathons, workshops, and competitions',mentor_assigned:'Sanjivini',phone:'7054054583',email:'gadarsh960@gmail.com'}
 ];
 
+// ════════ KRISTU JAYANTI SEED DATA ════════
+const KJ_BBAAIDS_STUDENTS=[
+  {name:'Ananya K',register_number:'25BBAI09',course:'BBA - AI & DS',project_title:'Customer experience study',mentor_assigned:'Ishika Bhattacharjee',phone:'9036190085',email:'ananya3913@gmail.com'},
+  {name:'Rishika Patel',register_number:'25BBAI44',course:'BBA - AI & DS',project_title:'SkillDrift',mentor_assigned:'Ishika Bhattacharjee',phone:'8105829562',email:'rishikapatel753@gmail.com'},
+  {name:'Sharan Venkatesh',register_number:'25BBAI48',course:'BBA - AI & DS',project_title:'Mise-en-scène: A Mobile Application for Practical Cinema Skill Development and Portfolio Building',mentor_assigned:'Ishika Bhattacharjee',phone:'8660848554',email:'sharan.venkatesh2007@gmail.com'},
+  {name:'Ashutosh Khalkho',register_number:'25BBAI18',course:'BBA - AI & DS',project_title:'Clinic appointment process improvement',mentor_assigned:'Ishika Bhattacharjee',phone:'9243790171',email:'khalkhoashutosh1@gmail.com'},
+  {name:'Pooja Roy',register_number:'25BBAI37',course:'BBA - AI & DS',project_title:'AI Customer Profit Optimization Engine',mentor_assigned:'Ishika Bhattacharjee',phone:'8871663078',email:'roypooja2006@gmail.com'},
+  {name:'Esther Dreama Pinto',register_number:'25BBAI36',course:'BBA - AI & DS',project_title:'AI Trend Hunter: Predictive Market Trend Analysis for Business Growth',mentor_assigned:'Ishika Bhattacharjee',phone:'9834364147',email:'estherdreama@gmail.com'},
+  {name:'Adarsh Suresh',register_number:'25BBAI03',course:'BBA - AI & DS',project_title:'Personal Finance Tracker with Spending Insights',mentor_assigned:'Ishika Bhattacharjee',phone:'9937561812',email:'adarshsuresh2210@gmail.com'},
+  {name:'Nripan Ravi',register_number:'25BBAI34',course:'BBA - AI & DS',project_title:'Restaurant Demand Prediction and Food Waste Management System',mentor_assigned:'Ishika Bhattacharjee',phone:'9961312046',email:'nripanravi111@gmail.com'},
+  {name:'Ajay Monson',register_number:'25BBAI06',course:'BBA - AI & DS',project_title:'Improve the Order Management Process of a Small Catering Business',mentor_assigned:'Ishika Bhattacharjee',phone:'7907578962',email:'ajaymonson@gmail.com'},
+  {name:'Nandana Prakashan Nambiar',register_number:'25BBAI32',course:'BBA - AI & DS',project_title:'SafeHer: Smart Women Safety and Emergency Alert System',mentor_assigned:'Ishika Bhattacharjee',phone:'9325021204',email:'25bbai32@kristujayanti.com'},
+  {name:'Shreya Chopra',register_number:'25BBAI49',course:'BBA - AI & DS',project_title:'Internship Recruitment Tracking System for Startups',mentor_assigned:'Ishika Bhattacharjee',phone:'9243731575',email:'shreya54chopra@gmail.com'},
+  {name:'Shriya Prathap',register_number:'25BBAI52',course:'BBA - AI & DS',project_title:'RefundShield',mentor_assigned:'Ishika Bhattacharjee',phone:'9591328723',email:'shriyaprathapshriyaprathap@gmail.com'},
+  {name:'Anuraj Mishra',register_number:'25BBAI14',course:'BBA - AI & DS',project_title:'Digital Marketing Strategy for a Local Coaching Institute',mentor_assigned:'Ishika Bhattacharjee',phone:'7004630321',email:'25bbai14@kristujayanti.com'},
+  {name:'Besii Kaikho',register_number:'25BBAI20',course:'BBA - AI & DS',project_title:'Smart Blind Assistance Glasses using AI and Sensors',mentor_assigned:'Ishika Bhattacharjee',phone:'8413029373',email:'25bbai20@kristujayanti.com'},
+  {name:'Rishav Singh',register_number:'25BBAI43',course:'BBA - AI & DS',project_title:'Prediction system',mentor_assigned:'Ishika Bhattacharjee',phone:'8178904768',email:'25bbai43@kristujayanti.com'},
+  {name:'Pavan K',register_number:'25BBAI35',course:'BBA - AI & DS',project_title:'Created a bot using AI',mentor_assigned:'Ishika Bhattacharjee',phone:'9980827703',email:'pavankcr7@gmail.com'},
+  {name:'Niharika Vohra',register_number:'25BBAI33',course:'BBA - AI & DS',project_title:'Optimizing Event Equipment Rental Operations Through Digital Reservation and Inventory Tracking (Velmora)',mentor_assigned:'Ishika Bhattacharjee',phone:'7051921239',email:'vohraniharika10@gmail.com'},
+  {name:'Revant Sandilya',register_number:'25BBAI41',course:'BBA - AI & DS',project_title:'AI-Based Smart Safety & Emergency Response System',mentor_assigned:'Ishika Bhattacharjee',phone:'9956335566',email:'revantshandilya@gmail.com'},
+  {name:'Suryansh Kumar',register_number:'25BBAI57',course:'BBA - AI & DS',project_title:'Customer Experience Analysis and Feedback Improvement System',mentor_assigned:'Ishika Bhattacharjee',phone:'7493947948',email:'sanu15051612@gmail.com'},
+  {name:'Ayush Kumar Singh',register_number:'25BBAI19',course:'BBA - AI & DS',project_title:'Business Process Improvement',mentor_assigned:'Ishika Bhattacharjee',phone:'7207203107',email:'ayushsingh70554@gmail.com'},
+  {name:'Adiba Mariyam',register_number:'25BBAI04',course:'BBA - AI & DS',project_title:'AI and Machine Learning',mentor_assigned:'Ishika Bhattacharjee',phone:'9844700897',email:'25bbai04@kristujayanti.com'},
+  {name:'Anshika Singh',register_number:'25BBAI12',course:'BBA - AI & DS',project_title:'Voice Assistant for disabled people',mentor_assigned:'Ishika Bhattacharjee',phone:'7975964530',email:'anshika0713singh@gmail.com'}
+];
+
+const KJ_BBAFN_STUDENTS=[
+  {name:'R. Darshan',register_number:'25BBFN39',course:'BBA - FinTech',project_title:'Improving PG/Hostel Management Through a Digital Rent and Complaint Tracking System',mentor_assigned:'Ishika Bhattacharjee',phone:'8073939901',email:'25bbfn39@gmail.com'},
+  {name:'Sneha Majumdar',register_number:'25BBFN49',course:'BBA - FinTech',project_title:'Fingerprint-Only Offline POS Payment System',mentor_assigned:'Ishika Bhattacharjee',phone:'8902373792',email:'25bbfn49@kristujayanti.com'},
+  {name:'Aditi Dhanraj',register_number:'25BBFN03',course:'BBA - FinTech',project_title:'Customer Experience Study of Students in the College Placement Process',mentor_assigned:'Ishika Bhattacharjee',phone:'8340389869',email:'aditidhanraj391@gmail.com'},
+  {name:'Theodosia',register_number:'25BBFN54',course:'BBA - FinTech',project_title:'Digital Credit and Collection Management System for Small Retail Businesses',mentor_assigned:'Ishika Bhattacharjee',phone:'6362477220',email:'25bbfn54@kristujayanti.com'},
+  {name:'Lokeshwari S',register_number:'25BBFN25',course:'BBA - FinTech',project_title:'Finzo AI Powered Personal Finance & Expense Management System',mentor_assigned:'Ishika Bhattacharjee',phone:'8660901407',email:'25bbfn25@kristujayanti.com'}
+];
+
 // ════════ STATE ════════
 let selectedCollegeKey=null,selectedCollegeName=null,selectedSection=null,selectedRole=null,currentUser=null;
 let students=[],allStudents=[];
@@ -1225,11 +1264,13 @@ async function initApp(){
         const isBharathidasan=selectedCollegeKey==='bharathidasan';
         const isRathinam=selectedCollegeKey==='rathinam';
         const isTerf=selectedCollegeKey==='terf';
+        const isKristu=selectedCollegeKey==='kristu';
         let seedFn='seedSSTStudents()';let seedLabel='SST';let seedDesc='Insert all I BBA and I MCA students into the database. Run once only.';
         if(isAlliance){seedFn='seedAllianceStudents()';seedLabel='Alliance';seedDesc='Insert all Alliance University students into the database. Run once only.';}
         else if(isBharathidasan){seedFn='seedBharathidasanStudents()';seedLabel='Bharathidasan';seedDesc='Insert all II B.Sc CT and I B.Sc CT students into the database. Run once only.';}
         else if(isRathinam){seedFn='seedRathinamStudents()';seedLabel='Rathinam';seedDesc='Insert all B.Sc CT (GenAI) and BCA (AI) students into the database. Run once only.';}
         else if(isTerf){seedFn='seedTerfStudents()';seedLabel='TERF';seedDesc='Insert all II B.Sc IT students into the database. Run once only.';}
+        else if(isKristu){seedFn='seedKristuStudents()';seedLabel='Kristu';seedDesc='Insert all I BBA AI & DS and I BBA FinTech students into the database. Run once only.';}
         document.getElementById('seedBtn').setAttribute('onclick',seedFn);
         document.getElementById('seedBtn').textContent='+ Insert '+seedLabel+' Students';
         document.querySelector('.seed-panel-title').textContent='First-time Setup: Seed '+seedLabel+' Students';
@@ -1602,6 +1643,52 @@ async function seedAllianceStudents(){
   }
 }
 
+async function seedKristuStudents(){
+  const btn=document.getElementById('seedBtn');
+  const status=document.getElementById('seedStatus');
+  btn.disabled=true;
+  btn.innerHTML='<span class="spinner"></span> Inserting\u2026';
+  const col=selectedCollegeName;
+  const allToInsert=[
+    ...KJ_BBAAIDS_STUDENTS.map(s=>({...s,section:'I BBA AI & DS'})),
+    ...KJ_BBAFN_STUDENTS.map(s=>({...s,section:'I BBA FinTech'}))
+  ];
+  let inserted=0,errors=0;
+  for(const s of allToInsert){
+    try{
+      await api.insertStudent({
+        college:         col,
+        section:         s.section,
+        name:            s.name,
+        register_number: s.register_number,
+        course:          s.course,
+        project_title:   s.project_title,
+        mentor_assigned: s.mentor_assigned,
+        phone:           s.phone || null,
+        email:           s.email
+      });
+      inserted++;
+      status.textContent=inserted+' inserted\u2026';
+    }catch(e){
+      errors++;
+      console.warn('Failed:',s.name,e.message);
+    }
+  }
+  btn.disabled=false;
+  btn.innerHTML='&#43; Insert Kristu Students';
+  if(errors===0){
+    status.textContent='\u2713 All '+inserted+' students inserted!';
+    status.style.color='var(--green)';
+    document.getElementById('sstSeedPanel').style.display='none';
+    showToast(inserted+' Kristu Jayanti students added!','success');
+    await initApp();
+  }else{
+    status.textContent=inserted+' inserted, '+errors+' errors';
+    status.style.color='var(--red)';
+    showToast(errors+' students failed — check console','error');
+  }
+}
+
 function renderAdminTabs(){const tabs=COLLEGE_ADMIN_TABS[selectedCollegeKey]||COLLEGE_ADMIN_TABS['default'];const row=document.getElementById('adminTabRow');row.innerHTML=tabs.map((t,i)=>`<button class="tab-btn${i===0?' active':''}" onclick="setAdminTab('${escHTML(t.key).replace(/'/g,'&#39;')}',this)">${escHTML(t.label)}</button>`).join('');adminTab='all';}
 function setAdminTab(tab,btn){adminTab=tab;document.querySelectorAll('#adminTabRow .tab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderAdminTable();renderAdminStats();}
 function getAdminList(){if(adminTab==='all')return allStudents;return allStudents.filter(s=>s.section===adminTab);}
@@ -1614,7 +1701,6 @@ function exportCSV(){const list=getAdminList();const rows=[['#','Name','Register
 
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 let toastTimeout;
-function showToast(msg,type='success'){const t=document.getElementById('toast');document.getElementById('toastMsg').textContent=msg;document.getElementById('toastDot').className='toast-dot '+type;t.classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>t.classList.remove('show'),3500);}
-</script>
+function showToast(msg,type='success'){const t=document.getElementById('toast');document.getElementById('toastMsg').textContent=msg;document.getElementById('toastDot').className='toast-dot '+type;t.classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>t.classList.remove('show'),3500);}</script>
 </body>
 </html>
