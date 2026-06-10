@@ -704,8 +704,7 @@ const COLLEGE_SECTIONS={
     {value:'KJ_BBAFN',label:'BBA - FinTech'}
   ],
   'svyasa':[{value:'SVYASA_IIBCA',label:'II BCA'}],
-  'asb':[{value:'ASB_BCA',label:'BCA'}]
-};
+'asb':[{value:'ASB_BCA',label:'BCA'},{value:'ASB_BBA',label:'BBA'}]};
 
 const SECTION_ROLES={
   'A':['Aparna','Arun Raj','Saral','Admin'],
@@ -733,8 +732,8 @@ const SECTION_ROLES={
   'KJ_BBAAIDS':['Ishika Bhattacharjee','Admin'],
   'KJ_BBAFN':['Ishika Bhattacharjee','Admin'],
   'SVYASA_IIBCA':['Mr Lakshaya','Ms Nagashree','Mr. Neeraj','Ms. Rakshitha','Admin'],
-  'ASB_BCA': ['Athira', 'Parvathy', 'Admin']
-};
+'ASB_BCA': ['Athira', 'Parvathy', 'Admin'],
+'ASB_BBA': ['Parvathy', 'Admin']};
 
 const COLLEGE_NAMES={
   'kamaraj':'Kamaraj College','kamaraj-women':"Kamaraj Women's College",
@@ -761,8 +760,7 @@ const COLLEGE_ADMIN_SECTIONS={
   'alliance':['I MCA - A','I MCA - B','II BCA AI & ML (A+B)'],
   'kristu':['BBA - AI & DS','BBA - FinTech'],
   'svyasa':['II BCA'],
-  'asb': ['BCA']
-};
+'asb': ['BCA', 'BBA']};
 
 const SECTION_LABEL_MAP={
   'II':'II BCA','BCH':'I B.Com Honours','BBADM':'I BBA Digital Marketing',
@@ -775,8 +773,8 @@ const SECTION_LABEL_MAP={
   'KJ_BBAAIDS':'BBA - AI & DS',
   'KJ_BBAFN':'BBA - FinTech',
   'SVYASA_IIBCA':'II BCA',
-  'ASB_BCA': 'BCA'
-};
+'ASB_BCA': 'BCA',
+'ASB_BBA': 'BBA'};
 
 const COLLEGE_ADMIN_TABS={
   'default':[
@@ -808,9 +806,9 @@ const COLLEGE_ADMIN_TABS={
   'svyasa':[{key:'all',label:'All'},{key:'II BCA',label:'II BCA'}],
   'asb': [
   { key: 'all', label: 'All' },
-  { key: 'BCA', label: 'BCA' }
-]
-};
+  { key: 'BCA', label: 'BCA' },
+  { key: 'BBA', label: 'BBA' }
+]};
 
 const MENTOR_COLORS={
   'Aparna':'var(--accent2)','Arun Raj':'var(--green)','Saral':'var(--amber)',
@@ -2082,8 +2080,10 @@ async function seedSvyasaStudents(){
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span> Inserting…';
   const col = selectedCollegeName;
-  const allToInsert = ASB_BCA_STUDENTS.map(s => ({ ...s, section: 'BCA' }));
-  let inserted = 0, errors = 0;
+const allToInsert = ASB_BCA_STUDENTS.map(s => ({
+  ...s,
+  section: s.course === 'BBA' ? 'BBA' : 'BCA'
+}));  let inserted = 0, errors = 0;
   for (const s of allToInsert) {
     try {
       await api.insertStudent({
