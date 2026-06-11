@@ -666,7 +666,11 @@ const PINS={
   'Mr. Aakaash M':'1212','Mr. Santhosh M':'1212',
   'Aarthi':'1212',
   'Malarvizhi':'1212','Sakshi':'1212','Subashni':'1212',
-  'Dharani':'1212','Nayeemunnisa':'1212','Geetha':'1212'
+  'Dharani':'1212','Nayeemunnisa':'1212','Geetha':'1212',
+  'Nivetha R P':'1212',
+'Syed Basila S':'1212',
+'Melbi Susan':'1212',
+'Hari Ganesh':'1212'
 };
 
 const COLLEGE_SECTIONS={
@@ -711,7 +715,13 @@ const COLLEGE_SECTIONS={
     {value:'SDNB_IBSCDSAI',label:'I B.Sc. DS & AI'},
     {value:'SDNB_IBBADMBA',label:'I BBA DM & BA'},
     {value:'SDNB_IIBSCCS',label:'II B.Sc. CS with AI'}
-  ]
+  ],
+  'amaraavathi':[
+  {value:'AMAR_IBCA',label:'I BCA'},
+  {value:'AMAR_IBSCAIML',label:'I B.Sc. AI & ML'},
+  {value:'AMAR_BCOMFT',label:'B.Com FinTech'},
+  {value:'AMAR_IIBCA',label:'II BCA'}
+]
 };
 
 const SECTION_ROLES={
@@ -758,7 +768,11 @@ const SECTION_ROLES={
   'SDNB_IBSCCS2':['Subashni','Admin'],
   'SDNB_IBSCDSAI':['Dharani','Admin'],
   'SDNB_IBBADMBA':['Nayeemunnisa','Admin'],
-  'SDNB_IIBSCCS':['Geetha','Admin']
+  'SDNB_IIBSCCS':['Geetha','Admin'],
+  'AMAR_IBCA':['Nivetha R P','Admin'],
+'AMAR_IBSCAIML':['Syed Basila S','Admin'],
+'AMAR_BCOMFT':['Melbi Susan','Admin'],
+'AMAR_IIBCA':['Hari Ganesh','Admin']
 };
 
 const COLLEGE_NAMES={
@@ -781,17 +795,18 @@ const COLLEGE_ADMIN_SECTIONS={
   'kamaraj-women':['I BCA - A'],'sst':['I BBA','I MCA'],
   'nagarathinam':['I B.Sc AI','II B.Sc AI','B.Com BC & FT','BBA DM','I B.Sc CC'],
   'studyworld':['BCA'],'terf':['II B.Sc IT'],
-  'rathinam':['B.Sc CT (GenAI)','BCA (AI)'],
+  'rathinam':['I B.Sc CT (GenAI)','I BCA (AI)'],
   'bharathidasan':['II B.Sc CT','I B.Sc CT'],
   'alliance':['I MCA - A','I MCA - B','II BCA AI & ML (A+B)'],
-  'kristu':['BBA - AI & DS','BBA - FinTech'],
+  'kristu':['I BBA - AI & DS','I BBA - FinTech'],
   'svyasa':['II BCA'],
-  'asb':['BCA','BBA'],
-  'vinayaga':['B.Sc AI & ML','B.Com FinTech with AI'],
-  'takshashila':['II B.Sc CS AI & ML','I B.Sc CS AI & ML','B.Com FinTech with AI'],
+  'asb':['I BCA','I BBA'],
+  'vinayaga':['I B.Sc AI & ML','I B.Com FinTech with AI'],
+  'takshashila':['II B.Sc CS AI & ML','I B.Sc CS AI & ML','I B.Com FinTech with AI'],
   'amet':['I B.Sc AI & ML','I B.Sc AI & DS','I BBA E-Commerce & Digital Marketing','II B.Sc AI & ML','I B.Com Fintech with AI'],
   'tjs':['II B.Sc CS with AI'],
-  'sdnb':['I B.Com FinTech with AI','I B.Sc. CS with AI (Shift 1)','I B.Sc. CS with AI (Shift 2)','I B.Sc. DS & AI','I BBA DM & BA','II B.Sc. CS with AI']
+  'sdnb':['I B.Com FinTech with AI','I B.Sc. CS with AI (Shift 1)','I B.Sc. CS with AI (Shift 2)','I B.Sc. DS & AI','I BBA DM & BA','II B.Sc. CS with AI'],
+  'amaraavathi':['I BCA','I B.Sc. AI & ML','B.Com FinTech','II BCA']
 };
 
 const SECTION_LABEL_MAP={
@@ -813,7 +828,11 @@ const SECTION_LABEL_MAP={
   'TJS_IIBSCCSAI':'II B.Sc CS with AI',
   'SDNB_IBCOMFT':'I B.Com FinTech with AI','SDNB_IBSCCS1':'I B.Sc. CS with AI (Shift 1)',
   'SDNB_IBSCCS2':'I B.Sc. CS with AI (Shift 2)','SDNB_IBSCDSAI':'I B.Sc. DS & AI',
-  'SDNB_IBBADMBA':'I BBA DM & BA','SDNB_IIBSCCS':'II B.Sc. CS with AI'
+  'SDNB_IBBADMBA':'I BBA DM & BA','SDNB_IIBSCCS':'II B.Sc. CS with AI',
+  'AMAR_IBCA':'I BCA',
+'AMAR_IBSCAIML':'I B.Sc. AI & ML',
+'AMAR_BCOMFT':'B.Com FinTech',
+'AMAR_IIBCA':'II BCA'
 };
 
 const COLLEGE_ADMIN_TABS={
@@ -844,8 +863,15 @@ const COLLEGE_ADMIN_TABS={
     {key:'all',label:'All'},{key:'I B.Com FinTech with AI',label:'B.Com FinTech AI'},
     {key:'I B.Sc. CS with AI (Shift 1)',label:'B.Sc CS AI (S1)'},{key:'I B.Sc. CS with AI (Shift 2)',label:'B.Sc CS AI (S2)'},
     {key:'I B.Sc. DS & AI',label:'B.Sc DS & AI'},{key:'I BBA DM & BA',label:'BBA DM & BA'},
-    {key:'II B.Sc. CS with AI',label:'II B.Sc CS AI'}
-  ]
+    {key:'II B.Sc. CS with AI',label:'II B.Sc CS AI'},
+  ],
+  'amaraavathi':[
+  {key:'all',label:'All'},
+  {key:'I BCA',label:'I BCA'},
+  {key:'I B.Sc. AI & ML',label:'I B.Sc. AI & ML'},
+  {key:'B.Com FinTech',label:'B.Com FinTech'},
+  {key:'II BCA',label:'II BCA'}
+]
 };
 
 const MENTOR_COLORS={
@@ -868,7 +894,11 @@ const MENTOR_COLORS={
   'Mr. Aakaash M':'#b45309','Mr. Santhosh M':'#0369a1',
   'Aarthi':'#e11d48',
   'Malarvizhi':'#0d9488','Sakshi':'#7c3aed','Subashni':'#db2777',
-  'Dharani':'#b45309','Nayeemunnisa':'#0369a1','Geetha':'#16a34a'
+  'Dharani':'#b45309','Nayeemunnisa':'#0369a1','Geetha':'#16a34a',
+  'Nivetha R P':'#0891b2',
+'Syed Basila S':'#9333ea',
+'Melbi Susan':'#db2777',
+'Hari Ganesh':'#16a34a'
 };
 
 // ════════ STATE ════════
