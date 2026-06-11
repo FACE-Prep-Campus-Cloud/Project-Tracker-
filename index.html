@@ -671,7 +671,9 @@ const PINS={
   'Mr Lakshaya':'1212','Ms Nagashree':'1212','Mr. Neeraj':'1212','Ms. Rakshitha':'1212',
   'Ishika Bhattacharjee':'1212',
   'Athira': '1212',
-'Parvathy': '1212'
+  'Parvathy': '1212',
+  'Malarvizhi':'1212','Sakshi':'1212','Subashni':'1212',
+  'Dharani':'1212','Nayeemunnisa':'1212','Geetha':'1212'
 };
 
 const COLLEGE_SECTIONS={
@@ -704,7 +706,15 @@ const COLLEGE_SECTIONS={
     {value:'KJ_BBAFN',label:'BBA - FinTech'}
   ],
   'svyasa':[{value:'SVYASA_IIBCA',label:'II BCA'}],
-'asb':[{value:'ASB_BCA',label:'BCA'},{value:'ASB_BBA',label:'BBA'}]};
+  'asb':[{value:'ASB_BCA',label:'BCA'},{value:'ASB_BBA',label:'BBA'}],
+  'sdnb':[
+    {value:'SDNB_IBCOMFT',label:'I B.Com FinTech with AI'},
+    {value:'SDNB_IBSCCS1',label:'I B.Sc. CS with AI (Shift 1)'},
+    {value:'SDNB_IBSCCS2',label:'I B.Sc. CS with AI (Shift 2)'},
+    {value:'SDNB_IBSCDSAI',label:'I B.Sc. DS & AI'},
+    {value:'SDNB_IBBADMBA',label:'I BBA DM & BA'},
+    {value:'SDNB_IIBSCCS',label:'II B.Sc. CS with AI'}
+  ]};
 
 const SECTION_ROLES={
   'A':['Aparna','Arun Raj','Saral','Admin'],
@@ -732,7 +742,14 @@ const SECTION_ROLES={
   'KJ_BBAAIDS':['Ishika Bhattacharjee','Admin'],
   'KJ_BBAFN':['Ishika Bhattacharjee','Admin'],
   'SVYASA_IIBCA':['Mr Lakshaya','Ms Nagashree','Mr. Neeraj','Ms. Rakshitha','Admin'],
-'ASB_BCA': ['Athira', 'Admin'],'ASB_BBA': ['Parvathy', 'Admin']};
+  'ASB_BCA': ['Athira', 'Admin'],
+  'ASB_BBA': ['Parvathy', 'Admin'],
+  'SDNB_IBCOMFT':['Malarvizhi','Admin'],
+  'SDNB_IBSCCS1':['Sakshi','Admin'],
+  'SDNB_IBSCCS2':['Subashni','Admin'],
+  'SDNB_IBSCDSAI':['Dharani','Admin'],
+  'SDNB_IBBADMBA':['Nayeemunnisa','Admin'],
+  'SDNB_IIBSCCS':['Geetha','Admin']};
 
 const COLLEGE_NAMES={
   'kamaraj':'Kamaraj College','kamaraj-women':"Kamaraj Women's College",
@@ -759,7 +776,8 @@ const COLLEGE_ADMIN_SECTIONS={
   'alliance':['I MCA - A','I MCA - B','II BCA AI & ML (A+B)'],
   'kristu':['BBA - AI & DS','BBA - FinTech'],
   'svyasa':['II BCA'],
-'asb': ['BCA', 'BBA']};
+  'asb': ['BCA', 'BBA'],
+  'sdnb':['I B.Com FinTech with AI','I B.Sc. CS with AI (Shift 1)','I B.Sc. CS with AI (Shift 2)','I B.Sc. DS & AI','I BBA DM & BA','II B.Sc. CS with AI']};
 
 const SECTION_LABEL_MAP={
   'II':'II BCA','BCH':'I B.Com Honours','BBADM':'I BBA Digital Marketing',
@@ -772,8 +790,14 @@ const SECTION_LABEL_MAP={
   'KJ_BBAAIDS':'BBA - AI & DS',
   'KJ_BBAFN':'BBA - FinTech',
   'SVYASA_IIBCA':'II BCA',
-'ASB_BCA': 'BCA',
-'ASB_BBA': 'BBA'};
+  'ASB_BCA': 'BCA',
+  'ASB_BBA': 'BBA',
+  'SDNB_IBCOMFT':'I B.Com FinTech with AI',
+  'SDNB_IBSCCS1':'I B.Sc. CS with AI (Shift 1)',
+  'SDNB_IBSCCS2':'I B.Sc. CS with AI (Shift 2)',
+  'SDNB_IBSCDSAI':'I B.Sc. DS & AI',
+  'SDNB_IBBADMBA':'I BBA DM & BA',
+  'SDNB_IIBSCCS':'II B.Sc. CS with AI'};
 
 const COLLEGE_ADMIN_TABS={
   'default':[
@@ -804,10 +828,19 @@ const COLLEGE_ADMIN_TABS={
   ],
   'svyasa':[{key:'all',label:'All'},{key:'II BCA',label:'II BCA'}],
   'asb': [
-  { key: 'all', label: 'All' },
-  { key: 'BCA', label: 'BCA' },
-  { key: 'BBA', label: 'BBA' }
-]};
+    { key: 'all', label: 'All' },
+    { key: 'BCA', label: 'BCA' },
+    { key: 'BBA', label: 'BBA' }
+  ],
+  'sdnb':[
+    {key:'all',label:'All'},
+    {key:'I B.Com FinTech with AI',label:'B.Com FinTech AI'},
+    {key:'I B.Sc. CS with AI (Shift 1)',label:'B.Sc CS AI (S1)'},
+    {key:'I B.Sc. CS with AI (Shift 2)',label:'B.Sc CS AI (S2)'},
+    {key:'I B.Sc. DS & AI',label:'B.Sc DS & AI'},
+    {key:'I BBA DM & BA',label:'BBA DM & BA'},
+    {key:'II B.Sc. CS with AI',label:'II B.Sc CS AI'}
+  ]};
 
 const MENTOR_COLORS={
   'Aparna':'var(--accent2)','Arun Raj':'var(--green)','Saral':'var(--amber)',
@@ -823,7 +856,9 @@ const MENTOR_COLORS={
   'Mr Lakshaya':'#0d9488','Ms Nagashree':'#9333ea','Mr. Neeraj':'#0891b2','Ms. Rakshitha':'#db2777',
   'Ishika Bhattacharjee':'#0891b2',
   'Athira': '#0891b2',
-'Parvathy': '#9333ea'
+  'Parvathy': '#9333ea',
+  'Malarvizhi':'#0d9488','Sakshi':'#7c3aed','Subashni':'#db2777',
+  'Dharani':'#b45309','Nayeemunnisa':'#0369a1','Geetha':'#16a34a'
 };
 
 // ════════ SEED DATA ════════
@@ -1013,279 +1048,27 @@ const BCAS_IBSCCT_STUDENTS=[
   {name:'SATHYA SUNDARAM',register_number:'2CT-25_022',course:'I B.Sc CT',project_title:'Modeling Application',mentor_assigned:'Senthil Nathan S',phone:'6369987493',email:'SATHYASUNDARAM1624@GMAIL.COM',problem_statement:'Develop a Python-based modeling application that analyzes input data and predicts outcomes using machine learning.',impact_of_problem:'Without a proper modeling application, data analysis becomes time-consuming and prone to errors.',brand_name:'Bharathidhasan college of arts and science',project_type:'Fashion',target_users:'All women',key_outcome:'Develop a Python-based modeling application for data analysis and machine learning.'},
   {name:'BHAVAN SHRI S',register_number:'2ct-25-028',course:'I B.Sc CT',project_title:'Online Learning Platform [Course, Videos, Quiz]',mentor_assigned:'Senthil Nathan S',phone:'7305799734',email:'bhavanbhavan2205@gmail.com',problem_statement:'Many students face difficulties in accessing structured and interactive learning resources.',impact_of_problem:'Poor understanding, no system to test knowledge, low student engagement, difficulty tracking progress.',brand_name:'Learnx',project_type:'Online learning platform',target_users:'Students',key_outcome:'Develop a simple, user-friendly online learning platform that enables students to access courses, watch videos, and take quizzes.'}
 ];
-  const ASB_BCA_STUDENTS = [
-  {
-    name: 'Parvathi R P',
-    register_number: '92225030',
-    course: 'BCA',
-    project_title: 'MediStock: A Mobile Application for Real-Time Medicine Availability Tracking',
-    mentor_assigned: 'Athira',
-    phone: '8590981783',
-    email: 'parvaathhii@gmail.com',
-    brand_name: 'MediStock',
-    project_type: 'Healthcare',
-    target_users: 'Families; Elderly People; General Public',
-    problem_statement: 'Many people face difficulty finding specific medicines, especially during urgent situations. Patients often visit multiple pharmacies or make repeated phone calls to check availability, which is time-consuming and stressful. Local pharmacies usually manage their inventory offline, and there is no easy way for customers to know whether a required medicine is in stock nearby.',
-    impact_of_problem: 'The proposed mobile application solves this problem by providing a platform where users can search for medicines and check their availability in nearby pharmacies in real time. It reduces the need to physically visit multiple stores, saving time and effort for patients.',
-    key_outcome: 'The goal of this project is to make medicine availability easily accessible and transparent for everyone. It aims to help users quickly find required medicines from nearby pharmacies, reducing delays and unnecessary travel.'
-  },
-  {
-    name: 'Sadiya Mariyam',
-    register_number: '92225016',
-    course: 'BCA',
-    project_title: 'Medical Appointment and Queue Management',
-    mentor_assigned: 'Athira',
-    phone: '9895054064',
-    email: 'sadiyamariyam08@gmail.com',
-    brand_name: 'DocSlot',
-    project_type: 'Healthcare',
-    target_users: 'General Public',
-    problem_statement: 'Solves waiting time and hospital chaos.',
-    impact_of_problem: 'Our project solves this problem by providing a smart doctor appointment and queue management mobile application. Patients can book appointments online, select available time slots, and receive a token number instantly.',
-    key_outcome: 'This project aims to improve the overall patient experience by reducing waiting time and eliminating unnecessary hospital crowding.'
-  },
-  {
-    name: 'Adil Muhammed N',
-    register_number: '92225002',
-    course: 'BCA',
-    project_title: 'AI LifeOS – Smart Personal Life Management Mobile Application',
-    mentor_assigned: 'Athira',
-    phone: '8714820156',
-    email: 'adilmuhammeda8@gmail.com',
-    brand_name: 'MindSync',
-    project_type: 'AI-based Productivity and Personal Management Application',
-    target_users: 'Students; Families; Elderly People; General Public',
-    problem_statement: 'People struggle to efficiently manage daily activities, schedules, reminders, notes, and personal tasks across multiple disconnected platforms. Students face difficulties tracking assignments and exam schedules, while professionals struggle with meeting schedules and task prioritization.',
-    impact_of_problem: 'Loss of productivity, poor time management, missed deadlines and appointments, increased stress and mental overload, and reduced work/study efficiency.',
-    key_outcome: 'The goal of MindSync is to help users efficiently manage their daily tasks, schedules, reminders, notes, and productivity through an AI-powered centralized platform.'
-  },
-  {
-    name: 'Atif Ehsaan',
-    register_number: '92225027',
-    course: 'BCA',
-    project_title: 'AI-Powered Food Waste Redistribution for Students',
-    mentor_assigned: 'Athira',
-    phone: '8281108873',
-    email: 'mae210606@gmail.com',
-    brand_name: 'FoodBridge',
-    project_type: 'Food Waste Management & Student Welfare',
-    target_users: 'Students; Restaurant owners, bakeries, and other food and grocery outlets',
-    problem_statement: 'Many college students struggle to afford healthy meals, while restaurants, bakeries, and cafeterias often have surplus food that goes to waste.',
-    impact_of_problem: 'The platform connects food businesses with nearby students, allowing them to purchase safe surplus meals at highly discounted prices instead of letting the food be discarded.',
-    key_outcome: 'Reduce food waste while providing students with affordable nutritious meals and helping businesses recover part of their loss.'
-  },
-  {
-    name: 'S. Afreen Sainaba Fathima',
-    register_number: '92225031',
-    course: 'BCA',
-    project_title: 'EcoScan AI – Smart Waste Classification & Green Rewards Platform',
-    mentor_assigned: 'Athira',
-    phone: '8590724255',
-    email: 'afreentvm@gmail.com',
-    brand_name: 'EcoScan AI',
-    project_type: 'Environmental Monitoring',
-    target_users: 'Students; Families; Elderly People; General Public',
-    problem_statement: 'Improper waste segregation contributes significantly to environmental pollution and reduces recycling efficiency. Many people are unaware of how to dispose of waste such as plastic, paper, glass, metal, and organic materials correctly.',
-    impact_of_problem: 'EcoScan AI uses artificial intelligence to identify waste types through image recognition. Users take a photo of a waste item, and the system classifies it and provides disposal instructions, recycling tips, and awareness guidance.',
-    key_outcome: 'The primary goal of EcoScan AI is to improve waste segregation and recycling awareness through AI-powered technology and reward-based engagement.'
-  },
-  {
-    name: 'Theertha Sunil',
-    register_number: '92225021',
-    course: 'BCA',
-    project_title: 'AI Resume Analyzer',
-    mentor_assigned: 'Athira',
-    phone: '7736536915',
-    email: 'theerthasunil066@gmail.com',
-    brand_name: 'ResumeIQ AI',
-    project_type: 'Assistive Technology',
-    target_users: 'Students',
-    problem_statement: 'Many students create resumes that do not meet industry standards, reducing their chances of getting shortlisted for jobs and internships.',
-    impact_of_problem: 'The AI Resume Analyzer reviews resumes, identifies weaknesses, suggests improvements, and helps students create professional resumes that better match job requirements.',
-    key_outcome: 'Help students create professional resumes that better match job requirements.'
-  },
-  {
-    name: 'Al Fayaz Hyder S',
-    register_number: '92225004',
-    course: 'BCA',
-    project_title: 'PeakFuel: Smart Fuel Delivery and Inventory Management System for Remote Areas',
-    mentor_assigned: 'Athira',
-    phone: '8304027208',
-    email: 'alfayazhyder62275@gmail.com',
-    brand_name: 'Peak Fuel',
-    project_type: 'Smart City',
-    target_users: 'General Public',
-    problem_statement: 'In many hilly and remote areas, fuel stations are located far from communities and travel routes, making fuel access difficult for residents, farmers, businesses, and travelers.',
-    impact_of_problem: 'PeakFuel is a smart fuel delivery platform that connects customers with authorized local fuel suppliers and delivery personnel.',
-    key_outcome: 'Improve fuel accessibility in remote and hilly areas by providing a reliable fuel delivery platform, reducing travel time and costs.'
-  },
-  {
-    name: 'Sreelekshmi A A',
-    register_number: '92225020',
-    course: 'BCA',
-    project_title: 'EcoCampus – Campus Sustainability Analytics Dashboard',
-    mentor_assigned: 'Athira',
-    phone: '9744334597',
-    email: 'itsmesreelekshmiaa@gmail.com',
-    brand_name: 'EcoCampus Analytics',
-    project_type: 'Environmental Monitoring',
-    target_users: 'Students; General Public',
-    problem_statement: 'Educational institutions implement sustainability initiatives but their impact is often not measured effectively. Without proper data analysis, colleges find it difficult to track environmental performance.',
-    impact_of_problem: 'EcoCampus provides a Power BI dashboard that analyzes sustainability-related data such as energy consumption, water usage, waste recycling, and green initiatives.',
-    key_outcome: 'Help educational institutions measure, monitor, and improve campus sustainability through data-driven insights.'
-  },
-  {
-    name: 'S.M Gopika',
-    register_number: '92225015',
-    course: 'BCA',
-    project_title: 'AI for Detecting Skill Decay',
-    mentor_assigned: 'Athira',
-    phone: '9074206064',
-    email: 'smgopika2@gmail.com',
-    brand_name: 'SkillTrack AI',
-    project_type: 'Assistive Technology',
-    target_users: 'Students; General Public',
-    problem_statement: 'Students and professionals acquire numerous skills but due to lack of regular practice, these skills gradually fade over time — a phenomenon known as skill decay.',
-    impact_of_problem: 'Skill decay reduces a learner\'s ability to recall and apply previously acquired knowledge, affecting academic performance, productivity, and career growth.',
-    key_outcome: 'Improve long-term knowledge retention by identifying skills at risk of being forgotten and providing timely, personalized recommendations for revision and practice.'
-  },
-  {
-    name: 'Pranav R L',
-    register_number: '92225014',
-    course: 'BCA',
-    project_title: 'MediCare Connect – Clinic Appointment Booking App',
-    mentor_assigned: 'Athira',
-    phone: '8590911922',
-    email: 'pranavrl428@gmail.com',
-    brand_name: 'MediCare Connect',
-    project_type: 'Healthcare',
-    target_users: 'Families; Elderly People; General Public',
-    problem_statement: 'Small clinics and medical centers often manage patient appointments manually through phone calls and handwritten registers, creating confusion in scheduling and long waiting times.',
-    impact_of_problem: 'The MediCare Connect mobile app helps clinics manage appointments digitally. Patients can book appointments online, view available time slots, and receive notifications.',
-    key_outcome: 'Simplify appointment management in small clinics by providing an easy-to-use digital booking system, reducing waiting time and improving patient management.'
-  },
-  {
-    name: 'Sreehari B',
-    register_number: '92225019',
-    course: 'BCA',
-    project_title: 'SmartCart – Grocery Store Management App',
-    mentor_assigned: 'Athira',
-    phone: '8848374328',
-    email: 'sreehari106b@gmail.com',
-    brand_name: 'SmartCart Solutions',
-    project_type: 'Retail Management System',
-    target_users: 'Families; Industries; General Public',
-    problem_statement: 'Many small grocery stores still manage product stock, customer orders, and daily sales manually using notebooks or WhatsApp messages, leading to confusion in inventory tracking and missed orders.',
-    impact_of_problem: 'The SmartCart mobile app helps small grocery stores manage inventory, customer orders, and product availability digitally.',
-    key_outcome: 'Simplify grocery store management using a mobile app, reduce manual work, and provide customers with a faster and more convenient shopping experience.'
-  },
-  {
-    name: 'Amina S',
-    register_number: '92235005',
-    course: 'BCA',
-    project_title: 'Dost - AI Powered First Generation College Student Navigator',
-    mentor_assigned: 'Athira',
-    phone: null,
-    email: 'aminazakkir.09@gmail.com',
-    brand_name: 'Dost',
-    project_type: 'Assistive Technology',
-    target_users: 'Students; Undergraduate students',
-    problem_statement: '50%+ of Indian college students are first-generation learners. They miss scholarships, choose wrong branches, and never find internships — not because they lack talent, but because nobody tells them how college actually works.',
-    impact_of_problem: 'Dost is an AI-powered college senior available 24/7. Students enter their stream, state, income and category and Dost instantly delivers scholarships they qualify for, branch selection guidance, and internship tips.',
-    key_outcome: 'Close the scholarship awareness gap, deliver personalized career and branch guidance, ensure equal opportunity through multilingual AI support.'
-  },
-  {
-    name: 'Nandana Sajeev',
-    register_number: '92225029',
-    course: 'BCA',
-    project_title: 'Library Management',
-    mentor_assigned: 'Athira',
-    phone: '9495311593',
-    email: 'nandanasvsajeev@gmail.com',
-    brand_name: 'Smart Library Manager',
-    project_type: 'Library Management System',
-    target_users: 'Students; General Public',
-    problem_statement: 'Libraries often use notebooks or spreadsheets to manage books, making it difficult to track issued books, return dates, and availability, leading to errors and delays.',
-    impact_of_problem: 'The app digitizes library records, making it easy to manage books, track returns, and check availability.',
-    key_outcome: 'Create a simple digital library system that improves book management, reduces manual work, and helps students and librarians access information quickly.'
-  },
-  {
-    name: 'Abisha S A',
-    register_number: '92225001',
-    course: 'BCA',
-    project_title: 'Smart Light Control',
-    mentor_assigned: 'Athira',
-    phone: '9567200276',
-    email: 'abisha2521@gmail.com',
-    brand_name: 'EcoGlow',
-    project_type: 'Home Automation',
-    target_users: 'Families',
-    problem_statement: 'In most households, lights are frequently left on due to human negligence, leading to significant energy wastage and higher electricity bills.',
-    impact_of_problem: 'Lights left on due to negligence lead to unnecessary energy consumption, higher electricity bills, and environmental degradation.',
-    key_outcome: 'Reduce energy wastage, lower electricity costs, and promote sustainable living through smart IoT-based home automation.'
-  },
-  {
-    name: 'Adithyan B',
-    register_number: '92225003',
-    course: 'BCA',
-    project_title: 'Lost and Found Portal for a College',
-    mentor_assigned: 'Athira',
-    phone: '7736576472',
-    email: 'adithyanb2007@gmail.com',
-    brand_name: 'Lost n Found',
-    project_type: 'Safety & Security',
-    target_users: 'Students',
-    problem_statement: 'Students can report items that are found or lost on campus with no centralized system to manage this.',
-    impact_of_problem: 'Lack of a portal means lost items are rarely reunited with their owners.',
-    key_outcome: 'Provide a simple portal where students can report and recover lost items easily.'
-  },
-  {
-    name: 'Mohammed Nafi Naissam',
-    register_number: '92225011',
-    course: 'BCA',
-    project_title: 'Hospital Management Dashboard for Healthcare Analytics and Decision Support',
-    mentor_assigned: 'Athira',
-    phone: '8305555508',
-    email: 'mohammednafinaissam@gmail.com',
-    brand_name: 'MediDash',
-    project_type: 'Healthcare',
-    target_users: 'General Public',
-    problem_statement: 'Manual hospital management causes delays, data errors, and inefficient patient care.',
-    impact_of_problem: 'The Hospital Management Dashboard collects and analyzes hospital data such as patient records, appointments, billing, and department performance through interactive charts and reports.',
-    key_outcome: 'Improve hospital efficiency by providing real-time insights into patient management, appointments, billing, and resource utilization.'
-  },
-  {
-    name: 'Ijas Muhamed',
-    register_number: '92225024',
-    course: 'BCA',
-    project_title: 'Job Hunt Commander',
-    mentor_assigned: 'Athira',
-    phone: '9072435925',
-    email: 'ijasmuhamed2020@gmail.com',
-    brand_name: 'Job Hunt Commander',
-    project_type: 'Assistive Technology',
-    target_users: 'Students',
-    problem_statement: 'Every year 5 million+ Indian college students enter placement season applying to dozens of companies. Application details are scattered across multiple platforms with no single source of truth, leading to missed deadlines, duplicate applications, and interview schedule clashes.',
-    impact_of_problem: 'Chaotic job hunting leads to missed deadlines, duplicate applications, unknown rejection reasons, no preparation guidance, and severe mental toll on students.',
-    key_outcome: 'Job Hunt Commander transforms chaotic job hunting into an organized, data-driven process with centralized tracking, AI-driven interview preparation, scheduling, and mental health support.'
-  },
-  {
-    name: 'Anagha S',
-    register_number: '92225006',
-    course: 'BCA',
-    project_title: 'Smart Study Planner',
-    mentor_assigned: 'Athira',
-    phone: '9605656847',
-    email: 'anaaaghas14@gmail.com',
-    brand_name: 'LearnWise',
-    project_type: 'Educational Technology',
-    target_users: 'Students',
-    problem_statement: 'Many students struggle to manage their study schedules, assignments, and exam preparation effectively. Poor time management often leads to stress, missed deadlines, and reduced academic performance.',
-    impact_of_problem: 'The Smart Study Planner helps students organize their academic activities through personalized schedules, reminders, and progress tracking. This improves productivity, time management, and overall learning outcomes.',
-    key_outcome: 'To help students plan their studies efficiently, stay organized, meet deadlines, and improve academic performance through a simple and user-friendly mobile application.'
-  }
- ];
-  
+
+const ASB_BCA_STUDENTS = [
+  {name:'Parvathi R P',register_number:'92225030',course:'BCA',project_title:'MediStock: A Mobile Application for Real-Time Medicine Availability Tracking',mentor_assigned:'Athira',phone:'8590981783',email:'parvaathhii@gmail.com',brand_name:'MediStock',project_type:'Healthcare',target_users:'Families; Elderly People; General Public',problem_statement:'Many people face difficulty finding specific medicines, especially during urgent situations.',impact_of_problem:'The proposed mobile application solves this problem by providing a platform where users can search for medicines and check their availability in nearby pharmacies in real time.',key_outcome:'The goal of this project is to make medicine availability easily accessible and transparent for everyone.'},
+  {name:'Sadiya Mariyam',register_number:'92225016',course:'BCA',project_title:'Medical Appointment and Queue Management',mentor_assigned:'Athira',phone:'9895054064',email:'sadiyamariyam08@gmail.com',brand_name:'DocSlot',project_type:'Healthcare',target_users:'General Public',problem_statement:'Solves waiting time and hospital chaos.',impact_of_problem:'Our project solves this problem by providing a smart doctor appointment and queue management mobile application.',key_outcome:'This project aims to improve the overall patient experience by reducing waiting time and eliminating unnecessary hospital crowding.'},
+  {name:'Adil Muhammed N',register_number:'92225002',course:'BCA',project_title:'AI LifeOS – Smart Personal Life Management Mobile Application',mentor_assigned:'Athira',phone:'8714820156',email:'adilmuhammeda8@gmail.com',brand_name:'MindSync',project_type:'AI-based Productivity and Personal Management Application',target_users:'Students; Families; Elderly People; General Public',problem_statement:'People struggle to efficiently manage daily activities, schedules, reminders, notes, and personal tasks across multiple disconnected platforms.',impact_of_problem:'Loss of productivity, poor time management, missed deadlines and appointments, increased stress and mental overload.',key_outcome:'The goal of MindSync is to help users efficiently manage their daily tasks, schedules, reminders, notes, and productivity through an AI-powered centralized platform.'},
+  {name:'Atif Ehsaan',register_number:'92225027',course:'BCA',project_title:'AI-Powered Food Waste Redistribution for Students',mentor_assigned:'Athira',phone:'8281108873',email:'mae210606@gmail.com',brand_name:'FoodBridge',project_type:'Food Waste Management & Student Welfare',target_users:'Students; Restaurant owners, bakeries, and other food and grocery outlets',problem_statement:'Many college students struggle to afford healthy meals, while restaurants, bakeries, and cafeterias often have surplus food that goes to waste.',impact_of_problem:'The platform connects food businesses with nearby students, allowing them to purchase safe surplus meals at highly discounted prices.',key_outcome:'Reduce food waste while providing students with affordable nutritious meals and helping businesses recover part of their loss.'},
+  {name:'S. Afreen Sainaba Fathima',register_number:'92225031',course:'BCA',project_title:'EcoScan AI – Smart Waste Classification & Green Rewards Platform',mentor_assigned:'Athira',phone:'8590724255',email:'afreentvm@gmail.com',brand_name:'EcoScan AI',project_type:'Environmental Monitoring',target_users:'Students; Families; Elderly People; General Public',problem_statement:'Improper waste segregation contributes significantly to environmental pollution and reduces recycling efficiency.',impact_of_problem:'EcoScan AI uses artificial intelligence to identify waste types through image recognition.',key_outcome:'The primary goal of EcoScan AI is to improve waste segregation and recycling awareness through AI-powered technology and reward-based engagement.'},
+  {name:'Theertha Sunil',register_number:'92225021',course:'BCA',project_title:'AI Resume Analyzer',mentor_assigned:'Athira',phone:'7736536915',email:'theerthasunil066@gmail.com',brand_name:'ResumeIQ AI',project_type:'Assistive Technology',target_users:'Students',problem_statement:'Many students create resumes that do not meet industry standards.',impact_of_problem:'The AI Resume Analyzer reviews resumes, identifies weaknesses, suggests improvements.',key_outcome:'Help students create professional resumes that better match job requirements.'},
+  {name:'Al Fayaz Hyder S',register_number:'92225004',course:'BCA',project_title:'PeakFuel: Smart Fuel Delivery and Inventory Management System for Remote Areas',mentor_assigned:'Athira',phone:'8304027208',email:'alfayazhyder62275@gmail.com',brand_name:'Peak Fuel',project_type:'Smart City',target_users:'General Public',problem_statement:'In many hilly and remote areas, fuel stations are located far from communities.',impact_of_problem:'PeakFuel is a smart fuel delivery platform that connects customers with authorized local fuel suppliers.',key_outcome:'Improve fuel accessibility in remote and hilly areas by providing a reliable fuel delivery platform.'},
+  {name:'Sreelekshmi A A',register_number:'92225020',course:'BCA',project_title:'EcoCampus – Campus Sustainability Analytics Dashboard',mentor_assigned:'Athira',phone:'9744334597',email:'itsmesreelekshmiaa@gmail.com',brand_name:'EcoCampus Analytics',project_type:'Environmental Monitoring',target_users:'Students; General Public',problem_statement:'Educational institutions implement sustainability initiatives but their impact is often not measured effectively.',impact_of_problem:'EcoCampus provides a Power BI dashboard that analyzes sustainability-related data.',key_outcome:'Help educational institutions measure, monitor, and improve campus sustainability through data-driven insights.'},
+  {name:'S.M Gopika',register_number:'92225015',course:'BCA',project_title:'AI for Detecting Skill Decay',mentor_assigned:'Athira',phone:'9074206064',email:'smgopika2@gmail.com',brand_name:'SkillTrack AI',project_type:'Assistive Technology',target_users:'Students; General Public',problem_statement:'Students and professionals acquire numerous skills but due to lack of regular practice, these skills gradually fade over time.',impact_of_problem:'Skill decay reduces a learner\'s ability to recall and apply previously acquired knowledge.',key_outcome:'Improve long-term knowledge retention by identifying skills at risk of being forgotten.'},
+  {name:'Pranav R L',register_number:'92225014',course:'BCA',project_title:'MediCare Connect – Clinic Appointment Booking App',mentor_assigned:'Athira',phone:'8590911922',email:'pranavrl428@gmail.com',brand_name:'MediCare Connect',project_type:'Healthcare',target_users:'Families; Elderly People; General Public',problem_statement:'Small clinics and medical centers often manage patient appointments manually.',impact_of_problem:'The MediCare Connect mobile app helps clinics manage appointments digitally.',key_outcome:'Simplify appointment management in small clinics by providing an easy-to-use digital booking system.'},
+  {name:'Sreehari B',register_number:'92225019',course:'BCA',project_title:'SmartCart – Grocery Store Management App',mentor_assigned:'Athira',phone:'8848374328',email:'sreehari106b@gmail.com',brand_name:'SmartCart Solutions',project_type:'Retail Management System',target_users:'Families; Industries; General Public',problem_statement:'Many small grocery stores still manage product stock and orders manually.',impact_of_problem:'The SmartCart mobile app helps small grocery stores manage inventory and orders digitally.',key_outcome:'Simplify grocery store management using a mobile app.'},
+  {name:'Amina S',register_number:'92235005',course:'BCA',project_title:'Dost - AI Powered First Generation College Student Navigator',mentor_assigned:'Athira',phone:null,email:'aminazakkir.09@gmail.com',brand_name:'Dost',project_type:'Assistive Technology',target_users:'Students; Undergraduate students',problem_statement:'50%+ of Indian college students are first-generation learners. They miss scholarships, choose wrong branches.',impact_of_problem:'Dost is an AI-powered college senior available 24/7 for guidance.',key_outcome:'Close the scholarship awareness gap and deliver personalized career and branch guidance.'},
+  {name:'Nandana Sajeev',register_number:'92225029',course:'BCA',project_title:'Library Management',mentor_assigned:'Athira',phone:'9495311593',email:'nandanasvsajeev@gmail.com',brand_name:'Smart Library Manager',project_type:'Library Management System',target_users:'Students; General Public',problem_statement:'Libraries often use notebooks or spreadsheets to manage books.',impact_of_problem:'The app digitizes library records.',key_outcome:'Create a simple digital library system.'},
+  {name:'Abisha S A',register_number:'92225001',course:'BCA',project_title:'Smart Light Control',mentor_assigned:'Athira',phone:'9567200276',email:'abisha2521@gmail.com',brand_name:'EcoGlow',project_type:'Home Automation',target_users:'Families',problem_statement:'In most households, lights are frequently left on due to human negligence.',impact_of_problem:'Unnecessary energy consumption and higher electricity bills.',key_outcome:'Reduce energy wastage through smart IoT-based home automation.'},
+  {name:'Adithyan B',register_number:'92225003',course:'BCA',project_title:'Lost and Found Portal for a College',mentor_assigned:'Athira',phone:'7736576472',email:'adithyanb2007@gmail.com',brand_name:'Lost n Found',project_type:'Safety & Security',target_users:'Students',problem_statement:'Students can report items that are found or lost on campus with no centralized system.',impact_of_problem:'Lack of a portal means lost items are rarely reunited with their owners.',key_outcome:'Provide a simple portal where students can report and recover lost items easily.'},
+  {name:'Mohammed Nafi Naissam',register_number:'92225011',course:'BCA',project_title:'Hospital Management Dashboard for Healthcare Analytics and Decision Support',mentor_assigned:'Athira',phone:'8305555508',email:'mohammednafinaissam@gmail.com',brand_name:'MediDash',project_type:'Healthcare',target_users:'General Public',problem_statement:'Manual hospital management causes delays, data errors, and inefficient patient care.',impact_of_problem:'The Hospital Management Dashboard collects and analyzes hospital data.',key_outcome:'Improve hospital efficiency by providing real-time insights.'},
+  {name:'Ijas Muhamed',register_number:'92225024',course:'BCA',project_title:'Job Hunt Commander',mentor_assigned:'Athira',phone:'9072435925',email:'ijasmuhamed2020@gmail.com',brand_name:'Job Hunt Commander',project_type:'Assistive Technology',target_users:'Students',problem_statement:'Every year 5 million+ Indian college students enter placement season with scattered application details.',impact_of_problem:'Chaotic job hunting leads to missed deadlines and no preparation guidance.',key_outcome:'Job Hunt Commander transforms chaotic job hunting into an organized, data-driven process.'},
+  {name:'Anagha S',register_number:'92225006',course:'BCA',project_title:'Smart Study Planner',mentor_assigned:'Athira',phone:'9605656847',email:'anaaaghas14@gmail.com',brand_name:'LearnWise',project_type:'Educational Technology',target_users:'Students',problem_statement:'Many students struggle to manage their study schedules, assignments, and exam preparation effectively.',impact_of_problem:'Poor time management leads to stress and missed deadlines.',key_outcome:'To help students plan their studies efficiently through a user-friendly mobile application.'}
+];
 
 // ════════ ALLIANCE UNIVERSITY SEED DATA ════════
 const ALLIANCE_IMCA_A_STUDENTS=[
@@ -1341,35 +1124,37 @@ const KJ_BBAFN_STUDENTS=[
   {name:'Theodosia',register_number:'25BBFN54',course:'BBA - FinTech',project_title:'Digital Credit and Collection Management System for Small Retail Businesses',mentor_assigned:'Ishika Bhattacharjee',phone:'6362477220',email:'25bbfn54@kristujayanti.com'},
   {name:'Lokeshwari S',register_number:'25BBFN25',course:'BBA - FinTech',project_title:'Finzo AI Powered Personal Finance & Expense Management System',mentor_assigned:'Ishika Bhattacharjee',phone:'8660901407',email:'25bbfn25@kristujayanti.com'}
 ];
+
 const SVYASA_IIBCA_STUDENTS=[
   {name:'SENIN P',register_number:'2022408055',course:'II BCA',project_title:'Smart city',mentor_assigned:'Mr Lakshaya',phone:'9037053550',email:'seninaman728@gmail.com',brand_name:'svyasa university',project_type:'Smart City',target_users:'General Public',problem_statement:'Traffic',impact_of_problem:'Reduce traffic',key_outcome:'Reduce traffic'},
-  {name:'Priya KR',register_number:'2022408048',course:'II BCA',project_title:'FreshFlow: AI-Driven Inventory Intelligence for Local Retailers',mentor_assigned:'Ms Nagashree',phone:'7411289509',email:'priyapriya86874@gmail.com',brand_name:'BlinkLogic',project_type:'Data analytics and predictive AI',target_users:'Small business owners and retailers',problem_statement:'Local grocery stores are losing revenue because they cannot predict demand as accurately as quick-commerce apps like Blinkit. They often over-order perishables which results in high wastage, or they under-order, leading to customers switching to apps.',impact_of_problem:'This results in a 15-20% daily waste of fresh goods and a steady decline in loyal customers. For a small business, this loss directly affects their ability to pay rent and staff.',key_outcome:'To provide local shop owners with a Smart Ordering dashboard that predicts daily stock requirements, reducing waste by 30% and ensuring best-sellers never go out of stock'},
-  {name:'Anusha H',register_number:'2022408011',course:'II BCA',project_title:'ZenFit Studio - Class Booking & Management App',mentor_assigned:'Mr. Neeraj',phone:'7975674076',email:'anuanu60078@gmail.com',brand_name:'ZenFit Studio',project_type:'Service Booking & Management Mobile App',target_users:'General Public',problem_statement:'Independent fitness studios struggle with manual class booking systems using paper sign-up sheets and WhatsApp groups. This leads to double-bookings, no real-time visibility into class capacity, and instructors spending excessive time on administrative tasks.',impact_of_problem:'The app provides real-time class booking with automated waitlists, one-tap registration with calendar sync, and push notifications for reminders and capacity alerts. This eliminates double-bookings and reduces admin time by 5+ hours/week.',key_outcome:'Create a seamless digital booking experience that eliminates manual scheduling inefficiencies. Reduce administrative overhead by 70%, decrease class no-shows by 40%, and increase class utilization rates.'},
-  {name:'Gunashree S',register_number:'2022408021',course:'II BCA',project_title:'Smart LPG Gas Leakage Detection and Alert System',mentor_assigned:'Ms Nagashree',phone:'9663355506',email:'gunashree.s2006@gmail.com',brand_name:'SafeGas Smart Security',project_type:'Safety & Security',target_users:'Families, Elderly People, General Public',problem_statement:'Gas leakage in homes and kitchens is a serious safety issue. Many people cannot detect gas leakage early, which may lead to fire accidents, breathing problems, and even loss of life.',impact_of_problem:'This project detects LPG gas leakage using a gas sensor and gives an instant alert through buzzer/alarm and notification. It helps prevent fire accidents and ensures safety by warning users at the right time.',key_outcome:'Improve home safety by detecting LPG gas leakage early and providing immediate alert to users, reducing the risk of fire accidents and health hazards.'},
-  {name:'Naveenlal M',register_number:'2022408066',course:'II BCA',project_title:'Student Attendance App',mentor_assigned:'Mr. Neeraj',phone:'8891156269',email:'naveenlalm669@gmail.com',brand_name:'NewAttend',project_type:'Mobile app',target_users:'Teachers and staffs',problem_statement:'Taking attendance manually takes time and can have mistakes. Sometimes students give proxy attendance.',impact_of_problem:'This app helps mark attendance quickly and stores data properly. It reduces errors and saves time.',key_outcome:'To make attendance faster, more accurate, and easy to manage using a simple mobile app.'},
-  {name:'Prerana H Jahageerdar',register_number:'2022408047',course:'II BCA',project_title:'ReStart: A Smart Motivation Recovery System',mentor_assigned:'Ms Nagashree',phone:'9480048003',email:'jahageerdarprerana@gmail.com',brand_name:'SecondStep',project_type:'Assistive Technology',target_users:'Students',problem_statement:'Many students struggle not because they lack ability, but because they lose motivation after breaks, failures, or distractions. Existing productivity apps focus on reminders and deadlines, which often increase pressure instead of helping users restart.',impact_of_problem:'The proposed system detects inactivity or incomplete tasks and provides a restart pathway instead of reminders. It breaks tasks into smaller, manageable steps and suggests easy entry points to begin again.',key_outcome:'Help users restart tasks easily after losing focus, reduce stress caused by deadlines and backlog, improve consistency rather than intensity, and build a habit of small, continuous progress.'},
-  {name:'P Prajwal',register_number:'2022408045',course:'II BCA',project_title:'Medicine Expiry & Stock Tracker',mentor_assigned:'Ms. Rakshitha',phone:'916360646120',email:'prajwal2676@gmail.com',brand_name:'Analyse Pharmacy',project_type:'Healthcare',target_users:'General Public',problem_statement:'A small medical shop in Bengaluru manually tracks medicine stock and expiry dates using paper registers. With 300-500 medicines, the pharmacist has no system to flag medicines nearing expiry or predict stockouts.',impact_of_problem:'Expired medicines cause direct financial loss and legal risks. Estimated monthly loss from expiry waste and missed sales: Rs.3000-8000 for a single small pharmacy.',key_outcome:'The MediTrack Power BI Dashboard will give real-time visibility into inventory, highlight medicines expiring within 30/15/7 days, and reduce monthly waste by an estimated 40%.'},
-  {name:'Rahees Ibnu muhammed',register_number:'2022408049',course:'II BCA',project_title:'Smart Attendance & Fee Tracker for Tuition Centers',mentor_assigned:'Ms. Rakshitha',phone:'8943187271',email:'raheesibnumuhammed@gmail.com',brand_name:'Bright Future Tuition Center',project_type:'Education technology',target_users:'Students',problem_statement:'Small tuition centers manage attendance and fee records manually using notebooks or WhatsApp, which causes confusion, time loss, and errors.',impact_of_problem:'Time loss for teachers and staff, errors in attendance and fee records, confusion in student management, delayed fee collection, and poor communication with parents.',key_outcome:'Develop a simple mobile app that helps tuition centers manage student attendance, fee tracking, and records digitally in an organized and efficient way.'},
-  {name:'Zaiba Khan',register_number:'2022408064',course:'II BCA',project_title:'AI-Based Smart Interview Preparation & Performance Analysis System',mentor_assigned:'Ms. Rakshitha',phone:'8867499171',email:'zaibakhanzaiba9@gmail.com',brand_name:'PrepWise AI',project_type:'AI interview preparation system',target_users:'Students, General Public',problem_statement:'Many students struggle to clear interviews due to lack of proper guidance, confidence, and real-time feedback. Traditional preparation methods do not provide personalized evaluation.',impact_of_problem:'This project uses AI to simulate real interview environments and analyze user performance, providing instant feedback on answers, communication skills, and confidence level.',key_outcome:'Bridge the gap between theoretical knowledge and real-world interview performance. Improve communication skills, boost confidence, and help users identify their weaknesses through AI-driven feedback.'},
-  {name:'Akshitha r',register_number:'2022408008',course:'II BCA',project_title:'Decentralized Carbon Credit Marketplace for Urban Micro-Communities',mentor_assigned:'Ms Nagashree',phone:'9110446499',email:'ashhhuthhy@gmail.com',brand_name:'CarbonPool',project_type:'Smart City',target_users:'Students, Families, Industries, General Public',problem_statement:'Urban households and small communities contribute to carbon reduction but lack access to carbon credit markets. Existing systems are designed for large corporations, making it difficult for smaller contributors to participate.',impact_of_problem:'This project creates a pooled carbon credit marketplace where multiple small communities can collectively participate. NGOs act as trusted validators to calculate and verify carbon savings.',key_outcome:'A pooled platform enables small urban communities to collectively generate and trade carbon credits. Earned revenue is fairly distributed among participants, encouraging sustainable practices.'},
-  {name:'Osheen Kumar',register_number:'2022408042',course:'II BCA',project_title:'TraceIt : A Verified Lost & Found Recovery System',mentor_assigned:'Ms. Rakshitha',phone:'8446071642',email:'osheenkumar09@gmail.com',brand_name:'TraceIt',project_type:'Community Utility',target_users:'Students, General Public',problem_statement:'In a busy campus environment, lost items are reported through fragmented WhatsApp groups and Instagram stories. These posts disappear quickly, making it nearly impossible for owners to find their property. There is no secure way to verify ownership.',impact_of_problem:'This project solves this by creating a centralized, searchable database where items stay listed until found. It introduces a Privacy-First verification system where finders set a security question only the true owner can answer.',key_outcome:'Digitize the campus lost-and-found process to achieve a higher recovery rate for student property, reduce time spent coordinating lost items, and provide a secure spam-free platform.'},
-  {name:'Sakshi S Peddarpeth',register_number:'2022408053',course:'II BCA',project_title:'Smart Study Planner using AI',mentor_assigned:'Mr Lakshaya',phone:'7019659818',email:'sakshisrinivaspeddarpeth@gmail.com',brand_name:'StudyMate AI',project_type:'Assistive Technology',target_users:'Students',problem_statement:'Many students struggle to manage their time and create an effective study schedule. They often waste time deciding what to study, miss deadlines, and fail to revise properly.',impact_of_problem:'This project helps students generate a personalized study timetable based on syllabus, exam dates, available study hours, and weak subjects. It improves time management and reduces stress.',key_outcome:'Help students manage their time effectively by generating a personalized AI-based study plan based on syllabus, exam dates, available hours, and subject priority.'},
-  {name:'Suchitha C',register_number:'2022408059',course:'II BCA',project_title:'Bus Crowd Status App',mentor_assigned:'Mr. Neeraj',phone:'8088206553',email:'suchithac255@gmail.com',brand_name:'BusEase',project_type:'Smart City',target_users:'Students, General Public',problem_statement:'Passengers using public buses often face uncertainty about crowd levels. They do not know whether a bus is crowded before boarding, which leads to discomfort, delays, and inconvenience especially during peak hours.',impact_of_problem:'The app allows users to update and view bus crowd levels (Low, Medium, High) in real-time. This helps passengers make better travel decisions and avoid overcrowded buses.',key_outcome:'Provide real-time crowd information for buses, enabling passengers to travel more comfortably and efficiently while reducing overcrowding.'},
-  {name:'Nirmala Rathod',register_number:'2022408038',course:'II BCA',project_title:'Personal Subscription Safety Tracker',mentor_assigned:'Mr. Neeraj',phone:'8073993459',email:'nirmala272006@gmail.com',brand_name:'Sub Track',project_type:'Safety & Security',target_users:'Students, Families, General Public',problem_statement:'Millions of individuals and families subscribe to 5-10 digital services with different renewal dates and auto-debit enabled. There is no single place to see all active subscriptions and free trials silently convert to paid renewals without warning.',impact_of_problem:'Users rely on bank SMS alerts and mental memory, leading to unexpected auto-debits, insufficient balance penalties, and monthly money leaks of Rs.500-2000.',key_outcome:'Users save Rs.500-2000 per month by avoiding forgotten renewals. Zero unexpected auto-debits due to 3-day advance reminders. Users gain complete visibility and control over monthly expenses.'},
-  {name:'Apeksha K A',register_number:'2022408012',course:'II BCA',project_title:'Smart Water Wastage Alert System',mentor_assigned:'Ms Nagashree',phone:'9916158433',email:'apekshaashok119@gmail.com',brand_name:'AquaSave',project_type:'Environmental Monitoring',target_users:'Families, General Public',problem_statement:'Many households unknowingly waste water due to leaking taps, overflow tanks, or leaving taps open. This leads to water scarcity and higher bills.',impact_of_problem:'The system detects continuous water flow using a simple sensor and alerts users through a buzzer or mobile notification. It helps reduce water wastage and promotes responsible usage.',key_outcome:'Reduce water wastage in homes and create awareness about water conservation using a low-cost smart system.'},
-  {name:'Akansha Singh',register_number:'2022408007',course:'II BCA',project_title:'PlaceIQ — AI-driven placement intelligence application',mentor_assigned:'Mr. Neeraj',phone:'8937851156',email:'akanshasingh11954@gmail.com',brand_name:'Skillmatch',project_type:'Industrial IoT',target_users:'Students, Industries',problem_statement:'Engineering and BBA colleges in India see 40-60% of students go unplaced not because of a lack of jobs, but because students do not know which skills to build, and placement cells do not have real-time visibility into each student\'s readiness.',impact_of_problem:'Nearly 6 out of 10 eligible students go unplaced every year because their skills do not match what companies need. Students waste 2-3 months preparing for the wrong things and lose confidence when not shortlisted.',key_outcome:'Help college students know exactly where they stand before placement season begins. Allow students to enter their skills and instantly see a readiness score for common job roles, with specific skills to learn next.'},
-  {name:'Kiran K Lal',register_number:'2022408025',course:'II BCA',project_title:'AI Based Network Traffic Analyzer',mentor_assigned:'Mr Lakshaya',phone:'910808462',email:'kiranlx222@gmail.com',brand_name:'Lx Ai solutions',project_type:'Safety & Security',target_users:'General Public',problem_statement:'Organizations face difficulty in monitoring large volumes of network traffic in real time. Traditional methods are slow and cannot quickly detect suspicious activities like unauthorized access or malware traffic.',impact_of_problem:'This project uses AI techniques to analyze network traffic in real time and detect unusual patterns or threats. It alerts administrators instantly and provides insights into traffic behavior.',key_outcome:'Develop an AI-based system that monitors network traffic and detects threats in real time, improving network speed and security.'},
-  {name:'Yash pandey',register_number:'2022408063',course:'II BCA',project_title:'IT-elector — AI-driven placement intelligence system',mentor_assigned:'Mr. Neeraj',phone:'9301877377',email:'yashpandey982005@gmail.com',brand_name:'PlaceIT',project_type:'Industrial IoT',target_users:'Students, Industries',problem_statement:'Most college students do not know what skills companies actually look for during placements. When placement season arrives, they realize too late that their resume does not match any job role.',impact_of_problem:'Nearly 6 out of 10 eligible students go unplaced every year because their skills do not match what companies need. Students waste 2-3 months preparing for the wrong things.',key_outcome:'More students placed, better preparation, and a smarter process for colleges. SkillMatch gives every student the clarity and direction they need to walk into a placement drive with confidence.'},
-  {name:'P Bhavishya',register_number:'2022408043',course:'II BCA',project_title:'Online Public Complaint Management System',mentor_assigned:'Mr. Neeraj',phone:'8217049393',email:'pbhavishya14@gmail.com',brand_name:'FixMyCity',project_type:'Smart City',target_users:'General Public',problem_statement:'In many areas, public issues like potholes, garbage, water leakage, and streetlight failure are not reported properly due to lack of a simple system. People must visit offices physically or call repeatedly, causing delay.',impact_of_problem:'This system allows citizens to raise complaints online with photo and location, and track complaint status in real time. It improves transparency and reduces response time.',key_outcome:'Provide a simple and efficient platform for citizens to report public issues, track status in real time, and improve communication between the public and authorities.'},
-  {name:'sakshi roy',register_number:'2022408079',course:'II BCA',project_title:'Tuition Centre Management Mobile App',mentor_assigned:'Mr Lakshaya',phone:'6200954671',email:'sakshiroy021@gmail.com',brand_name:'Smart Tuition Hub',project_type:'Management App',target_users:'Students, Families',problem_statement:'Many tuition centres manage student data manually using notebooks or WhatsApp. Attendance, fees, and performance records are not organized properly. Teachers find it difficult to track student progress.',impact_of_problem:'The project provides a simple mobile app where all student data is stored digitally. Teachers can easily track attendance, fees, and performance in one place.',key_outcome:'Simplify tuition centre management by digitizing student records and improving communication between teachers and parents, saving time and reducing manual errors.'},
-  {name:'Deepak R',register_number:'2022408065',course:'II BCA',project_title:'Security Testing Automation Tool (QA + Security)',mentor_assigned:'Mr Lakshaya',phone:'8050775329',email:'dineshrock275@gmail.com',brand_name:'SecureQA',project_type:'Safety & Security',target_users:'Students',problem_statement:'Web applications are rapidly developed and deployed with frequent updates, but security testing is often neglected or performed manually during this fast-paced development cycle.',impact_of_problem:'The Security Testing Automation Tool addresses the limitations of manual security testing by introducing an automated, reliable, and efficient solution for identifying vulnerabilities.',key_outcome:'Develop an automated security testing tool to identify vulnerabilities like SQL Injection and XSS efficiently. Integrate security testing into the QA process and reduce testing time.'},
-  {name:'Mohitha M',register_number:'2022408033',course:'II BCA',project_title:'PG/Hostel Management Mobile App',mentor_assigned:'Ms Nagashree',phone:'7022256447',email:'mohithacta@gmail.com',brand_name:'NestEase',project_type:'Mobile management system',target_users:'Students, General Public',problem_statement:'Many PG/hostel accommodations manage rent payments, complaints, and tenant records manually through notebooks or messaging apps like WhatsApp. This leads to poor organization and missed rent tracking.',impact_of_problem:'The proposed mobile app provides a centralized platform to manage PG operations. Owners can track rent payments, manage tenant details, and handle complaints in one place.',key_outcome:'Simplify and digitize PG/hostel management by reducing manual work, improving efficiency, and enhancing communication between owners and tenants.'},
-  {name:'Alok M Babu',register_number:'2022408100',course:'II BCA',project_title:'Cafe / Small Hotel Business providing public WiFi safety services',mentor_assigned:'Ms. Rakshitha',phone:'9464004832',email:'alokalan8@gmail.com',brand_name:'SafeNet Access',project_type:'Safety & Security',target_users:'General Public',problem_statement:'Public WiFi in cafes and hotels is usually accessed through shared passwords, which are openly distributed among customers. This leads to unauthorized usage, misuse of internet services, and lack of user tracking.',impact_of_problem:'This can result in security risks, legal issues for the business owner, slow network performance, and poor customer experience. Unauthorized users can exploit the network.',key_outcome:'Develop a secure WiFi access management system that ensures only verified users can access the network and provides better control to business owners.'},
-  {name:'Anshin Pradeep',register_number:'2022408010',course:'II BCA',project_title:'TripWise – AI-Based Budget Travel Planner for Students & Families',mentor_assigned:'Ms. Rakshitha',phone:'7902320126',email:'anshinpradeep12@gmail.com',brand_name:'TripWise',project_type:'Smart City',target_users:'Students, Families, General Public',problem_statement:'Planning a trip is difficult for students and families because it involves multiple challenges such as finding affordable destinations, choosing the best travel routes, and managing overall expenses.',impact_of_problem:'This app simplifies travel planning by combining budget optimization, route planning, and quality recommendations into a single platform. It helps save money and reduce planning stress.',key_outcome:'Simplify trip planning for students and families by providing a smart, budget-friendly travel solution that generates a complete itinerary, saving time, money, and effort.'},
-  {name:'Nisarga P',register_number:'2022408039',course:'II BCA',project_title:'DHARTI: From Prediction to Protection in Agriculture',mentor_assigned:'Ms. Rakshitha',phone:'9686229957',email:'pnisarga56@gmail.com',brand_name:'Dharti',project_type:'Agriculture',target_users:'Students, Farmers, Elderly People',problem_statement:'Farmers in India face significant challenges including unpredictable weather conditions, pest attacks, silkworm diseases, and fluctuating market prices. They also lack access to reliable pre-harvest data to secure formal loans.',impact_of_problem:'DHARTI helps farmers make better decisions using AI-based predictions for weather, yield, and market prices. It improves access to loans through verified data and enables early disease detection.',key_outcome:'Empower farmers with an AI-driven platform that reduces uncertainty through accurate predictions, improves access to formal credit, enables early detection of crop diseases, and speeds up insurance claims.'},
-  {name:'SYED ZAIN AHMED',register_number:'2022408061',course:'II BCA',project_title:'NeuroMitra — AI-Powered Daily Routine Companion for Autistic Children in Indian Government Schools',mentor_assigned:'Mr Lakshaya',phone:'7975636105',email:'sz4334427@gmail.com',brand_name:'NeuroMitra',project_type:'Assistive Technology',target_users:'Students, Families',problem_statement:'India has over 2 million autistic children, yet 80%+ attend government schools with zero special educators and no digital support tools. Every existing assistive app is in English and completely inaccessible to Kannada-speaking teachers and parents.',impact_of_problem:'NeuroMitra is a free voice-guided mobile web app that helps autistic children navigate their school day. The app announces what comes next in calm Kannada audio and gives a 5-minute warning before every transition.',key_outcome:'Build and deploy a fully working NeuroMitra prototype in Kannada and English. Pilot with autistic children and achieve a 50% reduction in observable transition meltdowns within 2 weeks.'},
-  {name:'Deepika P',register_number:'2022408068',course:'II BCA',project_title:'TryOn AI',mentor_assigned:'Ms Nagashree',phone:null,email:'jessiejosie258@gmail.com',brand_name:'Mirror Fit',project_type:'Smart City',target_users:'General Public',problem_statement:'Online shoppers often struggle to visualize how clothes will look on them before purchasing, leading to uncertainty, poor outfit selection, and high product return rates.',impact_of_problem:'High product return rates, customer dissatisfaction due to wrong outfit selection, time and money wasted on returns, and increased logistics and operational costs for fashion businesses.',key_outcome:'Provide users with a personalized virtual outfit trial experience, helping them choose suitable clothes confidently before purchasing and reducing product return rates.'}
+  {name:'Priya KR',register_number:'2022408048',course:'II BCA',project_title:'FreshFlow: AI-Driven Inventory Intelligence for Local Retailers',mentor_assigned:'Ms Nagashree',phone:'7411289509',email:'priyapriya86874@gmail.com',brand_name:'BlinkLogic',project_type:'Data analytics and predictive AI',target_users:'Small business owners and retailers',problem_statement:'Local grocery stores are losing revenue because they cannot predict demand accurately.',impact_of_problem:'This results in a 15-20% daily waste of fresh goods and a steady decline in loyal customers.',key_outcome:'To provide local shop owners with a Smart Ordering dashboard that predicts daily stock requirements, reducing waste by 30%.'},
+  {name:'Anusha H',register_number:'2022408011',course:'II BCA',project_title:'ZenFit Studio - Class Booking & Management App',mentor_assigned:'Mr. Neeraj',phone:'7975674076',email:'anuanu60078@gmail.com',brand_name:'ZenFit Studio',project_type:'Service Booking & Management Mobile App',target_users:'General Public',problem_statement:'Independent fitness studios struggle with manual class booking systems.',impact_of_problem:'The app provides real-time class booking with automated waitlists.',key_outcome:'Create a seamless digital booking experience that eliminates manual scheduling inefficiencies.'},
+  {name:'Gunashree S',register_number:'2022408021',course:'II BCA',project_title:'Smart LPG Gas Leakage Detection and Alert System',mentor_assigned:'Ms Nagashree',phone:'9663355506',email:'gunashree.s2006@gmail.com',brand_name:'SafeGas Smart Security',project_type:'Safety & Security',target_users:'Families, Elderly People, General Public',problem_statement:'Gas leakage in homes and kitchens is a serious safety issue.',impact_of_problem:'This project detects LPG gas leakage using a gas sensor and gives an instant alert.',key_outcome:'Improve home safety by detecting LPG gas leakage early.'},
+  {name:'Naveenlal M',register_number:'2022408066',course:'II BCA',project_title:'Student Attendance App',mentor_assigned:'Mr. Neeraj',phone:'8891156269',email:'naveenlalm669@gmail.com',brand_name:'NewAttend',project_type:'Mobile app',target_users:'Teachers and staffs',problem_statement:'Taking attendance manually takes time and can have mistakes.',impact_of_problem:'This app helps mark attendance quickly and stores data properly.',key_outcome:'To make attendance faster, more accurate, and easy to manage using a simple mobile app.'},
+  {name:'Prerana H Jahageerdar',register_number:'2022408047',course:'II BCA',project_title:'ReStart: A Smart Motivation Recovery System',mentor_assigned:'Ms Nagashree',phone:'9480048003',email:'jahageerdarprerana@gmail.com',brand_name:'SecondStep',project_type:'Assistive Technology',target_users:'Students',problem_statement:'Many students struggle not because they lack ability, but because they lose motivation.',impact_of_problem:'The proposed system detects inactivity or incomplete tasks and provides a restart pathway.',key_outcome:'Help users restart tasks easily after losing focus.'},
+  {name:'P Prajwal',register_number:'2022408045',course:'II BCA',project_title:'Medicine Expiry & Stock Tracker',mentor_assigned:'Ms. Rakshitha',phone:'916360646120',email:'prajwal2676@gmail.com',brand_name:'Analyse Pharmacy',project_type:'Healthcare',target_users:'General Public',problem_statement:'A small medical shop manually tracks medicine stock and expiry dates using paper registers.',impact_of_problem:'Expired medicines cause direct financial loss and legal risks.',key_outcome:'The MediTrack Power BI Dashboard will give real-time visibility into inventory.'},
+  {name:'Rahees Ibnu muhammed',register_number:'2022408049',course:'II BCA',project_title:'Smart Attendance & Fee Tracker for Tuition Centers',mentor_assigned:'Ms. Rakshitha',phone:'8943187271',email:'raheesibnumuhammed@gmail.com',brand_name:'Bright Future Tuition Center',project_type:'Education technology',target_users:'Students',problem_statement:'Small tuition centers manage attendance and fee records manually.',impact_of_problem:'Time loss, errors in attendance and fee records, confusion in student management.',key_outcome:'Develop a simple mobile app that helps tuition centers manage attendance and fees digitally.'},
+  {name:'Zaiba Khan',register_number:'2022408064',course:'II BCA',project_title:'AI-Based Smart Interview Preparation & Performance Analysis System',mentor_assigned:'Ms. Rakshitha',phone:'8867499171',email:'zaibakhanzaiba9@gmail.com',brand_name:'PrepWise AI',project_type:'AI interview preparation system',target_users:'Students, General Public',problem_statement:'Many students struggle to clear interviews due to lack of proper guidance.',impact_of_problem:'This project uses AI to simulate real interview environments and analyze user performance.',key_outcome:'Bridge the gap between theoretical knowledge and real-world interview performance.'},
+  {name:'Akshitha r',register_number:'2022408008',course:'II BCA',project_title:'Decentralized Carbon Credit Marketplace for Urban Micro-Communities',mentor_assigned:'Ms Nagashree',phone:'9110446499',email:'ashhhuthhy@gmail.com',brand_name:'CarbonPool',project_type:'Smart City',target_users:'Students, Families, Industries, General Public',problem_statement:'Urban households and small communities contribute to carbon reduction but lack access to carbon credit markets.',impact_of_problem:'This project creates a pooled carbon credit marketplace where multiple small communities can collectively participate.',key_outcome:'A pooled platform enables small urban communities to collectively generate and trade carbon credits.'},
+  {name:'Osheen Kumar',register_number:'2022408042',course:'II BCA',project_title:'TraceIt : A Verified Lost & Found Recovery System',mentor_assigned:'Ms. Rakshitha',phone:'8446071642',email:'osheenkumar09@gmail.com',brand_name:'TraceIt',project_type:'Community Utility',target_users:'Students, General Public',problem_statement:'In a busy campus environment, lost items are reported through fragmented channels.',impact_of_problem:'This project solves this by creating a centralized, searchable database.',key_outcome:'Digitize the campus lost-and-found process.'},
+  {name:'Sakshi S Peddarpeth',register_number:'2022408053',course:'II BCA',project_title:'Smart Study Planner using AI',mentor_assigned:'Mr Lakshaya',phone:'7019659818',email:'sakshisrinivaspeddarpeth@gmail.com',brand_name:'StudyMate AI',project_type:'Assistive Technology',target_users:'Students',problem_statement:'Many students struggle to manage their time and create an effective study schedule.',impact_of_problem:'This project helps students generate a personalized study timetable.',key_outcome:'Help students manage their time effectively.'},
+  {name:'Suchitha C',register_number:'2022408059',course:'II BCA',project_title:'Bus Crowd Status App',mentor_assigned:'Mr. Neeraj',phone:'8088206553',email:'suchithac255@gmail.com',brand_name:'BusEase',project_type:'Smart City',target_users:'Students, General Public',problem_statement:'Passengers using public buses often face uncertainty about crowd levels.',impact_of_problem:'The app allows users to update and view bus crowd levels in real-time.',key_outcome:'Provide real-time crowd information for buses.'},
+  {name:'Nirmala Rathod',register_number:'2022408038',course:'II BCA',project_title:'Personal Subscription Safety Tracker',mentor_assigned:'Mr. Neeraj',phone:'8073993459',email:'nirmala272006@gmail.com',brand_name:'Sub Track',project_type:'Safety & Security',target_users:'Students, Families, General Public',problem_statement:'Millions of individuals subscribe to multiple digital services with different renewal dates.',impact_of_problem:'Users rely on bank SMS alerts, leading to unexpected auto-debits.',key_outcome:'Users save money by avoiding forgotten renewals.'},
+  {name:'Apeksha K A',register_number:'2022408012',course:'II BCA',project_title:'Smart Water Wastage Alert System',mentor_assigned:'Ms Nagashree',phone:'9916158433',email:'apekshaashok119@gmail.com',brand_name:'AquaSave',project_type:'Environmental Monitoring',target_users:'Families, General Public',problem_statement:'Many households unknowingly waste water due to leaking taps or overflow tanks.',impact_of_problem:'The system detects continuous water flow using a simple sensor and alerts users.',key_outcome:'Reduce water wastage in homes and create awareness about water conservation.'},
+  {name:'Akansha Singh',register_number:'2022408007',course:'II BCA',project_title:'PlaceIQ — AI-driven placement intelligence application',mentor_assigned:'Mr. Neeraj',phone:'8937851156',email:'akanshasingh11954@gmail.com',brand_name:'Skillmatch',project_type:'Industrial IoT',target_users:'Students, Industries',problem_statement:'Engineering and BBA colleges see 40-60% of students go unplaced due to skill mismatch.',impact_of_problem:'Students waste months preparing for the wrong things.',key_outcome:'Help college students know exactly where they stand before placement season begins.'},
+  {name:'Kiran K Lal',register_number:'2022408025',course:'II BCA',project_title:'AI Based Network Traffic Analyzer',mentor_assigned:'Mr Lakshaya',phone:'910808462',email:'kiranlx222@gmail.com',brand_name:'Lx Ai solutions',project_type:'Safety & Security',target_users:'General Public',problem_statement:'Organizations face difficulty in monitoring large volumes of network traffic in real time.',impact_of_problem:'This project uses AI techniques to analyze network traffic and detect unusual patterns.',key_outcome:'Develop an AI-based system that monitors network traffic and detects threats in real time.'},
+  {name:'Yash pandey',register_number:'2022408063',course:'II BCA',project_title:'IT-elector — AI-driven placement intelligence system',mentor_assigned:'Mr. Neeraj',phone:'9301877377',email:'yashpandey982005@gmail.com',brand_name:'PlaceIT',project_type:'Industrial IoT',target_users:'Students, Industries',problem_statement:'Most college students do not know what skills companies actually look for during placements.',impact_of_problem:'Nearly 6 out of 10 eligible students go unplaced every year.',key_outcome:'More students placed, better preparation, and a smarter process for colleges.'},
+  {name:'P Bhavishya',register_number:'2022408043',course:'II BCA',project_title:'Online Public Complaint Management System',mentor_assigned:'Mr. Neeraj',phone:'8217049393',email:'pbhavishya14@gmail.com',brand_name:'FixMyCity',project_type:'Smart City',target_users:'General Public',problem_statement:'In many areas, public issues are not reported properly due to lack of a simple system.',impact_of_problem:'This system allows citizens to raise complaints online with photo and location.',key_outcome:'Provide a simple and efficient platform for citizens to report public issues.'},
+  {name:'sakshi roy',register_number:'2022408079',course:'II BCA',project_title:'Tuition Centre Management Mobile App',mentor_assigned:'Mr Lakshaya',phone:'6200954671',email:'sakshiroy021@gmail.com',brand_name:'Smart Tuition Hub',project_type:'Management App',target_users:'Students, Families',problem_statement:'Many tuition centres manage student data manually.',impact_of_problem:'The project provides a simple mobile app where all student data is stored digitally.',key_outcome:'Simplify tuition centre management.'},
+  {name:'Deepak R',register_number:'2022408065',course:'II BCA',project_title:'Security Testing Automation Tool (QA + Security)',mentor_assigned:'Mr Lakshaya',phone:'8050775329',email:'dineshrock275@gmail.com',brand_name:'SecureQA',project_type:'Safety & Security',target_users:'Students',problem_statement:'Web applications are rapidly developed with frequent updates, but security testing is often neglected.',impact_of_problem:'The Security Testing Automation Tool addresses the limitations of manual security testing.',key_outcome:'Develop an automated security testing tool to identify vulnerabilities efficiently.'},
+  {name:'Mohitha M',register_number:'2022408033',course:'II BCA',project_title:'PG/Hostel Management Mobile App',mentor_assigned:'Ms Nagashree',phone:'7022256447',email:'mohithacta@gmail.com',brand_name:'NestEase',project_type:'Mobile management system',target_users:'Students, General Public',problem_statement:'Many PG/hostel accommodations manage rent payments and records manually.',impact_of_problem:'The proposed mobile app provides a centralized platform to manage PG operations.',key_outcome:'Simplify and digitize PG/hostel management.'},
+  {name:'Alok M Babu',register_number:'2022408100',course:'II BCA',project_title:'Cafe / Small Hotel Business providing public WiFi safety services',mentor_assigned:'Ms. Rakshitha',phone:'9464004832',email:'alokalan8@gmail.com',brand_name:'SafeNet Access',project_type:'Safety & Security',target_users:'General Public',problem_statement:'Public WiFi in cafes and hotels is usually accessed through shared passwords.',impact_of_problem:'This can result in security risks and legal issues for the business owner.',key_outcome:'Develop a secure WiFi access management system.'},
+  {name:'Anshin Pradeep',register_number:'2022408010',course:'II BCA',project_title:'TripWise – AI-Based Budget Travel Planner for Students & Families',mentor_assigned:'Ms. Rakshitha',phone:'7902320126',email:'anshinpradeep12@gmail.com',brand_name:'TripWise',project_type:'Smart City',target_users:'Students, Families, General Public',problem_statement:'Planning a trip is difficult for students and families.',impact_of_problem:'This app simplifies travel planning by combining budget optimization and route planning.',key_outcome:'Simplify trip planning for students and families.'},
+  {name:'Nisarga P',register_number:'2022408039',course:'II BCA',project_title:'DHARTI: From Prediction to Protection in Agriculture',mentor_assigned:'Ms. Rakshitha',phone:'9686229957',email:'pnisarga56@gmail.com',brand_name:'Dharti',project_type:'Agriculture',target_users:'Students, Farmers, Elderly People',problem_statement:'Farmers in India face challenges including unpredictable weather and pest attacks.',impact_of_problem:'DHARTI helps farmers make better decisions using AI-based predictions.',key_outcome:'Empower farmers with an AI-driven platform that reduces uncertainty.'},
+  {name:'SYED ZAIN AHMED',register_number:'2022408061',course:'II BCA',project_title:'NeuroMitra — AI-Powered Daily Routine Companion for Autistic Children in Indian Government Schools',mentor_assigned:'Mr Lakshaya',phone:'7975636105',email:'sz4334427@gmail.com',brand_name:'NeuroMitra',project_type:'Assistive Technology',target_users:'Students, Families',problem_statement:'India has over 2 million autistic children, yet 80%+ attend government schools with zero special educators.',impact_of_problem:'NeuroMitra is a free voice-guided mobile web app that helps autistic children navigate their school day.',key_outcome:'Build and deploy a fully working NeuroMitra prototype in Kannada and English.'},
+  {name:'Deepika P',register_number:'2022408068',course:'II BCA',project_title:'TryOn AI',mentor_assigned:'Ms Nagashree',phone:null,email:'jessiejosie258@gmail.com',brand_name:'Mirror Fit',project_type:'Smart City',target_users:'General Public',problem_statement:'Online shoppers often struggle to visualize how clothes will look on them before purchasing.',impact_of_problem:'High product return rates and customer dissatisfaction due to wrong outfit selection.',key_outcome:'Provide users with a personalized virtual outfit trial experience.'}
 ];
+
 // ════════ STATE ════════
 let selectedCollegeKey=null,selectedCollegeName=null,selectedSection=null,selectedRole=null,currentUser=null;
 let students=[],allStudents=[];
@@ -1580,18 +1365,18 @@ async function initApp(){
         const isRathinam=selectedCollegeKey==='rathinam';
         const isTerf=selectedCollegeKey==='terf';
         const isKristu=selectedCollegeKey==='kristu';
+        const isSvyasa=selectedCollegeKey==='svyasa';
+        const isAsb=selectedCollegeKey==='asb';
+        const isSdnb=selectedCollegeKey==='sdnb';
         let seedFn='seedSSTStudents()';let seedLabel='SST';let seedDesc='Insert all I BBA and I MCA students into the database. Run once only.';
         if(isAlliance){seedFn='seedAllianceStudents()';seedLabel='Alliance';seedDesc='Insert all Alliance University students into the database. Run once only.';}
         else if(isBharathidasan){seedFn='seedBharathidasanStudents()';seedLabel='Bharathidasan';seedDesc='Insert all II B.Sc CT and I B.Sc CT students into the database. Run once only.';}
         else if(isRathinam){seedFn='seedRathinamStudents()';seedLabel='Rathinam';seedDesc='Insert all B.Sc CT (GenAI) and BCA (AI) students into the database. Run once only.';}
         else if(isTerf){seedFn='seedTerfStudents()';seedLabel='TERF';seedDesc='Insert all II B.Sc IT students into the database. Run once only.';}
         else if(isKristu){seedFn='seedKristuStudents()';seedLabel='Kristu';seedDesc='Insert all BBA - AI & DS and BBA - FinTech students into the database. Run once only.';}
-        else if(selectedCollegeKey==='svyasa'){seedFn='seedSvyasaStudents()';seedLabel='S-VYASA';seedDesc='Insert all II BCA students into the database. Run once only.';}
-        else if(selectedCollegeKey==='asb'){
-  seedFn='seedAsbStudents()';
-  seedLabel='ASB';
-  seedDesc='Insert all BCA students from Asian School of Business. Run once only.';
-}
+        else if(isSvyasa){seedFn='seedSvyasaStudents()';seedLabel='S-VYASA';seedDesc='Insert all II BCA students into the database. Run once only.';}
+        else if(isAsb){seedFn='seedAsbStudents()';seedLabel='ASB';seedDesc='Insert all BCA students from Asian School of Business. Run once only.';}
+        else if(isSdnb){seedFn='seedSdnbStudents()';seedLabel='SDNB';seedDesc='Insert all SDNB Vaishnav College students into the database. Run once only.';}
         document.getElementById('seedBtn').setAttribute('onclick',seedFn);
         document.getElementById('seedBtn').textContent='+ Insert '+seedLabel+' Students';
         document.querySelector('.seed-panel-title').textContent='First-time Setup: Seed '+seedLabel+' Students';
@@ -1668,7 +1453,6 @@ function renderStudentList(){
   if(!list.length){tb.innerHTML='<tr><td colspan="5"><div class="empty-state"><div class="empty-icon">&#128269;</div>No students match</div></td></tr>';return;}
   tb.innerHTML=list.map((s,i)=>{const weeks=progressMap[s.id]||{};const wbtns=[1,2,3,4].map(w=>{const wd=weeks[w],cls=wd?wd.status:'not-started';const icon=cls==='completed'?'&#10003;':cls==='in-progress'?'&#8230;':String(w);const safeName=escHTML(s.name).replace(/'/g,'&#39;');return`<button class="week-btn ${cls}" title="Week ${w}: ${cls}" onclick="openWeekModal(${s.id},'${safeName}',${w})">${icon}</button>`;}).join('');return`<tr><td style="color:var(--ink3);">${i+1}</td><td>${nameBtn(s)}</td><td style="font-size:12px;color:var(--ink3);">${escHTML(s.register_number||'')}</td><td><div class="week-btns">${wbtns}</div></td><td><select class="approval-select status-${getApproval(s.id)}" onchange="saveApproval(${s.id},this.value,this)"><option value="pending" ${getApproval(s.id)==='pending'?'selected':''}>Pending</option><option value="approved" ${getApproval(s.id)==='approved'?'selected':''}>Approved</option><option value="needs-revision" ${getApproval(s.id)==='needs-revision'?'selected':''}>Needs Revision</option></select></td></tr>`;}).join('');
 }
-
 function renderProgressTable(){
   const q=(document.getElementById('progressSearch').value||'').toLowerCase();
   const list=students.filter(s=>studentMatchesQuery(s,q));
