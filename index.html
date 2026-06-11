@@ -672,6 +672,11 @@ const PINS={
   'Ishika Bhattacharjee':'1212',
   'Athira': '1212',
   'Parvathy': '1212',
+  'Bavatharani':'1212','Edward Linil':'1212',
+  'Ms.Priyanshi':'1212','Ms Ruchi':'1212','Ms kavya':'1212',
+  'Mr. Nishanta':'1212','Mr. Tamilarasan D':'1212','Mrs. Sruthi V':'1212',
+  'Mr. Aakaash M':'1212','Mr. Santhosh M':'1212',
+  'Aarthi':'1212',
   'Malarvizhi':'1212','Sakshi':'1212','Subashni':'1212',
   'Dharani':'1212','Nayeemunnisa':'1212','Geetha':'1212'
 };
@@ -707,6 +712,10 @@ const COLLEGE_SECTIONS={
   ],
   'svyasa':[{value:'SVYASA_IIBCA',label:'II BCA'}],
   'asb':[{value:'ASB_BCA',label:'BCA'},{value:'ASB_BBA',label:'BBA'}],
+  'vinayaga':[{value:'VIN_BSCAIML',label:'B.Sc AI & ML'},{value:'VIN_BCOMFT',label:'B.Com FinTech with AI'}],
+  'takshashila':[{value:'TAK_IIBSCCSAIML',label:'II B.Sc CS AI & ML'},{value:'TAK_IBSCCSAIML',label:'I B.Sc CS AI & ML'},{value:'TAK_BCOMFT',label:'B.Com FinTech with AI'}],
+  'amet':[{value:'AMT_IBSCAIML',label:'I B.Sc AI & ML'},{value:'AMT_IBSCAIDS',label:'I B.Sc AI & DS'},{value:'AMT_IBBAEDM',label:'I BBA E-Commerce & Digital Mktg'},{value:'AMT_IIBSCAIML',label:'II B.Sc AI & ML'},{value:'AMT_IBCOMFT',label:'I B.Com Fintech with AI'}],
+  'tjs':[{value:'TJS_IIBSCCSAI',label:'II B.Sc CS with AI'}],
   'sdnb':[
     {value:'SDNB_IBCOMFT',label:'I B.Com FinTech with AI'},
     {value:'SDNB_IBSCCS1',label:'I B.Sc. CS with AI (Shift 1)'},
@@ -744,6 +753,17 @@ const SECTION_ROLES={
   'SVYASA_IIBCA':['Mr Lakshaya','Ms Nagashree','Mr. Neeraj','Ms. Rakshitha','Admin'],
   'ASB_BCA': ['Athira', 'Admin'],
   'ASB_BBA': ['Parvathy', 'Admin'],
+  'VIN_BSCAIML':['Bavatharani','Admin'],
+  'VIN_BCOMFT':['Edward Linil','Admin'],
+  'TAK_IIBSCCSAIML':['Ms.Priyanshi','Ms Ruchi','Ms kavya','Admin'],
+  'TAK_IBSCCSAIML':['Ms.Priyanshi','Ms Ruchi','Ms kavya','Admin'],
+  'TAK_BCOMFT':['Ms.Priyanshi','Ms Ruchi','Ms kavya','Admin'],
+  'AMT_IBSCAIML':['Mr. Nishanta','Admin'],
+  'AMT_IBSCAIDS':['Mr. Tamilarasan D','Admin'],
+  'AMT_IBBAEDM':['Mrs. Sruthi V','Admin'],
+  'AMT_IIBSCAIML':['Mr. Aakaash M','Admin'],
+  'AMT_IBCOMFT':['Mr. Santhosh M','Admin'],
+  'TJS_IIBSCCSAI':['Aarthi','Admin'],
   'SDNB_IBCOMFT':['Malarvizhi','Admin'],
   'SDNB_IBSCCS1':['Sakshi','Admin'],
   'SDNB_IBSCCS2':['Subashni','Admin'],
@@ -777,6 +797,10 @@ const COLLEGE_ADMIN_SECTIONS={
   'kristu':['BBA - AI & DS','BBA - FinTech'],
   'svyasa':['II BCA'],
   'asb': ['BCA', 'BBA'],
+  'vinayaga':['B.Sc AI & ML','B.Com FinTech with AI'],
+  'takshashila':['II B.Sc CS AI & ML','I B.Sc CS AI & ML','B.Com FinTech with AI'],
+  'amet':['I B.Sc AI & ML','I B.Sc AI & DS','I BBA E-Commerce & Digital Marketing','II B.Sc AI & ML','I B.Com Fintech with AI'],
+  'tjs':['II B.Sc CS with AI'],
   'sdnb':['I B.Com FinTech with AI','I B.Sc. CS with AI (Shift 1)','I B.Sc. CS with AI (Shift 2)','I B.Sc. DS & AI','I BBA DM & BA','II B.Sc. CS with AI']};
 
 const SECTION_LABEL_MAP={
@@ -792,6 +816,17 @@ const SECTION_LABEL_MAP={
   'SVYASA_IIBCA':'II BCA',
   'ASB_BCA': 'BCA',
   'ASB_BBA': 'BBA',
+  'VIN_BSCAIML':'B.Sc AI & ML',
+  'VIN_BCOMFT':'B.Com FinTech with AI',
+  'TAK_IIBSCCSAIML':'II B.Sc CS AI & ML',
+  'TAK_IBSCCSAIML':'I B.Sc CS AI & ML',
+  'TAK_BCOMFT':'B.Com FinTech with AI',
+  'AMT_IBSCAIML':'I B.Sc AI & ML',
+  'AMT_IBSCAIDS':'I B.Sc AI & DS',
+  'AMT_IBBAEDM':'I BBA E-Commerce & Digital Marketing',
+  'AMT_IIBSCAIML':'II B.Sc AI & ML',
+  'AMT_IBCOMFT':'I B.Com Fintech with AI',
+  'TJS_IIBSCCSAI':'II B.Sc CS with AI',
   'SDNB_IBCOMFT':'I B.Com FinTech with AI',
   'SDNB_IBSCCS1':'I B.Sc. CS with AI (Shift 1)',
   'SDNB_IBSCCS2':'I B.Sc. CS with AI (Shift 2)',
@@ -832,6 +867,18 @@ const COLLEGE_ADMIN_TABS={
     { key: 'BCA', label: 'BCA' },
     { key: 'BBA', label: 'BBA' }
   ],
+  'vinayaga':[
+    {key:'all',label:'All'},{key:'B.Sc AI & ML',label:'B.Sc AI & ML'},{key:'B.Com FinTech with AI',label:'B.Com FinTech AI'}
+  ],
+  'takshashila':[
+    {key:'all',label:'All'},{key:'II B.Sc CS AI & ML',label:'II B.Sc CS AI'},{key:'I B.Sc CS AI & ML',label:'I B.Sc CS AI'},{key:'B.Com FinTech with AI',label:'B.Com FinTech AI'}
+  ],
+  'amet':[
+    {key:'all',label:'All'},{key:'I B.Sc AI & ML',label:'I B.Sc AI & ML'},{key:'I B.Sc AI & DS',label:'I B.Sc AI & DS'},{key:'I BBA E-Commerce & Digital Marketing',label:'I BBA E-Com & DM'},{key:'II B.Sc AI & ML',label:'II B.Sc AI & ML'},{key:'I B.Com Fintech with AI',label:'B.Com Fintech AI'}
+  ],
+  'tjs':[
+    {key:'all',label:'All'},{key:'II B.Sc CS with AI',label:'II B.Sc CS AI'}
+  ],
   'sdnb':[
     {key:'all',label:'All'},
     {key:'I B.Com FinTech with AI',label:'B.Com FinTech AI'},
@@ -857,6 +904,17 @@ const MENTOR_COLORS={
   'Ishika Bhattacharjee':'#0891b2',
   'Athira': '#0891b2',
   'Parvathy': '#9333ea',
+  'Bavatharani':'#db2777',
+  'Edward Linil':'#0d9488',
+  'Ms.Priyanshi':'#7c3aed',
+  'Ms Ruchi':'#0891b2',
+  'Ms kavya':'#16a34a',
+  'Mr. Nishanta':'#0d9488',
+  'Mr. Tamilarasan D':'#9333ea',
+  'Mrs. Sruthi V':'#db2777',
+  'Mr. Aakaash M':'#b45309',
+  'Mr. Santhosh M':'#0369a1',
+  'Aarthi':'#e11d48',
   'Malarvizhi':'#0d9488','Sakshi':'#7c3aed','Subashni':'#db2777',
   'Dharani':'#b45309','Nayeemunnisa':'#0369a1','Geetha':'#16a34a'
 };
@@ -888,6 +946,26 @@ const SST_IBBA_STUDENTS=[
 ];
 const SST_IMCA_STUDENTS=[];
 
+// ════════ VINAYAGA SEED DATA ════════
+const VINAYAGA_BSCAIML_STUDENTS=[];
+const VINAYAGA_BCOMFT_STUDENTS=[];
+
+// ════════ TAKSHASHILA SEED DATA ════════
+const TAKSHASHILA_IIBSCCSAIML_STUDENTS=[];
+const TAKSHASHILA_IBSCCSAIML_STUDENTS=[];
+const TAKSHASHILA_BCOMFT_STUDENTS=[];
+
+// ════════ AMET UNIVERSITY SEED DATA ════════
+const AMET_IBSCAIML_STUDENTS=[];
+const AMET_IBSCAIDS_STUDENTS=[];
+const AMET_IBBAEDM_STUDENTS=[];
+const AMET_IIBSCAIML_STUDENTS=[];
+const AMET_IBCOMFT_STUDENTS=[];
+
+// ════════ TJS COLLEGE SEED DATA ════════
+const TJS_IIBSCCSAI_STUDENTS=[];
+
+// (All other existing seed arrays — RATHINAM, TERF, BCAS, ALLIANCE, KJ, SVYASA, ASB — retained below)
 const RATHINAM_BSCT_STUDENTS=[
   {name:'Ganesh Manoj A',register_number:'RCAS2025BCT014',course:'B.Sc CT (GenAI)',project_title:'Smart Power Failure and Internet Monitoring System',mentor_assigned:'Anto Jegan',phone:'9025807153',email:'ganeshmanoj.a7@gmail.com'},
   {name:'Nancy Annammal A',register_number:'RCAS2025BCT031',course:'B.Sc CT (GenAI)',project_title:'College Event Management and Notification App',mentor_assigned:'Anto Jegan',phone:'9443909290',email:'nancy14072008@gmail.com'},
@@ -1058,7 +1136,7 @@ const ASB_BCA_STUDENTS = [
   {name:'Theertha Sunil',register_number:'92225021',course:'BCA',project_title:'AI Resume Analyzer',mentor_assigned:'Athira',phone:'7736536915',email:'theerthasunil066@gmail.com',brand_name:'ResumeIQ AI',project_type:'Assistive Technology',target_users:'Students',problem_statement:'Many students create resumes that do not meet industry standards.',impact_of_problem:'The AI Resume Analyzer reviews resumes, identifies weaknesses, suggests improvements.',key_outcome:'Help students create professional resumes that better match job requirements.'},
   {name:'Al Fayaz Hyder S',register_number:'92225004',course:'BCA',project_title:'PeakFuel: Smart Fuel Delivery and Inventory Management System for Remote Areas',mentor_assigned:'Athira',phone:'8304027208',email:'alfayazhyder62275@gmail.com',brand_name:'Peak Fuel',project_type:'Smart City',target_users:'General Public',problem_statement:'In many hilly and remote areas, fuel stations are located far from communities.',impact_of_problem:'PeakFuel is a smart fuel delivery platform that connects customers with authorized local fuel suppliers.',key_outcome:'Improve fuel accessibility in remote and hilly areas by providing a reliable fuel delivery platform.'},
   {name:'Sreelekshmi A A',register_number:'92225020',course:'BCA',project_title:'EcoCampus – Campus Sustainability Analytics Dashboard',mentor_assigned:'Athira',phone:'9744334597',email:'itsmesreelekshmiaa@gmail.com',brand_name:'EcoCampus Analytics',project_type:'Environmental Monitoring',target_users:'Students; General Public',problem_statement:'Educational institutions implement sustainability initiatives but their impact is often not measured effectively.',impact_of_problem:'EcoCampus provides a Power BI dashboard that analyzes sustainability-related data.',key_outcome:'Help educational institutions measure, monitor, and improve campus sustainability through data-driven insights.'},
-  {name:'S.M Gopika',register_number:'92225015',course:'BCA',project_title:'AI for Detecting Skill Decay',mentor_assigned:'Athira',phone:'9074206064',email:'smgopika2@gmail.com',brand_name:'SkillTrack AI',project_type:'Assistive Technology',target_users:'Students; General Public',problem_statement:'Students and professionals acquire numerous skills but due to lack of regular practice, these skills gradually fade over time.',impact_of_problem:'Skill decay reduces a learner\'s ability to recall and apply previously acquired knowledge.',key_outcome:'Improve long-term knowledge retention by identifying skills at risk of being forgotten.'},
+  {name:'S.M Gopika',register_number:'92225015',course:'BCA',project_title:'AI for Detecting Skill Decay',mentor_assigned:'Athira',phone:'9074206064',email:'smgopika2@gmail.com',brand_name:'SkillTrack AI',project_type:'Assistive Technology',target_users:'Students; General Public',problem_statement:"Students and professionals acquire numerous skills but due to lack of regular practice, these skills gradually fade over time.",impact_of_problem:"Skill decay reduces a learner's ability to recall and apply previously acquired knowledge.",key_outcome:'Improve long-term knowledge retention by identifying skills at risk of being forgotten.'},
   {name:'Pranav R L',register_number:'92225014',course:'BCA',project_title:'MediCare Connect – Clinic Appointment Booking App',mentor_assigned:'Athira',phone:'8590911922',email:'pranavrl428@gmail.com',brand_name:'MediCare Connect',project_type:'Healthcare',target_users:'Families; Elderly People; General Public',problem_statement:'Small clinics and medical centers often manage patient appointments manually.',impact_of_problem:'The MediCare Connect mobile app helps clinics manage appointments digitally.',key_outcome:'Simplify appointment management in small clinics by providing an easy-to-use digital booking system.'},
   {name:'Sreehari B',register_number:'92225019',course:'BCA',project_title:'SmartCart – Grocery Store Management App',mentor_assigned:'Athira',phone:'8848374328',email:'sreehari106b@gmail.com',brand_name:'SmartCart Solutions',project_type:'Retail Management System',target_users:'Families; Industries; General Public',problem_statement:'Many small grocery stores still manage product stock and orders manually.',impact_of_problem:'The SmartCart mobile app helps small grocery stores manage inventory and orders digitally.',key_outcome:'Simplify grocery store management using a mobile app.'},
   {name:'Amina S',register_number:'92235005',course:'BCA',project_title:'Dost - AI Powered First Generation College Student Navigator',mentor_assigned:'Athira',phone:null,email:'aminazakkir.09@gmail.com',brand_name:'Dost',project_type:'Assistive Technology',target_users:'Students; Undergraduate students',problem_statement:'50%+ of Indian college students are first-generation learners. They miss scholarships, choose wrong branches.',impact_of_problem:'Dost is an AI-powered college senior available 24/7 for guidance.',key_outcome:'Close the scholarship awareness gap and deliver personalized career and branch guidance.'},
@@ -1089,7 +1167,7 @@ const ALLIANCE_IIBCA_AIML_STUDENTS=[
   {name:'Bhumika R',register_number:'2411021240026',course:'II BCA AI & ML (A+B)',project_title:'Smart Women Safety and Emergency Response System',mentor_assigned:'Nagashri',phone:'9980850740',email:'bhumikaravi2006@gmail.com'},
   {name:'Kailash Kumar B',register_number:'2411021240071',course:'II BCA AI & ML (A+B)',project_title:'FestNest - Centralized platform for college events, hackathons, workshops, and competitions',mentor_assigned:'Sanjivini',phone:'8088309340',email:'kkailashBCA24@ced.alliance.edu.in'},
   {name:'Adarsh Kumar Gupta Kasaudhan',register_number:'2411021240076',course:'II BCA AI & ML (A+B)',project_title:'FestNest - Centralized platform for college events, hackathons, workshops, and competitions',mentor_assigned:'Sanjivini',phone:'7054054583',email:'gadarsh960@gmail.com'}
-];
+]
 
 // ════════ KRISTU JAYANTI SEED DATA ════════
 const KJ_BBAAIDS_STUDENTS=[
