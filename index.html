@@ -1359,8 +1359,7 @@ function renderAdminTabs(){
 function setAdminTab(tab,btn){adminTab=tab;document.querySelectorAll('#adminTabRow .tab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderAdminTable();renderAdminStats();}
 
 // FIX: s.section is a DB value (e.g. "NAIG_IBSCAI"); adminTab is now also a DB value → filter works correctly
-function getAdminList(){if(adminTab==='all')return allStudents;return allStudents.filter(s=>s.section===adminTab);}
-
+function getAdminList(){if(adminTab==='all')return allStudents;const label=getSectionLabel(adminTab);return allStudents.filter(s=>s.section===label);}
 function renderAdminStats(){
   const list=getAdminList();
   const approved=list.filter(s=>adminApprovalMap[s.id]?.status==='approved').length;
